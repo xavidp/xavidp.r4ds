@@ -25,7 +25,7 @@ Para explorar los verbos básicos de manipulación de datos de dplyr, usaremos `
 vuelos
 ```
 
-Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un __tibble__. Los Tibbles son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; volveremos a tibbles con más detalle en [wrangle] (# wrangle-intro).
+Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un __tibble__. Los Tibbles son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; volveremos a tibbles con más detalle en [doma] (# doma-intro).
 
 También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras debajo de los nombres de las columnas. Estos describen el tipo de cada variable:
 
@@ -144,9 +144,9 @@ Además de `&` y `|`, R también tiene `&&` y `||`. ¡No los uses aquí! Aprende
 
 Siempre que empieces a usar expresiones complejas de varias partes en `filter()`, considera convertirlas en variables explícitas. Eso hace que sea mucho más fácil verificar tu trabajo. Aprenderás cómo crear nuevas variables en breve.
 
-### Missing values
+### Valores faltantes
 
-One important feature of R that can make comparison tricky are missing values, or `NA`s ("not availables"). `NA` represents an unknown value so missing values are "contagious": almost any operation involving an unknown value will also be unknown.
+Una característica importante de R que puede hacer que la comparación sea difícil son los valores faltantes, o `NA`s ("no disponibles en inglés"). `NA` representa un valor desconocido por lo que los valores perdidos son "contagiosos": casi cualquier operación que involucre un valor desconocido también será desconocida.
 
 ```{r}
 NA > 5
@@ -155,33 +155,33 @@ NA + 10
 NA / 2
 ```
 
-The most confusing result is this one:
+El resultado más confuso es este:
 
 ```{r}
 NA == NA
 ```
 
-It's easiest to understand why this is true with a bit more context:
+Es más fácil entender por qué esto es cierto con un poco más de contexto:
 
 ```{r}
-# Let x be Mary's age. We don't know how old she is.
+# Sea x la edad de María. No sabemos qué edad tiene.
 x <- NA
 
-# Let y be John's age. We don't know how old he is.
+# Sea y la edad de Juan. No sabemos qué edad tiene.
 y <- NA
 
-# Are John and Mary the same age?
+# ¿Tienen Juan y María la misma edad?
 x == y
-# We don't know!
+# ¡No sabemos!
 ```
 
-If you want to determine if a value is missing, use `is.na()`:
+Si deseas determinar si falta un valor, usa `is.na()`:
 
 ```{r}
 is.na(x)
 ```
 
-`filter()` only includes rows where the condition is `TRUE`; it excludes both `FALSE` and `NA` values. If you want to preserve missing values, ask for them explicitly:
+`filter()` solo incluye filas donde la condición es `TRUE`; excluye ambos valores `FALSE` y `NA`. Si deseas conservar valores perdidos, solicítalos explícitamente:
 
 ```{r}
 df <- tibble(x = c(1, NA, 3))
@@ -189,30 +189,25 @@ filter(df, x > 1)
 filter(df, is.na(x) | x > 1)
 ```
 
-### Exercises
+### Ejercicios
 
-1.  Find all flights that
+1.  Encuentra todos los vuelos que:
 
-    1. Had an arrival delay of two or more hours
-    1. Flew to Houston (`IAH` or `HOU`)
-    1. Were operated by United, American, or Delta
-    1. Departed in summer (July, August, and September)
-    1. Arrived more than two hours late, but didn't leave late
-    1. Were delayed by at least an hour, but made up over 30 minutes in flight
-    1. Departed between midnight and 6am (inclusive)
+   i.   Tuvieron un retraso de llegada de dos o más horas
+   ii.  Volaron a Houston (`IAH` o` HOU`)
+   iii. Fueron operados por United, American o Delta
+   iv.  Partieron en verano (julio, agosto y septiembre)
+   v.   Llegaron más de dos horas tarde, pero no salieron tarde
+   vi.  Se retrasaron por lo menos una hora, pero repusieron más de 30 minutos en vuelo
+   vii. Partieron entre la medianoche y las 6 a.m. (inclusive)
 
-1.  Another useful dplyr filtering helper is `between()`. What does it do?
-    Can you use it to simplify the code needed to answer the previous 
-    challenges?
+2.  Otro filtrado útil de dplyr es `between()`. ¿Qué hace? ¿Puedes usarlo para simplificar el código necesario para responder a los desafíos anteriores?
 
-1.  How many flights have a missing `dep_time`? What other variables are 
-    missing? What might these rows represent?
+3. ¿Cuántos vuelos tienen datos faltantes de `dep_time`? ¿Qué otras variables tienen valores faltantes? ¿Qué representan estas filas?
 
-1.  Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing?
-    Why is `FALSE & NA` not missing? Can you figure out the general
-    rule?  (`NA * 0` is a tricky counterexample!)
+4. ¿Por qué `NA ^ 0` no es faltante? ¿Por qué `NA | TRUE` no es faltante? ¿Por qué `FALSE & NA` no es faltante? ¿Puedes descubrir la regla general? (`NA * 0` es un contraejemplo complicado!)
 
-## Arrange rows with `arrange()`
+## Reordena las filas con `arrange()`
 
 `arrange()` works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns:
 
