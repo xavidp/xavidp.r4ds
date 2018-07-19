@@ -1,19 +1,21 @@
-# Data transformation {#transform}
+# Transformación de Datos {#transforma}
 
-## Introduction
+## Introducción
 
-Visualisation is an important tool for insight generation, but it is rare that you get the data in exactly the right form you need. Often you'll need to create some new variables or summaries, or maybe you just want to rename the variables or reorder the observations in order to make the data a little easier to work with. You'll learn how to do all that (and more!) in this chapter, which will teach you how to transform your data using the dplyr package and a new dataset on flights departing New York City in 2013.
+La visualización es una herramienta importante para el análisis exploratorio, sin embargo es raro que obtengas los datos exactamente en la forma correcta que necesitas. A menudo necesitarás crear variables o estadísticos nuevos, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete *dplyr*. Utilizaremos un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
 
-### Prerequisites
+### Prerequisitos
 
-In this chapter we're going to focus on how to use the dplyr package, another core member of the tidyverse. We'll illustrate the key ideas using data from the nycflights13 package, and use ggplot2 to help us understand the data. 
+En este capítulo nos enfocaremos en cómo usar el paquete dplyr, otro miembro central del tidyverse. Ilustraremos las ideas clave con los datos del paquete vuelos y usaremos ggplot2 para ayudarnos a comprender los datos. 
 
 ```{r setup, message = FALSE}
+devtools::install_github("cienciadedatos/datos")
+data(package = "datos")
 library(nycflights13)
 library(tidyverse)
 ```
 
-Take careful note of the conflicts message that's printed when you load the tidyverse. It tells you that dplyr overwrites some functions in base R. If you want to use the base version of these functions after loading dplyr, you'll need to use their full names: `stats::filter()` and `stats::lag()`.
+Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquete tidyverse. Le dice que dplyr sobrescribe algunas funciones en la base R. Si desea usar la versión base de estas funciones después de cargar dplyr, necesitará usar sus nombres completos: `stats :: filter ()` y `stats :: lag () `.
 
 ### nycflights13
 
