@@ -2,7 +2,7 @@
 
 ## Introducción
 
-La visualización es una herramienta importante para el análisis exploratorio, sin embargo es raro que obtengas los datos exactamente en la forma correcta que necesitas. A menudo necesitarás crear variables o estadísticos nuevos, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete *dplyr*. Utilizaremos un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
+La visualización es una herramienta importante para el análisis exploratorio, sin embargo es raro que obtengas los datos exactamente en la forma correcta que necesitas. A menudo necesitarás crear variables o estadísticos nuevos, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete dplyr. Utilizaremos un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
 
 ### Prerequisitos
 
@@ -15,136 +15,134 @@ library(nycflights13)
 library(tidyverse)
 ```
 
-Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquete tidyverse. Le dice que dplyr sobrescribe algunas funciones en la base R. Si desea usar la versión base de estas funciones después de cargar dplyr, necesitará usar sus nombres completos: `stats :: filter ()` y `stats :: lag () `.
+Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquete tidyverse. Te dice que dplyr sobrescribe algunas funciones en la base de R. Si deseas usar la versión base de estas funciones después de cargar dplyr, necesitarás usar sus nombres completos: `stats::filter()` y `stats::lag()`.
 
-### nycflights13
+### vuelos
 
-To explore the basic data manipulation verbs of dplyr, we'll use `nycflights13::flights`. This data frame contains all `r format(nrow(nycflights13::flights), big.mark = ",")` flights that departed from New York City in 2013. The data comes from the US [Bureau of Transportation Statistics](http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), and is documented in `?flights`.
-
-```{r}
-flights
-```
-
-You might notice that this data frame prints a little differently from other data frames you might have used in the past: it only shows the first few rows and all the columns that fit on one screen. (To see the whole dataset, you can run `View(flights)` which will open the dataset in the RStudio viewer). It prints differently because it's a __tibble__. Tibbles are data frames, but slightly tweaked to work better in the tidyverse. For now, you don't need to worry about the differences; we'll come back to tibbles in more detail in [wrangle](#wrangle-intro).
- 
-You might also have noticed the row of three (or four) letter abbreviations under the column names. These describe the type of each variable:
-
-* `int` stands for integers.
-
-* `dbl` stands for doubles, or real numbers.
-
-* `chr` stands for character vectors, or strings.
-
-* `dttm` stands for date-times (a date + a time).
-
-There are three other common types of variables that aren't used in this dataset but you'll encounter later in the book:
-
-* `lgl` stands for logical, vectors that contain only `TRUE` or `FALSE`.
-
-* `fctr` stands for factors, which R uses to represent categorical variables
-  with fixed possible values.
-
-* `date` stands for dates.
-
-### dplyr basics
-
-In this chapter you are going to learn the five key dplyr functions that allow you to solve the vast majority of your data manipulation challenges:
-
-* Pick observations by their values (`filter()`).
-* Reorder the rows (`arrange()`).
-* Pick variables by their names (`select()`).
-* Create new variables with functions of existing variables (`mutate()`).
-* Collapse many values down to a single summary (`summarise()`).
-
-These can all be used in conjunction with `group_by()` which changes the scope of each function from operating on the entire dataset to operating on it group-by-group. These six functions provide the verbs for a language of data manipulation.
-
-All verbs work similarly: 
-
-1.  The first argument is a data frame.
-
-1.  The subsequent arguments describe what to do with the data frame,
-    using the variable names (without quotes).
-    
-1.  The result is a new data frame.
-
-Together these properties make it easy to chain together multiple simple steps to achieve a complex result. Let's dive in and see how these verbs work.
-
-## Filter rows with `filter()`
-
-`filter()` allows you to subset observations based on their values. The first argument is the name of the data frame. The second and subsequent arguments are the expressions that filter the data frame. For example, we can select all flights on January 1st with:
+Para explorar los verbos básicos de manipulación de datos de dplyr, usaremos `datos::vuelos`. Este conjunto de datos contiene todos los vuelos `formato r (nrow (datos::vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen de las estadísticas de la [Oficina de Transportes de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `? datos`.
 
 ```{r}
-filter(flights, month == 1, day == 1)
+vuelos
 ```
 
-When you run that line of code, dplyr executes the filtering operation and returns a new data frame. dplyr functions never modify their inputs, so if you want to save the result, you'll need to use the assignment operator, `<-`:
+Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un __tibble__. Los Tibbles son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; volveremos a tibbles con más detalle en [wrangle] (# wrangle-intro).
+
+También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras debajo de los nombres de las columnas. Estos describen el tipo de cada variable:
+
+* `int` significa enteros.
+
+* `dbl` representa dobles, o números reales.
+
+* `chr` significa vectores de caracteres o cadenas.
+
+* `dttm` significa fechas y horas (una fecha + una hora).
+
+Hay otros tres tipos comunes de variables que no se usan en este conjunto de datos, pero que encontrará más adelante en el libro:
+
+* `lgl` significa vectores lógicos que solo contienen ` TRUE` (verdadero) o `FALSE` (falso).
+
+* `fctr` significa factores, que R usa para representar variables categóricas con valores posibles fijos.
+
+* `date` significa fechas.
+
+### Lo básico de dplyr 
+
+En este capítulo, aprenderás las cinco funciones clave de dplyr que te permiten resolver la gran mayoría de tus desafíos de manipulación de datos:
+
+* Filtra o elije las observaciones por sus valores (`filter()` — del inglés filtrar).
+* Reordena las filas (`arrange()` — del inglés arreglar).
+* Selecciona las variables por sus nombres (`select()` — del inglés seleccionar).
+* Crea nuevas variables con transformaciones de variables existentes (`mutate()` — del inglés mutar o transformar).
+* Contraer muchos valores hasta un solo resumen (`summarize()` — del inglés resumir).
+
+Todo esto se puede usar junto con `group_by()` (— agrupar por en inglés), que cambia el alcance de cada función para que funcione ya no en todo el conjunto de datos sino que funcione grupo por grupo. Estas seis funciones proporcionan los verbos para un lenguaje de manipulación de datos.
+
+Todos los verbos funcionan de manera similar:
+
+1. El primer argumento es un marco de datos.
+
+2. Los argumentos posteriores describen qué hacer con el marco de datos usando los nombres de variables (sin comillas).
+
+3. El resultado es un nuevo marco de datos.
+
+En conjunto, estas propiedades hacen que sea fácil encadenar varios pasos simples para lograr un resultado complejo. Vamos a sumergirnos y ver cómo funcionan estos verbos.
+
+## Filtrar filas con `filter()`
+
+`filter()` te permite filtrar un subconjunto de observaciones basadas en sus valores. El primer argumento es el nombre del marco de datos. El segundo y siguientes argumentos son las expresiones que filtran el marco de datos. Por ejemplo, podemos seleccionar todos los vuelos del 1 de enero con:
 
 ```{r}
-jan1 <- filter(flights, month == 1, day == 1)
+filter(vuelos, mes == 1, dia == 1)
 ```
 
-R either prints out the results, or saves them to a variable. If you want to do both, you can wrap the assignment in parentheses:
+Cuando ejecutas esa línea de código, dplyr ejecuta la operación de filtrado y devuelve un nuevo marco de datos. Las funciones dplyr nunca modifican sus entradas, por lo que si deseas guardar el resultado, necesitarás usar el operador de asignación, `<-`:
 
 ```{r}
-(dec25 <- filter(flights, month == 12, day == 25))
+ene1 <- filter(vuelos, mes == 1, dia == 1)
 ```
 
-### Comparisons
+R imprime los resultados o los guarda en una variable. Si deseas hacer ambas cosas, puedes escribir toda la línea entre paréntesis:
 
-To use filtering effectively, you have to know how to select the observations that you want using the comparison operators. R provides the standard suite: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal). 
+```{r}
+(dic25 <- filter(vuelos, mes == 12, dia == 25))
+```
 
-When you're starting out with R, the easiest mistake to make is to use `=` instead of `==` when testing for equality. When this happens you'll get an informative error:
+### Comparaciones
+
+Para usar el filtrado de manera efectiva, debes saber cómo seleccionar las observaciones que deseas utilizando los operadores de comparación. R proporciona la suite estándar: `>`, `> =`, `<`, `<=`, `! =` (No igual) y `==` (igual).
+
+Cuando comienzas con R, el error más fácil de cometer es usar `=` en lugar de `==` cuando se prueba la igualdad. Cuando esto sucede, obtendrás un error informativo:
 
 ```{r, error = TRUE}
-filter(flights, month = 1)
+filter(vuelos, mes = 1)
 ```
 
-There's another common problem you might encounter when using `==`: floating point numbers. These results might surprise you!
+Hay otro problema común que puedes encontrar al usar `==`: números de coma flotante. ¡Estos resultados pueden sorprenderte!
 
 ```{r}
 sqrt(2) ^ 2 == 2
 1 / 49 * 49 == 1
 ```
 
-Computers use finite precision arithmetic (they obviously can't store an infinite number of digits!) so remember that every number you see is an approximation. Instead of relying on `==`, use `near()`:
+Las computadoras usan aritmética de precisión finita (obviamente no pueden almacenar una cantidad infinita de dígitos) Así que recuerda que cada número que ves es una aproximación. En lugar de confiar en `==`, usa `near()` (cercano en inglés):
 
 ```{r}
 near(sqrt(2) ^ 2,  2)
 near(1 / 49 * 49, 1)
 ```
 
-### Logical operators
+### Operadores lógicos
 
-Multiple arguments to `filter()` are combined with "and": every expression must be true in order for a row to be included in the output. For other types of combinations, you'll need to use Boolean operators yourself: `&` is "and", `|` is "or", and `!` is "not". Figure \@ref(fig:bool-ops) shows the complete set of Boolean operations.
+Múltiples argumentos para `filter()` se combinan con "y": cada expresión debe ser verdadera para que una fila se incluya en la salida. Para otros tipos de combinaciones, necesitarás usar operadores Booleanos: `&` es "y", `|` es "o", y `!` Es "no". La figura @ref(fig:bool-ops) muestra el conjunto completo de operaciones Booleanas.
 
-```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."}
+```{r bool-ops, echo = FALSE, fig.cap = "Set Completo de Operaciones Booleanas. `x` es el círculo de la izquierda, `y` es el círculo de la derecha, y la región sombreada muestra qué partes selecciona cada operador."}
 knitr::include_graphics("diagrams/transform-logical.png")
 ```
 
-The following code finds all flights that departed in November or December:
+El siguiente código encuentra todos los vuelos que partieron en noviembre o diciembre:
 
 ```{r, eval = FALSE}
-filter(flights, month == 11 | month == 12)
+filter(vuelos, mes == 11 | mes == 12)
 ```
 
-The order of operations doesn't work like English. You can't write `filter(flights, month == 11 | 12)`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `TRUE`. In a numeric context (like here), `TRUE` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
+El orden de las operaciones no funciona como en español. No puedes escribir `filter (vuelos, mes == 11 | 12)`, que literalmente puede traducirse como "encuentra todos los vuelos que partieron en noviembre o diciembre". En cambio, encontrará todos los meses que son iguales a `11 | 12`, una expresión que evalúa a 'VERDADERO'. En un contexto numérico (como aquí), 'VERDADERO' se convierte en un uno, por lo que encuentra todos los vuelos en enero, no en noviembre o diciembre. Esto es bastante confuso.
 
-A useful short-hand for this problem is `x %in% y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above:
+Una manera rápida y útil para resolver este problema es `x %in% y` (x en y en inglés). Esto seleccionará cada fila donde `x` es uno de los valores en` y`. Podríamos usarlo para reescribir el código de arriba:
 
 ```{r, eval = FALSE}
-nov_dec <- filter(flights, month %in% c(11, 12))
+nov_dic <- filter(vuelos, mes %in% c(11, 12))
 ```
 
-Sometimes you can simplify complicated subsetting by remembering De Morgan's law: `!(x & y)` is the same as `!x | !y`, and `!(x | y)` is the same as `!x & !y`. For example, if you wanted to find flights that weren't delayed (on arrival or departure) by more than two hours, you could use either of the following two filters:
+A veces puedes simplificar subconjuntos complicados al recordar la ley de De Morgan: `!(x & y)` es lo mismo que `!x | !y`, y `!(x | y)` es lo mismo que `!x & !y`. Por ejemplo, si deseas encontrar vuelos que no se retrasaron (en llegada o partida) en más de dos horas, puedes usar cualquiera de los dos filtros siguientes:
 
 ```{r, eval = FALSE}
-filter(flights, !(arr_delay > 120 | dep_delay > 120))
-filter(flights, arr_delay <= 120, dep_delay <= 120)
+filter(vuelos, !(lleg_tardia > 120 | sal_tardia > 120))
+filter(vuelos  , lleg_tardia <= 120, sal_tardia <= 120)
 ```
 
-As well as `&` and `|`, R also has `&&` and `||`. Don't use them here! You'll learn when you should use them in [conditional execution].
+Además de `&` y `|`, R también tiene `&&` y `||`. ¡No los uses aquí! Aprenderás cuándo debe usarlos en [ejecución condicional].
 
-Whenever you start using complicated, multipart expressions in `filter()`, consider making them explicit variables instead. That makes it much easier to check your work. You'll learn how to create new variables shortly.
+Siempre que empieces a usar expresiones complejas de varias partes en `filter()`, considera convertirlas en variables explícitas. Eso hace que sea mucho más fácil verificar tu trabajo. Aprenderás cómo crear nuevas variables en breve.
 
 ### Missing values
 
@@ -869,31 +867,20 @@ A grouped filter is a grouped mutate followed by an ungrouped filter. I generall
 
 Functions that work most naturally in grouped mutates and filters are known as  window functions (vs. the summary functions used for summaries). You can learn more about useful window functions in the corresponding vignette: `vignette("window-functions")`.
 
-### Exercises
+### Ejercicios
 
-1.  Refer back to the lists of useful mutate and filtering functions. 
-    Describe how each operation changes when you combine it with grouping.
+1. Remítete a las listas de funciones útiles de mutación y filtrado. Describe cómo cambia cada operación cuando las combinas con la agrupación.
 
-1.  Which plane (`tailnum`) has the worst on-time record?
+2. ¿Qué avión (`colanum`) tiene el peor registro de tiempo?
 
-1.  What time of day should you fly if you want to avoid delays as much
-    as possible?
-    
-1.  For each destination, compute the total minutes of delay. For each 
-    flight, compute the proportion of the total delay for its destination.
-    
-1.  Delays are typically temporally correlated: even once the problem that
-    caused the initial delay has been resolved, later flights are delayed 
-    to allow earlier flights to leave. Using `lag()`, explore how the delay
-    of a flight is related to the delay of the immediately preceding flight.
-    
-1.  Look at each destination. Can you find flights that are suspiciously
-    fast? (i.e. flights that represent a potential data entry error). Compute
-    the air time a flight relative to the shortest flight to that destination.
-    Which flights were most delayed in the air?
-    
-1.  Find all destinations that are flown by at least two carriers. Use that
-    information to rank the carriers.
+3. ¿A qué hora del día deberías volar si quieres evitar retraso lo más posible?
 
-1.  For each plane, count the number of flights before the first delay 
-    of greater than 1 hour.
+4. Para cada destino, calcula los minutos totales de demora. Para cada vuelo, calcula la proporción de la demora total para su destino.
+
+5. Los retrasos suelen estar temporalmente correlacionados: incluso una vez que el problema que causó el retraso inicial se ha resuelto, los vuelos posteriores se retrasan para permitir que salgan los vuelos anteriores. Usando `lag()`, explora cómo el retraso de un vuelo está relacionado con el retraso del vuelo inmediatamente anterior.
+
+6. Mira cada destino. ¿Puedes encontrar vuelos sospechosamente rápidos? (es decir, vuelos que representan un posible error de entrada de datos). Calcula el tiempo en el aire de un vuelo relativo al vuelo más corto a ese destino. ¿Cuáles vuelos se retrasaron más en el aire?
+
+7. Encuentra todos los destinos que son volados por al menos dos operadores. Usa esta información para clasificar a los transportistas.
+
+8. Para cada avión, cuenta el número de vuelos antes del primer retraso de más de 1 hora.
