@@ -277,7 +277,7 @@ Ver `?select` para más detalles.
 `select()` se puede usar para cambiar el nombre de las variables, pero rara vez es útil porque descarta todas las variables que no se mencionan explícitamente. En su lugar, utiliza `rename()`, que es una variante de `select()` que mantiene todas las variables que no se mencionan explícitamente:
 
 `` `{r}
-rename(vuelos, cola_num = colanum)
+rename(vuelos, cola_num = codigo_cola)
 `` `
 
 Otra opción es usar `select()` junto con el asistente `everything()` (todo en inglés). Esto es útil si tienes un grupo de variables que te gustaría mover al comienzo del *data frame*.
@@ -788,7 +788,7 @@ Las funciones que trabajan de forma más natural en transformaciones y filtros a
 
 1. Remítete a las listas de funciones útiles de mutación y filtrado. Describe cómo cambia cada operación cuando las combinas con la agrupación.
 
-2. ¿Qué avión (`colanum`) tiene el peor registro de tiempo?
+2. ¿Qué avión (`codigo_cola`) tiene el peor registro de tiempo?
 
 3. ¿A qué hora del día deberías volar si quieres evitar retraso lo más posible?
 
