@@ -2,13 +2,13 @@
 
 ## Introducción
 
-A lo largo de este libro, trabajaremos con "tibbles" en vez de con los `data.frame`s tradicionales de R. Los tibbles __son__ __data fames__, pero modifican algunos comportamientos antiguos para hacernos la vida más fácil. R es un lenguaje viejo y algunas cosas que eran útiles hace 10 o 20 años, actualmente nos dan inconvenientes. Es dificil cambiar R base sin romer el código existente, así que la mayor parte de la innovación ocurre en paquetes. Acá vamos a describir el paquete __tible__, que provee data frames parcializados que facilitan trabajar en el tidyverse. La mayoría de las veces voy a usar el término tibble y data frame de manera intercambiable; cuando quiera señalar al data frame de R lo voy a llamar `data.frame`.
+A lo largo de este libro, trabajaremos con "tibbles" en vez de con los `data.frame`s tradicionales de R. Los tibbles __son__ __data fames__, pero modifican algunos comportamientos antiguos para hacernos la vida más fácil. R es un lenguaje viejo y algunas cosas que eran útiles hace 10 o 20 años, actualmente pueden resultar inconvenientes. Es difícil moficicar R base sin romer el código existente, así que la mayor parte de la innovación ocurre en paquetes. Aquí vamos a describir el paquete __tibble__, que provee data frames parcializados que facilitan trabajar en el tidyverse. La mayoría de las veces voy a usar el término tibble y data frame de manera intercambiable; para hablar del data frame de R lo voy a llamar `data.frame`.
 
-Si luego de leer este capítulo te quedas con ganas de aprender más sobre tibbles, quizás disfrutes `vignette("tibble")`
+Si luego de leer este capítulo te quedas con ganas de aprender más sobre tibbles, quizás disfrutes `vignette("tibble")`.
 
 ### Requisitos
 
-En este capítulo exploraré el paquete __tible__, parte de los paquetes principales del tidyverse.
+En este capítulo exploraré el paquete __tibble__, parte de los paquetes principales del tidyverse.
 
 ```{r setup, message = FALSE}
 library(tidyverse)
@@ -16,13 +16,13 @@ library(tidyverse)
 
 ## Creando tibbles {#tibbles}
 
-Casi todas las funciones que usarás en este libro producen tibbles ya que éstas son una de las características que unen al tidyverse. El resto de los paquetes de R suelen usar data frames clásicos, así que quizás quieras convertir un data frame en un tibble. Esto se hace con `as_tibble()`:
+Casi todas las funciones que usarás en este libro producen tibbles ya que éstos son una de las características que unen al tidyverse. El resto de los paquetes de R suelen usar data frames clásicos, así que quizás quieras convertir un data frame en un tibble. Esto se hace con `as_tibble()`:
 
 ```{r}
 as_tibble(iris)
 ```
 
-Puedes crear un nuevo tibble a partir de vectores individuales con `tibble()`. `tibble()` automáticamente recila vectores de longitud 1 y te permite referirte a variables creadas dentro de la función, como se muestra abajo.
+Puedes crear un nuevo tibble a partir de vectores individuales con `tibble()`. `tibble()` automáticamente recicla vectores de longitud 1 y te permite referirte a variables creadas dentro de la propia función, como se muestra abajo.
 
 ```{r}
 tibble(
@@ -32,9 +32,9 @@ tibble(
 )
 ```
 
-Si ya estás familiarizado con `data.frame()` es importante notar que `tibble()` hace menos cosas: nunca cambia el tipo de los inputs (p.e. nunca convierte caracteres en factores!), nunca cambia el nombre de las variabels, y nunca asigna nombres a las filas.
+Si ya estás familiarizado con `data.frame()` es importante notar que `tibble()` hace menos cosas: nunca cambia el tipo de los inputs (p.e. ¡nunca convierte caracteres en factores!), nunca cambia el nombre de las variables, y nunca asigna nombres a las filas.
 
-Un tibble puede tener nombres de columnas que no sean nombres válidos de variable en R, es decir nombres __no sintácticos__. Por ejemplo, pueden no empezar con una letra, o contener caracteres poco compues como un espacio. Para referirse a estas variables, tienes que rodearlos de acentos abiertos, `` ` ``:
+Un tibble puede tener nombres de columnas que no sean nombres de variable válidos en R, es decir nombres __no sintácticos__. Por ejemplo, pueden no empezar con una letra, o contener caracteres poco comunes, como espacios. Para referirse a estas variables, tienes que rodearlos de acentos abiertos, `` ` ``:
 
 ```{r}
 tb <- tibble(
@@ -47,7 +47,7 @@ tb
 
 También necesitarás los espacios abiertos al trabajar con estas variables en otros paquetes, como ggplot2, dplyr y tidyr.
 
-Otra forma de crear un tibble es con `tribble()`, que significa tibble **tr**anspuesto. `tribble()` está pensado para dara entry en el código: los nombres de columnas se definen con fórmulas (comienzan con `~`), y cada entrada está separada por comas. Esto posibilita escribir pocos datos de manera legible.
+Otra forma de crear un tibble es con `tribble()`, que significa tibble **tr**anspuesto. `tribble()` está pensado para data entry en el código: los nombres de columnas se definen con fórmulas (comienzan con `~`), y cada entrada está separada por comas. Esto permite escribir pocos datos de manera legible.
 
 ```{r}
 tribble(
@@ -58,7 +58,7 @@ tribble(
 )
 ```
 
-Usualmente agrego un commentario (la línea que comienza con `#`) para dejar en claro cuál es el encabezado.
+Usualmente agrego un comentario (la línea que comienza con `#`) para dejar en claro cuál es el encabezado.
 
 ## Tibbles vs. data.frame
 
@@ -66,7 +66,7 @@ Hay dos diferencias principales entre el uso de un tibble y un `data.frame` clá
 
 ### Impresión en consola
 
-Los tibbles tienen un método de impresión en consola refinado que sólo muestra las primeras 10 filas y todas las columnas que entran en la pantalla. Esto facilita mucho trabajar con grandes datos. Además de su nombre, cada columna muestra su tipo, una característica útil tomada prestada de `str()`
+Los tibbles tienen un método de impresión en consola refinado que sólo muestra las primeras 10 filas y solo las columnas que entran en la pantalla. Esto facilita mucho trabajar con grandes datos. Además de su nombre, cada columna muestra su tipo, una característica útil tomada prestada de `str()`
 
 ```{r}
 tibble(
@@ -78,7 +78,7 @@ tibble(
 )
 ```
 
-Los tibbles están diseñados para que no llenen tu consola accidentalmente al mirar data frames muy grandes. Pero a veces es necesario un output mayor que el que se obtiene por default. Existen algunas opciones que pueden ayudar. 
+Los tibbles están diseñados para no inundar tu consola accidentalmente al mirar data frames muy grandes. Pero a veces es necesario un output mayor que el que se obtiene por default. Existen algunas opciones que pueden ayudar. 
 
 Primero, puedes usar `print()` en el data frame explícitamente y controlar el número de filas (`n`) y el ancho (`width`) mostrado. `width = Inf` muestra todas las columnas:
 
@@ -87,9 +87,9 @@ vuelos %>%
   print(n = 10, width = Inf)
 ```
 
-También puede controlar el comportamiento por default con algunas opciones:
+También puedes controlar el comportamiento por default con algunas opciones:
 
-* `options(tibble.print_max = n, tibble.print_min = m)`: si hay más de `n` filas, mostrar sólo `m` filas. Usa `options(tibble.print_min = Inf)` para mostrar siempre todas las filas.
+* `options(tibble.print_max = n, tibble.print_min = m)`: si hay más de `n` filas, mostrar solo `m` filas. Usa `options(tibble.print_min = Inf)` para mostrar siempre todas las filas.
 
 * Usa `options(tibble.width = Inf)` para mostrar siempre todas las columnas sin importar el ancho de la pantalla.
 
@@ -104,8 +104,7 @@ vuelos %>%
 
 ### Selección se subconjuntos
 
-Hasta ahora todas las herramientas que aprendiste funcionan con el data frame completo. Si quieres extraer una variable individual, necesitas algunas herramientas nuevas, `$` y `[[`. `[[` puede extraer según nombre o posición; `$` sólo extrae según el nombre, pero permite tipear un poco menos. 
-
+Hasta ahora todas las herramientas que aprendiste funcionan con el data frame completo. Si quieres extraer una variable individual, necesitas algunas herramientas nuevas: `$` y `[[`. `[[` puede extraer según nombre o posición; `$` sólo extrae según el nombre, pero permite tipear un poco menos. 
 
 ```{r}
 df <- tibble(
@@ -138,13 +137,13 @@ Algunas funciones previas no funcionan con tibbles. Si te encuentras uno de esos
 class(as.data.frame(tb))
 ```
 
-La principal rasón de que algunas funciones previas no funcionen con tibbles es la función `[`. En este libro no usamos mucho `[` porque `dplyr::filter()` y `dplyr::select()` resuelven los mismos problemas con un código más limpio (pero aprenderás un poco sobre ello en [vector subsetting](#vector-subsetting) XXX). Con los data frames de R base, `[` a veces devuelve un data frame y a veces devuelve un vector. Con tibbles, `[` siempre devuelve otro tibble. 
+La principal razón de que algunas funciones previas no funcionen con tibbles es la función `[`. En este libro no usamos mucho `[` porque `dplyr::filter()` y `dplyr::select()` resuelven los mismos problemas con un código más limpio (pero aprenderás un poco sobre ello en [vector subsetting](#vector-subsetting) XXX). Con los data frames de R base, `[` a veces devuelve un data frame y a veces devuelve un vector. Con tibbles, `[` siempre devuelve otro tibble. 
 
 ## Ejercicios
 
 1.  ¿Cómo puedes saber si un objeto es un tibble? (Ayuda: trata imprimir `mtcars` en consola, que es un data frame clásico).
 
-1.  Compara y contrasta las siguientes operaciones en un `data.frame` y en un tibble equivalente. ¿Qué es diference? ¿Por qué podría causarte frustración el comportamiento default del data frame?
+1.  Compara y contrasta las siguientes operaciones en un `data.frame` y en un tibble equivalente. ¿Qué es diferente? ¿Por qué podría causarte frustración el comportamiento default del data frame?
     
     ```{r, eval = FALSE}
     df <- data.frame(abc = 1, xyz = "a")
@@ -161,9 +160,9 @@ La principal rasón de que algunas funciones previas no funcionen con tibbles es
     
     1. Graficando un gráfico de dispersión de `1` vs `2`.
     
-    1. Creando una nueva columna llamada `3` que es `2` dividido `1`.
+    1. Creando una nueva columna llamada `3` que sea `2` dividido `1`.
     
-    1. Renombrando las columnas a `uno`, `dos` y `tres`.
+    1. Renombrando las columnas como `uno`, `dos` y `tres`.
     
     ```{r}
     molesto <- tibble(
