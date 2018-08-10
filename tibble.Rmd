@@ -2,7 +2,7 @@
 
 ## Introducción
 
-A lo largo de este libro, trabajaremos con "tibbles" en vez de con los `data.frame`s tradicionales de R. Los tibbles __son__ __data fames__, pero modifican algunos comportamientos antiguos para hacernos la vida más fácil. R es un lenguaje viejo y algunas cosas que eran útiles hace 10 o 20 años, actualmente pueden resultar inconvenientes. Es difícil moficicar R base sin romer el código existente, así que la mayor parte de la innovación ocurre en paquetes. Aquí vamos a describir el paquete __tibble__, que provee data frames parcializados que facilitan trabajar en el tidyverse. La mayoría de las veces voy a usar el término tibble y data frame de manera intercambiable; para hablar del data frame de R lo voy a llamar `data.frame`.
+A lo largo de este libro, trabajaremos con "tibbles" (pronunciado /tibl/) en vez de con los `data.frame`s tradicionales de R. Los tibbles __son__ __data fames__, pero modifican algunos comportamientos antiguos para hacernos la vida más fácil. R es un lenguaje viejo y algunas cosas que eran útiles hace 10 o 20 años, actualmente pueden resultar inconvenientes. Es difícil moficicar R base sin romer el código existente, así que la mayor parte de la innovación ocurre en paquetes. Aquí vamos a describir el paquete __tibble__, que provee data frames parcializados que facilitan trabajar en el tidyverse. La mayoría de las veces voy a usar el término tibble y data frame de manera intercambiable; para hablar del data frame de R lo voy a llamar `data.frame`.
 
 Si luego de leer este capítulo te quedas con ganas de aprender más sobre tibbles, quizás disfrutes `vignette("tibble")`.
 
