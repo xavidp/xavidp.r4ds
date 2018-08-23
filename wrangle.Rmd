@@ -31,11 +31,9 @@ La doma de datos también abarca la transformación de los datos, sobre lo cual 
 *   [cadenas de caracteres] te introducirá en las expresiones regulares (regular expressions), una herramienta poderosa para
     manipular cadenas de caracteres.
 
-*   [Factores] son cómo R almacena los datos categoricos. Se usan cuando una variable
+*   [Factores] son cómo R almacena los datos categóricos. Se usan cuando una variable
     tiene un conjunto fijo de posibles valores, o cuando quieres usar una cadena de caracteres en un 
     orden distinto al alfabético.
     
-*   [Dates and times] will give you the key tools for working with 
-    dates and date-times.
 *   [Fechas y horas] te dará herramientas clave para trabajar con  
     fechas y fecha-horas.
