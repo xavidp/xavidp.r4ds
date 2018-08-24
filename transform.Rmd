@@ -1,4 +1,4 @@
-# Transformación de Datos {#transforma}
+# Transformación de Datos {#transform}
 
 ## Introducción
 
