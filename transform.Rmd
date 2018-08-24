@@ -2,7 +2,7 @@
 
 ## Introducción
 
-La visualización es una herramienta importante para el análisis exploratorio, sin embargo es raro que obtengas los datos exactamente en la forma correcta que necesitas. A menudo necesitarás crear variables o estadísticos nuevos, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete **dplyr**. Utilizaremos un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
+La visualización es una herramienta importante para para la generación de conocimiento, sin embargo es raro que obtengas los datos exactamente en la forma correcta que necesitas.  A menudo necesitarás crear algunas variables nuevas o resúmenes, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete **dplyr** y el uso de un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
 
 ### Prerequisitos
 
