@@ -6,7 +6,7 @@ La visualización es una herramienta importante para para la generación de cono
 
 ### Prerequisitos
 
-En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central del tidyverse. Ilustraremos las ideas clave con los datos del paquete **vuelos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
+En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central de tidyverse. Ilustraremos las ideas clave con los datos del paquete **vuelos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
 
 ```{r setup, message = FALSE}
 devtools::install_github("cienciadedatos/datos")
