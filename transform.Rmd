@@ -15,23 +15,23 @@ library(datos)
 library(tidyverse)
 ```
 
-Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquete **tidyverse**. Te dice que **dplyr** sobrescribe algunas funciones en la base de R. Si deseas usar la versión base de estas funciones después de cargar **dplyr**, necesitarás usar sus nombres completos: `stats::filter()` y `stats::lag()`.
+Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquete **tidyverse**. Te dice que **dplyr** sobrescribe algunas funciones en R base. Si deseas usar la versión base de estas funciones después de cargar **dplyr**, necesitarás usar sus nombres completos: `stats::filter()` y `stats::lag()`.
 
 ### vuelos
 
-Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `datos::vuelos`. Este conjunto de datos contiene todos los vuelos `r format(nrow (datos::vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen de las estadísticas de la [Oficina de Transportes de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?datos`.
+Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `datos::vuelos`. Este conjunto de datos contiene todos los vuelos `r format(nrow (datos::vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?datos`.
 
 ```{r}
 vuelos
 ```
 
-Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un _tibble_. Los *tibbles* son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; volveremos a *tibbles* con más detalle en [doma] (# doma-intro).
+Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un _tibble_. Los *tibbles* son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; volveremos a *tibbles* con más detalle en [wrangle](#wrangle-intro).
 
 También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras debajo de los nombres de las columnas. Estos describen el tipo de cada variable:
 
 * `int` significa enteros.
 
-* `dbl` representa dobles, o números reales.
+* `dbl` significa dobles, o números reales.
 
 * `chr` significa vectores de caracteres o cadenas.
 
@@ -39,7 +39,7 @@ También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras 
 
 Hay otros tres tipos comunes de variables que no se usan en este conjunto de datos, pero que encontrará más adelante en el libro:
 
-* `lgl` significa vectores lógicos que solo contienen ` TRUE` (verdadero) o `FALSE` (falso).
+* `lgl` significa lógico, vectores que solo contienen que solo contienen ` TRUE` (verdadero) o `FALSE` (falso).
 
 * `fctr` significa factores, que R usa para representar variables categóricas con valores posibles fijos.
 
@@ -49,13 +49,13 @@ Hay otros tres tipos comunes de variables que no se usan en este conjunto de dat
 
 En este capítulo, aprenderás las cinco funciones clave de **dplyr** que te permiten resolver la gran mayoría de tus desafíos de manipulación de datos:
 
-* Filtra o elije las observaciones por sus valores (`filter()` — del inglés filtrar).
-* Reordena las filas (`arrange()` — del inglés arreglar).
-* Selecciona las variables por sus nombres (`select()` — del inglés seleccionar).
-* Crea nuevas variables con transformaciones de variables existentes (`mutate()` — del inglés mutar o transformar).
-* Contrae muchos valores en un solo resumen (`summarize()` — del inglés resumir).
+* Filtrar o elegir las observaciones por sus valores (`filter()` — del inglés filtrar).
+* Reordenar las filas (`arrange()` — del inglés arreglar).
+* Seleccionar las variables por sus nombres (`select()` — del inglés seleccionar).
+* Crear nuevas variables con transformaciones de variables existentes (`mutate()` — del inglés mutar o transformar).
+* Contraer muchos valores en un solo resumen (`summarize()` — del inglés resumir).
 
-Todo esto se puede usar junto con `group_by()` (- agrupar por en inglés), que cambia el alcance de cada función para que funcione ya no en todo el conjunto de datos sino que funcione grupo por grupo. Estas seis funciones proporcionan los verbos para un lenguaje de manipulación de datos.
+Todo esto se puede usar junto con `group_by()` (- del inglés agrupar por), que cambia el alcance de cada función para que funcione ya no en todo el conjunto de datos sino que funcione grupo por grupo. Estas seis funciones proporcionan los verbos para un lenguaje de manipulación de datos.
 
 Todos los verbos funcionan de manera similar:
 
