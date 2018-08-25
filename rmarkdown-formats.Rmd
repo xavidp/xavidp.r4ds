@@ -1,36 +1,35 @@
-# R Markdown formats
+# Formatos de R Markdown
 
-## Introduction
+## Introducción
 
-So far you've seen R Markdown used to produce HTML documents. This chapter gives a brief overview of some of the many other types of output you can produce with R Markdown. There are two ways to set the output of a document:
+Hasta ahora has visto usar R markdown para producir documentos HTML. Este capítulo muestra una breve descripción de algunos de los muchos otros tipos de documentos que puedes generar con R Markdown. Hay dos maneras de definir la salida de un documento:
 
-1.  Permanently, by modifying the YAML header: 
+1.  Permanentemente, modificando el encabezado YAML: 
     
     ```yaml
     title: "Viridis Demo"
     output: html_document
     ```
     
-1.  Transiently, by calling `rmarkdown::render()` by hand:
+1.  Transitoriamente, llamando `rmarkdown::render()` a mano:
     
     ```{r eval = FALSE}
     rmarkdown::render("diamond-sizes.Rmd", output_format = "word_document")
     ```
     
-    This is useful if you want to programmatically produce multiple types of
-    output.
+    Esto es útil si quieres producir multiples tipos de salida programáticamente.
 
-RStudio's knit button renders a file to the first format listed in its `output` field. You can render to additional formats by clicking the dropdown menu beside the knit button.
+El botón knit de RStudio genera un archivo en el primer formato listado en su campo `output`. Puedes generar archivos en formatos adicionales haciendo clic en el menú de selección al lado del botón knit.
 
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("screenshots/rmarkdown-knit.png")
 ```
 
-## Output options
+## Opciones de salida
 
-Each output format is associated with an R function. You can either write `foo` or `pkg::foo`. If you omit `pkg`, the default is assumed to be rmarkdown. It's important to know the name of the function that makes the output because that's where you get help. For example, to figure out what parameters you can set with `html_document`, look at `?rmarkdown::html_document`.
+Cada formato de salida está relacionado con una función de R. Puedes escribir `foo` o `pkg::foo`. Si omites `pkg`, por defecto se asume que es rmarkdown. Es importante conocer el nombre de la función que genera el documento de salida, porque así es como obtienes ayuda. Por ejemplo, para saber que parámetros puedes definir con `html_document`, busca en `?rmarkdown::html_document`.
 
-To override the default parameter values, you need to use an expanded `output` field. For example, if you wanted to render an `html_document` with a floating table of contents, you'd use:
+Para sobreescribir los parámatros predeterminados necesitas usar un campo de `output` extendido. Por ejemplo, si quieres generar un `html_document` con una tabla de contenido flotante, usarías:
 
 ```yaml
 output:
@@ -39,7 +38,7 @@ output:
     toc_float: true
 ```
 
-You can even render to multiple outputs by supplying a list of formats:
+Incluso puedes generar múltiples salidas suministrando una lista de formatos:
 
 ```yaml
 output:
@@ -49,36 +48,36 @@ output:
   pdf_document: default
 ```
 
-Note the special syntax if you don't want to override any of the default options.
+Nota la sintaxis especial si no quieres modificar ninguna de las opciones por defecto, en inglés default.
 
-## Documents
+## Documentos
 
-The previous chapter focused on the default `html_document` output. There are a number of basic variations on that theme, generating different types of documents:
+El capítulo anterior se enfocó en la salida predeterminada del documento html `html_document`. Hay un número de variaciones básicas para generar diferentes tipos de documentos:
 
-*   `pdf_document` makes a PDF with LaTeX (an open source document layout 
-    system), which you'll need to install. RStudio will prompt you if you 
-    don't already have it.
+*   `pdf_document` crea un PDF con LaTeX (un sistema de código abierto 
+    de composición de textos), que necesitarás instalar. RStudio te notificará
+    si todavía no lo tienes
   
-*   `word_document` for Microsoft Word documents (`.docx`).
+*   `word_document` para documentos de Microsoft Word (`.docx`).
   
-*   `odt_document` for OpenDocument Text documents (`.odt`).
+*   `odt_document` para documentos de texto OpenDocument (`.odt`).
   
-*   `rtf_document` for Rich Text Format (`.rtf`) documents.
+*   `rtf_document` para documentos de Formato de Texto Enriquecido (`.rtf`).
   
-*   `md_document` for a Markdown document. This isn't typically useful by 
-    itself, but you might use it if, for example, your corporate CMS or
-    lab wiki uses markdown.
-    
-*   `github_document`: this is a tailored version of `md_document` 
-    designed for sharing on GitHub. 
+*   `md_document` para documentos Markdown. Tipicamente no es muy útil en sí mismo, 
+    pero puedes usarlo si, por ejemplo, tu CMS corporativo o 
+    tu wiki de laboratorio usa markdown.
+       
+*   `github_document`: esta es una versión a medida de `md_document` 
+    diseñada para compartir en GitHub.
 
-Remember, when generating a document to share with decision makers, you can turn off the default display of code by setting global options in the setup chunk:
+Recuerda, cuando generes un documento para compartirlo con los responsables de la toma de decisiones, puedes desactivar la visualización predeterminada de código, definiendo las opciones globales en el fragmento de configuración:
 
 ```{r, eval = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-For `html_document`s another option is to make the code chunks hidden by default, but visible with a click:
+Para documentos `html_document` otra opción es hacer que los fragmentos de código estén escondidos por defecto, pero visibles con un clic: 
 
 ```yaml
 output:
@@ -86,7 +85,7 @@ output:
     code_folding: hide
 ```
 
-## Notebooks
+## Notebooks (se traduce?)
 
 A notebook, `html_notebook`, is a variation on a `html_document`. The rendered outputs are very similar, but the purpose is different. A `html_document` is focused on communicating with decision makers, while a notebook is focused on collaborating with other data scientists. These different purposes lead to using the HTML output in different ways. Both HTML outputs will contain the fully rendered output, but the notebook also contains the full source code. That means you can use the `.nb.html` generated by the notebook in two ways:
 
