@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -215,7 +215,7 @@
      id="namedview4"
      showgrid="false"
      inkscape:zoom="0.84780091"
-     inkscape:cx="124.29562"
+     inkscape:cx="-53.222472"
      inkscape:cy="284.79107"
      inkscape:window-x="65"
      inkscape:window-y="24"
@@ -227,38 +227,7 @@
      fit-margin-top="5"
      fit-margin-right="5"
      fit-margin-bottom="5"
-     fit-margin-left="5">
-    <sodipodi:guide
-       position="145.80638,153.5247"
-       orientation="1,0"
-       id="guide5581"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="19.464567,256.64786"
-       orientation="1,0"
-       id="guide5589"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="28.281107,266.96019"
-       orientation="1,0"
-       id="guide6839"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="336.72789,266.96019"
-       orientation="1,0"
-       id="guide6851"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="289.16592,256.65849"
-       orientation="1,0"
-       id="guide8757"
-       inkscape:locked="false" />
-    <sodipodi:guide
-       position="312.26962,256.64786"
-       orientation="1,0"
-       id="guide10149"
-       inkscape:locked="false" />
-  </sodipodi:namedview>
+     fit-margin-left="5" />
   <g
      id="g210"
      transform="translate(128.81602,-240.93354)">
