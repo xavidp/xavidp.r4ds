@@ -1,8 +1,7 @@
 
 Comunicando
 Introducción 
-Hasta aquí, hemos aprendido a usar las herramientas para importar tus datos en R, ordenarlos de una manera conveniente para el análisis, y luego interpretarlos a través de su transformación, visualización y modelado. Sin embargo, no importa lo bien que esté hecho tu análisis
-si no lo puedes explicar de manera sencilla a otros: es decir, que es necesario comunicar tus resultados.
+Hasta aquí, hemos aprendido a usar las herramientas para importar tus datos en R, ordenarlos de una manera conveniente para el análisis, y luego interpretarlos a través de su transformación, visualización y modelado. Sin embargo, no importa lo bien que esté hecho tu análisis si no puedes explicarlo de manera sencilla a otros: es decir, que es necesario comunicar tus resultados.
 
 La comunicación de resultados es el tema de los siguientes cuatro capítulos.
 
@@ -16,6 +15,3 @@ los cuales ayudarán a quien ve tu análisis por primera vez a comprender de qu�
 * Terminaremos con [el flujo de trabajo de R Markdown], donde aprenderás sobre "analysis notebook", en otras palabras, aprenderás sobre el modo notebook para realizar el análisis y registrar sistemáticamente tus logros y fallas para que puedas aprender de ellos. 
 
 Desafortunadamente, estos capítulos se enfocan principalmente en la parte técnica de la comunicación, y no en los verdaderos grandes problemas de comunicar tus pensamientos a otras personas. Sin embargo, existe una gran cantidad de excelentes libros que abordan esta problemática, cuyas referencias estarán disponibles al final de cada capítulo.
-
-
-
