@@ -1,16 +1,17 @@
-# (PART) Program {-}
+# (PART) Programar {-}
 
-# Introduction {#program-intro}
+# Introduction {#programar-intro}
 
-In this part of the book, you'll improve your programming skills. Programming is a cross-cutting skill needed for all data science work: you must use a computer to do data science; you cannot do it in your head, or with pencil and paper. 
+En esta parte del libro, mejorarás tus aptitudes de programación. La programación es una habilidad que cruza transversalmente todos los trabajos de ciencia de datos: deberás usar una computadora para hacer ciencia de datos, no puedes hacerlo sólo con tu cabeza o con lápiz y papel.
 
 ```{r echo = FALSE, out.width = "75%"}
 knitr::include_graphics("diagrams/data-science-program.png")
 ```
 
-Programming produces code, and code is a tool of communication. Obviously code tells the computer what you want it to do. But it also communicates meaning to other humans. Thinking about code as a vehicle for communication is important because every project you do is fundamentally collaborative. Even if you're not working with other people, you'll definitely be working with future-you! Writing clear code is important so that others (like future-you) can understand why you tackled an analysis in the way you did. That means getting better at programming also involves getting better at communicating. Over time, you want your code to become not just easier to write, but easier for others to read. 
+Programar produce código, y el código es una herramienta de comunicación. Obviamente el código le dice a la computadora que es lo que quieres que haga, pero también comunica el significado a otros humanos. Es importante pensar el código como un vehículo de comunicación, 
+porque todo proyecto que realices es esencialmente colaborativo.  Aún cuando no estés trabajando con otras personas, seguramente en el futuro trabajarás con ese mismo código.  Por eso es necesario escribir código claro, para que otros (o tú en el futuro) puedan entender porque encaraste un análisis de la manera que lo hiciste. Esto significa que mejorando la programación también mejorarás la comunicación. Pasado el tiempo, querrás que tu código resulte no solo fácil de escribir, sino también fácil de leer para otros.     
 
-Writing code is similar in many ways to writing prose. One parallel which I find particularly useful is that in both cases rewriting is the key to clarity. The first expression of your ideas is unlikely to be particularly clear, and you may need to rewrite multiple times. After solving a data analysis challenge, it's often worth looking at your code and thinking about whether or not it's obvious what you've done. If you spend a little time rewriting your code while the ideas are fresh, you can save a lot of time later trying to recreate what your code did. But this doesn't mean you should rewrite every function: you need to balance what you need to achieve now with saving time in the long run. (But the more you rewrite your functions the more likely your first attempt will be clear.)
+Escribir código es similar,  en muchas formas, a escribir prosa. Un paralelismo que encuentro particularmente útil es que en ambos casos reescribir es clave para la claridad. La primera expresión de tus ideas difícilmente sea clara, y posiblemente necesitarás reescribir muchas veces. Después de resolver el problema de análisis de datos, en general es mejor mirar tu código y pensar si es obvio o no lo que has hecho.  Si utilizas un poco de tiempo reescribiendo tu código mientras las ideas están frescas, puedes ganar mucho tiempo después cuando necesites recrear el código que hiciste. Esto no significa que debas reescribir todas las funciones: necesitas equilibrar que es lo que tienes que mejorar ahora para ganar tiempo a largo plazo. (Pero cuanto más reescribas tus funciones, más probable será que tu primer intento sea cada vez más claro).
 
 In the following four chapters, you'll learn skills that will allow you to both tackle new programs and to solve existing problems with greater clarity and ease: 
 
