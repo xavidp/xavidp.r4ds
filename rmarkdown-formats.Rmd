@@ -180,12 +180,10 @@ interactivas de series de tiempo.
 * __DiagrammeR__, <http://rich-iannone.github.io/DiagrammeR/> Para diagramas
   (como diagramas de flujo y diagramas simples de nodos).
 
-To learn more about htmlwidgets and see a more complete list of packages that provide them visit <http://www.htmlwidgets.org/>.
 Para obtener más información sobre htmlwidgets y ver una lista más completa de los paquetes que los proporcionan, visita <http://www.htmlwidgets.org/>.
 
 ### Shiny
 
-htmlwidgets provide __client-side__ interactivity --- all the interactivity happens in the browser, independently of R. On one hand, that's great because you can distribute the HTML file without any connection to R. However, that fundamentally limits what you can do to things that have been implemented in HTML and JavaScript.  An alternative approach is to use __shiny__, a package that allows you to create interactivity using R code, not JavaScript.
 htmlwidgets proporciona interactividad del lado del cliente --- toda la interactividad ocurre en el navegador, independientement de R. Por un lado eso es bueno porque puedes distribuir el archivo HTML sin ninguna conexion con R. Sin embargo, eso limita fundamentalmente lo que puedes hacer a las cosas que han sido implementadas en HTML y JavaScript. Una alternativa es user __shiny__, un paquete que te permite crear interactividad usando código R, no JavaScript.
 
 Para llamar codigo Shiny desde un documento R Markdown, agrega `runtime: shiny` al encabezado:
@@ -196,7 +194,6 @@ output: html_document
 runtime: shiny
 ```
 
-Then you can use the "input" functions to add interactive components to the document:
 Luego puedes usar las funciones de "input" (entrada en español) para agregar componentes interactivos al documento:
 
 ```{r, eval = FALSE}
@@ -209,7 +206,7 @@ numericInput("age", "How old are you?", NA, min = 0, max = 150)
 knitr::include_graphics("screenshots/rmarkdown-shiny.png")
 ```
 
-Luego puedes referirte a los valores con `input$name` and `input$age`, y el código que los usa se volverá a ejecutar automáticamente cada vez que cambien.
+Después puedes referirte a los valores con `input$name` and `input$age`, y el código que los usa se volverá a ejecutar automáticamente cada vez que cambien.
 
 I can't show you a live shiny app here because shiny interactions occur on the __server-side__. This means that you can write interactive apps without knowing JavaScript, but you need a server to run them on. This introduces a logistical issue: Shiny apps need a Shiny server to be run online. When you run shiny apps on your own computer, shiny automatically sets up a shiny server for you, but you need a public facing shiny server if you want to publish this sort of interactivity online. That's the fundamental trade-off of shiny: you can do anything in a shiny document that you can do in R, but it requires someone to be running R.
 
