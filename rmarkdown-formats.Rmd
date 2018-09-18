@@ -56,7 +56,7 @@ El capítulo anterior se enfocó en la salida predeterminada del documento html 
 
 *   `pdf_document` crea un PDF con LaTeX (un sistema de código abierto 
     de composición de textos), que necesitarás instalar. RStudio te notificará
-    si todavía no lo tienes
+    si todavía no lo tienes.
   
 *   `word_document` para documentos de Microsoft Word (`.docx`).
   
@@ -114,9 +114,9 @@ También puedes usar R Markdown para generar presentaciones. Obtienes menos cont
 
 R Markdown viene con tres formatos de presentación integrados:
 
-1.  `ioslides_presentation` - Presentación HTML con ioslides
+1.  `ioslides_presentation` - Presentación HTML con ioslides.
 
-2.  `slidy_presentation` - Presentación HTML con W3C Slidy
+2.  `slidy_presentation` - Presentación HTML con W3C Slidy.
 
 3.  `beamer_presentation` - Presentación PDF con LaTeX Beamer.
 
@@ -170,21 +170,21 @@ Lo bueno de htmlwidgets es que no necesitas saber nada sobre HTML o JavaScript p
 
 Hay muchos paquetes que proporcionan htmlwidgets, incluyendo:
 
-* __dygraphs__, <http://rstudio.github.io/dygraphs/>, Para visializacciones
+* __dygraphs__, <http://rstudio.github.io/dygraphs/>, para visualizacciones
 interactivas de series de tiempo.
 
-* __DT__, <http://rstudio.github.io/DT/>, Para tablas interactivas.
+* __DT__, <http://rstudio.github.io/DT/>, para tablas interactivas.
 
-* __threejs__, <https://github.com/bwlewis/rthreejs> para plots 3D interactivos.
+* __threejs__, <https://github.com/bwlewis/rthreejs>, para plots 3D interactivos.
 
-* __DiagrammeR__, <http://rich-iannone.github.io/DiagrammeR/> Para diagramas
+* __DiagrammeR__, <http://rich-iannone.github.io/DiagrammeR/>, para diagramas
   (como diagramas de flujo y diagramas simples de nodos).
 
 Para obtener más información sobre htmlwidgets y ver una lista más completa de los paquetes que los proporcionan, visita <http://www.htmlwidgets.org/>.
 
 ### Shiny
 
-htmlwidgets proporciona interactividad del lado del cliente --- toda la interactividad ocurre en el navegador, independientement de R. Por un lado eso es bueno porque puedes distribuir el archivo HTML sin ninguna conexion con R. Sin embargo, eso limita fundamentalmente lo que puedes hacer a las cosas que han sido implementadas en HTML y JavaScript. Una alternativa es user __shiny__, un paquete que te permite crear interactividad usando código R, no JavaScript.
+htmlwidgets proporciona interactividad del lado del cliente, es decir que toda la interactividad ocurre en el navegador, independientement de R. Por un lado esto es bueno porque puedes distribuir el archivo HTML sin ninguna conexion con R. Sin embargo, también limita fundamentalmente lo que puedes hacer a las cosas que han sido implementadas en HTML y JavaScript. Una alternativa es usar __shiny__, un paquete que te permite crear interactividad usando código R, no JavaScript.
 
 Para llamar codigo Shiny desde un documento R Markdown, agrega `runtime: shiny` al encabezado:
 
@@ -206,73 +206,73 @@ numericInput("age", "How old are you?", NA, min = 0, max = 150)
 knitr::include_graphics("screenshots/rmarkdown-shiny.png")
 ```
 
-Después puedes referirte a los valores con `input$name` and `input$age`, y el código que los usa se volverá a ejecutar automáticamente cada vez que cambien.
+Después puedes referirte a los valores con `input$name` e `input$age`, y el código que los usa se volverá a ejecutar automáticamente cada vez que los valores cambien.
 
-I can't show you a live shiny app here because shiny interactions occur on the __server-side__. This means that you can write interactive apps without knowing JavaScript, but you need a server to run them on. This introduces a logistical issue: Shiny apps need a Shiny server to be run online. When you run shiny apps on your own computer, shiny automatically sets up a shiny server for you, but you need a public facing shiny server if you want to publish this sort of interactivity online. That's the fundamental trade-off of shiny: you can do anything in a shiny document that you can do in R, but it requires someone to be running R.
+No puedo mostrarte una aplicacion Shiny corriendo ahora porque las interacciones de Shiny ocurren en el lado del servidor. Esto quiere decir que puedes escribir aplicaciones interactivas sin saber JavaScript, pero necesitas un servidor para correrlas. Esto introduce un problema logistico: Las aplicaciones Shiny necesitan un servidor para correr en línea. Cuando corres una aplicacion Shiny en tu propia computadora, Shiny automaticamente crea un servidor Shiny para que la puedas correr, pero necesitaras un servidor Shiny público si quieres proporcionar este tipo de interactividad en línea. Esta es la limitación fundamental de Shiny: puedes crear en Shiny todo lo que puedes crear en R, pero necesitarás que R esté corriendo en algún lugar.
 
-Learn more about Shiny at <http://shiny.rstudio.com/>.
+Aprende más sobre Shiny en: <http://shiny.rstudio.com/>.
 
-## Websites
+## Sitios Web
 
-With a little additional infrastructure you can use R Markdown to generate a complete website:
+Con un poco más de infraestructura puedes user R Markdown para crear un sitio web completo:
 
-*   Put your `.Rmd` files in a single directory. `index.Rmd` will become 
-    the home page.
+*   Coloca todos tus archivos `.Rmd` en un mismo directorio. `index.Rmd` será tu 
+    página de inicio.
 
-*   Add a YAML file named `_site.yml` provides the navigation for the site.
-    For example:
+*   Agrega un archivo YAML llamado `_site.yml` que proporcionará la navegavilidad para el sitio.
+    Por ejemplo:
 
     ```{r echo = FALSE, comment = ""}
     cat(readr::read_file("rmarkdown/example-site.yml"))
     ```
 
-Execute `rmarkdown::render_site()` to build `_site`, a directory of files ready to deploy as a standalone static website, or if you use an RStudio Project for your website directory. RStudio will add a Build tab to the IDE that you can use to build and preview your site. 
+Ejecuta `rmarkdown::render_site()` para crear un `_site` (sitio en español), un directorio de archivos listo para ser implementado como un sitio web estático independiente, o si usas un proyecto de RStudio para el directorio de tu sitio web, RStudio agregará una pestaña de compilación que puedes usar para crear y obtener una vista previa de tu sitio.
 
-Read more at <http://rmarkdown.rstudio.com/rmarkdown_websites.html>.
+Lee más acerca de los Sitios Web en: <http://rmarkdown.rstudio.com/rmarkdown_websites.html>.
 
-## Other formats
+## Otros Formatos
 
-Other packages provide even more output formats:
+Otros paquetes proveen incluso más formatos de salida:
 
-*   The __bookdown__ package, <https://github.com/rstudio/bookdown>, 
-    makes it easy to write books, like this one. To learn more, read 
+*   El paquete __bookdown__, <https://github.com/rstudio/bookdown>, 
+    hace que crear libros, como este mismo, sea fácil. Para aprender más, lee
+    "Creando libros con R Markdown" en inglés 
     [_Authoring Books with R Markdown_](https://bookdown.org/yihui/bookdown/),
-    by Yihui Xie, which is, of course, written in bookdown. Visit
-    <http://www.bookdown.org> to see other bookdown books written by the 
-    wider R community.
+    por Yihui Xie, el cual está, por supuesto, escrito en bookdown. Visita
+    <http://www.bookdown.org> para ver otros libros bookdown escritos 
+    por la comunidad R.
 
-*   The __prettydoc__ package, <https://github.com/yixuan/prettydoc/>, 
-    provides lightweight document formats with a range of attractive
-    themes.
+*   El paquete __prettydoc__, <https://github.com/yixuan/prettydoc/>, 
+    proporciona formatos livianos de documentos con una gama de temas atractivos.
 
-*   The __rticles__ package, <https://github.com/rstudio/rticles>, compiles a
-    selection of formats tailored for specific scientific journals.
+*   El paquete __rticles__, <https://github.com/rstudio/rticles>, compila una
+    selección de formatos específicos para revistas científicas.
 
-See <http://rmarkdown.rstudio.com/formats.html> for a list of even more formats.  You can also create your own by following the instructions at <http://rmarkdown.rstudio.com/developer_custom_formats.html>.
+Consulta <http://rmarkdown.rstudio.com/formats.html> para ver una lista de más formatos. También puedes crear tu propio formato siguiendo las instrucciones en inglés de: <http://rmarkdown.rstudio.com/developer_custom_formats.html>.
 
-## Learning more
+## Aprende más
 
-To learn more about effective communication in these different formats I recommend the following resources:
+Para obtener más información sobre comunicación efectiva con estos diferentes formatos, recomiendo los siguientes recursos (en inglés):
 
-* To improve your presentation skills, I recommend 
-  [_Presentation Patterns_](https://amzn.com/0321820800), by Neal Ford,
-  Matthew McCollough, and Nathaniel Schutta. It provides a set of effective
-  patterns (both low- and high-level) that you can apply to improve your 
-  presentations.
+* Para mejorar tus habilidades de presentación, recomiendo: Patrones de Presentación,
+  [_Presentation Patterns_](https://amzn.com/0321820800), por Neal Ford,
+  Matthew McCollough, y Nathaniel Schutta. Proporciona un conjunto de patrones 
+  efectivo de alto y bajo nivel que puedes usar para mejorar tus presentaciones.
+
+* Si das charlas académicas, recomiendo que leas La guia para dar charlas del grupo Leek:
+  [_Leek group guide to giving talks_](https://github.com/jtleek/talkguide).
   
-* If you give academic talks, I recommend reading the [_Leek group guide
-  to giving talks_](https://github.com/jtleek/talkguide).
-  
-* I haven't taken it myself, but I've heard good things about Matt 
-  McGarrity's online course on public speaking: 
+* No lo he tomado yo mismo, pero he escuchado buenos comentarios sobre 
+  el curso en línea de Hablar en Público de Matt McGarrity: 
   <https://www.coursera.org/learn/public-speaking>.
 
-* If you are creating a lot of dashboards, make sure to read Stephen Few's
+* Si estás creando muchos dashboards, asegurate de leer: 
+  Diseño de Dashboards de información: La comunicación de datos efectiva, de Stephen Few.
   [Information Dashboard Design: The Effective Visual Communication 
-  of Data](https://amzn.com/0596100167). It will help you create dashboards
-  that are truly useful, not just pretty to look at.
+  of Data](https://amzn.com/0596100167). Te ayudará a crear dashboards realment útiles
+  y no solo bonitos a la vista.
 
-* Effectively communicating your ideas often benefits from some
-  knowledge of graphic design. [_The Non-Designer's Design
-  Book_](http://amzn.com/0133966151) is a great place to start.
-
+* Comunicar tus ideas efectivamente a menudo se beneficia de un poco 
+  de conocimiento en diseño gráfico. El libro de diseño para no diseñadores,
+  [_The Non-Designer's Design Book_](http://amzn.com/0133966151) 
+  es un buen lugar para empezar.
