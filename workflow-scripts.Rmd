@@ -16,11 +16,11 @@ The script editor is also a great place to build up complex ggplot2 plots or lon
 library(dplyr)
 library(nycflights13)
 
-not_cancelled <- flights %>% 
-  filter(!is.na(dep_delay)█, !is.na(arr_delay))
+not_cancelled <- flights %>%
+  filter(!is.na(dep_delay), !is.na(arr_delay))
 
-not_cancelled %>% 
-  group_by(year, month, day) %>% 
+not_cancelled %>%
+  group_by(year, month, day) %>%
   summarise(mean = mean(dep_delay))
 ```
 
@@ -58,4 +58,3 @@ knitr::include_graphics("screenshots/rstudio-diagnostic-warn.png")
 1.  What other common mistakes will RStudio diagnostics report?  Read
     <https://support.rstudio.com/hc/en-us/articles/205753617-Code-Diagnostics> to 
     find out.
-    
