@@ -29,7 +29,7 @@ There are two types of vectors:
 The chief difference between atomic vectors and lists is that atomic vectors are __homogeneous__, while lists can be __heterogeneous__. There's one other related object: `NULL`. `NULL` is often used to represent the absence of a vector (as opposed to `NA` which is used to represent the absence of a value in a vector). `NULL` typically behaves like a vector of length 0. Figure \@ref(fig:datatypes) summarises the interrelationships. 
 
 ```{r datatypes, echo = FALSE, out.width = "50%", fig.cap = "The hierarchy of R's vector types"}
-knitr::include_graphics("diagrams/data-structures-overview.png")
+knitr::include_graphics("diagrams/data-structures-overview.svg")
 ```
 
 Every vector has two key properties: 
@@ -441,7 +441,7 @@ x3 <- list(1, list(2, list(3)))
 I'll draw them as follows:
 
 ```{r, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("diagrams/lists-structure.png")
+knitr::include_graphics("diagrams/lists-structure.svg")
 ```
 
 There are three principles:
@@ -492,7 +492,7 @@ a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
 The distinction between `[` and `[[` is really important for lists, because `[[` drills down into the list while `[` returns a new, smaller list. Compare the code and output above with the visual representation in Figure \@ref(fig:lists-subsetting).
 
 ```{r lists-subsetting, echo = FALSE, out.width = "75%", fig.cap = "Subsetting a list, visually."}
-knitr::include_graphics("diagrams/lists-subsetting.png")
+knitr::include_graphics("diagrams/lists-subsetting.svg")
 ```
 
 ### Lists of condiments

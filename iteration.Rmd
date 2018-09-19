@@ -730,7 +730,7 @@ map2(mu, sigma, rnorm, n = 5) %>% str()
 `map2()` generates this series of function calls:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-map2.png")
+knitr::include_graphics("diagrams/lists-map2.svg")
 ```
 
 Note that the arguments that vary for each call come _before_ the function; arguments that are the same for every call come _after_.
@@ -760,7 +760,7 @@ args1 %>%
 That looks like:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-pmap-unnamed.png")
+knitr::include_graphics("diagrams/lists-pmap-unnamed.svg")
 ```
 
 If you don't name the elements of list, `pmap()` will use positional matching when calling the function. That's a little fragile, and makes the code harder to read, so it's better to name the arguments:
@@ -775,7 +775,7 @@ args2 %>%
 That generates longer, but safer, calls:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-pmap-named.png")
+knitr::include_graphics("diagrams/lists-pmap-named.svg")
 ```
 
 Since the arguments are all the same length, it makes sense to store them in a data frame:
@@ -813,7 +813,7 @@ invoke_map(f, param, n = 5) %>% str()
 ```
 
 ```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams/lists-invoke.png")
+knitr::include_graphics("diagrams/lists-invoke.svg")
 ```
 
 The first argument is a list of functions or character vector of function names. The second argument is a list of lists giving the arguments that vary for each function. The subsequent arguments are passed on to every function.
