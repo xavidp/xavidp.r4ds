@@ -1,6 +1,6 @@
 # R for Data Science
 
-[![Build Status](https://travis-ci.org/pachamaltese/r4ds.svg?branch=traduccion)](https://travis-ci.org/pachamaltese/r4ds)
+[![Build Status](https://travis-ci.org/cienciadedatos/r4ds.svg?branch=traduccion)](https://travis-ci.org/cienciadedatos/r4ds)
 
 Última versión disponible en http://es.r4ds.hadley.nz.
 
