@@ -1,6 +1,6 @@
 # (PART) Programar {-}
 
-# Introduction {#programar-intro}
+# Introducción {#programar-intro}
 
 En esta parte del libro, mejorarás tus aptitudes de programación. La programación es una habilidad que cruza transversalmente todos los trabajos de ciencia de datos: deberás usar una computadora para hacer ciencia de datos, no puedes hacerlo sólo con tu cabeza o con lápiz y papel.
 
@@ -8,28 +8,28 @@ En esta parte del libro, mejorarás tus aptitudes de programación. La programac
 knitr::include_graphics("diagrams/data-science-program.png")
 ```
 
-Programar produce código, y el código es una herramienta de comunicación. Obviamente el código le dice a la computadora que es lo que quieres que haga, pero también comunica el significado a otros humanos. Es importante pensar el código como un vehículo de comunicación, 
+Programar produce código, y el código es una herramienta de comunicación. Obviamente el código le dice a la computadora que es lo que quieres que haga, pero también comunica el significado a otros humanos. Es importante pensar el código como un medio de comunicación, 
 porque todo proyecto que realices es esencialmente colaborativo.  Aún cuando no estés trabajando con otras personas, seguramente en el futuro trabajarás con ese mismo código.  Por eso es necesario escribir código claro, para que otros (o tú en el futuro) puedan entender porque encaraste un análisis de la manera que lo hiciste. Esto significa que mejorando la programación también mejorarás la comunicación. Pasado el tiempo, querrás que tu código resulte no solo fácil de escribir, sino también fácil de leer para otros.     
 
-Escribir código es similar,  en muchas formas, a escribir prosa. Un paralelismo que encuentro particularmente útil es que en ambos casos reescribir es clave para la claridad. La primera expresión de tus ideas difícilmente sea clara, y posiblemente necesitarás reescribir muchas veces. Después de resolver el problema de análisis de datos, en general es mejor mirar tu código y pensar si es obvio o no lo que has hecho.  Si utilizas un poco de tiempo reescribiendo tu código mientras las ideas están frescas, puedes ganar mucho tiempo después cuando necesites recrear el código que hiciste. Esto no significa que debas reescribir todas las funciones: necesitas equilibrar que es lo que tienes que mejorar ahora para ganar tiempo a largo plazo. (Pero cuanto más reescribas tus funciones, más probable será que tu primer intento sea cada vez más claro).
+Escribir código es similar,  en muchas formas, a escribir prosa. Un paralelismo que encuentro particularmente útil es que en ambos casos reescribir es clave para la claridad. La primera expresión de tus ideas difícilmente sea clara, y posiblemente necesitarás reescribir muchas veces. Después de resolver el problema de análisis de datos, en general es mejor mirar tu código y pensar si es obvio o no lo que has hecho.  Si utilizas un poco de tiempo reescribiendo tu código mientras las ideas están frescas, puedes ganar mucho tiempo después, cuando necesites recrear el código que hiciste. Esto no significa que debas reescribir todas las funciones: necesitas equilibrar que es lo que tienes que mejorar ahora para ganar tiempo a largo plazo. (Pero cuanto más reescribas tus funciones, más probable será que tu primer intento sea cada vez más claro).
 
-In the following four chapters, you'll learn skills that will allow you to both tackle new programs and to solve existing problems with greater clarity and ease: 
+En los próximos cuatro capítulos, aprenderás habilidades que te permitirán abordar nuevos programas como también resolver problemas ya existentes de manera más sencilla y con mayor claridad: 
 
-1.  In [pipes], you will dive deep into the __pipe__, `%>%`, and learn more 
-    about how it works, what the alternatives are, and when not to use it.
+1.  En [_pipes_], navegarás dentro del __pipe__, `%>%`, y sabrás más  
+    sobre cómo trabaja, las alternativas que existen y cuando no conviene usarlo.
 
-1.  Copy-and-paste is a powerful tool, but you should avoid doing it more than
-    twice. Repeating yourself in code is dangerous because it can easily lead 
-    to errors and inconsistencies. Instead, in [functions], you'll learn
-    how to write __functions__ which let you extract out repeated code so that 
-    it can be easily reused.
+2.	Copiar y pegar (_copy-and-paste_) es muy práctico, pero deberías evitar usarlo más  
+    de dos veces. Repetir el código dentro de un programa es peligroso porque puede llevar a  
+    errores e inconsistencias. Por eso, en [funciones], aprenderás
+    a escribir __funciones__ que permiten extraer código repertido y convertirlo en  
+    código fácilmente reutilizable.
 
-1.  As you start to write more powerful functions, you'll need a solid
-    grounding in R's __data structures__, provided by [vectors]. You must master 
-    the four common atomic vectors, the three important S3 classes built on 
-    top of them, and understand the mysteries of the list and data frame. 
+3.	A medida que comiences a escribir funciones más potenes, necesitarás una base sólida 
+    en las __estructuras de datos__ de R, que te proporcionará [vectores]. Deberás dominar  
+    los cuatro tipos de vectores atómicos clásicos, las tres clases S3 construidas sobre ellos, 
+    y entender los misterios de las listas y los _data frame_. 
 
-1.  Functions extract out repeated code, but you often need to repeat the
+4.  Functions extract out repeated code, but you often need to repeat the
     same actions on different inputs. You need tools for __iteration__ that
     let you do similar things again and again. These tools include for loops 
     and functional programming, which you'll learn about in [iteration].
