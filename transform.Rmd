@@ -104,7 +104,7 @@ sqrt(2) ^ 2 == 2
 1 / 49 * 49 == 1
 ```
 
-Las computadoras usan aritmética de precisión finita (obviamente no pueden almacenar una cantidad infinita de dígitos), así que recuerda que cada número que ves es una aproximación. En lugar de confiar en `==`, usa `near()` (del inglés cercano):
+Las computadoras usan aritmética de precisión finita (obviamente no pueden almacenar una cantidad infinita de dígitos), así que recuerda que cada número que ves es una aproximación. En lugar de confiar en `==`, usa `near()` (- del inglés cercano):
 
 ```{r}
 near(sqrt(2) ^ 2,  2)
@@ -127,7 +127,7 @@ filter(vuelos, mes == 11 | mes == 12)
 
 El orden de las operaciones no funciona como en español. No puedes escribir `filter (vuelos, mes == 11 | 12)`, que literalmente puede traducirse como "encuentra todos los vuelos que partieron en noviembre o diciembre". En cambio, encontrará todos los meses que son iguales a `11 | 12`, una expresión que resulta en 'VERDADERO'. En un contexto numérico (como aquí), 'VERDADERO' se convierte en uno, por lo que encuentra todos los vuelos en enero, no en noviembre o diciembre. ¡Esto es bastante confuso!
 
-Una manera rápida y útil para resolver este problema es `x %in% y` (del inglés x en y). Esto seleccionará cada fila donde `x` es uno de los valores en` y`. Podríamos usarlo para reescribir el código de arriba:
+Una manera rápida y útil para resolver este problema es `x %in% y` (- del inglés x en y). Esto seleccionará cada fila donde `x` es uno de los valores en` y`. Podríamos usarlo para reescribir el código de arriba:
 
 ```{r, eval = FALSE}
 nov_dic <- filter(vuelos, mes %in% c(11, 12))
@@ -146,7 +146,7 @@ Siempre que empieces a usar expresiones complejas de varias partes en `filter()`
 
 ### Valores faltantes
 
-Una característica importante de R que puede hacer que la comparación sea difícil son los valores faltantes, o `NA`s (del inglés "no disponibles"). `NA` representa un valor desconocido por lo que los valores perdidos son "contagiosos": casi cualquier operación que involucre un valor desconocido también será desconocida.
+Una característica importante de R que puede hacer que la comparación sea difícil son los valores faltantes, o `NA`s (- del inglés "no disponibles"). `NA` representa un valor desconocido por lo que los valores perdidos son "contagiosos": casi cualquier operación que involucre un valor desconocido también será desconocida.
 
 ```{r}
 NA > 5
