@@ -411,13 +411,13 @@ ggplot(vuelos, aes(salida_programada %% 60)) + geom_histogram(binwidth = 1)
 ggplot(vuelos, aes(tiempo_vuelo - tiempo_vuelo2)) + geom_histogram()
 ```
 
-1. Las variables `horario_salida` y `salida_programada` tienen un formato conveniente para leer, pero es difícil realizar cualquier cálculo con ellas porque no son realmente números continuos. Conviértelos en una representación más conveniente de la cantidad de minutos desde la medianoche.
+1. Las variables `horario_salida` y `salida_programada` tienen un formato conveniente para leer, pero es difícil realizar cualquier cálculo con ellas porque no son realmente números continuos. Conviértelos en representación más conveniente considerando la cantidad de minutos desde la medianoche.
 
 2. Compara `tiempo_vuelo` con` horario_llegada - horario_salida`. ¿Qué esperas ver? ¿Qué ves? ¿Qué necesitas hacer para arreglarlo?
 
 3. Compara `horario_salida`, `salida_programada`, y `atraso_salida`. ¿Cómo esperarías que esos tres números estén relacionados?
 
-4. Encuentra los 10 vuelos más retrasados utilizando una función de clasificación. ¿Cómo quieres para manejar los empates? Lee atentamente la documentación de `min_rank()`.
+4. Encuentra los 10 vuelos más retrasados utilizando una función de clasificación. ¿Cómo quieres manejar los empates? Lee atentamente la documentación de `min_rank()`.
 
 5. ¿Qué devuelve `1:3 + 1:10`? ¿Por qué?
 
