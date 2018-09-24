@@ -570,7 +570,7 @@ RStudio tip: un atajo en tu teclado que puede ser muy útil es Cmd/Ctrl + Shift 
 
 --------------------------------------------------------------------------------
 
-Hay otra variación común de este tipo de patrón. Veamos cómo el rendimiento promedio de los bateadores en el béisbol está relacionado con el número de veces que están bateando. Aquí utilizas el conjunto de datos de bateo para calcular el promedio de bateo (número de bateos / número de intentos) de cada jugador de béisbol de Grandes Ligas.
+Hay otra variación común de este tipo de patrón. Veamos cómo el rendimiento promedio de los bateadores en el béisbol está relacionado con el número de veces que están bateando. Aquí utilizas el conjunto de datos de bateadores para calcular el promedio de bateo (número de bateos / número de intentos) de cada jugador de béisbol de Grandes Ligas.
 
 Cuando graficas la habilidad del bateador (medido por el promedio de bateo, `ba`) contra el número de oportunidades para golpear la pelota (medido por al bate,`ab`), verás dos patrones:
 
@@ -580,16 +580,16 @@ Cuando graficas la habilidad del bateador (medido por el promedio de bateo, `ba`
 
 ```{r}
 # Convierte a tibble para puedas imprimirlo de una manera legible
-batting <- as_tibble(Lahman::Batting)
+bateo <- as_tibble(datos::bateadores)
 
-batters <- batting %>% 
-  group_by(playerID) %>% 
+bateadores <- bateo %>% 
+  group_by(ID_jugador) %>% 
   summarise(
-    ba = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
-    ab = sum(AB, na.rm = TRUE)
+    ba = sum(golpes, na.rm = TRUE) / sum(al_bate, na.rm = TRUE),
+    ab = sum(al_bate, na.rm = TRUE)
   )
 
-batters %>% 
+bateadores %>% 
   filter(ab > 100) %>% 
   ggplot(mapping = aes(x = ab, y = ba)) +
     geom_point() + 
@@ -599,7 +599,7 @@ batters %>%
 Esto también tiene implicaciones importantes para la clasificación. Si ingenuamente ordenas `desc(ba)`, las personas con los mejores promedios de bateo tiene claramente mucha suerte, pero no son necesariamente habilidosos:
 
 ```{r}
-batters %>% 
+bateadores %>% 
   arrange(desc(ba))
 ```
 
