@@ -6,7 +6,7 @@ La visualización es una herramienta importante para para la generación de cono
 
 ### Prerequisitos
 
-En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central de tidyverse. Ilustraremos las ideas clave con los datos del paquete **vuelos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
+En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central de tidyverse. Ilustraremos las ideas clave con el conjunto de datos *vuelos* del paquete **datos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
 
 ```{r setup, message = FALSE}
 devtools::install_github("cienciadedatos/datos")
@@ -19,7 +19,7 @@ Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquet
 
 ### vuelos
 
-Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `datos::vuelos`. Este conjunto de datos contiene todos los vuelos `r format(nrow (datos::vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?datos`.
+Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `datos::vuelos`. Este conjunto de datos contiene todos los vuelos `r format(nrow (datos::vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?vuelos`.
 
 ```{r}
 vuelos
