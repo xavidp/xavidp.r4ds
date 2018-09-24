@@ -25,7 +25,7 @@ Para explorar los verbos básicos de manipulación de datos de **dplyr**, usarem
 vuelos
 ```
 
-Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un _tibble_. Los *tibbles* son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; volveremos a *tibbles* con más detalle en [wrangle](#wrangle-intro).
+Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un __tibble__. Los *tibbles* son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; hablaremos en más detalle de los *tibbles* en [wrangle](#wrangle-intro).
 
 También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras debajo de los nombres de las columnas. Estos describen el tipo de cada variable:
 
@@ -39,7 +39,7 @@ También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras 
 
 Hay otros tres tipos comunes de variables que no se usan en este conjunto de datos, pero que encontrará más adelante en el libro:
 
-* `lgl` significa lógico, vectores que solo contienen que solo contienen ` TRUE` (verdadero) o `FALSE` (falso).
+* `lgl` significa lógico, vectores que solo contienen ` TRUE` (verdadero) o `FALSE` (falso).
 
 * `fctr` significa factores, que R usa para representar variables categóricas con valores posibles fijos.
 
