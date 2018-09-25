@@ -6,7 +6,7 @@ La visualización es una herramienta importante para para la generación de cono
 
 ### Prerequisitos
 
-En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central de tidyverse. Ilustraremos las ideas clave con el conjunto de datos *vuelos* del paquete **datos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
+En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central de tidyverse. Ilustraremos las ideas clave con el conjunto de datos *vuelos* que aparecen originalmente en el paquete **nycflights13**, pero para este caso utilizaremos la versión traducida incluida en el paquete **datos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
 
 ```{r setup, message = FALSE}
 #devtools::install_github("cienciadedatos/datos")
@@ -49,7 +49,7 @@ Hay otros tres tipos comunes de variables que no se usan en este conjunto de dat
 En este capítulo, aprenderás las cinco funciones clave de **dplyr** que te permiten resolver la gran mayoría de tus desafíos de manipulación de datos:
 
 * Filtrar o elegir las observaciones por sus valores (`filter()` — del inglés filtrar).
-* Reordenar las filas (`arrange()` — del inglés arreglar).
+* Reordenar las filas (`arrange()` — del inglés organizar).
 * Seleccionar las variables por sus nombres (`select()` — del inglés seleccionar).
 * Crear nuevas variables con transformaciones de variables existentes (`mutate()` — del inglés mutar o transformar).
 * Contraer muchos valores en un solo resumen (`summarize()` — del inglés resumir).
