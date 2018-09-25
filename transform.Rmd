@@ -493,7 +493,7 @@ delays <- vuelos %>%
 
 Esto se enfoca en las transformaciones, no en lo que se está transformando, lo que hace que el código sea más fácil de leer. Puedes leerlo como una serie de declaraciones imperativas: agrupa, luego resume y por último filtra. Como sugiere esta lectura, una buena forma de pronunciar `%>%` cuando se lee el código es "y luego".  
 
-Lo que encuentras detrás del código, es que `x%>% f(y)` se convierte en `f(x, y)`, y `x%>% f(y)%>% g(z)` se convierte en `g(f(x, y), z)` y así sucesivamente. Puedes usar un *pipe* para reescribir múltiples operaciones de forma que puedas leer de izquierda a derecha, de arriba hacia abajo. Usaremos *pipes* con frecuencia a partir de ahora porque mejora considerablemente la legibilidad del código, y volveremos al tema con más detalle en [pipes].
+Lo que encuentras detrás del código, es que `x %>% f(y)` se convierte en `f(x, y)`, y `x %>% f(y) %>% g(z)` se convierte en `g(f(x, y), z)` y así sucesivamente. Puedes usar un *pipe* para reescribir múltiples operaciones de forma que puedas leer de izquierda a derecha, de arriba hacia abajo. Usaremos *pipes* con frecuencia a partir de ahora porque mejora considerablemente la legibilidad del código, y volveremos al tema con más detalle en [pipes].
 
 Trabajar con un *pipe* es uno de los criterios clave para pertenecer al tidyverse. La única excepción es **ggplot2**: se escribió antes de que se descubrieran los *pipes*. Lamentablemente, la siguiente iteración de **ggplot2**, ggvis, que sí utiliza *pipes*, aún no está lista para la audiencia general.  
 
