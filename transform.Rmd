@@ -297,10 +297,10 @@ select(vuelos, fecha_hora, tiempo_vuelo, everything())
 vars <- c ("anio", "mes", "dia", "atraso_salida", "atraso_llegada")
 ```
 
-4. ¿Te sorprende el resultado de ejecutar el siguiente código? ¿Cómo tratan el caso por defecto los ayudantes seleccionados? ¿Cómo puedes cambiar ese valor predeterminado?
+4. ¿Te sorprende el resultado de ejecutar el siguiente código? ¿Cómo tratan por defecto las funciones auxiliares de select() a las palabras en mayúsculas o en minúsculas? ¿Cómo puedes cambiar ese comportamiento predeterminado?
 
 ```{r, eval = FALSE}
-select(vuelos, contains("HORA"))
+select(vuelos, contains("SALIDA"))
 ```
 
 ## Añadir nuevas variables con `mutate()`
