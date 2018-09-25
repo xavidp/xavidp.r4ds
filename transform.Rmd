@@ -254,9 +254,9 @@ No es raro obtener conjuntos de datos con cientos o incluso miles de variables. 
 # Seleccionar columnas por nombre
 select(vuelos, anio, mes, dia)
 # Seleccionar todas las columnas entre anio y dia (incluyente)
-select(vuelos, anio: dia)
+select(vuelos, anio:dia)
 # Seleccionar todas las columnas excepto aquellas entre anio en dia (incluyente)
-select(vuelos, - (anio: dia))
+select(vuelos, -(anio:dia))
 ```
 
 Hay una serie de funciones auxiliares que puedes usar dentro de `select()`:
@@ -275,9 +275,9 @@ Consulta `?select` para ver más detalles.
 
 `select()` se puede usar para cambiar el nombre de las variables, pero rara vez es útil porque descarta todas las variables que no se mencionan explícitamente. En su lugar, utiliza `rename()`, que es una variante de `select()` que mantiene todas las variables que no se mencionan explícitamente:
 
-`` `{r}
+```{r}
 rename(vuelos, cola_num = codigo_cola)
-`` `
+```
 
 Otra opción es usar `select()` junto con el auxiliar `everything()` (todo, en inglés). Esto es útil si tienes un grupo de variables que te gustaría mover al comienzo del *data frame*.
 
@@ -404,7 +404,7 @@ cume_dist(y)
 
 ```{r, eval = FALSE, echo = FALSE}
 vuelos <- vuelos %>% mutate(
-  horario_salida = hora * 60 + minutos,
+  horario_salida = hora * 60 + minuto,
   horario_llegada = (horario_llegada %/% 100) * 60 + (horario_llegada %% 100),
   tiempo_vuelo2 = horario_llegada - horario_salida,
   salida_programada = horario_salida + atraso_salida
@@ -431,20 +431,20 @@ ggplot(vuelos, aes(tiempo_vuelo - tiempo_vuelo2)) + geom_histogram()
 
 El último verbo clave es `summarize()` (de resumir en inglés). Se encarga de colapsar un *data frame* en una sola fila:
 
-`` `{r}
+```{r}
 summarize(vuelos, atraso = mean(atraso_salida, na.rm = TRUE))
-`` `
+```
 
 (Volveremos a lo que significa `na.rm = TRUE` en muy poco tiempo).
 
 `summarize()` no es muy útil a menos que lo emparejemos con `group_by()`. Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Luego, cuando uses los verbos **dplyr** en un *data frame* agrupado, estos se aplicaran automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un *data frame* agrupado por fecha, obtenemos el retraso promedio por fecha:
 
 ```{r}
-por_dia <- group_by (vuelos, anio, mes, dia)
+por_dia <- group_by(vuelos, anio, mes, dia)
 summarize(por_dia, atraso = mean(atraso_salida, na.rm = TRUE))
 ```
 
-Juntos `group_by ()` y `summarize ()` proporcionan una de las herramientas que usarás más comúnmente cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (/paip/) (tubería o dataducto).
+Juntos `group_by()` y `summarize()` proporcionan una de las herramientas que usarás más comúnmente cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (/paip/) (tubería o dataducto).
   
 ### Combinación de múltiples operaciones con un *pipe*
 
@@ -690,11 +690,13 @@ no_cancelados %>%
   count(codigo_cola, wt = distancia)
 ```
   
-* Cuentas y proporciones de valores lógicos: `suma(x> 10)`, `media(y == 0)`. Cuando se usan con funciones numéricas, `TRUE` se convierte en un 1 y `FALSE` en un 0. Esto hace que `sum()` y `mean()` sean muy útiles: `sum(x)` te da la cantidad de `TRUE`s en` x`, y `mean(x)` te da la proporción.
-
+* Cuentas y proporciones de valores lógicos: `sum(x > 10)`, `mean(y == 0)`. 
+    
+   Cuando se usan con funciones numéricas, `TRUE` se convierte en 1 y `FALSE` en 0. Esto hace que `sum()` y `mean()` sean muy útiles: `sum(x)` te da la cantidad de `TRUE`s en `x`, y `mean(x)` te da la proporción.
+   
 ```{r}
-# ¿Cuántos vuelos salieron antes de las 5 a.m.? (estos generalmente son vuelos demorados 
-# del día anterior)
+# ¿Cuántos vuelos salieron antes de las 5 a.m.? 
+# (estos generalmente son vuelos demorados del día anterior)
 no_cancelados %>% 
   group_by(anio, mes, dia) %>% 
   summarise(n_temprano = sum(horario_salida < 500))
@@ -716,7 +718,7 @@ diario <- group_by(vuelos, anio, mes, dia)
 (por_anio  <- summarise(por_mes, vuelos = sum(vuelos)))
 ```
 
-Ten cuidado al acumular resúmenes progresivamente: está bien para las sumas y los recuentos, pero debes pensar en la ponderación de las medias y las varianzas, además de que no es posible hacerlo exactamente para estadísticas basadas en rangos como la mediana. En otras palabras, la suma de las sumas agrupadas es la suma total, pero la mediana de las medias agrupadas no es la mediana general.
+Ten cuidado al acumular resúmenes progresivamente: está bien para las sumas y los recuentos, pero debes pensar en la ponderación de las medias y las varianzas, además de que no es posible hacerlo exactamente para estadísticas basadas en rangos como la mediana. En otras palabras, la suma de las sumas agrupadas es la suma total, pero la mediana de las medianas agrupadas no es la mediana general.
 
 ### Desagrupar
 
@@ -732,17 +734,17 @@ diario %>%
 
 1.   Haz una lluvia de ideas de al menos 5 formas diferentes de evaluar las características de un retraso típico de un grupo de vuelos. Considera los siguientes escenarios:
  
- * Un vuelo llega 15 minutos antes 50% del tiempo, y 15 minutos tarde 50% de el tiempo.
+    * Un vuelo llega 15 minutos antes 50% del tiempo, y 15 minutos tarde 50% de el tiempo.
 
- * Un vuelo llega siempre 10 minutos tarde.
+    * Un vuelo llega siempre 10 minutos tarde.
 
- * Un vuelo llega 30 minutos antes 50% del tiempo, y 30 minutos tarde 50% del tiempo.
+    * Un vuelo llega 30 minutos antes 50% del tiempo, y 30 minutos tarde 50% del tiempo.
 
- * Un vuelo llega a tiempo en el 99% de los casos. 1% de las veces llega 2 horas tarde.
+    * Un vuelo llega a tiempo en el 99% de los casos. 1% de las veces llega 2 horas tarde.
+    
+    ¿Qué es más importante: retraso de la llegada o demora de salida?
 
-¿Qué es más importante: retraso de la llegada o demora de salida?
-
-2.  Vamos con otro enfoque que te dará el mismo *output* que `no_cancelados %>% count(destino)` y
+2.  Sugiere un nuevo enfoque que te de el mismo *output* que `no_cancelados %>% count(destino)` y
 `no_cancelado %>% count(codigo_cola, wt = distancia)` (sin usar `count()`).
 
 3.  Nuestra definición de vuelos cancelados (`is.na(atraso_salida) | is.na (atraso_llegada)`) es un poco subóptima. ¿Por qué? ¿Cuál es la columna más importante?
@@ -751,7 +753,7 @@ diario %>%
 
 5. ¿Qué compañía tiene los peores retrasos? Desafío: ¿puedes desenredar el efecto de malos aeropuertos vs. el efecto de malos transportistas? ¿Por qué o por qué no? (Sugerencia: piensa en `vuelos %>% group_by(aerolinea, destino) %>% summarize(n())`)
 
-6. ¿Qué hace el argumento `sort` para `count()`. ¿Cuándo podrías usarlo?
+6. ¿Qué hace el argumento `sort` a `count()`. ¿Cuándo podrías usarlo?
 
 ## Transformaciones agrupadas (y filtros)
 
@@ -783,7 +785,7 @@ popular_destinos %>%
   select(anio:dia, destino, atraso_llegada, prop_atraso)
 ```
 
-Un filtro agrupado es una transformación agrupada seguida de un filtro desagrupado. En general, los evito, excepto por las manipulaciones rápidas y sucias: de lo contrario, es difícil comprobar que has hecho la manipulación correctamente.
+Un filtro agrupado es una transformación agrupada seguida de un filtro desagrupado. En general, los evito, excepto para las manipulaciones rápidas y sucias: de lo contrario, es difícil comprobar que has hecho la manipulación correctamente.
 
 Las funciones que trabajan de forma más natural en transformaciones y filtros agrupados se conocen como funciones de ventana (frente a las funciones de resumen utilizadas para los resúmenes). Puedes obtener más información sobre las funciones de ventana útiles en la viñeta correspondiente: `vignette("window-functions")`.
 
@@ -793,7 +795,7 @@ Las funciones que trabajan de forma más natural en transformaciones y filtros a
 
 2. ¿Qué avión (`codigo_cola`) tiene el peor registro de tiempo?
 
-3. ¿A qué hora del día deberías volar si quieres evitar retraso lo más posible?
+3. ¿A qué hora del día deberías volar si quieres evitar los retrasos lo más posible?
 
 4. Para cada destino, calcula los minutos totales de demora. Para cada vuelo, calcula la proporción de la demora total para su destino.
 
