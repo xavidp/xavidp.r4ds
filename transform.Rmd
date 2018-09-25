@@ -1,4 +1,4 @@
-# Transformación de Datos {#transform}
+# Transformación de datos {#transform}
 
 ## Introducción
 
@@ -497,7 +497,7 @@ Lo que encuentras detrás del código, es que `x %>% f(y)` se convierte en `f(x,
 
 Trabajar con un *pipe* es uno de los criterios clave para pertenecer al tidyverse. La única excepción es **ggplot2**: se escribió antes de que se descubrieran los *pipes*. Lamentablemente, la siguiente iteración de **ggplot2**, ggvis, que sí utiliza *pipes*, aún no está lista para la audiencia general.  
 
-### Valores Faltantes
+### Valores faltantes
 
 Es posible que te hayas preguntado sobre el argumento `na.rm` que utilizamos anteriormente. ¿Qué pasa si no lo configuramos?
 
@@ -507,7 +507,7 @@ vuelos %>%
   summarise(mean = mean(atraso_salida))
 ```
 
-¡Obtenemos muchos valores faltantes! Esto se debe a que las funciones de agregación obedecen la regla habitual de valores faltantes: si hay algún valor faltante en el *input*, el *output* será un valor faltante. Afortunadamente, todas las funciones de agregación tienen un argumento `na.rm` que elimina los valores perdidos antes del cálculo:
+¡Obtenemos muchos valores faltantes! Esto se debe a que las funciones de agregación obedecen la regla habitual de valores faltantes: si hay algún valor faltante en el *input*, el *output* será un valor faltante. Afortunadamente, todas las funciones de agregación tienen un argumento `na.rm` que elimina los valores faltante antes del cálculo:
 
 ```{r}
 vuelos %>% 
@@ -557,9 +557,9 @@ ggplot(data = atrasos, mapping = aes(x = n, y = atraso)) +
   geom_point(alpha = 1/10)
 ```
 
-No es de sorprender que hay una mayor variación en el promedio de retraso cuando hay pocos vuelos. La forma de este gráfico es muy importante: cuando usted traza un promedio (o cualquier otra medida de resumen) contra el tamaño del grupo, verá que la variación decrece cuando el tamaño de muestra aumenta.
+No es de sorprender que haya una mayor variación en el promedio de retraso cuando hay pocos vuelos. La forma de este gráfico es muy importante: cuando trazas un promedio (o cualquier otra medida de resumen) contra el tamaño del grupo, verás que la variación decrece a medida que el tamaño de muestra aumenta.
 
-Cuando se observan este tipo de gráficos, resulta útil eliminar los grupos con menor número de observaciones, ya que puedes ver más del patrón y menos de la variación extrema de los grupos pequeños. Esto es lo que te muestra cómo hacer el código siguiente, así como también te ofrece una manera muy útil para integrar **ggplot2** en **dplyr**. Es un poco incómodo tener que cambiar de `%>%` a `+`, pero una vez que entiendas el código, verás que es bastante conveniente.
+Cuando se observa este tipo de gráficos, resulta útil eliminar los grupos con menor número de observaciones, ya que puedes ver más del patrón y menos de la variación extrema de los grupos pequeños. Esto es lo que te muestra cómo hacer el código siguiente, así como también te ofrece una manera muy útil para integrar **ggplot2** en el flujo de trabajo de **dplyr**. Es un poco incómodo tener que cambiar de `%>%` a `+`, pero una vez que entiendas el código, verás que es bastante conveniente.
 
 ```{r}
 atrasos %>% 
@@ -600,7 +600,7 @@ bateadores %>%
     geom_smooth(se = FALSE)
 ```
 
-Esto también tiene implicaciones importantes para la clasificación. Si ingenuamente ordenas `desc(ba)`, las personas con los mejores promedios de bateo tiene claramente mucha suerte, pero no son necesariamente habilidosos:
+Esto también tiene implicaciones importantes para la clasificación. Si ingenuamente ordenas `desc(ba)`, verás que las personas con los mejores promedios de bateo tienen claramente mucha suerte, pero no son necesariamente habilidosos:
 
 ```{r}
 bateadores %>% 
@@ -609,7 +609,7 @@ bateadores %>%
 
 Puedes encontrar una buena explicación de este problema en <http://varianceexplained.org/r/empirical_bayes_baseball/> y <http://www.evanmiller.org/how-not-to-sort-by-average-rating.html>.
 
-### Funciones de resumen útiles {#summarize-funs}
+### Funciones de resumen útiles {#summarise-funs}
 
 Solo el uso de medias, cuentas y sumas puede llevarte muy lejos, pero R proporciona muchas otras funciones de resumen útiles:
 
@@ -620,7 +620,7 @@ no_cancelados %>%
   group_by(anio, mes, dia) %>% 
   summarise(
     prom_atraso1 = mean(atraso_llegada),
-    prom_atraso2 = mean(atraso_llegada[atraso_llegada > 0]) # the average positive delay
+    prom_atraso2 = mean(atraso_llegada[atraso_llegada > 0]) # el promedio de atrasos positivos
   )
 ```
 
@@ -634,7 +634,7 @@ no_cancelados %>%
   arrange(desc(distancia_sd))
 ```
   
-* Medidas de rango: `min(x)`, `quantile(x, 0.25)`, `max(x)`. Los cuantiles son una generalización de la mediana. Por ejemplo, `quantile(x, 0.25)` encontrará un valor de `x` que es mayor que el 25% de los valores, y menos que el 75% restante.
+* Medidas de rango: `min(x)`, `quantile(x, 0.25)`, `max(x)`. Los cuantiles son una generalización de la mediana. Por ejemplo, `quantile(x, 0.25)` encontrará un valor de `x` que sea mayor a 25% de los valores, y menor que el 75% restante.
 
 ```{r}
 # ¿Cuándo salen los primeros y los últimos vuelos cada día?
@@ -666,7 +666,7 @@ no_cancelados %>%
   filter(r %in% range(r))
 ```
 
-* Cuentas: has visto `n()`, que no toma argumentos, y devuelve el tamaño del grupo actual. Para contar la cantidad de valores no perdidos, usa `sum(!is.na (x))`. Para contar la cantidad de valores distintos (únicos), usa `n_distinct(x)`.
+* Cuentas: has visto `n()`, que no toma argumentos, y devuelve el tamaño del grupo actual. Para contar la cantidad de valores no faltantes, usa `sum(!is.na (x))`. Para contar la cantidad de valores distintos (únicos), usa `n_distinct(x)`.
     
 ```{r}
 # ¿Qué destinos tienen la mayoría de los transportistas?
@@ -676,8 +676,7 @@ no_cancelados %>%
   arrange(desc(aerolineas))
 ```
     
-Las cuentas son tan útiles que **dplyr** proporciona un ayudante simple si todo lo que quieres es
-un conteo:
+Las cuentas son tan útiles que **dplyr** proporciona un ayudante simple si todo lo que quieres es un conteo:
 
 ```{r}
 no_cancelados %>% 
