@@ -1,4 +1,7 @@
-chequear_traduccion <- function(x = "wrangle.Rmd") {
+# x <- "https://raw.githubusercontent.com/melvidoni/r4ds/traduccion_melina/factors.Rmd"
+# x <- "https://raw.githubusercontent.com/melvidoni/r4ds/traduccion_melina/datetimes.Rmd"
+
+chequear_traduccion <- function(x = "https://raw.githubusercontent.com/melvidoni/r4ds/traduccion_melina/factors.Rmd") {
 
   library(tidyverse)
   library(hunspell)
@@ -21,15 +24,17 @@ chequear_traduccion <- function(x = "wrangle.Rmd") {
 
 }
 
-chequear_knitr <- function(x = "wrangle.Rmd") {
+chequear_knitr <- function(x = "https://raw.githubusercontent.com/melvidoni/r4ds/traduccion_melina/factors.Rmd") {
 
   message("chequear_knitr...")
 
-  archivo_temp <- x
+  archivo_temp <- tempfile()
+  download.file(x, destfile = archivo_temp)
   knitr::knit(input = archivo_temp, quiet = TRUE, envir = new.env())
+
 }
 
-obtener_data <- function(x = "wrangle.Rmd") {
+obtener_data <- function(x = "https://raw.githubusercontent.com/melvidoni/r4ds/traduccion_melina/factors.Rmd") {
 
   message("obtener_data...")
 
