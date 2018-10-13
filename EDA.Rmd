@@ -157,7 +157,7 @@ Las agrupaciones de valores similares sugieren que ciertos subgrupos existen en 
 El siguiente histograma muestra la duración (en minutos) de 272 erupciones del géiser Viejo Fiel (Old Faithful Geyser) en el Parque Nacional Yellowstone. La duración de las erupciones parece estar agrupada en dos conjuntos: erupciones cortas (con duración de alrededor de dos minutos) y erupciones largas (4-5 minutos), y pocos datos en el intervalo intermedio.
 
 ```{r}
-ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+ggplot(data = faithful, mapping = aes(x = eruptions)) +
   geom_histogram(binwidth = 0.25)
 ```  
 
@@ -530,7 +530,7 @@ Los patrones en tus datos te dan una idea acerca de las relaciones entre variabl
 Un diagrama de dispersión de la duración de las erupciones del géiser Viejo Fiel contra el tiempo de espera entre erupciones muestra un patrón: tiempos de espera más largos están asociados con erupciones más largas. El diagrama de dispersión también muestra los dos grupos que identificamos antes.
 
 ```{r fig.height = 2}
-ggplot(data = faithful) + 
+ggplot(data = faithful) +
   geom_point(mapping = aes(x = eruptions, y = waiting))
 ``` 
 
@@ -565,7 +565,7 @@ En la parte final de este libro, [model](#model-intro), aprenderás cómo funcio
 A medida que nos alejamos de estos capítulos introductorios, usaremos expresiones más concisas para escribir código ggplot2. Hasta ahora hemos sido muy explícitos en el código, lo que es muy útil cuando estás aprendiendo:
 
 ```{r, eval = FALSE}
-ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+ggplot(data = faithful, mapping = aes(x = eruptions)) +
   geom_freqpoly(binwidth = 0.25)
 ```
 
@@ -574,7 +574,7 @@ Usualmente los primeros argumentos de una función son tan importantes que deber
 Escribir el código para la gráfica anterior de manera más precisa resulta en:
 
 ```{r, eval = FALSE}
-ggplot(faithful, aes(eruptions)) + 
+ggplot(faithful, aes(eruptions)) +
   geom_freqpoly(binwidth = 0.25)
 ```
 
