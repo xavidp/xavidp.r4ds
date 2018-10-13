@@ -99,7 +99,7 @@ diamantes %>%
 
 Un histograma segmenta el eje horizontal en rangos equidistantes y después hace uso de la altura de la barra para mostrar el número de observaciones que corresponden a cada unidad o barra. En la gráfica anterior, la barra más alta muestra que al menos 30,000 observaciones tienen un `quilate` entre 0.25 y 0.75, que son los bordes izquierdo y derecho de la barra. 
 
-Puedes definir el ancho de los intervalos de un histograma con el argumento `binwidth` (del inglés __binwidth__, ancho del rango o intervalo), que es medido en las unidades de la variable `x`. Siempre deberías explorar una variedad de distintas medidas para el ancho del intervalo cuando estés trabajando con histogramas, pues distintas medidas pueden revelar diferentes patrones. Por ejemplo, así es como luce la gráfica anterior cuando acercamos la imagen a sólo los diamantes con un tamaño menor a tres quilates y escogemos un intervalo más pequeño.
+Puedes definir el ancho de los intervalos de un histograma con el argumento `binwidth` (del inglés _ancho del rango_ o _ancho del intervalo_), que es medido en las unidades de la variable `x`. Siempre deberías explorar una variedad de distintas medidas para el ancho del intervalo cuando estés trabajando con histogramas, pues distintas medidas pueden revelar diferentes patrones. Por ejemplo, así es como luce la gráfica anterior cuando acercamos la imagen a sólo los diamantes con un tamaño menor a tres quilates y escogemos un intervalo más pequeño.
 
 ```{r}
 pequenos <- diamantes %>% 
@@ -109,7 +109,7 @@ ggplot(data = pequenos, mapping = aes(x = quilate)) +
   geom_histogram(binwidth = 0.1)
 ```
 
-Si deseas sobreponer múltiples histogramas en la misma gráfica, recomiendo usar `geom_freqpoly()` (del inglés __frequency polygons__, polígonos de frecuencia) en lugar de `geom_histogram()`. `geom_freqpoly()` realiza el mismo cálculo que `geom_histogram()`, pero usa líneas en lugar de barrar para mostrar los totales. Es mucho más fácil entender líneas a barras que se sobreponen.
+Si deseas sobreponer múltiples histogramas en la misma gráfica, recomiendo usar `geom_freqpoly()` (del inglés _polígonos de frecuencia_) en lugar de `geom_histogram()`. `geom_freqpoly()` realiza el mismo cálculo que `geom_histogram()`, pero usa líneas en lugar de barrar para mostrar los totales. Es mucho más fácil entender líneas a barras que se sobreponen.
 
 ```{r}
 ggplot(data = pequenos, mapping = aes(x = quilate, colour = corte)) +
@@ -165,7 +165,7 @@ Muchas de las preguntas anteriores te ayudarán a explorar la relación *entre* 
 
 ### Valores inusuales
 
-Los valores atípicos, también conocidos en inglés como __outliers__, son puntos en los datos que parecen no seguir el patrón. Algunas veces dichos valores atípicos son errores cometidos durante la entrada de datos; otras veces sugieren nueva información. Cuando tienes una gran cantidad de datos, es difícil identificar los valores atípicos en un histograma. Por ejemplo, toma la distribución de la variable `y` del set de datos de diamantes. La única evidencia de la existencia de valores atípicos son límites inusualmente anchos en el eje horizontal.
+Los valores atípicos, también conocidos en inglés como _outliers_, son puntos en los datos que parecen no seguir el patrón. Algunas veces dichos valores atípicos son errores cometidos durante la entrada de datos; otras veces sugieren nueva información. Cuando tienes una gran cantidad de datos, es difícil identificar los valores atípicos en un histograma. Por ejemplo, toma la distribución de la variable `y` del set de datos de diamantes. La única evidencia de la existencia de valores atípicos son límites inusualmente anchos en el eje horizontal.
 
 ```{r}
 ggplot(diamantes) + 
@@ -239,7 +239,7 @@ Si has encontrado valores inusuales en tu set de datos y simplemente quieres seg
     quizá no tengas datos con los que trabajar al final.
 
 1.  En lugar de eso, recomiendo reemplazar los valores inusuales con valores faltantes.
-    La manera más fácil de hacerlo es usar `mutate()` (del inglés __mutar__) para reemplazar la variable
+    La manera más fácil de hacerlo es usar `mutate()` (del inglés _mutar_) para reemplazar la variable
     con una copia editada de la misma. Puedes usar la función `ifelse()` para
     reemplazar valores inusuales con `NA`:
 
@@ -285,7 +285,7 @@ Sin embargo esta gráfica no es tan buena porque hay muchos más vuelos no cance
 1.  ¿Qué sucede con los valores faltantes en un histograma? ¿Qué pasa con los valores
     faltantes en una gráfica de barras? ¿Cuál es la razón detrás de esta diferencia?
 
-1.  ¿Qué efecto tiene usar `na.rm = TRUE` en `mean()` (del inglés __promedio__) y `sum()`(del inglés __sumar__)?
+1.  ¿Qué efecto tiene usar `na.rm = TRUE` en `mean()` (del inglés _promedio_) y `sum()`(del inglés _sumar_)?
 
 ## Covariación
 
@@ -316,16 +316,16 @@ ggplot(data = diamantes, mapping = aes(x = precio, y = ..density..)) +
 
 En esta gráfica hay algo un tanto sorprendente: ¡parece que los diamantes regulares (la calidad más baja) tienen, en promedio, el precio más alto! Pero quizá eso sea porque los polígonos de frecuencia son difíciles de interpretar; hay mucho que decir sobre lo que esta gráfica muestra.
 
-Otra alternativa para mostrar la distribución de una variable continua agrupada en relación a otra variable discreta es el diagrama de caja ( también conocido como diagrama de cajas y bigotes; __boxplot__, en inglés). Un **diagrama de caja** es un tipo de representación visual para la distribución de valores popular entre las personas que se dedican a la estadística. Cada diagrama de caja está integrado por:
+Otra alternativa para mostrar la distribución de una variable continua agrupada en relación a otra variable discreta es el diagrama de caja ( también conocido como diagrama de cajas y bigotes; _boxplot_ en inglés). Un **diagrama de caja** es un tipo de representación visual para la distribución de valores popular entre las personas que se dedican a la estadística. Cada diagrama de caja está integrado por:
 
 * Una caja que comprende desde el percentil 25avo de la distribución hasta el 75avo percentil, 
-  distancia que se conoce como rango intercuartílico (RIC; __interquartile range__ o __IQR__ en inglés). 
+  distancia que se conoce como rango intercuartílico ( _interquartile range_ o _IQR_ en inglés). 
   En el centro de la caja se encuentra una línea que señala la mediana (es decir, el 50avo percentil),
   de la distribución. Estas tres líneas te darán una idea sobre la dispersión de la 
   distribución, así como también te mostrarán si la distribución es simétrica en torno a la mediana 
   o si está sesgada.
 
-* Los puntos que representan observaciones que se encuentran a más de 1.5 RIC
+* Los puntos que representan observaciones que se encuentran a más de 1.5 _IQR_
   a partir de cualquier borde de la caja. Estos puntos son inusuales en los datos, 
   de manera que son graficados individualmente.
 
@@ -345,7 +345,7 @@ ggplot(data = diamantes, mapping = aes(x = corte, y = precio)) +
 
 Vemos menos información sobre la distribución, pero los diagramas de caja son más compactos, lo que hace que sea más fácil compararlos (y presentar más en una misma gráfica). Esta gráfica respalda el contradictorio resultado al que llegamos antes sobre que los diamantes de mayor calidad son en promedio más baratos. En los ejercicios, tendrás que descubrir por qué.
 
-`corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables discretas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (del inglés __reordenar__).
+`corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables discretas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (del inglés _reordenar_).
 
 Por ejemplo, toma la variable `clase` variable del set de datos `millas`. Podría interesarte saber cómo varía el rendimiento en autopista según la clase del vehículo:
 
@@ -361,7 +361,7 @@ ggplot(data = millas) +
   geom_boxplot(mapping = aes(x = reorder(clase, autopista, FUN = median), y = autopista))
 ```
 
-Si los nombres de tus variables son muy largos, `geom_boxplot()` funcionará mejor si giras el gráfico 90°. Puedes hacer esto agregando `coord_flip()` (del inglés __coordinate flip__, como para "voltear" las coordenadas).
+Si los nombres de tus variables son muy largos, `geom_boxplot()` funcionará mejor si giras el gráfico 90°. Puedes hacer esto agregando `coord_flip()` (del inglés _voltear coordenadas_).
 
 ```{r}
 ggplot(data = millas) +
@@ -379,13 +379,13 @@ ggplot(data = millas) +
     ¿Por qué la combinación de estas dos relaciones conlleva a que los diamantes de 
     menor calidad sean más costosos?
 
-1.  Instala el paquete *ggstance*, y crea un diagrama de caja horizontal. 
+1.  Instala el paquete **ggstance**, y crea un diagrama de caja horizontal. 
     ¿Cómo se compara esto a usar `coord_flip()`?
 
 1.  Un problema con los diagramas de caja es que fueron desarrollados en un tiempo en que 
     los sets de datos eran más pequeños y por ende tienden a mostrar un número muy grande de 
     "valores atípicos". Una estrategia para remediar este problema es 
-    el diagrama __letter value__. Instala el paquete *lvplot*, e intenta usar
+    el diagrama __letter value__. Instala el paquete **lvplot**, e intenta usar
     `geom_lv()` para mostrar la distribución de precio vs corte. ¿Qué observas?
     ¿Cómo intepretas las gráficas?
 
@@ -395,12 +395,12 @@ ggplot(data = millas) +
 
 1.  Si tu set de datos es pequeño, a veces resulta útil usar `geom_jitter()`
     para ver la relación entre una variable continua y una discreta.
-    El paquete *ggbeeswarm* provee de un número de métodos similares a 
+    El paquete **ggbeeswarm** provee de un número de métodos similares a 
     `geom_jitter()`. Enlístalos y describe brevemente qué hace cada uno.
 
 ### Dos variables discretas
 
-Para visualizar la variación entre variables discretas, deberás contar el número de observaciones de cada combinación. Una manera de hacerlo es empleando la función integrada `geom_count()` (del inglés __count__, contar):
+Para visualizar la variación entre variables discretas, deberás contar el número de observaciones de cada combinación. Una manera de hacerlo es empleando la función integrada `geom_count()` (del inglés _contar_):
 
 ```{r}
 ggplot(data = diamantes) +
@@ -425,7 +425,7 @@ diamantes %>%
     geom_tile(mapping = aes(fill = n))
 ```
 
-Si las variables discretas no siguen un orden particular, podrías usar el paquete *seriation* para reordenar las filas y columnas simultáneamente, de manera que sea más fácil detectar patrones interesantes. En el caso de gráficos más grandes, intenta usar los paquetes *d3heatmap* o *heatmaply*, que crean gráficos interactivos.
+Si las variables discretas no siguen un orden particular, podrías usar el paquete **seriation** para reordenar las filas y columnas simultáneamente, de manera que sea más fácil detectar patrones interesantes. En el caso de gráficos más grandes, intenta usar los paquetes **d3heatmap** o **heatmaply**, que crean gráficos interactivos.
 
 #### Ejercicios
 
@@ -456,9 +456,9 @@ ggplot(data = diamantes) +
   geom_point(mapping = aes(x = quilate, y = precio), alpha = 1 / 100)
 ```
 
-Pero agregar transparencia puede ser difícil para conjuntos de datos que sean muy grandes. Otra solución es modificar el parámetro _bin_ (del inglés "contenedor", mejor traducido al español en nuestro contexto como "rango" o "unidad"). Anteriormente usaste `geom_histogram()` y `geom_freqpoly()` para segmentar una variable en rangos de manera unidimensional. Ahora aprenderás a usar `geom_bin2d()` y `geom_hex()` para hacerlo en dos dimensiones.
+Pero agregar transparencia puede ser difícil para conjuntos de datos que sean muy grandes. Otra solución es modificar el parámetro _bin_ (del inglés _contenedor_, mejor traducido al español en nuestro contexto como _rango_ o _unidad_). Anteriormente usaste `geom_histogram()` y `geom_freqpoly()` para segmentar una variable en rangos de manera unidimensional. Ahora aprenderás a usar `geom_bin2d()` y `geom_hex()` para hacerlo en dos dimensiones.
 
-`geom_bin2d()` y `geom_hex()` dividen el plano cartesiano en unidades bidimensionales y luego usan un color de relleno para mostrar cuántos puntos pueden ser clasificados en cada unidad. `geom_bin2d()` crea unidades rectangulares. `geom_hex()` crea unidades hexagonales. Deberás instalar el paquete *hexbin* para usar `geom_hex()`.
+`geom_bin2d()` y `geom_hex()` dividen el plano cartesiano en unidades bidimensionales y luego usan un color de relleno para mostrar cuántos puntos pueden ser clasificados en cada unidad. `geom_bin2d()` crea unidades rectangulares. `geom_hex()` crea unidades hexagonales. Deberás instalar el paquete **hexbin** para usar `geom_hex()`.
 
 ```{r, fig.asp = 1, out.width = "50%", fig.align = "default", message = FALSE}
 ggplot(data = pequenos) +
@@ -558,7 +558,7 @@ ggplot(data = diamantes2) +
   geom_boxplot(mapping = aes(x = corte, y = resid))
 ```
 
-En la parte final de este libro, [model](#model-intro), aprenderás cómo funciona el modelado estadístico y el paquete *modelr*. Dejamos el modelado para más adelante pues es más fácil entender qué son los modelos y cómo funcionan una vez que cuentes con las herramientas necesarias de doma de datos y programación.
+En la parte final de este libro, [model](#model-intro), aprenderás cómo funciona el modelado estadístico y el paquete **modelr**. Dejamos el modelado para más adelante pues es más fácil entender qué son los modelos y cómo funcionan una vez que cuentes con las herramientas necesarias de doma de datos y programación.
 
 ## Argumentos en ggplot2
 
