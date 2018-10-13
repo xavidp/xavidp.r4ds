@@ -589,7 +589,7 @@ diamantes %>%
 
 ## Aprendiendo más
 
-Si quieres aprender más acerca de la mecánica de `ggplot2`, te recomendaría consultar una copia del libro de ggplot2: <https://amzn.com/331924275X> (disponible en inglés). Fue actualizado recientemente, de manera que incluye código para dplyr y tidyr, y tiene mucho más espacio para explorar todas las facetas de visualización. Desafortunadamente el libro no está disponible sin costo, pero si tienes alguna relación con una universidad es probable que puedas obtener una versión electrónica del libro sin costo mediante SpringerLink.
+Si quieres aprender más acerca de la mecánica de `ggplot2`, te recomendaría consultar una copia del [_libro de ggplot2_](https://amzn.com/331924275X) (disponible en inglés). Fue actualizado recientemente, de manera que incluye código para dplyr y tidyr, y tiene mucho más espacio para explorar todas las facetas de visualización. Desafortunadamente el libro no está disponible sin costo, pero si tienes alguna relación con una universidad es probable que puedas obtener una versión electrónica del libro sin costo mediante SpringerLink.
 
 Otro recurso útil es el [_R Graphics Cookbook_](https://amzn.com/1449316956) por Winston Chang. Gran parte del contenido de este libro está disponible en línea en <http://www.cookbook-r.com/Graphs/>.
 
