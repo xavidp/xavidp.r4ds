@@ -7,7 +7,7 @@ Hasta ahora has visto usar R Markdown para producir documentos HTML. Este capít
 1.  De forma permanente, modificando el encabezado YAML: 
     
     ```yaml
-    title: "Viridis Demo"
+    title: "Demo Viridis"
     output: html_document
     ```
     
