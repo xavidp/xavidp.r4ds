@@ -4,14 +4,14 @@
 
 Hasta ahora has visto usar R Markdown para producir documentos HTML. Este capítulo muestra una breve descripción de algunos de los muchos otros tipos de documentos que puedes generar con R Markdown. Hay dos maneras de definir la salida de un documento:
 
-1.  Permanente, modificando el encabezado YAML: 
+1.  De forma permanente, modificando el encabezado YAML: 
     
     ```yaml
     title: "Viridis Demo"
     output: html_document
     ```
     
-1.  Transitoria, llamando `rmarkdown::render()` directamente:
+2.  De forma transitoria, llamando `rmarkdown::render()` directamente:
     
     ```{r eval = FALSE}
     rmarkdown::render("diamond-sizes.Rmd", output_format = "word_document")
@@ -27,9 +27,9 @@ knitr::include_graphics("screenshots/rmarkdown-knit.png")
 
 ## Opciones de salida
 
-Cada formato de salida está relacionado con una función de R. Puedes escribir `foo` o `pkg::foo`. Si omites `pkg`, por defecto se asume que es rmarkdown. Es importante conocer el nombre de la función que genera el documento de salida, porque así es como obtienes ayuda. Por ejemplo, para saber qué parámetros puedes definir con `html_document`, busca en `?rmarkdown::html_document`.
+Cada formato de salida está asociado con una función de R. Puedes escribir `foo` o `pkg::foo`. Si omites `pkg`, por defecto se asume que es rmarkdown. Es importante conocer el nombre de la función que genera el documento de salida, porque así es como obtienes ayuda. Por ejemplo, para saber qué parámetros puedes definir con `html_document`, busca en `?rmarkdown::html_document`.
 
-Para sobrescribir los parámetros predeterminados necesitas usar un campo de `output` extendido. Por ejemplo, si quieres generar un `html_document` con una tabla de contenido flotante, usarías:
+Para sobrescribir los parámetros predeterminados necesitas usar un campo de `output` extendido. Por ejemplo, si quisieras generar un `html_document` con una tabla de contenido flotante, usarías:
 
 ```yaml
 output:
@@ -56,7 +56,7 @@ El capítulo anterior se enfocó en la salida predeterminada del documento html 
 
 *   `pdf_document` crea un PDF con LaTeX (un sistema de código abierto 
     de composición de textos), que necesitarás instalar. RStudio te notificará
-    si todavía no lo tienes.
+    si no lo tienes.
   
 *   `word_document` para documentos de Microsoft Word (`.docx`).
   
@@ -68,7 +68,7 @@ El capítulo anterior se enfocó en la salida predeterminada del documento html 
     pero puedes usarlo si, por ejemplo, tu CMS corporativo o 
     tu wiki de laboratorio usa markdown.
        
-*   `github_document`: esta es una versión a medida de `md_document` 
+*   `github_document`: esta es una versión de `md_document` específicamente
     diseñada para compartir en GitHub.
 
 Recuerda que cuando generes un documento para compartirlo con los responsables de la toma de decisiones, puedes desactivar la visualización predeterminada de código, definiendo las opciones globales en el fragmento de configuración:
@@ -77,7 +77,7 @@ Recuerda que cuando generes un documento para compartirlo con los responsables d
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Para documentos html `html_document` otra opción es hacer que los fragmentos de código estén escondidos por defecto, pero visibles con un clic: 
+Para los `html_document` otra opción es hacer que los fragmentos de código estén escondidos por defecto, pero visibles con un clic: 
 
 ```yaml
 output:
@@ -98,7 +98,7 @@ Un notebook, `html_notebook` (cuaderno en español), es una variación de un `ht
    podrás incluir archivos de soporte (ej. archivos de datos `.csv`), que 
    serán extraídos automáticamente cuando sea necesario.
 
-Enviar archivos `.nb.html` por correo electrónico es una manera simple de compartir los análisis con tus colegas. Pero las cosas se pondrán difíciles tan pronto como quieras hacer cambios. Si esto empieza a suceder, es un buen momento para aprender Git y GitHub. Aprender Git y Github es definitivamente doloroso al principio, pero la recompensa de la colaboración es enorme. Como se mencionó anteriormente, Git y GitHub están fuera del alcance del libro, pero hay un consejo útil si ya los estás usando: usa las dos salidas, `html_notebook` y `github_document`: 
+Enviar archivos `.nb.html` por correo electrónico es una manera simple de compartir los análisis con tus colegas. Pero las cosas se pondrán difíciles tan pronto como quieras hacer cambios. Si esto empieza a suceder, es un buen momento para aprender Git y GitHub. Aprender Git y Github definitivamente es doloroso al principio, pero la recompensa de la colaboración es enorme. Como se mencionó anteriormente, Git y GitHub están fuera del alcance de este libro, pero este es un consejo útil si ya los estás usando: usa las dos salidas, `html_notebook` y `github_document`: 
 
 ```yaml
 output:
@@ -106,7 +106,7 @@ output:
   github_document: default
 ```
 
-`html_notebook` te da una vista previa local, y un archivo que puedes compartir por correo electrónico. `github_document` crea un archivo md mínimo que puedes verificar en git. Puedes revisar fácilmente como los resultados de tus análisis (no solo el código) cambian con el tiempo, y GitHub lo renderizará muy bien en línea.
+`html_notebook` te da una vista previa local, y un archivo que puedes compartir por correo electrónico. `github_document` crea un archivo md mínimo que puedes ingresar en git. Puedes revisar fácilmente como los resultados de tus análisis (no solo el código) cambian con el tiempo, y GitHub lo renderizará muy bien en línea.
 
 ## Presentaciones
 
@@ -156,7 +156,7 @@ Cualquier formato HTML (documento, notebook, presentación, o dashboard) puede c
 
 ### htmlwidgets
 
-HTML es un formato interactivo, y puedes aprovechar esa interactividad con __htmlwidgets__, funciones R que producen visualizaciones HTML interactivas. Por ejemplo, toma el mapa __leaflet__ a continuación. Si estás viendo esta página en la web, puedes arrastrar el mapa, acercar y alejar, etc. Obviamente no puedes hacer esto en un libro, por lo que RMarkdown automáticamente inserta una captura de pantalla estática para ti.
+HTML es un formato interactivo, y puedes aprovechar esa interactividad con __htmlwidgets__, funciones de R que producen visualizaciones HTML interactivas. Por ejemplo, fíjate en el mapa de __leaflet__ a continuación. Si estás viendo esta página en la web, puedes arrastrar el mapa, acercar y alejar, etc. Obviamente no puedes hacer esto en un libro, por lo que RMarkdown automáticamente inserta una captura de pantalla estática.
 
 ```{r}
 library(leaflet)
@@ -166,7 +166,7 @@ leaflet() %>%
   addMarkers(174.764, -36.877, popup = "Maungawhau") 
 ```
 
-Lo bueno de htmlwidgets es que no necesitas saber nada sobre HTML o JavaScript para usarlos. Todos los detalles están incluidos en el paquete, por lo que no tienes que preocuparte por eso.
+Lo bueno de los htmlwidgets es que no necesitas saber nada sobre HTML o JavaScript para usarlos. Todos los detalles están incluidos en el paquete, por lo que no tienes que preocuparte por eso.
 
 Hay muchos paquetes que proporcionan htmlwidgets, incluyendo:
 
@@ -180,16 +180,16 @@ interactivas de series de tiempo.
 * __DiagrammeR__, <http://rich-iannone.github.io/DiagrammeR/>, para diagramas
   (como diagramas de flujo y diagramas simples de nodos).
 
-Para obtener más información sobre htmlwidgets y ver una lista más completa de los paquetes que los proporcionan, visita <http://www.htmlwidgets.org/>.
+Para obtener más información sobre los htmlwidgets y ver una lista más completa de los paquetes que los proporcionan, visita <http://www.htmlwidgets.org/>.
 
 ### Shiny
 
-htmlwidgets proporciona interactividad del lado del cliente, es decir que toda la interactividad ocurre en el navegador, independientemente de R. Por un lado esto es bueno porque puedes distribuir el archivo HTML sin ninguna conexión con R. Sin embargo, también limita fundamentalmente lo que puedes hacer a las cosas que han sido implementadas en HTML y JavaScript. Una alternativa es usar __shiny__, un paquete que te permite crear interactividad usando código R, no JavaScript.
+Los htmlwidgets proporciona interactividad del lado del cliente, es decir que toda la interactividad ocurre en el navegador, independientemente de R. Por un lado esto es bueno porque puedes distribuir el archivo HTML sin ninguna conexión con R. Sin embargo, también limita fundamentalmente lo que puedes hacer a las cosas que han sido implementadas en HTML y JavaScript. Una alternativa es usar __shiny__, un paquete que te permite crear interactividad usando código R, no JavaScript.
 
 Para llamar código Shiny desde un documento R Markdown, agrega `runtime: shiny` al encabezado:
 
 ```yaml
-title: "App Web Shiny"
+title: "Applicación Web Shiny"
 output: html_document
 runtime: shiny
 ```
@@ -208,7 +208,7 @@ knitr::include_graphics("screenshots/rmarkdown-shiny.png")
 
 Después puedes referirte a los valores con `input$nombre` e `input$edad`, y el código que los usa se volverá a ejecutar automáticamente cada vez que los valores cambien.
 
-No puedo mostrarte una aplicacion Shiny corriendo ahora porque las interacciones de Shiny ocurren en el lado del servidor. Esto quiere decir que puedes escribir aplicaciones interactivas sin saber JavaScript, pero necesitas un servidor para correrlas. Esto introduce un problema logístico: Las aplicaciones Shiny necesitan un servidor para correr en línea. Cuando corres una aplicación Shiny en tu propia computadora, Shiny automáticamente crea un servidor Shiny para que la puedas correr, pero necesitaras un servidor Shiny público si quieres proporcionar este tipo de interactividad en línea. Esta es la limitación fundamental de Shiny: puedes crear en Shiny todo lo que puedes crear en R, pero necesitarás que R esté corriendo en algún lugar.
+No puedo mostrarte una aplicacion Shiny corriendo ahora porque las interacciones de Shiny ocurren en el lado del servidor. Esto quiere decir que puedes escribir aplicaciones interactivas sin saber JavaScript, pero necesitas un servidor para correrlas. Esto introduce un problema logístico: Las aplicaciones Shiny necesitan un servidor para correr en línea. Cuando corres una aplicación Shiny en tu propia computadora, Shiny automáticamente crea un servidor Shiny para que la puedas correr, pero necesitarás un servidor Shiny público si quieres proporcionar este tipo de interactividad en línea. Ésta es la limitación fundamental de Shiny: puedes crear en Shiny todo lo que puedes crear en R, pero necesitarás que R esté corriendo en algún lugar.
 
 Aprende más sobre Shiny en: <http://shiny.rstudio.com/>.
 
@@ -226,7 +226,7 @@ Con un poco más de infraestructura puedes usar R Markdown para crear un sitio w
     cat(readr::read_file("rmarkdown/example-site.yml"))
     ```
 
-Ejecuta `rmarkdown::render_site()` para crear un `_site` (sitio en español), un directorio de archivos listo para ser implementado como un sitio web estático independiente, o si usas un proyecto de RStudio para el directorio de tu sitio web, RStudio agregará una pestaña de compilación que puedes usar para crear y obtener una vista previa de tu sitio.
+Ejecuta `rmarkdown::render_site()` para crear `_site` (sitio en español), un directorio de archivos listo para ser implementado como un sitio web estático independiente, o si usas un proyecto de RStudio para el directorio de tu sitio web, RStudio agregará una pestaña de compilación que puedes usar para crear y obtener una vista previa de tu sitio.
 
 Lee más acerca de los Sitios Web en: <http://rmarkdown.rstudio.com/rmarkdown_websites.html>.
 
@@ -243,7 +243,7 @@ Otros paquetes proveen incluso más formatos de salida:
     por la comunidad R.
 
 *   El paquete __prettydoc__, <https://github.com/yixuan/prettydoc/>, 
-    proporciona formatos livianos de documentos con una gama de temas atractivos.
+    proporciona formatos livianos de documentos con una gama de estéticas atractivas.
 
 *   El paquete __rticles__, <https://github.com/rstudio/rticles>, compila una
     selección de formatos específicos para revistas científicas.
@@ -256,13 +256,13 @@ Para obtener más información sobre comunicación efectiva con estos diferentes
 
 * Para mejorar tus habilidades de presentación, recomiendo: Patrones de Presentación,
   [_Presentation Patterns_](https://amzn.com/0321820800), por Neal Ford,
-  Matthew McCollough, y Nathaniel Schutta. Proporciona un conjunto de patrones 
+  Matthew McCollough y Nathaniel Schutta. Proporciona un conjunto de patrones 
   efectivo de alto y bajo nivel que puedes usar para mejorar tus presentaciones.
 
 * Si das charlas académicas, recomiendo que leas La guía para dar charlas del grupo Leek:
   [_Leek group guide to giving talks_](https://github.com/jtleek/talkguide).
   
-* No lo he tomado yo mismo, pero he escuchado buenos comentarios sobre 
+* Yo no lo he tomado, pero he escuchado buenos comentarios sobre 
   el curso en línea Hablar en Público; Public Speaking de Matt McGarrity: 
   <https://www.coursera.org/learn/public-speaking>.
 
