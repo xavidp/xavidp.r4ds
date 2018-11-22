@@ -751,13 +751,13 @@ diario %>%
 
 4. Mira la cantidad de vuelos cancelados por día. ¿Hay un patrón? ¿La proporción de vuelos cancelados está relacionada con el retraso promedio?
 
-5. ¿Qué compañía tiene los peores retrasos? Desafío: ¿puedes desenredar el efecto de malos aeropuertos vs. el efecto de malos transportistas? ¿Por qué o por qué no? (Sugerencia: piensa en `vuelos %>% group_by(aerolinea, destino) %>% summarize(n())`)
+5. ¿Qué compañía tiene los peores retrasos? Desafío: ¿puedes desenredar el efecto de malos aeropuertos vs. el efecto de malos transportistas? ¿Por qué o por qué no? (Sugerencia: piensa en `vuelos %>% group_by(aerolinea, destino) %>% summarise(n())`)
 
 6. ¿Qué hace el argumento `sort` a `count()`. ¿Cuándo podrías usarlo?
 
 ## Transformaciones agrupadas (y filtros)
 
-La agrupación es más útil si se utiliza junto con `summarize()`, pero también puedes hacer operaciones convenientes con `mutate()` y `filter()`:
+La agrupación es más útil si se utiliza junto con `summarise()`, pero también puedes hacer operaciones convenientes con `mutate()` y `filter()`:
 
 *   Encuentra los peores miembros de cada grupo:
 
