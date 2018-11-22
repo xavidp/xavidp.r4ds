@@ -52,7 +52,7 @@ En este capítulo, aprenderás las cinco funciones clave de **dplyr** que te per
 * Reordenar las filas (`arrange()` — del inglés organizar).
 * Seleccionar las variables por sus nombres (`select()` — del inglés seleccionar).
 * Crear nuevas variables con transformaciones de variables existentes (`mutate()` — del inglés mutar o transformar).
-* Contraer muchos valores en un solo resumen (`summarize()` — del inglés resumir).
+* Contraer muchos valores en un solo resumen (`summarise()` — del inglés resumir).
 
 Todas estas funciones se pueden usar junto con `group_by()` (del inglés agrupar por), que cambia el alcance de cada función para que actúe ya no sobre todo el conjunto de datos sino grupo por grupo. Estas seis funciones proporcionan los verbos para un lenguaje de manipulación de datos.
 
@@ -427,24 +427,24 @@ ggplot(vuelos, aes(tiempo_vuelo - tiempo_vuelo2)) + geom_histogram()
 
 6. ¿Qué funciones trigonométricas proporciona R?
 
-## Resúmenes agrupados con `summarize()`
+## Resúmenes agrupados con `summarise()`
 
-El último verbo clave es `summarize()` (de resumir en inglés). Se encarga de colapsar un *data frame* en una sola fila:
+El último verbo clave es `summarise()` (de resumir en inglés). Se encarga de colapsar un *data frame* en una sola fila:
 
 ```{r}
-summarize(vuelos, atraso = mean(atraso_salida, na.rm = TRUE))
+summarise(vuelos, atraso = mean(atraso_salida, na.rm = TRUE))
 ```
 
 (Volveremos a lo que significa `na.rm = TRUE` en muy poco tiempo).
 
-`summarize()` no es muy útil a menos que lo emparejemos con `group_by()`. Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Luego, cuando uses los verbos **dplyr** en un *data frame* agrupado, estos se aplicaran automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un *data frame* agrupado por fecha, obtenemos el retraso promedio por fecha:
+`summarise()` no es muy útil a menos que lo emparejemos con `group_by()`. Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Luego, cuando uses los verbos **dplyr** en un *data frame* agrupado, estos se aplicaran automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un *data frame* agrupado por fecha, obtenemos el retraso promedio por fecha:
 
 ```{r}
 por_dia <- group_by(vuelos, anio, mes, dia)
-summarize(por_dia, atraso = mean(atraso_salida, na.rm = TRUE))
+summarise(por_dia, atraso = mean(atraso_salida, na.rm = TRUE))
 ```
 
-Juntos `group_by()` y `summarize()` proporcionan una de las herramientas que usarás más comúnmente cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (/paip/) (tubería o dataducto).
+Juntos `group_by()` y `summarise()` proporcionan una de las herramientas que usarás más comúnmente cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (/paip/) (tubería o dataducto).
   
 ### Combinación de múltiples operaciones con un *pipe*
 
@@ -452,7 +452,7 @@ Imagina que queremos explorar la relación entre la distancia y la demora promed
 
 ```{r, fig.width = 6}
 por_destino <- group_by(vuelos, destino)
-atraso <- summarize(por_destino,
+atraso <- summarise(por_destino,
   count = n(),
   distancia = mean(distancia, na.rm = TRUE),
   atraso = mean(atraso_llegada, na.rm = TRUE)
