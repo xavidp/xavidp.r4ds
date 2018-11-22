@@ -437,35 +437,35 @@ summarise(vuelos, atraso = mean(atraso_salida, na.rm = TRUE))
 
 (Volveremos a lo que significa `na.rm = TRUE` en muy poco tiempo).
 
-`summarise()` no es muy útil a menos que lo emparejemos con `group_by()`. Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Luego, cuando uses los verbos **dplyr** en un *data frame* agrupado, estos se aplicaran automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un *data frame* agrupado por fecha, obtenemos el retraso promedio por fecha:
+`summarise()` no es muy útil a menos que lo enlacemos con `group_by()`. Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Luego, cuando uses los verbos **dplyr** en un *data frame* agrupado, estos se aplicaran automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un *data frame* agrupado por fecha, obtenemos el retraso promedio por fecha:
 
 ```{r}
 por_dia <- group_by(vuelos, anio, mes, dia)
 summarise(por_dia, atraso = mean(atraso_salida, na.rm = TRUE))
 ```
 
-Juntos `group_by()` y `summarise()` proporcionan una de las herramientas que usarás más comúnmente cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (/paip/) (tubería o dataducto).
+Juntos `group_by()` y `summarise()` proporcionan una de las herramientas que más comúnmente usarás cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (/paip/) (del inglés tubo o conducto).
   
-### Combinación de múltiples operaciones con un *pipe*
+### Combinación de múltiples operaciones con el *pipe*
 
 Imagina que queremos explorar la relación entre la distancia y la demora promedio para cada ubicación. Usando lo que sabes acerca de **dplyr**, podrías escribir un código como este:
 
 ```{r, fig.width = 6}
 por_destino <- group_by(vuelos, destino)
 atraso <- summarise(por_destino,
-  count = n(),
+  conteo = n(),
   distancia = mean(distancia, na.rm = TRUE),
   atraso = mean(atraso_llegada, na.rm = TRUE)
 )
-atraso <- filter(atraso, count > 20, destino!= "HNL")
+atraso <- filter(atraso, count > 20, destino != "HNL")
 
 # Parece que las demoras aumentan con una distancia de hasta ~ 750 millas
 # y luego disminuyen. Tal vez a medida que los vuelos se hacen más 
 # largos, hay más habilidad para compensar las demoras en el aire?
 
-ggplot (data = atraso, mapping = aes (x = distancia, y = atraso)) +
-  geom_point (aes (size = count), alpha = 1/3) +
-  geom_smooth (se = FALSE)
+ggplot(data = atraso, mapping = aes(x = distancia, y = atraso)) +
+  geom_point(aes(size = count), alpha = 1/3) +
+  geom_smooth(se = FALSE)
 ```
 
 Hay tres pasos para preparar esta información:
@@ -478,13 +478,13 @@ Hay tres pasos para preparar esta información:
 
 Nombrar cosas es difícil y enlentece nuestro análisis. Es entonces un poco frustrante escribir este código porque tenemos que dar un nombre a cada *data frame* intermedio, incluso si el *data frame* en sí mismo no nos importa.
 
-Hay otra forma de abordar el mismo problema con un *pipe*, %>%:
+Hay otra forma de abordar el mismo problema con el *pipe*, %>%:
 
 ```{r}
-delays <- vuelos %>% 
+atrasos <- vuelos %>% 
   group_by(destino) %>% 
   summarise(
-    count = n(),
+    conteo = n(),
     distancia = mean(distancia, na.rm = TRUE),
     atraso = mean(atraso_llegada, na.rm = TRUE)
   ) %>% 
@@ -493,9 +493,9 @@ delays <- vuelos %>%
 
 Esto se enfoca en las transformaciones, no en lo que se está transformando, lo que hace que el código sea más fácil de leer. Puedes leerlo como una serie de declaraciones imperativas: agrupa, luego resume y por último filtra. Como sugiere esta lectura, una buena forma de pronunciar `%>%` cuando se lee el código es "y luego".  
 
-Lo que encuentras detrás del código, es que `x %>% f(y)` se convierte en `f(x, y)`, y `x %>% f(y) %>% g(z)` se convierte en `g(f(x, y), z)` y así sucesivamente. Puedes usar un *pipe* para reescribir múltiples operaciones de forma que puedas leer de izquierda a derecha, de arriba hacia abajo. Usaremos *pipes* con frecuencia a partir de ahora porque mejora considerablemente la legibilidad del código, y volveremos al tema con más detalle en [pipes].
+Lo que encuentras detrás del código, es que `x %>% f(y)` se convierte en `f(x, y)`, y `x %>% f(y) %>% g(z)` se convierte en `g(f(x, y), z)` y así sucesivamente. Puedes usar el *pipe* para reescribir múltiples operaciones de forma que puedas leer de izquierda a derecha, de arriba hacia abajo. Usaremos *pipes* con frecuencia a partir de ahora porque mejora considerablemente la legibilidad del código, y volveremos al tema con más detalle en [pipes].
 
-Trabajar con un *pipe* es uno de los criterios clave para pertenecer al tidyverse. La única excepción es **ggplot2**: se escribió antes de que se descubrieran los *pipes*. Lamentablemente, la siguiente iteración de **ggplot2**, ggvis, que sí utiliza *pipes*, aún no está lista para la audiencia general.  
+Trabajar con el *pipe* es uno de los criterios clave para pertenecer al tidyverse. La única excepción es **ggplot2**: se escribió antes de que se descubriera el *pipe*. Lamentablemente, la siguiente iteración de **ggplot2**, ggvis, que sí utiliza el *pipe*, aún no está lista para la audiencia general.  
 
 ### Valores faltantes
 
@@ -507,7 +507,7 @@ vuelos %>%
   summarise(mean = mean(atraso_salida))
 ```
 
-¡Obtenemos muchos valores faltantes! Esto se debe a que las funciones de agregación obedecen la regla habitual de valores faltantes: si hay algún valor faltante en el *input*, el *output* será un valor faltante. Afortunadamente, todas las funciones de agregación tienen un argumento `na.rm` que elimina los valores faltante antes del cálculo:
+¡Obtenemos muchos valores faltantes! Esto se debe a que las funciones de agregación obedecen la regla habitual de valores faltantes: si hay algún valor faltante en el *input*, el *output* será un valor faltante. Afortunadamente, todas las funciones de agregación tienen un argumento `na.rm` que elimina los valores faltantes antes del cálculo:
 
 ```{r}
 vuelos %>% 
@@ -515,7 +515,7 @@ vuelos %>%
   summarise(mean = mean(atraso_salida, na.rm = TRUE))
 ```
 
-En este caso, cuando los valores faltantes representan vuelos cancelados, también podríamos abordar el problema eliminando primero los vuelos cancelados. Guardaremos este conjunto de datos para poder reutilizarlo en los siguientes ejemplos.
+En este caso, donde los valores faltantes representan vuelos cancelados, también podríamos abordar el problema eliminando primero los vuelos cancelados. Guardaremos este conjunto de datos para poder reutilizarlo en los siguientes ejemplos.
 
 ```{r}
 no_cancelados <- vuelos %>% 
@@ -526,7 +526,7 @@ no_cancelados %>%
   summarise(mean = mean(atraso_salida))
 ```
 
-### Cuentas
+### Conteos
 
 Siempre que realices una agregación, es una buena idea incluir un conteo (`n()`) o un recuento de valores no faltantes (`sum(!is.na(x))`). De esta forma, puedes verificar que no estás sacando conclusiones basadas en cantidades muy pequeñas de datos. Por ejemplo, veamos los aviones (identificados por su número de cola) que tienen las demoras promedio más altas:
 
@@ -541,7 +541,7 @@ ggplot(data = atrasos, mapping = aes(x = atraso)) +
   geom_freqpoly(binwidth = 10)
 ```
 
-¡Hay algunos aviones que tienen una demora promedio de 5 horas (300 minutos)!
+¡Hay algunos aviones que tienen una demora _promedio_ de 5 horas (300 minutos)!
 
 La historia es en realidad un poco más matizada. Podemos obtener más información si hacemos un diagrama de dispersión del número de vuelos contra la demora promedio:
 
@@ -557,7 +557,7 @@ ggplot(data = atrasos, mapping = aes(x = n, y = atraso)) +
   geom_point(alpha = 1/10)
 ```
 
-No es de sorprender que haya una mayor variación en el promedio de retraso cuando hay pocos vuelos. La forma de este gráfico es muy importante: cuando trazas un promedio (o cualquier otra medida de resumen) contra el tamaño del grupo, verás que la variación decrece a medida que el tamaño de muestra aumenta.
+No es sorprendente que haya una mayor variación en el promedio de retraso cuando hay pocos vuelos. La forma de este gráfico es muy característica: cuando trazas un promedio (o cualquier otra medida de resumen) contra el tamaño del grupo, verás que la variación decrece a medida que el tamaño de muestra aumenta.
 
 Cuando se observa este tipo de gráficos, resulta útil eliminar los grupos con menor número de observaciones, ya que puedes ver más del patrón y menos de la variación extrema de los grupos pequeños. Esto es lo que te muestra cómo hacer el código siguiente, así como también te ofrece una manera muy útil para integrar **ggplot2** en el flujo de trabajo de **dplyr**. Es un poco incómodo tener que cambiar de `%>%` a `+`, pero una vez que entiendas el código, verás que es bastante conveniente.
 
@@ -611,9 +611,9 @@ Puedes encontrar una buena explicación de este problema en <http://varianceexpl
 
 ### Funciones de resumen útiles {#summarise-funs}
 
-Solo el uso de medias, cuentas y sumas puede llevarte muy lejos, pero R proporciona muchas otras funciones de resumen útiles:
+Solo el uso de medias, conteos y sumas puede llevarte muy lejos, pero R proporciona muchas otras funciones de resumen útiles:
 
-  *  Medidas de centralidad: hemos usado `mean(x)`, pero `median(x)` también resulta muy útil. La media es la suma dividida por el número de observaciones; la mediana es un valor donde el 50% de `x` está por encima de él, y el 50% está por debajo. A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [subconjunto].
+  *  Medidas de centralidad: hemos usado `mean(x)`, pero `median(x)` también resulta muy útil. La media es la suma dividida por el número de observaciones; la mediana es un valor donde el 50% de `x` está por encima de él, y el 50% está por debajo. A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [subsetting].
     
 ```{r}
 no_cancelados %>% 
@@ -657,7 +657,7 @@ no_cancelados %>%
   )
 ```
     
-Estas funciones son complementarias al filtrado en rangos. El filtrado da todas las variables, con cada observación en una fila separada:
+Estas funciones son complementarias al filtrado en rangos. El filtrado te proporciona todas las variables, con cada observación en una fila separada:
     
 ```{r}
 no_cancelados %>% 
@@ -666,31 +666,31 @@ no_cancelados %>%
   filter(r %in% range(r))
 ```
 
-* Cuentas: has visto `n()`, que no toma argumentos, y devuelve el tamaño del grupo actual. Para contar la cantidad de valores no faltantes, usa `sum(!is.na (x))`. Para contar la cantidad de valores distintos (únicos), usa `n_distinct(x)`.
+* Conteos: has visto `n()`, que no toma argumentos, y devuelve el tamaño del grupo actual. Para contar la cantidad de valores no faltantes, usa `sum(!is.na (x))`. Para contar la cantidad de valores distintos (únicos), usa `n_distinct(x)`.
     
 ```{r}
-# ¿Qué destinos tienen la mayoría de los transportistas?
+# ¿Qué destinos tienen la mayoría de las aerolíneas?
 no_cancelados %>% 
   group_by(destino) %>% 
   summarise(aerolineas = n_distinct(aerolinea)) %>% 
   arrange(desc(aerolineas))
 ```
     
-Las cuentas son tan útiles que **dplyr** proporciona un ayudante simple si todo lo que quieres es un conteo:
+Los conteos son tan útiles que **dplyr** proporciona un ayudante simple si todo lo que quieres es un conteo:
 
 ```{r}
 no_cancelados %>% 
   count(destino)
 ```
     
-Opcionalmente puedes proporcionar una variable de peso. Por ejemplo, podrías usar esto para "contar" (o sumar) el número total de millas que un avión voló:
+Opcionalmente puedes proporcionar una variable de ponderación. Por ejemplo, podrías usar esto para "contar" (sumar) el número total de millas que un avión voló:
 
 ```{r}
 no_cancelados %>% 
   count(codigo_cola, wt = distancia)
 ```
   
-* Cuentas y proporciones de valores lógicos: `sum(x > 10)`, `mean(y == 0)`. 
+* Conteos y proporciones de valores lógicos: `sum(x > 10)`, `mean(y == 0)`. 
     
    Cuando se usan con funciones numéricas, `TRUE` se convierte en 1 y `FALSE` en 0. Esto hace que `sum()` y `mean()` sean muy útiles: `sum(x)` te da la cantidad de `TRUE`s en `x`, y `mean(x)` te da la proporción.
    
@@ -734,7 +734,7 @@ diario %>%
 
 1.   Haz una lluvia de ideas de al menos 5 formas diferentes de evaluar las características de un retraso típico de un grupo de vuelos. Considera los siguientes escenarios:
  
-    * Un vuelo llega 15 minutos antes 50% del tiempo, y 15 minutos tarde 50% de el tiempo.
+    * Un vuelo llega 15 minutos antes 50% del tiempo, y 15 minutos tarde 50% del tiempo.
 
     * Un vuelo llega siempre 10 minutos tarde.
 
@@ -751,7 +751,7 @@ diario %>%
 
 4. Mira la cantidad de vuelos cancelados por día. ¿Hay un patrón? ¿La proporción de vuelos cancelados está relacionada con el retraso promedio?
 
-5. ¿Qué compañía tiene los peores retrasos? Desafío: ¿puedes desenredar el efecto de malos aeropuertos vs. el efecto de malos transportistas? ¿Por qué o por qué no? (Sugerencia: piensa en `vuelos %>% group_by(aerolinea, destino) %>% summarise(n())`)
+5. ¿Qué compañía tiene los peores retrasos? Desafío: ¿puedes desenredar el efecto de malos aeropuertos vs. el efecto de malas aerolíneas? ¿Por qué o por qué no? (Sugerencia: piensa en `vuelos %>% group_by(aerolinea, destino) %>% summarise(n())`)
 
 6. ¿Qué hace el argumento `sort` a `count()`. ¿Cuándo podrías usarlo?
 
@@ -787,7 +787,7 @@ popular_destinos %>%
 
 Un filtro agrupado es una transformación agrupada seguida de un filtro desagrupado. En general, los evito, excepto para las manipulaciones rápidas y sucias: de lo contrario, es difícil comprobar que has hecho la manipulación correctamente.
 
-Las funciones que trabajan de forma más natural en transformaciones y filtros agrupados se conocen como funciones de ventana (frente a las funciones de resumen utilizadas para los resúmenes). Puedes obtener más información sobre las funciones de ventana útiles en la viñeta correspondiente: `vignette("window-functions")`.
+Las funciones que trabajan de forma más natural en transformaciones agrupadas y filtros se conocen como funciones de ventana (frente a las funciones de resumen utilizadas para los resúmenes). Puedes obtener más información sobre las funciones de ventana útiles en la viñeta correspondiente: `vignette("window-functions")`.
 
 ### Ejercicios
 
@@ -803,6 +803,6 @@ Las funciones que trabajan de forma más natural en transformaciones y filtros a
 
 6. Mira cada destino. ¿Puedes encontrar vuelos sospechosamente rápidos? (es decir, vuelos que representan un posible error de entrada de datos). Calcula el tiempo en el aire de un vuelo relativo al vuelo más corto a ese destino. ¿Cuáles vuelos se retrasaron más en el aire?
 
-7. Encuentra todos los destinos que son volados por al menos dos operadores. Usa esta información para clasificar a los transportistas.
+7. Encuentra todos los destinos que son volados por al menos dos operadores. Usa esta información para clasificar a las aerolíneas.
 
 8. Para cada avión, cuenta el número de vuelos antes del primer retraso de más de 1 hora.
