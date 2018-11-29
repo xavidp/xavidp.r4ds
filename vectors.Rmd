@@ -26,7 +26,7 @@ La diferencia principal entre vectores atómicos y listas es que los vectores at
 
 
 ```{r datatypes, echo = FALSE, out.width = "50%", fig.cap = "The hierarchy of R's vector types"}
-knitr::include_graphics("diagrams/data-structures-overview.png")
+knitr::include_graphics("diagrams/data-structures-overview.svg")
 ```
 
 Cada vector tiene dos propiedades claves: 
@@ -34,15 +34,15 @@ Cada vector tiene dos propiedades claves:
 1.  Su tipo (__type__), el cual puedes determinarlo con la sentencia typeof() (del inglés tipode).
 
     ```{r}
-    typeof(letters)
-    typeof(1:10)
+typeof(letters)
+typeof(1:10)
     ```
 
 1. Su longitud (__length__), la cual puedes determinarla con la sentencia length() (del ingés longitud).
 
     ```{r}
-    x <- list("a", "b", 1:10)
-    length(x)
+x <- list("a", "b", 1:10)
+length(x)
     ```
 
 Los vectores pueden contener también arbitrariamente metadata adicional en forma de atributos. Estos atributos son usados para crear vectores aumentados los cuales implican un comportamiento distinto. Existen tres tipos de vectores aumentados:
@@ -79,9 +79,9 @@ La distinción entre enteros y reales no es realmente importante aunque existen 
 
 
     ```{r}
-    x <- sqrt(2) ^ 2
-    x
-    x - 2
+x <- sqrt(2)^2
+x
+x - 2
     ```
 
 Este compartamiento es común cuando trabajas con números de punto flotante: la mayoría de los cálculos incluyen algunos errores de aproximación. En lugar de comparar números de punto flotante usando `==`, debes usar ´dplyr::near()`, el cual provee tolerancia numérica.
@@ -89,8 +89,6 @@ Este compartamiento es común cuando trabajas con números de punto flotante: la
 1.  Los números reales tienen cuatro tipos de valores posibles: NA, NaN, Inf and –Inf. Estos tres valores especiales NaN, Inf and -Inf pueden surgir a partir de la división de
 c(-1, 0, 1) / 0
 Evita usar ==  para chequear estos valores especiales. En su lugar usa la funciones de ayuda is.finite(), is.infinite(), y is.nan():
-
-
     
     |                  |  0  | Inf | NA  | NaN |
     |------------------|-----|-----|-----|-----|
@@ -255,7 +253,6 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una TIBBLE. La s
     ```{r}
     x <- c"uno", "dos", "tres", "cuatro", "cinco")
     x[c(3, 2, 5)]
-    x[c(3, 2, 5)]
     ```
     
      Repitiendo una posición, puedes en realidad generar un output de mayor longitud que el input::
@@ -270,12 +267,11 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una TIBBLE. La s
     ``` 
    Es un error mezclar valores positivos y negativos:
     
-    
     ```{r, error = TRUE}
     x[c(1, -1)]
     ```
 
-  El mensaje menciona subdivisiones utilizando cero, lo cual no returna valores.
+   El mensaje menciona subdivisiones utilizando cero, lo cual no returna valores.
     
     ```{r}
     x[0]
@@ -356,7 +352,7 @@ x3 <- list(1, list(2, list(3)))
 ```
 Y a continuación, las grafico:
 ```{r, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("diagrams/lists-structure.png")
+knitr::include_graphics("diagrams/lists-structure.svg")
 ```
 Existen tres principios, al momento de observer el gráfico anterior:
 1.	Las listas tienen esquinas redondeadas, en cambio, los vectores atómicos tienen esquinas cuadradas.
@@ -396,7 +392,6 @@ knitr::include_graphics("diagrams/lists-subsetting.png")
 
 ## Listas de Condimentos
 La diferencia entre ambos `[` y `[[` es muy importante, pero es muy fácil confundirlos. Para ayudarte a recordar, permiteme mostrarte un pimientero inusual
-
 
 ```{r, echo = FALSE, out.width = "25%"} 
 knitr::include_graphics("images/pepper.jpg")
