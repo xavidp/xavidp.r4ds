@@ -99,14 +99,14 @@ filter(vuelos, mes = 1)
 Hay otro problema común que puedes encontrar al usar `==`: números de coma flotante. ¡Estos resultados pueden sorprenderte!
 
 ```{r}
-sqrt(2) ^ 2 == 2
+sqrt(2)^2 == 2
 1 / 49 * 49 == 1
 ```
 
 Las computadoras usan aritmética de precisión finita (obviamente no pueden almacenar una cantidad infinita de dígitos), así que recuerda que cada número que ves es una aproximación. En lugar de confiar en `==`, usa `near()` (cercano, en inglés):
 
 ```{r}
-near(sqrt(2) ^ 2,  2)
+near(sqrt(2)^2, 2)
 near(1 / 49 * 49, 1)
 ```
 
@@ -114,8 +114,8 @@ near(1 / 49 * 49, 1)
 
 Múltiples argumentos para `filter()` se combinan con "y": cada expresión debe ser verdadera para que una fila se incluya en el *output*. Para otros tipos de combinaciones, necesitarás usar operadores Booleanos: `&` es "y", `|` es "o", y `!` es "no". La figura @ref(fig:bool-ops) muestra el conjunto completo de operaciones Booleanas.
 
-```{r bool-ops, echo = FALSE, fig.cap = "Conjunto completo de operaciones Booleanas. `x` es el círculo de la izquierda, `y` es el círculo de la derecha, y la región sombreada muestra qué partes selecciona cada operador."}
-knitr::include_graphics("diagrams/transform-logical.png")
+```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."}
+knitr::include_graphics("diagrams/transform-logical.svg")
 ```
 
 El siguiente código encuentra todos los vuelos que partieron en noviembre o diciembre:
@@ -350,7 +350,7 @@ Hay muchas funciones para crear nuevas variables que puedes usar con `mutate()`.
     
     Los operadores aritméticos también son útiles junto con las funciones de agregar que aprenderás más adelante. Por ejemplo, `x / sum(x)` calcula la proporción de un total, y `y - mean(y)` calcula la diferencia de la media.
     
-* Aritmética modular: `%/%` (división entera) y `%%` (resto), donde `x == y * (x %/% y) + (x %% y)`. La aritmética modular es una herramienta útil porque te permite dividir enteros en partes. Por ejemplo, en el conjunto de datos de vuelos, puedes calcular `hora` y` minutos` de `horario_salida` con:
+*   Aritmética modular: `%/%` (división entera) y `%%` (resto), donde `x == y * (x %/% y) + (x %% y)`. La aritmética modular es una herramienta útil porque te permite dividir enteros en partes. Por ejemplo, en el conjunto de datos de vuelos, puedes calcular `hora` y` minutos` de `horario_salida` con:
 
 ```{r}
 transmute(vuelos,
@@ -596,8 +596,8 @@ bateadores <- bateo %>%
 bateadores %>% 
   filter(ab > 100) %>% 
   ggplot(mapping = aes(x = ab, y = ba)) +
-    geom_point() + 
-    geom_smooth(se = FALSE)
+  geom_point() +
+  geom_smooth(se = FALSE)
 ```
 
 Esto también tiene implicaciones importantes para la clasificación. Si ingenuamente ordenas `desc(ba)`, verás que las personas con los mejores promedios de bateo tienen claramente mucha suerte, pero no son necesariamente habilidosos:
@@ -613,7 +613,7 @@ Puedes encontrar una buena explicación de este problema en <http://varianceexpl
 
 Solo el uso de medias, conteos y sumas puede llevarte muy lejos, pero R proporciona muchas otras funciones de resumen útiles:
 
-  *  Medidas de centralidad: hemos usado `mean(x)`, pero `median(x)` también resulta muy útil. La media es la suma dividida por el número de observaciones; la mediana es un valor donde el 50% de `x` está por encima de él, y el 50% está por debajo. A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [subsetting].
+*  Medidas de centralidad: hemos usado `mean(x)`, pero `median(x)` también resulta muy útil. La media es la suma dividida por el número de observaciones; la mediana es un valor donde el 50% de `x` está por encima de él, y el 50% está por debajo. A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [subsetting].
     
 ```{r}
 no_cancelados %>% 
@@ -667,7 +667,7 @@ no_cancelados %>%
 ```
 
 * Conteos: has visto `n()`, que no toma argumentos, y devuelve el tamaño del grupo actual. Para contar la cantidad de valores no faltantes, usa `sum(!is.na (x))`. Para contar la cantidad de valores distintos (únicos), usa `n_distinct(x)`.
-    
+
 ```{r}
 # ¿Qué destinos tienen la mayoría de las aerolíneas?
 no_cancelados %>% 
