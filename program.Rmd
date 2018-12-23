@@ -16,11 +16,11 @@ En los próximos cuatro capítulos, aprenderás habilidades que te permitirán a
 
 1.  En [_pipes_], navegarás dentro del __pipe__, `%>%`, y aprenderás más sobre cómo trabaja, qué alternativas existen y cuándo no conviene usarlo.
 
-2.	Copiar y pegar (_copy-and-paste_) es muy práctico, pero deberías evitar usarlo más de dos veces. Repetir el código dentro de un programa es peligroso porque puede llevar a errores e inconsistencias. Por eso, en [funciones], aprenderás a escribir __funciones__ que permiten extraer código repertido y convertirlo en código fácilmente reutilizable.
+2.  Copiar y pegar (_copy-and-paste_) es muy práctico, pero deberías evitar usarlo más de dos veces. Repetir el código dentro de un programa es peligroso porque puede llevar a errores e inconsistencias. Por eso, en [funciones], aprenderás a escribir __funciones__ que permiten extraer código repertido y convertirlo en código fácilmente reutilizable.
 
-3.	A medida que comiences a escribir funciones más potentes, necesitarás una base sólida en las __estructuras de datos__ de R, que te proporcionará [vectores]. Deberás dominar los cuatro tipos de vectores atómicos clásicos, también las tres clases S3 construídas sobre ellos, y entender los misterios de las listas y los _data frame_. 
+3.  A medida que comiences a escribir funciones más potentes, necesitarás una base sólida en las __estructuras de datos__ de R, que te proporcionará [vectores]. Deberás dominar los cuatro tipos de vectores atómicos clásicos, también las tres clases S3 construídas sobre ellos, y entender los misterios de las listas y los _data frame_. 
 
-4. 	Las funciones previenen que repitamos código, pero muchas veces necesitas repertir las mismas acciones con diferentes entradas. Necesitas, entonces, herramientas de __iteración__ que te permitan hacer cosas similares una y otra vez. Estas herramientas incluyen ciclos (_loops_) y programación funcional que aprenderás en [iteración].
+4.  Las funciones previenen que repitamos código, pero muchas veces necesitas repertir las mismas acciones con diferentes entradas. Necesitas, entonces, herramientas de __iteración__ que te permitan hacer cosas similares una y otra vez. Estas herramientas incluyen ciclos (_loops_) y programación funcional que aprenderás en [iteración].
 
 ## Aprendiendo más
 
