@@ -49,7 +49,7 @@ Los vectores pueden contener también arbitrariamente metadata adicional en form
 	Los factores (factors) construidos a partir de vectores de enteros.
 	Las fechas y fechas-tiempo (date-time) construidos a partir de vectores numéricos.
 	Los Dataframes y tibbles construidos a partir de listas.
-Este capítulo te introducirá a lo temas más importantes de vectores, desde lo más simple a lo más complicado. Comenzarás con vectores atómicos, luego seguirás con listas, y finalizarás con vectores aumentados.
+Este capítulo te introducirá a los temas más importantes de vectores, desde lo más simple a lo más complicado. Comenzarás con vectores atómicos, luego seguirás con listas, y finalizarás con vectores aumentados.
 
 ## Tipos importantes de vectores atómicos 
 
@@ -132,7 +132,7 @@ Normalmente no necesitas saber sobre los diferentes tipos porque puedes siempre 
 
 1. Describe la diferencia entre `is.finite(x)`  y `!is.infinite(x)`.
 1. Lee el código fuente de `dplyr:: near()` (Consejo: para ver el código fuente, no escribas lo siguiente `()`) ¿Funcionó?
-1. Un vector de tipo lógico puede tomar 3 valores posibles. ¿Cuántos valores posibles puede tomar un vector de tipo entero? ¿Cuántos valores posibles puede tomar un vector de tipo real? Usa google para realizar buscar información respecto a lo planteado anteriormente.
+1. Un vector de tipo lógico puede tomar 3 valores posibles. ¿Cuántos valores posibles puede tomar un vector de tipo entero? ¿Cuántos valores posibles puede tomar un vector de tipo real? Usa google para buscar información respecto a lo planteado anteriormente.
 1. Idea al menos 4 funciones que te permitan convertir un vector del tipo real a entero. ¿En qué difieren las funciones? Sé preciso.
 1. ¿Cuáles funciones del paquete readr te permiten convertir un vector del tipo string en un vector del tipo lógico, entero y doble?
 
@@ -274,7 +274,7 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una tibble. La s
     x[c(1, -1)]
     ```
 
-    El mensaje menciona subdivisiones utilizando cero, lo cual no returna valores.
+    El mensaje menciona subdivisiones utilizando cero, lo cual no retorna valores.
     
     ```{r}
     x[0]
@@ -468,7 +468,7 @@ Los vectores atómicos y las listas son los bloques sobre los que se construyen 
 •	Los Tibbles
 Estos son descriptos a continuación:
 Factores
-Los factores son diseñados para representar datos categoricos que pueden tomar un set fijo de valores posibles, son construidos sobre los enteros, y tienen 
+Los factores están diseñados para representar datos categóricos que pueden tomar un set fijo de valores posibles. Estos están construidos en base a enteros, y tienen un atributo por cada nivel:
 ```{r}
 x <- factor(c("ab", "cd", "ab"), levels = c("ab", "cd", "ef"))
 typeof(x)
@@ -500,14 +500,14 @@ x
 attr(x, "tzone") <- "US/ Oriental"
 x
 ```
-Existe otro tipo de vector date-time llamado POSIXlt. Éstos son construidos en  base a listas con nombres (named lists).
+Existe otro tipo de vector date-time llamado POSIXlt. Éstos son construidos en base a listas con nombres (named lists).
 ```{r}
 y <- as.POSIXlt(x)
 typeof(y)
 attributes(y)
 ```
 
-Los vectores POSIXlts son pocos comunes dentro del paquete tidyverse. Surgen en base a R, porque son necesarios para extraer components específicos de una fecha, como el año o el mes. Desde que el paquete lubridate te provee helpers para efectuar dicha extracción, los vectores POSIXlts no son necesarios. Siempre es más sencillo trabajar con loa vectores POSIXct's, por lo tanto si tenés  un vector POSIXlt, deberías convertirlo a un vector regular del tipo data-time con `lubridate::as_date_time()`.
+Los vectores POSIXlts son pocos comunes dentro del paquete tidyverse. Surgen en base a R, porque son necesarios para extraer components específicos de una fecha, como el año o el mes. Desde que el paquete lubridate te provee helpers para efectuar dicha extracción, los vectores POSIXlts no son necesarios. Siempre es más sencillo trabajar con los vectores POSIXct's, por lo tanto, si tienes un vector POSIXlt, deberías convertirlo a un vector regular del tipo data-time con `lubridate::as_date_time()`.
 
 ### Tibbles 
 Los Tibbles son listas aumentadas: los cuales tienen las clases "tbl_df", "tbl" y  "data.frame", y los atributos `names` (para nombrar una columna) y `row.names` (para nombrar una fila):
