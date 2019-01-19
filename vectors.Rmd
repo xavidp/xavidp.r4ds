@@ -2,61 +2,61 @@
 
 ## Introducción
 
-Hasta ahora este libro se ha enfocado en tibbles y sus paquetes correspondientes. Pero como empezaste a escribir tus propias funciones, y a profundizar en R, es que necesitas aprender sobre vectores, es decir, sobre los objetos que soportan los tibbles. Si has aprendido R en una forma más tradicional, probablemente estás familiarizado con vectores, ya la mayoría de los recursos de R comienzan con vectores y dirijen su desarrollo hacia las tibbles. Por esto, es mejor empezar con tibbles ya que de inmediato puedes ver su utilidad, y luego trabajar a tu manera con los componentes que están debajo, los vectores.
+Hasta ahora este libro se ha enfocado en tibbles y sus paquetes correspondientes. Pero como empezaste a escribir tus propias funciones, y a profundizar en R, es que necesitas aprender sobre vectores, es decir, sobre los objetos que soportan los tibbles. Por esto, es mejor empezar con tibbles ya que inmediatamente puedes ver su utilidad, y luego trabajar a tu manera con los componentes que están debajo, los vectores.
 Los vectores son particularmente importantes, al igual que la mayoría de las funciones que escribirás y utilizarás con dichos vectores. Es posible desarrollar funciones que trabajen con tibbles (como ggplot2, dplyr and tidyr) pero las herramientas que necesitas para ello son peculiares e inmaduras. Por esto, estoy desarrollando un mejor enfoque, el cual puedes consultar en https://github.com/hadley/lazyeval, pero este no estará listo a tiempo para la publicación del libro. Incluso aún cuando esté completo, de todas maneras necesitarás entender el concepto de vectores, esto solo facilitará la escritura de capas finales que sean user-friendly (amigables al usuario).
 
 
-### Pre-requisitos
+## Pre-requisitos
 
-Este capítulo se enfoca en las estructuras de datos de R base, por lo que no es esencial cargar ningún paquete. Sin embargo, usaremos un conjunto de funciones del paquete purrr para evitar algunas inconsistencias en R Base.
+Este capítulo se enfoca en las estructuras de datos de R base, por lo que no es esencial cargar ningún paquete. Sin embargo, usaremos un conjunto de funciones del paquete purrr para evitar algunas insonsistencias en R Base.
 
 ```{r setup, message = FALSE}
 library(tidyverse)
 ```
 
-## Introducción a vectores
+## Vectores básicos
 
 There are two types of vectors:
 
 1. _Hay dos tipos de vectores:
 1.	Vectores atómicos, de los cuales existen seis tipos: lógico o booleano, entero, doble o real, caracter, complejo y raw (que consisten en datos sin procesar). Los vectores de tipo  entero y doble son ampliamente conocidos como vectores númericos.
-1.	Las listas, las cuales son denominadas en ciertas ocasiones como vectores recursivos debido a que pueden contener otras listas.. 
+2.	Las listas, las cuales son denominadas en ciertas ocasiones como vectores recursivos debido a que pueden contener otras listas.. 
 
 La diferencia principal entre vectores atómicos y listas es que los vectores atomicos son homogéneos, mientras las listas pueden ser heterogéneas. Existe, otro objeto relacionado: Null (nulo). El nulo es a menudo usado para representar la ausencia de un vector (como el opuesto a NA el cual es usado para representar la ausencia de un valor en un vector.) Null típicamente se comporta como un vector de longitud cero 0. Figura @ref (fig:datatypes) resume las interrelaciones.
 
 
 ```{r datatypes, echo = FALSE, out.width = "50%", fig.cap = "The hierarchy of R's vector types"}
-knitr::include_graphics("diagrams/data-structures-overview.svg")
+knitr::include_graphics("diagrams/data-structures-overview.png")
 ```
 
 Cada vector tiene dos propiedades claves: 
 
 1.  Su tipo (__type__), el cual puedes determinarlo con la sentencia typeof() (del inglés tipode).
 
-```{r}
-typeof(letters)
-typeof(1:10)
-```
+    ```{r}
+    typeof(letters)
+    typeof(1:10)
+    ```
 
-1. Su longitud (__length__), la cual puedes determinarla con la sentencia length() (del inglés longitud).
+1. Su longitud (__length__), la cual puedes determinarla con la sentencia length() (del ingés longitud).
 
- ```{r}
-x <- list("a", "b", 1:10)
-length(x)
- ```
+    ```{r}
+    x <- list("a", "b", 1:10)
+    length(x)
+    ```
 
 Los vectores pueden contener también arbitrariamente metadata adicional en forma de atributos. Estos atributos son usados para crear vectores aumentados los cuales implican un comportamiento distinto. Existen tres tipos de vectores aumentados:
 	Los factores (factors) construidos a partir de vectores de enteros.
 	Las fechas y fechas-tiempo (date-time) construidos a partir de vectores numéricos.
 	Los Dataframes y tibbles construidos a partir de listas.
-Este capítulo te introducirá a los temas más importantes de vectores, desde lo más simple a lo más complicado. Comenzarás con vectores atómicos, luego seguirás con listas, y finalizarás con vectores aumentados.
+Este capítulo te introducirá a lo temas más importantes de vectores, desde lo más simple a lo más complicado. Comenzarás con vectores atómicos, luego seguirás con listas, y finalizarás con vectores aumentados.
 
 ## Tipos importantes de vectores atómicos 
 
 Los cuatro tipos más importantes de vectores atómicos son lógico, entero,  real y carácter. Los tipos raw y complejo son raramente usados durante el análisis de datos, por lo tanto no discutiremos sobre ellos aquí.
 
 ### Lógico o Booleano
-Los vectores de tipo lógico o booleano son el tipo más sencillo de vectores atómicos porque ellos solo pueden tomar tres valores posibles: falso (FALSE), verdadero (TRUE) y Na (NA). Los vectores lógicos son construidos usualmente con operadores de comparación, como se describe en [comparaciones]. También puedes crearlos manualmente con la función c():
+Los vectores de tipo lógico o booleano son el tipo más sencillo de vectores atómicos porque ellos solo pueden tomar tres valores posibles: falso, verdadero y Na. Los vectores lógicos son construidos usualmente con operadores de comparación, como se describe en [comparaciones]. También puedes crearlos manualmente con la función c ():
 
 ```{r}
 1:10 %% 3 == 0
@@ -78,20 +78,19 @@ La distinción entre enteros y reales no es realmente importante aunque existen 
 1.	Los números dobles o reales son aproximaciones. Los mismos representan números de punto flotante que no pueden ser precisamente representados con un monto fijo de memoria. Esto significa que debes considerar que todos los reales sean aproximaciones. Por ejemplo, ¿cuál es el cuadrado de la raíz cuadrada de dos?
 
 
-```{r}
-x <- sqrt(2)^2
-x
-x - 2
-```
+    ```{r}
+    x <- sqrt(2) ^ 2
+    x
+    x - 2
+    ```
 
-Este comportamiento es común cuando trabajas con números de punto flotante: la mayoría de los cálculos incluyen algunos errores de aproximación. En lugar de comparar números de punto flotante usando `==`, debes usar `dplyr::near()`, el cual provee tolerancia numérica.
+Este compartamiento es común cuando trabajas con números de punto flotante: la mayoría de los cálculos incluyen algunos errores de aproximación. En lugar de comparar números de punto flotante usando `==`, debes usar ´dplyr::near()`, el cual provee tolerancia numérica.
 
-1.  Los enteros sólo tienen un valor especial:`NA`, mientras que los números reales tienen cuatro tipos de valores posibles: `NA`, `NaN`, `Inf` and `–Inf`. Estos tres valores especiales `NaN`, `Inf` and `-Inf` pueden surgir a partir de la división de:
-
-```{r}
+1.  Los números reales tienen cuatro tipos de valores posibles: NA, NaN, Inf and –Inf. Estos tres valores especiales NaN, Inf and -Inf pueden surgir a partir de la división de
 c(-1, 0, 1) / 0
-```
 Evita usar ==  para chequear estos valores especiales. En su lugar usa la funciones de ayuda is.finite(), is.infinite(), y is.nan():
+
+
     
     |                  |  0  | Inf | NA  | NaN |
     |------------------|-----|-----|-----|-----|
@@ -128,11 +127,11 @@ NA_character_ # caracter
 
 Normalmente no necesitas saber sobre los diferentes tipos porque puedes siempre usar el valor NA (not Available), es decir el valor faltante, y se convertirá al tipo correcto usando las reglas de la coerción implícitas. Sin embargo, existen algunas funciones que son estrictas acerca de sus inputs, por lo tanto es útil tener presente este conocimiento así puedes  ser especifico cuando lo necesites.
 
-### Ejercicios
+###Ejercicios
 
 1. Describe la diferencia entre `is.finite(x)`  y `!is.infinite(x)`.
-1. Lee el código fuente de `dplyr:: near()` (Consejo: para ver el código fuente, no escribas lo siguiente `()`) ¿Funcionó?
-1. Un vector de tipo lógico puede tomar 3 valores posibles. ¿Cuántos valores posibles puede tomar un vector de tipo entero? ¿Cuántos valores posibles puede tomar un vector de tipo real? Usa google para buscar información respecto a lo planteado anteriormente.
+1. Lee el código fuente de `dplyr:: near()` (Consejo: para ver el código fuente, escribe lo siguiente `()`) ¿Funcionó?
+1. Un vector de tipo lógico puede tomar 3 valores posibles. ¿Cuántos valores posibles puede tomar un vector de tipo entero? ¿Cuántos valores posibles puede tomar un vector de tipo real? Usa google para realizar buscar información respecto a lo planteado anteriormente.
 1. Idea al menos 4 funciones que te permitan convertir un vector del tipo real a entero. ¿En qué difieren las funciones? Sé preciso.
 1. ¿Cuáles funciones del paquete readr te permiten convertir un vector del tipo string en un vector del tipo lógico, entero y doble?
 
@@ -152,14 +151,14 @@ Existen dos maneras de convertir, o coercer, un tipo de vector a otro:
 
 1. La Coerción implícita sucede cuando usas un vector en un contexto especifico del cual se espera un cierto tipo de vector. Por ejemplo, cuando usas un vector del tipo lógico con la función numérica 'summary' (del inglés resumen), o cuando usas un vector del tipo doble donde se espera un vector del tipo entero.
 Porque la coerción explicita es usada raramente, y es ampliamente fácil de entender, enfocaré sobre la coerción implicita aquí.
-Anteriormente vimos el tipo más importante de coerción implicita: usando un vector de tipo lógico en un contexto numérico. En ese caso, el valor `TRUE` ('VERDADERO') es convertido a `1` y `FALSE` ('FALSO') convertido a 0. Esto significa que la suma de un vector de tipo lógico es el número de los valores verdaderos, y el significado de un vector de tipo lógico es la proporción de valores verdaderos:
+Anteriormente vimos el tipo más importante de coerción implicita: usando un vector de tipo lógico en un contexto numérico. En ese caso, el valor `TRUE` ('VERDADERO') es convertido a `1` y 'FALSE' ('FALSO') convertido a 0. Esto significa que la suma de un vector de tipo lógico es el número de los valores verdaderos, y el significado de un vector de tipo lógico es la proporción de valores verdaderos:
 
     
 ```{r}
 x <- sample(20, 100, replace = TRUE)
 y <- x > 10
-sum(y)  #¿cuántos valores son más grandes que 10?
-mean(y) ) #? ¿cuál es la porporción de valores que son mayores que 10?
+sum(y)  # ¿cuántos valores son más grandes que 10?
+mean(y) # ¿cuál es la porporción de valores que son mayores que 10?
 ```
 
 Quizás veas algún código (tipicamente más antiguo) basado en la coerción implicita pero en la dirección opuesta, es decir, de un valor entero a uno lógico
@@ -170,7 +169,7 @@ if (length(x)) {
 }
 ```
 
-En este caso, 0 es convertido a `FALSE` y todo lo demás es convertido a `TRUE`. Pienso que esto hace más dificil entender el código, por lo que no lo recomiendo. En su lugar, de ser explicito, sugiero utilizar: `length(x) > 0`.
+En este caso, 0 es convertido a `FALSO` y todo lo demás es convertido a `VERDADERO`. Pienso que esto hace más dificil entender el código, por lo que no lo recomiendo. En su lugar, de ser explicito, sugiero utilizar: `length(x) > 0`.
 
 Es también importante entender que pasa cuando creas un vector que contiene múltiples tipos con `c()`: los tipos más complejos siempre ganan.
 
@@ -184,7 +183,7 @@ Un vector atómico no puede contener un mix de diferentes tipos porque el tipo e
 
 ### Funciones de test
 
-Algunas veces quieres hacer las cosas de una manera diferente basadas en el tipo de vector. Una  de las opciones es el uso de la sentencia `typeof()`. Otra es usar una función test la cual devuelva un valor `TRUE` o `FALSE` . R base provee varias funciones como `is.vector()` y `is.atomic()`, pero estas a menudo devuelven resultados inesperados. En su lugar, es más acertado usar las funciones `is_*` provistas por el paquete purrr, las cual están resumidas en la tabla que se muestra a continuación.
+Algunas veces quieres hacer las cosas de una manera diferente basadas en el tipo de vector. Una  de las opciones es el uso de la sentencia `typeof()`. Otra es usar una función test la cual devuelva un valor `TRUE` o 'FALSO' . R base provee varias funciones como `is.vector()` y `is.atomic()`, pero estas a menudo devuelven resultados inesperados. En su lugar, es más acertado usar las funciones `is_*` provistas por el paquete purrr, las cual están resumidas en la tabla que se muestra a continuación.
 
 |                  | lgl | int | dbl | chr | list |
 |------------------|-----|-----|-----|-----|------|
@@ -199,13 +198,13 @@ Algunas veces quieres hacer las cosas de una manera diferente basadas en el tipo
 
 Cada predicado además viene con una version para "escalares", donde la función `is_scalar_atomic()`, chequea que la longitud sea 1. Esto es útil, por ejemplo, si quieres chequear en algún argumento que tu función sea un solo valor lógico.
 
-###Escalares y reglas de reciclado 
+### Escalares y reglas de reciclado 
 
 Así como implicitamente se coercionan los tipos de vectores que son compatibles, R también implicitamente coerciona la longitud de los vectores. Esto se denomina vector __recycling__, o reciclado de vectores, debido a que el vector de menor longitud se repite, o recicla, hasta igualar la longitud del vector de mayor longitud.
 Esto es generalmente lo más útil cuando estás trabajando con vectores y "escalares". Los escalares están puestos en notas porque R en realidad no tiene definido los escalares: en su lugar, un solo número conforma un vector de longitud 1. Debido a que no existen los escalares, la mayoría de las funciones están construidas como vectorizadas, esto significa que operan sobre un vector del tipo númerico. Esto es así porque, por ejemplo, este código funciona:
 
 ```{r}
-sample(10) + 100 #(del inglés muestreo)
+sample(10) + 100 # (del inglés muestreo)
 runif(10) > 0.5
 ```
 En R, las operaciones matemáticas básicas funcionan con vectores. Lo que significa que no necesitarás la ejecución de una interación explicita cuando realices  cálculos matemáticos sencillos.
@@ -245,42 +244,42 @@ Los vectores con nombres son más útiles para subconjuntos, como se describe a 
 
 ### Subsetting (Subdivisión o creación de subconjuntos) {#vector-subsetting, subdivisión de vectores}
 
-Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una tibble. La sentencia `filter()` sólo funciona con TIBBLES, por lo que necesitaremos una nueva herramienta para trabajar con vectores: `[`. `[` representa a la función Subdivisión (Subsetting), la cual nos permite crear subconjuntos o subdivisiones a partir de vectores, y se indica como `x[a]`. Existen cuatro tipos de cosas en las que puedes subdividir un vector:
+Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una TIBBLE. La sentencia `filter()` sólo funciona con TIBBLES, por lo que necesitaremos una nueva herramienta para trabajar con vectores: `[`. `[` representa a la función Subdivisión (Subsetting), la cual nos permite crear subconjuntos o subdivisiones a partir de vectores, y se indica como `x[a]`. Existen cuatro tipos de cosas en las que puedes subdividir un vector:
 
 1.  Un vector numérico contiene sólo enteros. Los enteros deben ser todos positivos, todos negativos, o cero. 
 
     La Subdivisión con enteros positivos mantiene los elementos en aquellas posiciones:
 
     ```{r}
-    
-    ```{r}
-    x <- c"uno", "dos", "tres", "cuatro", "cinco")
+    x <- c("uno", "dos", "tres", "cuatro", "cinco")
+    x[c(3, 2, 5)]
     x[c(3, 2, 5)]
     ```
     
-    Repitiendo una posición, puedes en realidad generar un output de mayor longitud que el input::
+     Repitiendo una posición, puedes en realidad generar un output de mayor longitud que el input::
     
     ```{r}
     x[c(1, 1, 5, 5, 5, 2)]
     ```
-    Los valores negativos eliminan elementos en posiciones especificas: 
+   Los valores negativos eliminan elementos en posiciones especificas: 
     
     ```{r}
     x[c(-1, -3, -5)]
     ``` 
-    Es un error mezclar valores positivos y negativos:
+   Es un error mezclar valores positivos y negativos:
+    
     
     ```{r, error = TRUE}
     x[c(1, -1)]
     ```
 
-    El mensaje menciona subdivisiones utilizando cero, lo cual no retorna valores.
+  El mensaje menciona subdivisiones utilizando cero, lo cual no returna valores.
     
     ```{r}
     x[0]
     ```
     
-    Esto a menudo no es útil, pero puede ser de ayuda si quieres crear estructuras de datos inusuales para testear tus funciones. 
+     Esto a menudo no es útil, pero puede ser de ayuda si quieres crear estructuras de datos inusuales para testear tus funciones. 
 
  
 1. La subdivisión de un vector lógico mantiene/almacena todos los valores correspondientes al valor `TRUE` `VERDADERO`. Esto es a menudo mayormente útil en conjunto con las funciones de comparación.
@@ -294,7 +293,7 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una tibble. La s
     # Todos, incluso los  valores (missing) de x 
     x[x %% 2 == 0]
     ```
-1. Si tienes un vector con nombre, puedes subdivirlo en un vector de tipo caracter.
+1.   Si tienes un vector con nombre, puedes subdivirlo en un vector de tipo caracter.
      
     ```{r}
     x <- c(abc = 1, def = 2, xyz = 5)
@@ -304,9 +303,9 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una tibble. La s
     
 1.  El tipo más sencillo de subsetting es el valor vacío, `x[]`, el cual retorna el valor completo de `x`. Esto no es útil para vectores subdivididos, aunque si lo es para matrices subdivididas(y otras estructuras de grandes dimensiones) ya que te permite seleccionar toda las filas o todas las columnas, dejando el indice en blanco. Por ejemplo, si `x` está en la segunda posición, `x[1, ]` selecciona la primera fila y todas las columnas, y la expresión `x[, -1]` selecciona todas las filas y todas las columnas excepto la primera.
 
-Para aprender más acerca de las aplicaciones de subsetting, puedes leer el capítulo de Subsetting de R Avanzado: <http://adv-r.had.co.nz/Subsetting.html#applications>.
+ Para aprender más acerca de las aplicaciones de subsetting, puedes leer el capítulo de Subsetting de R Avanzado: <http://adv-r.had.co.nz/Subsetting.html#applications>.
     
-Existe una importante variación de `[`, la cual consiste en `[[`. Esta expresión `[[` sólo extrae un único elemento, y siempre omite nombres. Es una buena idea usarla siempre que quieras dejar en claro que estás extrayendo un único item, como en un bucle for. La diferencia entre `[` y`[[` es más importante para las listas (lists), como veremos en breve.
+    Existe una importante variación de `[`, la cual consiste en `[[`. Esta expresión `[[` sólo extrae un único elemento, y siempre omite nombres. Es una buena idea usarla siempre que quieras dejar en claro que estás extrayendo un único item, como en un bucle for. La diferencia entre `[` y`[[` es más importante para las listas (lists), como veremos en breve.
 
 ### Ejercicios
 
@@ -327,7 +326,7 @@ Existe una importante variación de `[`, la cual consiste en `[[`. Esta expresi�
 ## Vectores Recursivos (listas) 
 Las listas son un escalon más en complejidad partiendo de los vectores atómicos, debido a que las listas pueden contener otras listas. Lo cual las hace adecuadas para representar una estructura jerárquica o de tipo árbol. Puedes crear una lista con ´list()´:
 
-x <- list(1, 2, 3) #(del inglés lista)
+x <- list(1, 2, 3) (del inglés lista)
 x
 Un herramienta muy útil para trabajar con listas es ´str()´ ya que se enfoca en la estructura, no en los contenidos. 
 ```{r}
@@ -336,17 +335,19 @@ str(x)
 x_nombrada <- list(a = 1, b = 2, c = 3)
 str(x_nombrada)
 ```
-A diferencia de los vectores atómicos, el objeto `list()` puede contener una variedad de diferentes objetos:
 
+A diferencia de los vectores atómicos, el objeto ´list()´ puede contener una variedad de diferentes objetos:
 ```{r}
 y <- list("a", 1L, 1.5, TRUE)
 str(y)
 ```
+
 ¡Incluso las listas pueden contener otras listas!
 ```{r}
 z <- list(list(1, 2), list(3, 4))
 str(z)
 ```
+
 ## Visualizando listas
 Para explicar funciones de manipulacion de listas más complicadas, es útil tener una representacion visual de las mismas. Por ejemplo, defino estas tres listas:
 ```{r}
@@ -354,10 +355,12 @@ x1 <- list(c(1, 2), c(3, 4))
 x2 <- list(list(1, 2), list(3, 4))
 x3 <- list(1, list(2, list(3)))
 ```
+
 Y a continuación, las grafico:
 ```{r, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("diagrams/lists-structure.svg")
+knitr::include_graphics("diagrams/lists-structure.png")
 ```
+
 Existen tres principios, al momento de observer el gráfico anterior:
 1.	Las listas tienen esquinas redondeadas, en cambio, los vectores atómicos tienen esquinas cuadradas.
 2.	Los hijos son representados dentro de sus listas padres, y tienen un fondo ligeramente más oscuro para facilitar la visualización de la jerarquía.
@@ -396,18 +399,18 @@ knitr::include_graphics("diagrams/lists-subsetting.png")
 
 ## Listas de Condimentos
 La diferencia entre ambos `[` y `[[` es muy importante, pero es muy fácil confundirlos. Para ayudarte a recordar, permiteme mostrarte un pimientero inusual
-
 ```{r, echo = FALSE, out.width = "25%"} 
 knitr::include_graphics("images/pepper.jpg")
 ```
-Si este pimientero es tu lista `x`, entonces, `x[1] es un pimientero que contiene un simple paquete de pimienta:
 
+Si este pimientero es tu lista `x`, entonces, `x[1] es un pimientero que contiene un simple paquete de pimienta:
 ```{r, echo = FALSE, out.width = "25%"} 
 knitr::include_graphics("images/pepper-1.jpg")
 ``` 
-La expresión `x[2]` luciría del mismo modo, pero podría contener el segundo paquete. La expresión `x[1:2]` sería un pimientero que contiente dos paquetes de pimienta.
-La expresión `x[[1]]` es:
 
+La expresión `x[2]` luciría del mismo modo, pero podría contener el segundo paquete. La expresión `x[1:2]` sería un pimientero que contiente dos paquetes de pimienta.
+
+La expresión `x[[1]]` es:
 ```{r, echo = FALSE, out.width = "25%"} 
 knitr::include_graphics("images/pepper-2.jpg")
 ```
@@ -416,6 +419,7 @@ Si quisieras obtener el contenido del paquete de pimiento, necesitarías utiliza
 ```{r, echo = FALSE, out.width = "25%"} 
 knitr::include_graphics("images/pepper-3.jpg")
 ```
+
 ### Ejercicios
 1.Dibuja las listas siguientes como sets anidados:
 
@@ -440,7 +444,7 @@ Existen tres atributos muy importantes que son utilizados para implementar parte
 1.	Los __Nombres__ son utilizados para nombrar los elementos de un vector.
 2.	Las __Dimensiones__ (o dims, denominación más corta) hacen que un vector se comporte como una matriz o arreglo.
 3.	Una __Clase__ es utilizada para implementar el sistema S3 orientado a objetos.
-A los atributos nombres los vimos arriba, y no cubriremos las dimensiones porque no se usan matrices en este libro. Resta describir el atributo clase, el cual controla como las funciones genéricas funcionan. Las funciones genéricas son clave para la programacion orientada a objetos en R, porque ellas hacen que las funciones se comporten de manera diferente de acuerdo a las diferentes clases de inputs. Una discusión más profunda sobre programacion orientada a objetos no está contemplada en el ámbito de este libro, pero puedes leer más al respecto en el libro R Avanzado en: http://adv-r.had.co.nz/OO-essentials.html#s3.
+A los atributos nombres los vimos arriba, y no cubriremos las dimensiones porque no se usan matrices en este libro. Resta describir el atributo clase, el cual controla como las funciones genéricas funcionan. Las funciones genéricas son clave para la programacion orientada a objetos en R, porque ellas hacen que las funciones se comporten de manera diferente de acuerdo a las diferentes clases de inputs. Una discusión más profunda sobre programacion orientada a objetos no está contemplada en el ámbito de este libro, pero puedes leer más al respecto en el documento R Avanzado en: http://adv-r.had.co.nz/OO-essentials.html#s3.
 Así es como una función genérica típica luce: 
 ```{r}
 as.Date
@@ -468,7 +472,7 @@ Los vectores atómicos y las listas son los bloques sobre los que se construyen 
 •	Los Tibbles
 Estos son descriptos a continuación:
 Factores
-Los factores están diseñados para representar datos categóricos que pueden tomar un set fijo de valores posibles. Estos están construidos en base a enteros, y tienen un atributo por cada nivel:
+Los factores son diseñados para representar datos categoricos que pueden tomar un set fijo de valores posibles, son construidos sobre los enteros, y tienen 
 ```{r}
 x <- factor(c("ab", "cd", "ab"), levels = c("ab", "cd", "ef"))
 typeof(x)
@@ -500,14 +504,14 @@ x
 attr(x, "tzone") <- "US/ Oriental"
 x
 ```
-Existe otro tipo de vector date-time llamado POSIXlt. Éstos son construidos en base a listas con nombres (named lists).
+Existe otro tipo de vector date-time llamado POSIXlt. Éstos son construidos en  base a listas con nombres (named lists).
 ```{r}
 y <- as.POSIXlt(x)
 typeof(y)
 attributes(y)
 ```
 
-Los vectores POSIXlts son pocos comunes dentro del paquete tidyverse. Surgen en base a R, porque son necesarios para extraer components específicos de una fecha, como el año o el mes. Desde que el paquete lubridate te provee helpers para efectuar dicha extracción, los vectores POSIXlts no son necesarios. Siempre es más sencillo trabajar con los vectores POSIXct's, por lo tanto, si tienes un vector POSIXlt, deberías convertirlo a un vector regular del tipo data-time con `lubridate::as_date_time()`.
+Los vectores POSIXlts son pocos comunes dentro del paquete tidyverse. Surgen en base a R, porque son necesarios para extraer components específicos de una fecha, como el año o el mes. Desde que el paquete lubridate te provee helpers para efectuar dicha extracción, los vectores POSIXlts no son necesarios. Siempre es más sencillo trabajar con loa vectores POSIXct's, por lo tanto si tenés  un vector POSIXlt, deberías convertirlo a un vector regular del tipo data-time con `lubridate::as_date_time()`.
 
 ### Tibbles 
 Los Tibbles son listas aumentadas: los cuales tienen las clases "tbl_df", "tbl" y  "data.frame", y los atributos `names` (para nombrar una columna) y `row.names` (para nombrar una fila):
@@ -526,7 +530,6 @@ attributes(df)
 ```
 Se puede decir, que la diferencia principal entre ambos es la clase. Debido a que un tibble incluye el tipo "data.frame" lo que significa que los tibbles heredan el comportamiento regular de un data frame por defecto.
 Ejecicios:
-1. ¿Qué valor retorna la siguiente expresión hms::hms(3600)? ¿Cómo se muestra? ¿Cuál es la tipo primario sobre el cual se basa el vector aumentado? ¿Qué atributos utiliza el mismo?
-1. Intenta y crea un tibble que tenga columnas con diferentes longitudes ¿Qué es lo que ocurre?
-1. Teniendo en cuenta la definición vista anteriormente, ¿es correcto tener una lista como una columna de una tibble?
-
+1.	¿Qué valor retorna la siguiente expresión hms::hms(3600)? ¿Cómo se muestra? ¿Cuál es la tipo primario sobre el cual se basa el vector aumentado? ¿Qué atributos utiliza el mismo?
+2.	Intenta y crea un tibble que tenga columnas con diferentes longitudes ¿Qué es lo que ocurre?
+3.	Teniendo en cuenta 

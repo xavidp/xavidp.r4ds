@@ -6,7 +6,7 @@
 
 > "Todos los datos ordenados se parecen unos a otros, pero cada dato desordenado lo es a su manera" --- Hadley Wickham
 
-En este capítulo aprenderás una metodología consistente para organizar datos en R, a esta metodología le llamaremos __tidy data__. Llevar tus datos a este formato requiere algo de trabajo previo, sin embargo dicho trabajo tiene retorno positivo en el largo plazo. Una vez que tengas tus datos ordenados y las herramientas para ordenar datos que provee el tidyverse, vas a gastar mucho menos tiempo pasando de una forma de representar datos a otra, permietiéndote destinar más tiempo a las preguntas analíticas.
+En este capítulo aprenderás una metodología consistente para organizar datos en R, a esta metodología le llamaremos __tidy data__ (datos ordenados). Llevar tus datos a este formato requiere algo de trabajo previo, sin embargo dicho trabajo tiene retorno positivo en el largo plazo. Una vez que tengas tus datos ordenados y las herramientas para ordenar datos que provee el tidyverse, vas a gastar mucho menos tiempo pasando de una forma de representar datos a otra, permietiéndote destinar más tiempo a las preguntas analíticas.
 
 Este capítulo te dará una introducción práctica a tidy data y las herramientas que provee el paquete __tidyr__. Si desear saber más acerca de la teoría subyacente, puede que te guste el artículo *Tidy Data* publicado en la revista Journal of Statistical Software, <http://www.jstatsoft.org/v59/i10/paper>.
 
@@ -94,7 +94,7 @@ ggplot(tabla1, aes(anio, casos)) +
 
 1.  Recrea el gráfico que muestra el cambio en el número de casos usando la `tabla2` en lugar de la `tabla1`. ¿Qué debes hacer en primera lugar?
 
-## Esparcir y reunir
+## Gather y Spread
 
 Los principios de tidy data parecen tan obvios que te preguntarás si acaso vas a encontrar un dataset que no está ordenado. Desafortunadamente, sin embargo, gran parte de los datos que vas a encontrar están desordenados. Existen dos principales razones para esto:
 
@@ -102,8 +102,7 @@ Los principios de tidy data parecen tan obvios que te preguntarás si acaso vas 
 
 2. Los datos a menudo están organizados para facilitar tareas distintas del análisis. Por ejemplo, los datos se organizan para que su registro sea lo más sencillo posible.
 
-Esto significa que para la mayoría de los análisis, necesitarás ordenar los datos. El primer paso siempre es entender el significado de las variables y observaciones. Esto a veces es fácil, otras veces deberás consultar con quienes crearon el dataset.
-El segundo paso es resolver uno de los siguientes problemas frecuentes:
+Esto significa que para la mayoría de los análisis, necesitarás ordenar los datos. El primer paso siempre es entender el significado de las variables y observaciones. Esto a veces es fácil, otras veces deberás consultar con quienes crearon el dataset. El segundo paso es resolver uno de los siguientes problemas frecuentes:
 
 1. Una variable se esparce entre varias columnas
 
@@ -111,7 +110,7 @@ El segundo paso es resolver uno de los siguientes problemas frecuentes:
 
 Típicamente un dataset tiene uno de los problemas, ¡si contiene ambos significa que tienes muy mala suerte! Para solucionar estos problemas necesitarás las dos funciones más importantes de tidyr: `gather()` (reunir) y `spread()` (esparcir).
 
-### Reunir
+### Gather
 
 Un problema común se tiene cuando en un dataset los nombres de las columnas no representan nombres de variables, sino que representan los _valores_ de una variable. Tomando el caso de la `tabla4a`: los nombres de las columnas `1999` y `2000` representan los valores de la variable `anio` y cada fila representa dos observaciones en lugar de una.
 
@@ -119,7 +118,7 @@ Un problema común se tiene cuando en un dataset los nombres de las columnas no 
 tabla4a
 ```
 
-Para ordenar un dataset como este necesitamos __reunir__ tales columnas en un nuevo par de variables. Para describir dicha operación necesitamos tres parámetros:
+Para ordenar un dataset como este necesitamos contraer (__gather__) tales columnas en un nuevo par de variables. Para describir dicha operación necesitamos tres parámetros:
 
 * El conjunto de columnas que representan valores y no variables. En este ejemplo son las columnas `1999` y `2000`.
 
@@ -134,13 +133,13 @@ tabla4a %>%
   gather(`1999`, `2000`, key = "anio", value = "casos")
 ```
 
-Las columnas a reunir quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los escribimos con backtick. Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
+Las columnas a contraer quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los escribimos con __backtick__. Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
 
 ```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Gathering `tabla4` into a tidy form."}
 knitr::include_graphics("images/tidy-9.svg")
 ```
 
-En el resultado final, las columnas reunidas se eliminan y obtenermos la nuevas variables `key` y `value`. De otro modo, la relacién entre las variables originales se mantiene. Visualmente, esto se observa en la Figura \@ref(fig:tidy-gather). Podemos usar `gather()` para ordenar `tabla4b` de modo similar. La única diferencia es la variable almacenada en los valores de las celdas:
+En el resultado final, las columnas reunidas se eliminan y obtenemos la nuevas variables `key` y `value`. De otro modo, la relacién entre las variables originales se mantiene. Visualmente, esto se observa en la Figura \@ref(fig:tidy-gather). Podemos usar `gather()` para ordenar `tabla4b` de modo similar. La única diferencia es la variable almacenada en los valores de las celdas:
 
 ```{r}
 tabla4b %>%
@@ -152,28 +151,31 @@ Para combinar las versiones ordenadas de `tabla4a` y `tabla4b` en un único tibb
 ```{r}
 tidy4a <- tabla4a %>%
   gather(`1999`, `2000`, key = "anio", value = "casos")
+
 tidy4b <- tabla4b %>%
   gather(`1999`, `2000`, key = "anio", value = "poblacion")
+
 left_join(tidy4a, tidy4b)
 ```
 
-### Spreading
+### Spread
 
-Spreading is the opposite of gathering. You use it when an observation is scattered across multiple rows. For example, take `tabla2`: an observation is a pais in a anio, but each observation is spread across two rows.
+Extender (__spread__) es lo opuesto de __gather__. Lo usas cuando una observación aparece en múltiples filas. Por ejemplo, toma la tabla `tabla2`: una observación 
+
+You use it when an observation is scattered across multiple rows. For example, take `tabla2`: una observación es un país en un año, pero cada observación se reparte entre dos filas.
 
 ```{r}
 tabla2
 ```
 
-To tidy this up, we first analyse the representation in similar way to `gather()`. This time, however, we only need two parameters:
+Para ordenar esto, primero analiza la representación de un modo similar a cómo se haría con `gather()`. Esta vez, sin embargo, necesitamos únicamente dos parámetros:
 
-* The column that contains variable names, the `key` column. Here, it's
-  `tipo`.
 
-* The column that contains values from multiple variables, the `value`
-  column. Here it's `count`.
+* La columna que contiene los nombres de las variables, la columna `key`. En este caso corresponde a `tipo`.
 
-Once we've figured that out, we can use `spread()`, as shown programmatically below, and visually in Figure \@ref(fig:tidy-spread).
+* La columna que contiene valores de múltiples variables, la columna `value`. En este caso corresponde a `cuenta`.
+
+Una vez resuelto esto, podemos usar `spread()`, como se muestra programáticamente abajo y visualmente en la Figura \@ref(fig:tidy-spread).
 
 ```{r}
 tabla2 %>%
@@ -184,42 +186,40 @@ tabla2 %>%
 knitr::include_graphics("images/tidy-8.svg")
 ```
 
-As you might have guessed from the common `key` and `value` arguments, `spread()` and `gather()` are complements. `gather()` makes wide tablas narrower and longer; `spread()` makes long tablas shorter and wider.
+Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, `gather()` y `spread()` son complementarios. `gather()` genera tablas estrechas y largas, `spread()` genera tablas anchas y cortas.
 
-### Exercises
+### Ejercicios
 
-1.  Why are `gather()` and `spread()` not perfectly symmetrical?  
-    Carefully consider the following example:
+1.  ¿Por qué `gather()` y `spread()` no son perfectamente simétricas?
+    Observa cuidadosamente el siguiente ejemplo:
 
-    ```{r, eval = FALSE}
-stocks <- tibble(
-  anio = c(2015, 2015, 2016, 2016),
-  semestre = c(1, 2, 1, 2),
-  retorno = c(1.88, 0.59, 0.92, 0.17)
-)
-stocks %>%
-  spread(anio, retorno) %>%
-  gather("anio", "retorno", `2015`:`2016`)
-    ```
+```{r, eval = FALSE}
+  stocks <- tibble(
+    anio = c(2015, 2015, 2016, 2016),
+    semestre = c(1, 2, 1, 2),
+    retorno = c(1.88, 0.59, 0.92, 0.17)
+  )
+  stocks %>%
+    spread(anio, retorno) %>%
+    gather("anio", "retorno", `2015`:`2016`)
+```
 
-    (Hint: look at the variable tipos and think about column _names_.)
+    (Hint: observa los tipos de variables y piensa en los nombres de las columnas)
 
-    Both `spread()` and `gather()` have a `convert` argument. What does it
-    do?
+    Tanto `spread()` como `gather()` tienen el argumento `convert` (convertir). ¿Qué hace dich argumento?
 
-1.  Why does this code fail?
+1.  ¿Por qué falla el siguiente código?
 
-    ```{r, error = TRUE}
+```{r, error = TRUE}
 tabla4a %>%
   gather(1999, 2000, key = "anio", value = "casos")
-    ```
+```
 
-1.  Why does spreading this tibble fail? How could you add a new column to fix
-    the problem?
+1.  ¿Por qué no se puede extender la siguiente tabla? ¿Cómo agregarias una nueva columna para resolver el problema?
 
-    ```{r}
-people <- tribble(
-  ~ name, ~ key, ~ value,
+```{r}
+personas <- tribble(
+  ~ nombre, ~ llave, ~ valor,
   #-----------------|--------|------
   "Phillip Woods", "age", 45,
   "Phillip Woods", "height", 186,
@@ -227,32 +227,31 @@ people <- tribble(
   "Jessica Cordero", "age", 37,
   "Jessica Cordero", "height", 156
 )
-    ```
+```
 
-1.  Tidy the simple tibble below. Do you need to spread or gather it?
-    What are the variables?
+1.  Ordena la siguiente tabla. ¿Necesitas extenderla o contraerla? ¿Cuáles son las variables?
 
-    ```{r}
-preg <- tribble(
-  ~ pregnant, ~ male, ~ female,
+```{r}
+embarazo <- tribble(
+  ~ embarazo, ~ hombre, ~ mujer,
   "yes", NA, 10,
   "no", 20, 12
 )
-    ```
+```
 
-## Separating and uniting
+## Separar y unir
 
-So far you've learned how to tidy `tabla2` and `tabla4`, but not `tabla3`. `tabla3` has a different problem: we have one column (`rate`) that contains two variables (`casos` and `poblacion`). To fix this problem, we'll need the `separate()` function. You'll also learn about the complement of `separate()`: `unite()`, which you use if a single variable is spread across multiple columns.
+Hasta ahora has aprendido a ordenar las tablas `tabla2` y `tabla4`, pero no la `tabla3` que tiene un problema diferente: contiene una columna (`tasa`) la cual contiene dos variables (`casos` y `poblacion`). Para solucionar este problema, necesitamos la función `separate()` (separar), También aprenderás acerca del complemento de `separate()`: `unite()` (unir), la cual se usa en los casos en que una única variable se reparte en varias columnas.
 
-### Separate
+### Separar
 
-`separate()` pulls apart one column into multiple columns, by splitting wherever a separator character appears. Take `tabla3`:
+`separate()`divide una columna en varias columnas, dividiendo de acuerdo a la posición de un caracter separador. Tomando la `tabla3`:
 
 ```{r}
 tabla3
 ```
 
-The `rate` column contains both `casos` and `poblacion` variables, and we need to split it into two variables. `separate()` takes the name of the column to separate, and the names of the columns to separate into, as shown in Figure \@ref(fig:tidy-separate) and the code below.
+La columna `tasa` contiene las variables `casos` y `poblacion`,necesitamos dividir esto en dos variables. `separate()` toma el nombre de la columna a separar y el nombre de las columnas a donde irá el resultado, tal como se muestra en la Figura \@ref(fig:tidy-separate) y el código a continuación.
 
 ```{r}
 tabla3 %>%
@@ -263,14 +262,14 @@ tabla3 %>%
 knitr::include_graphics("images/tidy-17.svg")
 ```
 
-By default, `separate()` will split values wherever it sees a non-alphanumeric character (i.e. a character that isn't a number or letter). For example, in the code above, `separate()` split the values of `rate` at the forward slash characters. If you wish to use a specific character to separate a column, you can pass the character to the `sep` argument of `separate()`. For example, we could rewrite the code above as:
+Por defecto, `separate()` dividirá una columna donde aparezca un caracter no no alfanumérico (i.e. un caracter que no es un número o letra). Por ejemplo, en el siguiente código, `separate()` divide los valores de `tasa` donde aparece el caracter __slash__. Si deseas usar un caracter específico para separar una columna, puedes especificarlo en el argumento `sep` de `separate()`. Por ejemplo, lo anterior se puede re-escribir del siguiente modo:
 
 ```{r eval = FALSE}
 tabla3 %>%
   separate(tasa, into = c("casos", "poblacion"), sep = "/")
 ```
 
-(Formally, `sep` is a regular expression, which you'll learn more about in [strings].)
+(Formalmente, `sep` es una expresión regular y aprenderás más sobre esto en [strings].)
 
 Look carefully at the column tipos: you'll notice that `casos` and `poblacion` are character columns. This is the default behaviour in `separate()`: it leaves the tipo of the column as is. Here, however, it's not very useful as those really are numbers. We can ask `separate()` to try and convert to better tipos using `convert = TRUE`:
 
