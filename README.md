@@ -1,5 +1,8 @@
 # R for Data Science
 
+[![Travis build status](https://travis-ci.org/cienciadedatos/r4ds.svg?branch=master)](https://travis-ci.org/cienciadedatos/r4ds)
+
+
 This is code and text behind the [R for Data Science](http://r4ds.had.co.nz)
 book. 
 
