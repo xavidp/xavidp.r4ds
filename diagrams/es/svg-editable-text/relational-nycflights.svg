@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -214,10 +214,10 @@
      inkscape:window-height="732"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="0.8478009"
-     inkscape:cx="251.10326"
-     inkscape:cy="146.66188"
-     inkscape:window-x="1920"
+     inkscape:zoom="2.3979431"
+     inkscape:cx="371.36061"
+     inkscape:cy="116.56626"
+     inkscape:window-x="1600"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="g210"
@@ -227,13 +227,7 @@
      fit-margin-top="5"
      fit-margin-right="5"
      fit-margin-bottom="5"
-     fit-margin-left="5">
-    <sodipodi:guide
-       position="244.15006,121.93018"
-       orientation="1,0"
-       inkscape:locked="false"
-       id="guide4209" />
-  </sodipodi:namedview>
+     fit-margin-left="5" />
   <g
      id="g210"
      transform="translate(194.26846,-240.90148)">
@@ -298,12 +292,12 @@
     <text
        id="text1348"
        y="299.21619"
-       x="-155.28212"
+       x="-158.02061"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none"
          y="299.21619"
-         x="-155.28212"
+         x="-158.02061"
          id="tspan1346"
          sodipodi:role="line">codigo_aeropuerto</tspan></text>
     <rect
@@ -548,14 +542,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="-124.26649"
+       x="-128.85536"
        y="272.16711"
        id="text1344"><tspan
          sodipodi:role="line"
          id="tspan1342"
-         x="-124.26649"
+         x="-128.85536"
          y="272.16711"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none">aeropuerto</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none">aeropuertos</tspan></text>
     <rect
        y="511.66605"
        x="-106.29406"
@@ -844,14 +838,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="258.0332"
+       x="253.39635"
        y="478.41345"
        id="text1408"><tspan
          sodipodi:role="line"
          id="tspan1406"
-         x="258.0332"
+         x="253.39635"
          y="478.41345"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none">aerolinea</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none">aerolineas</tspan></text>
     <text
        id="text1412"
        y="505.46252"
