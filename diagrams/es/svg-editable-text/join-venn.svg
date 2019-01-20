@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="153.06573mm"
+   width="149.60773mm"
    height="49.452389mm"
-   viewBox="0 0 542.35892 175.225"
+   viewBox="0 0 530.10613 175.225"
    id="svg2"
    version="1.1"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="404.15217"
-     inkscape:cy="76.720702"
+     inkscape:cx="255.16414"
+     inkscape:cy="140.78191"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -81,16 +81,11 @@
              x="151.52289"
              style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              xml:space="preserve"><tspan
-               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'"
                y="161.66455"
                x="151.52289"
                id="tspan4230"
-               sodipodi:role="line">unión interior</tspan><tspan
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Roboto Mono';-inkscape-font-specification:'Roboto Mono'"
-               y="178.85205"
-               x="151.52289"
-               sodipodi:role="line"
-               id="tspan37">inner_join(x,y)</tspan></text>
+               sodipodi:role="line">inner_join(x,y)</tspan></text>
           <path
              style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
              d="M 85.806641,134.16602 A 30,30 0 0 0 73.740234,158.17578 30,30 0 0 0 85.814453,182.18555 30,30 0 0 0 97.880859,158.17578 30,30 0 0 0 85.806641,134.16602 Z"
@@ -123,16 +118,11 @@
            x="151.52289"
            style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            xml:space="preserve"><tspan
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'"
              y="240.45648"
              x="151.52289"
              id="tspan4234"
-             sodipodi:role="line">unión total</tspan><tspan
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Roboto Mono';-inkscape-font-specification:'Roboto Mono'"
-             y="257.64398"
-             x="151.52289"
-             sodipodi:role="line"
-             id="tspan39">full_join(x,y)</tspan></text>
+             sodipodi:role="line">full_join(x,y)</tspan></text>
         <path
            style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
            d="M 85.806641,212.95898 A 30,30 0 0 0 73.740234,236.96875 30,30 0 0 0 85.816406,260.97852 30,30 0 0 0 97.880859,236.96875 30,30 0 0 0 85.806641,212.95898 Z"
@@ -142,7 +132,7 @@
     </g>
     <g
        id="g4435"
-       transform="translate(2.4484475)">
+       transform="translate(2.448447)">
       <g
          transform="translate(256.95756)"
          id="g4333">
@@ -170,12 +160,7 @@
                id="tspan4343"
                x="151.52289"
                y="161.66455"
-               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'">unión por la izquierda</tspan><tspan
-               sodipodi:role="line"
-               x="151.52289"
-               y="178.85205"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Roboto Mono';-inkscape-font-specification:'Roboto Mono'"
-               id="tspan43">left_join(x,y)</tspan></text>
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">left_join(x,y)</tspan></text>
           <path
              style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
              d="m 287.32031,134.16602 a 30,30 0 0 0 -12.0664,24.00976 30,30 0 0 0 12.07421,24.00977 30,30 0 0 0 12.06641,-24.00977 30,30 0 0 0 -12.07422,-24.00976 z"
@@ -214,12 +199,7 @@
              id="tspan4357"
              x="151.52289"
              y="240.45648"
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'">unión por la derecha</tspan><tspan
-             sodipodi:role="line"
-             x="151.52289"
-             y="257.64398"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Roboto Mono';-inkscape-font-specification:'Roboto Mono'"
-             id="tspan45">right_join(x,y)</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.75px;line-height:1.25;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">right_join(x,y)</tspan></text>
         <path
            style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
            d="m 287.31836,212.95898 a 30,30 0 0 0 -12.06445,24.00977 30,30 0 0 0 12.07421,24.00977 30,30 0 0 0 12.06641,-24.00977 30,30 0 0 0 -12.07617,-24.00977 z"

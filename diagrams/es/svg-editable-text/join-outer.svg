@@ -59,10 +59,10 @@
      inkscape:guide-bbox="true"
      showguides="true"
      inkscape:window-maximized="1"
-     inkscape:window-y="0"
-     inkscape:window-x="1920"
-     inkscape:window-height="732"
-     inkscape:window-width="1366"
+     inkscape:window-y="-9"
+     inkscape:window-x="-9"
+     inkscape:window-height="1001"
+     inkscape:window-width="1920"
      fit-margin-bottom="5"
      fit-margin-right="5"
      fit-margin-left="5"
@@ -70,8 +70,8 @@
      showgrid="false"
      inkscape:current-layer="g4643"
      inkscape:document-units="px"
-     inkscape:cy="326.65472"
-     inkscape:cx="92.2194"
+     inkscape:cy="241.80191"
+     inkscape:cx="61.607503"
      inkscape:zoom="1.4142136"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -87,7 +87,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -251,14 +251,14 @@
            id="tspan4664"
            x="598.77692"
            y="276.66739"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x1</tspan></text>
       <text
          id="text4666"
          y="276.66739"
          x="580.20612"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="276.66739"
            x="580.20612"
            id="tspan4668"
@@ -273,14 +273,14 @@
            id="tspan4676"
            x="579.38519"
            y="294.1322"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">2</tspan></text>
       <text
          id="text4682"
          y="311.55734"
          x="579.38519"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="311.55734"
            x="579.38519"
            id="tspan4684"
@@ -291,7 +291,7 @@
          x="595.20026"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
            y="328.92142"
            x="595.20026"
            id="tspan4688"
@@ -306,7 +306,7 @@
            id="tspan4692"
            x="579.55914"
            y="328.92142"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">4</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">4</tspan></text>
       <text
          id="text4790"
          y="586.25159"
@@ -314,11 +314,11 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-90)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="586.25159"
            x="-256.60913"
            id="tspan4792"
-           sodipodi:role="line">llave</tspan></text>
+           sodipodi:role="line">key</tspan></text>
       <text
          transform="rotate(-90)"
          xml:space="preserve"
@@ -330,7 +330,7 @@
            id="tspan4796"
            x="-255.94991"
            y="607.12958"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">val_x</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">val_x</tspan></text>
       <rect
          inkscape:tile-h="17.425131"
          inkscape:tile-w="25.877264"
@@ -386,7 +386,7 @@
          x="624.65417"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="276.66739"
            x="624.65417"
            id="tspan5243"
@@ -397,7 +397,7 @@
          x="621.07751"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
            y="311.49631"
            x="621.07751"
            id="tspan5251"
@@ -413,14 +413,14 @@
            id="tspan5263"
            x="-255.94991"
            y="633.00684"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">val_y</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">val_y</tspan></text>
       <text
          id="text3458"
          y="294.09253"
          x="598.77692"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="294.09253"
            x="598.77692"
            id="tspan3460"
@@ -435,7 +435,7 @@
            id="tspan3464"
            x="598.77692"
            y="311.51767"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x3</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -446,14 +446,14 @@
            id="tspan3468"
            x="624.65417"
            y="294.09253"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y2</tspan></text>
       <text
          id="text3470"
          y="328.94278"
          x="624.65417"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="328.94278"
            x="624.65417"
            id="tspan3472"
@@ -573,7 +573,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-139.12897"
            x="535.10803"
            id="tspan4616"
@@ -589,7 +589,7 @@
            id="tspan4620"
            x="516.53723"
            y="-139.12897"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">1</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -601,7 +601,7 @@
            id="tspan4624"
            x="535.10803"
            y="-121.70385"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y2</tspan></text>
       <text
          id="text4626"
          y="-121.66418"
@@ -609,7 +609,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-121.66418"
            x="515.71631"
            id="tspan4628"
@@ -621,7 +621,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-104.27871"
            x="535.10803"
            id="tspan4632"
@@ -637,7 +637,7 @@
            id="tspan4636"
            x="515.71631"
            y="-104.23904"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">4</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">4</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -649,7 +649,7 @@
            id="tspan4640"
            x="531.53143"
            y="-86.874962"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000">NA</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000">NA</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path5045"
@@ -769,7 +769,7 @@
            id="tspan4952"
            x="46.592838"
            y="453.47278"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x1</tspan></text>
       <text
          id="text4978"
          y="453.47278"
@@ -777,7 +777,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="453.47278"
            x="70.577461"
            id="tspan4980"
@@ -789,7 +789,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="470.93759"
            x="45.53693"
            id="tspan4580"
@@ -805,7 +805,7 @@
            id="tspan4584"
            x="69.756538"
            y="470.93759"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">2</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -817,7 +817,7 @@
            id="tspan4588"
            x="45.713932"
            y="488.3017"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x3</tspan></text>
       <text
          id="text4590"
          y="488.36273"
@@ -825,7 +825,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="488.36273"
            x="69.756538"
            id="tspan4592"
@@ -837,7 +837,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
            y="505.72681"
            x="43.016178"
            id="tspan4596"
@@ -872,11 +872,11 @@
          x="337.10638"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:'Fira Sans Bold'"
            y="221.46474"
            x="337.10638"
            id="tspan4782"
-           sodipodi:role="line">Total</tspan></text>
+           sodipodi:role="line">Full</tspan></text>
     </g>
     <g
        id="g2681"
@@ -1009,7 +1009,7 @@
          x="598.77692"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="137.565"
            x="598.77692"
            id="tspan3498"
@@ -1024,14 +1024,14 @@
            id="tspan3502"
            x="580.20612"
            y="137.565"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">1</tspan></text>
       <text
          id="text3504"
          y="155.0298"
          x="579.38519"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="155.0298"
            x="579.38519"
            id="tspan3506"
@@ -1046,7 +1046,7 @@
            id="tspan3510"
            x="579.38519"
            y="172.45494"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">4</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">4</tspan></text>
       <text
          transform="rotate(-90)"
          xml:space="preserve"
@@ -1058,7 +1058,7 @@
            id="tspan3522"
            x="-117.50673"
            y="586.25159"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">llave</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">key</tspan></text>
       <text
          id="text3524"
          y="607.12958"
@@ -1066,7 +1066,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-90)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="607.12958"
            x="-116.84753"
            id="tspan3526"
@@ -1121,7 +1121,7 @@
            id="tspan3544"
            x="624.65417"
            y="137.565"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y1</tspan></text>
       <text
          id="text3550"
          y="633.00684"
@@ -1129,7 +1129,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-90)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="633.00684"
            x="-116.84753"
            id="tspan3552"
@@ -1144,14 +1144,14 @@
            id="tspan3556"
            x="598.77692"
            y="154.99013"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x2</tspan></text>
       <text
          id="text3558"
          y="172.39391"
          x="595.20032"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
            y="172.39391"
            x="595.20032"
            id="tspan3560"
@@ -1162,7 +1162,7 @@
          x="624.65417"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="154.99013"
            x="624.65417"
            id="tspan3564"
@@ -1177,7 +1177,7 @@
            id="tspan5489"
            x="624.65424"
            y="172.41527"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y3</tspan></text>
       <path
          style="fill:#b3b3b3;fill-rule:evenodd;stroke:#cccccc;stroke-width:1.04359901px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 376.08567,90.414522 70.71069,70.710668"
@@ -1264,7 +1264,7 @@
            id="tspan3608"
            x="424.42642"
            y="-232.38554"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y1</tspan></text>
       <text
          id="text3610"
          y="-232.34587"
@@ -1272,7 +1272,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-232.34587"
            x="405.03467"
            id="tspan3612"
@@ -1288,7 +1288,7 @@
            id="tspan3620"
            x="405.03467"
            y="-214.92073"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">2</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path3626"
@@ -1408,7 +1408,7 @@
            id="tspan3652"
            x="157.27454"
            y="342.79111"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x1</tspan></text>
       <text
          id="text3654"
          y="342.79111"
@@ -1416,7 +1416,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="342.79111"
            x="181.25916"
            id="tspan3656"
@@ -1428,7 +1428,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="360.25592"
            x="156.21863"
            id="tspan3660"
@@ -1444,7 +1444,7 @@
            id="tspan3664"
            x="180.43823"
            y="360.25592"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">2</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1456,7 +1456,7 @@
            id="tspan3668"
            x="156.39563"
            y="377.62003"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x3</tspan></text>
       <text
          id="text3670"
          y="377.68106"
@@ -1464,7 +1464,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="377.68106"
            x="180.43823"
            id="tspan3672"
@@ -1476,7 +1476,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
            y="395.04517"
            x="153.69788"
            id="tspan3676"
@@ -1499,11 +1499,11 @@
          x="337.10638"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:'Fira Sans Bold'"
            y="64.93721"
            x="337.10638"
            id="tspan3688"
-           sodipodi:role="line">Derecha</tspan></text>
+           sodipodi:role="line">Right</tspan></text>
       <text
          transform="rotate(44.999998)"
          id="text4552"
@@ -1511,7 +1511,7 @@
          x="405.06821"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-197.55664"
            x="405.06821"
            id="tspan4554"
@@ -1523,7 +1523,7 @@
          x="424.42642"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-214.9604"
            x="424.42642"
            id="tspan4558"
@@ -1539,7 +1539,7 @@
            id="tspan4562"
            x="424.42642"
            y="-197.53528"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y3</tspan></text>
       <circle
          cy="71.759964"
          cx="406.70273"
@@ -1657,14 +1657,14 @@
            id="tspan5554"
            x="598.77692"
            y="-18.582655"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x1</tspan></text>
       <text
          id="text5556"
          y="-18.582655"
          x="580.20612"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-18.582655"
            x="580.20612"
            id="tspan5558"
@@ -1679,14 +1679,14 @@
            id="tspan5562"
            x="579.38519"
            y="-1.1178569"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">2</tspan></text>
       <text
          id="text5564"
          y="16.307283"
          x="579.38519"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="16.307283"
            x="579.38519"
            id="tspan5566"
@@ -1698,11 +1698,11 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-90)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="586.25159"
            x="38.640942"
            id="tspan5570"
-           sodipodi:role="line">llave</tspan></text>
+           sodipodi:role="line">key</tspan></text>
       <text
          transform="rotate(-90)"
          xml:space="preserve"
@@ -1714,7 +1714,7 @@
            id="tspan5574"
            x="39.300121"
            y="607.12958"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">val_x</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">val_x</tspan></text>
       <rect
          inkscape:tile-h="17.425131"
          inkscape:tile-w="25.877264"
@@ -1761,7 +1761,7 @@
          x="624.65417"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-18.582655"
            x="624.65417"
            id="tspan5590"
@@ -1777,14 +1777,14 @@
            id="tspan5594"
            x="39.300121"
            y="633.00684"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">val_y</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">val_y</tspan></text>
       <text
          id="text5596"
          y="-1.1575297"
          x="598.77692"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-1.1575297"
            x="598.77692"
            id="tspan5598"
@@ -1799,14 +1799,14 @@
            id="tspan5606"
            x="624.65417"
            y="-1.1575297"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y2</tspan></text>
       <text
          id="text5608"
          y="16.246248"
          x="621.07758"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
            y="16.246248"
            x="621.07758"
            id="tspan5610"
@@ -1817,7 +1817,7 @@
          x="598.77698"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="16.267611"
            x="598.77698"
            id="tspan6054"
@@ -1853,11 +1853,11 @@
          x="337.10638"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:'Fira Sans Bold'"
            y="-84.169685"
            x="337.10638"
            id="tspan5706"
-           sodipodi:role="line">Izquierda</tspan></text>
+           sodipodi:role="line">Left</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path5648"
@@ -1964,7 +1964,7 @@
            id="tspan5638"
            x="258.97501"
            y="241.09061"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x1</tspan></text>
       <text
          id="text5640"
          y="241.13029"
@@ -1972,7 +1972,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-45.000002)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="241.13029"
            x="282.13876"
            id="tspan5642"
@@ -1988,7 +1988,7 @@
            id="tspan5646"
            x="282.13876"
            y="258.55545"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">2</tspan></text>
       <rect
          transform="rotate(44.999998)"
          inkscape:tile-y0="44.58737"
@@ -2088,7 +2088,7 @@
            id="tspan5674"
            x="305.30078"
            y="-351.5112"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y1</tspan></text>
       <text
          id="text5676"
          y="-351.51117"
@@ -2096,7 +2096,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(45.000002)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-351.51117"
            x="286.72998"
            id="tspan5678"
@@ -2112,7 +2112,7 @@
            id="tspan5686"
            x="285.90906"
            y="-334.04636"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">2</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">2</tspan></text>
       <text
          id="text5692"
          y="-316.62122"
@@ -2120,7 +2120,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(45.000002)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-316.62122"
            x="285.90906"
            id="tspan5694"
@@ -2132,7 +2132,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(45.000002)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
            y="-299.25714"
            x="301.72412"
            id="tspan5698"
@@ -2158,7 +2158,7 @@
          x="282.17233"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="275.91953"
            x="282.17233"
            id="tspan5710"
@@ -2177,7 +2177,7 @@
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-45.000002)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="258.51575"
            x="258.97501"
            id="tspan5934"
@@ -2193,7 +2193,7 @@
            id="tspan5938"
            x="258.97501"
            y="275.94089"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">x3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">x3</tspan></text>
       <text
          transform="rotate(45.000002)"
          id="text5992"
@@ -2201,7 +2201,7 @@
          x="305.30078"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans"
            y="-334.08609"
            x="305.30078"
            id="tspan5994"
@@ -2217,7 +2217,7 @@
            id="tspan5998"
            x="305.30078"
            y="-316.66095"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto">y3</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">y3</tspan></text>
     </g>
   </g>
 </svg>
