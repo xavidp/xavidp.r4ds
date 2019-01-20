@@ -16,7 +16,7 @@
    height="248.83057mm"
    viewBox="0 0 1368.462 940.46195"
    sodipodi:docname="rstudio-editor.svg"
-   inkscape:version="0.92.3 (unknown)">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -40,8 +40,8 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1535"
-     inkscape:window-height="876"
+     inkscape:window-width="1366"
+     inkscape:window-height="732"
      id="namedview4"
      showgrid="false"
      showguides="true"
@@ -52,10 +52,10 @@
      fit-margin-bottom="5"
      fit-margin-right="5"
      inkscape:zoom="0.35355339"
-     inkscape:cx="239.02437"
+     inkscape:cx="558.84093"
      inkscape:cy="470.83569"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2">
     <sodipodi:guide
@@ -89,7 +89,7 @@
        id="tspan1468"
        x="42.158287"
        y="897.48517"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#0088ff;fill-opacity:1">Console</tspan></text>
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#0088ff;fill-opacity:1">Consola</tspan></text>
   <rect
      style="fill:none;fill-opacity:1;stroke:#0088ff;stroke-width:5.66900015;stroke-miterlimit:4;stroke-dasharray:none"
      id="rect1478"
@@ -103,11 +103,11 @@
      x="866.19073"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:robo;-inkscape-font-specification:robo;letter-spacing:0px;word-spacing:0px;fill:#0088ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#0088ff;fill-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#0088ff;fill-opacity:1"
        y="897.48517"
        x="866.19073"
        id="tspan1480"
-       sodipodi:role="line">Output</tspan></text>
+       sodipodi:role="line">Salida</tspan></text>
   <rect
      y="59.935478"
      x="30.509075"

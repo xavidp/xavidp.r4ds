@@ -59,10 +59,10 @@
      inkscape:guide-bbox="true"
      showguides="true"
      inkscape:window-maximized="1"
-     inkscape:window-y="-9"
-     inkscape:window-x="-9"
-     inkscape:window-height="1001"
-     inkscape:window-width="1920"
+     inkscape:window-y="0"
+     inkscape:window-x="1920"
+     inkscape:window-height="732"
+     inkscape:window-width="1366"
      fit-margin-bottom="5"
      fit-margin-right="5"
      fit-margin-left="5"
@@ -70,9 +70,9 @@
      showgrid="false"
      inkscape:current-layer="g4643"
      inkscape:document-units="px"
-     inkscape:cy="241.80191"
-     inkscape:cx="61.607503"
-     inkscape:zoom="1.4142136"
+     inkscape:cy="245.9838"
+     inkscape:cx="271.12667"
+     inkscape:zoom="1.0000001"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -87,7 +87,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -288,12 +288,12 @@
       <text
          id="text4686"
          y="328.92142"
-         x="595.20026"
+         x="595.78619"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000"
            y="328.92142"
-           x="595.20026"
+           x="595.78619"
            id="tspan4688"
            sodipodi:role="line">NA</tspan></text>
       <text
@@ -318,7 +318,7 @@
            y="586.25159"
            x="-256.60913"
            id="tspan4792"
-           sodipodi:role="line">key</tspan></text>
+           sodipodi:role="line">llave</tspan></text>
       <text
          transform="rotate(-90)"
          xml:space="preserve"
@@ -394,12 +394,12 @@
       <text
          id="text5249"
          y="311.49631"
-         x="621.07751"
+         x="621.66345"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000"
            y="311.49631"
-           x="621.07751"
+           x="621.66345"
            id="tspan5251"
            sodipodi:role="line">NA</tspan></text>
       <text
@@ -641,15 +641,15 @@
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="531.53143"
-         y="-86.874962"
+         x="531.89288"
+         y="-87.236412"
          id="text4638"
          transform="rotate(44.999998)"><tspan
            sodipodi:role="line"
            id="tspan4640"
-           x="531.53143"
-           y="-86.874962"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000">NA</tspan></text>
+           x="531.89288"
+           y="-87.236412"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000">NA</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path5045"
@@ -832,14 +832,14 @@
            sodipodi:role="line">3</tspan></text>
       <text
          id="text4594"
-         y="505.72681"
-         x="43.016178"
+         y="505.9512"
+         x="43.240574"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
-           y="505.72681"
-           x="43.016178"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000"
+           y="505.9512"
+           x="43.240574"
            id="tspan4596"
            sodipodi:role="line">NA</tspan></text>
       <circle
@@ -872,11 +872,11 @@
          x="337.10638"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:'Fira Sans Bold'"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold'"
            y="221.46474"
            x="337.10638"
            id="tspan4782"
-           sodipodi:role="line">Full</tspan></text>
+           sodipodi:role="line">Total</tspan></text>
     </g>
     <g
        id="g2681"
@@ -1058,7 +1058,7 @@
            id="tspan3522"
            x="-117.50673"
            y="586.25159"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">key</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans">llave</tspan></text>
       <text
          id="text3524"
          y="607.12958"
@@ -1148,12 +1148,12 @@
       <text
          id="text3558"
          y="172.39391"
-         x="595.20032"
+         x="595.78619"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000"
            y="172.39391"
-           x="595.20032"
+           x="595.78619"
            id="tspan3560"
            sodipodi:role="line">NA</tspan></text>
       <text
@@ -1471,14 +1471,14 @@
            sodipodi:role="line">3</tspan></text>
       <text
          id="text3674"
-         y="395.04517"
-         x="153.69788"
+         y="395.26956"
+         x="153.92227"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(-44.999998)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
-           y="395.04517"
-           x="153.69788"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000"
+           y="395.26956"
+           x="153.92227"
            id="tspan3676"
            sodipodi:role="line">NA</tspan></text>
       <circle
@@ -1499,11 +1499,11 @@
          x="337.10638"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:'Fira Sans Bold'"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold'"
            y="64.93721"
            x="337.10638"
            id="tspan3688"
-           sodipodi:role="line">Right</tspan></text>
+           sodipodi:role="line">Derecha</tspan></text>
       <text
          transform="rotate(44.999998)"
          id="text4552"
@@ -1702,7 +1702,7 @@
            y="586.25159"
            x="38.640942"
            id="tspan5570"
-           sodipodi:role="line">key</tspan></text>
+           sodipodi:role="line">llave</tspan></text>
       <text
          transform="rotate(-90)"
          xml:space="preserve"
@@ -1803,12 +1803,12 @@
       <text
          id="text5608"
          y="16.246248"
-         x="621.07758"
+         x="621.66345"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000"
            y="16.246248"
-           x="621.07758"
+           x="621.66345"
            id="tspan5610"
            sodipodi:role="line">NA</tspan></text>
       <text
@@ -1853,11 +1853,11 @@
          x="337.10638"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:'Fira Sans Bold'"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold'"
            y="-84.169685"
            x="337.10638"
            id="tspan5706"
-           sodipodi:role="line">Left</tspan></text>
+           sodipodi:role="line">Izquierda</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path5648"
@@ -2127,14 +2127,14 @@
            sodipodi:role="line">4</tspan></text>
       <text
          id="text5696"
-         y="-299.25714"
-         x="301.72412"
+         y="-299.61862"
+         x="302.0856"
          style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"
          transform="rotate(45.000002)"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:Fira Sans;-inkscape-font-specification:Fira Sans;fill:#ff0000"
-           y="-299.25714"
-           x="301.72412"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:1.25;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans';fill:#ff0000"
+           y="-299.61862"
+           x="302.0856"
            id="tspan5698"
            sodipodi:role="line">NA</tspan></text>
       <circle

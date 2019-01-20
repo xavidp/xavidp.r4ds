@@ -210,13 +210,13 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1600"
-     inkscape:window-height="832"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="1.6956018"
-     inkscape:cx="255.20464"
-     inkscape:cy="157.43546"
+     inkscape:zoom="38.367089"
+     inkscape:cx="96.218585"
+     inkscape:cy="51.342046"
      inkscape:window-x="0"
      inkscape:window-y="32"
      inkscape:window-maximized="1"
@@ -425,6 +425,35 @@
     <g
        id="g5425">
       <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M -19.707758,501.23597 H 16.99036"
+         id="path5595"
+         inkscape:connector-curvature="0" />
+      <circle
+         r="3.2326748"
+         cy="501.23596"
+         cx="-20.219387"
+         id="circle6841"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         y="490.92365"
+         x="-100.60045"
+         height="20.624641"
+         width="80.404877"
+         id="rect1386"
+         style="fill:#ebebeb;fill-opacity:1;stroke:#000000;stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none" />
+      <text
+         id="text1396"
+         y="505.46252"
+         x="-94.203262"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none"
+           y="505.46252"
+           x="-94.203262"
+           id="tspan1394"
+           sodipodi:role="line">tailnum</tspan></text>
+      <path
          inkscape:connector-curvature="0"
          id="path10141"
          d="M 207.91187,315.61426 H 183.4536"
@@ -523,24 +552,6 @@
            x="-74.775764"
            id="tspan1350"
            sodipodi:role="line">...</tspan></text>
-      <path
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M -19.707758,501.23597 H 16.99036"
-         id="path5595"
-         inkscape:connector-curvature="0" />
-      <circle
-         r="3.2326748"
-         cy="501.23596"
-         cx="-60.398014"
-         id="circle6841"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none" />
-      <rect
-         y="490.92365"
-         x="-100.60045"
-         height="20.624641"
-         width="80.404877"
-         id="rect1386"
-         style="fill:#ebebeb;fill-opacity:1;stroke:#000000;stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none" />
       <rect
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none"
          id="rect1388"
@@ -559,17 +570,6 @@
            x="-89.190384"
            y="478.41345"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none">planes</tspan></text>
-      <text
-         id="text1396"
-         y="505.46252"
-         x="-94.203262"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';stroke-width:1.13385832;stroke-miterlimit:4;stroke-dasharray:none"
-           y="505.46252"
-           x="-94.203262"
-           id="tspan1394"
-           sodipodi:role="line">tailnum</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.13385832;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
