@@ -488,7 +488,7 @@ atrasos <- vuelos %>%
     distancia = mean(distancia, na.rm = TRUE),
     atraso = mean(atraso_llegada, na.rm = TRUE)
   ) %>% 
-  filter(count > 20, destino != "HNL")
+  filter(conteo > 20, destino != "HNL")
 ```
 
 Esto se enfoca en las transformaciones, no en lo que se está transformando, lo que hace que el código sea más fácil de leer. Puedes leerlo como una serie de declaraciones imperativas: agrupa, luego resume y por último filtra. Como sugiere esta lectura, una buena forma de pronunciar `%>%` cuando se lee el código es "y luego".  
