@@ -1,4 +1,4 @@
-# (PARTE) Domar datos {-}
+# (PART) Domar datos {-}
 
 
 # Introducción {#domar datos -intro}
