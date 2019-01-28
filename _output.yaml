@@ -3,7 +3,7 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><strong><a href="./">R for Data Science</a></strong></li>
+        <li><strong><a href="./">R para Ciencia de Datos</a></strong></li>
     edit:
       link: https://github.com/hadley/r4ds/edit/master/%s
       text: "Edit"
