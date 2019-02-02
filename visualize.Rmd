@@ -161,11 +161,11 @@ ggplot(data = millas) +
 También podríamos haber asignado la `clase` a la estética *alfa*, que controla la transparencia de los puntos o a la estética *shape* que controla la forma  (shape) de los puntos.
 
 ```{r out.width = "50%", fig.align = 'default', warning = FALSE, fig.asp = 1/2, fig.cap =""}
-# Left
+# Izquierda
 ggplot(data = millas) + 
   geom_point(mapping = aes(x = motor, y = autopista, alpha = clase))
 
-# Right
+# Derecha
 ggplot(data = millas) + 
   geom_point(mapping = aes(x = motor, y = autopista, shape = clase))
 ```
