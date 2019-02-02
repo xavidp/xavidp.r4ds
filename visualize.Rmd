@@ -189,7 +189,7 @@ Aquí, el color no transmite información sobre una variable, sino que cambia la
 
 *	El tamaño de un punto en mm.
 
-*	La forma de un punto como un número, como se muestra en la Figura \@ref(fig:shapes).Hay algunas que parecen duplicados: por ejemplo 0, 15 y 22 son todos cuadrados. La diferencia viene de la interacción entre las estéticas `color` y `fill` (*relleno*). Las formas vacías (0--14) tienen un borde determinado por `color`; las formas sólidas (15--18) están rellenas con `color`; las formas rellenas (21--24) tienen un borde de `color` y están rellenas por `fill`
+*	La forma de un punto como un número, como se muestra en la Figura \@ref(fig:shapes).
 
 ```{r shapes, echo = FALSE, out.width = "75%", fig.asp = 1/3, fig.cap="R tiene 25 formas de default que están identificadas por números. Hay algunas que parecen duplicados: por ejemplo 0, 15 y 22 son todos cuadrados. La diferencia viene de la interacción entre las estéticas `color` y `fill` (*relleno*). Las formas vacías (0--14) tienen un borde determinado por `color`; las formas sólidas (15--18) están rellenas con `color`; las formas rellenas (21--24) tienen un borde de `color` y están renellas por `fill`.", warning = FALSE}
 
