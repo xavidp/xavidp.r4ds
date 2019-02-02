@@ -537,7 +537,8 @@ Por ejemplo, puedes usar `stat_summary()`, que resume los valores de y para cada
       mapping = aes(x = corte, y = profundidad),
       fun.ymin = min,
       fun.ymax = max,
-     fun.y = median)
+      fun.y = median
+      )
     ```
     
 **ggplot2** proporciona más de 20 estadísticas para que uses. Cada estadística es una función, por lo que puedes obtener ayuda de la manera habitual, por ejemplo: `?stat_bin`. Para ver una lista completa de estadísticas disponibles para **ggplot2**, consulta la hoja de referencia.
