@@ -22,7 +22,7 @@ options(dplyr.print_min = 6, dplyr.print_max = 6)
 >"Un simple gráfico ha brindado más información a la mente del analista de datos
 >que cualquier otro dispositivo". --- John Tukey
 
-En este capítulo aprenderás cómo visualizar datos usando el paquete **ggplot2**. De los muchos sistemas que posee R para hacer gráficos, **ggplot2** es uno de los más elegantes y versátiles. Esto se debe a que implementa  un sistema coherente para describir y construir gráficos, conocido como la __gramática de gráficos__. Con **ggplot2** puedes hacer más cosas en menor tiempo, aprendiendo un único sistema y aplicándolo en muchos lugares
+En este capítulo aprenderás cómo visualizar tus datos usando el paquete **ggplot2**. De los muchos sistemas que posee R para hacer gráficos, **ggplot2** es uno de los más elegantes y versátiles. Esto se debe a que **ggplot2** implementa  un sistema coherente para describir y construir gráficos, conocido como la **gramática de gráficos**. Con **ggplot2** puedes hacer más cosas en menor tiempo, aprendiendo un único sistema y aplicándolo en diferentes ámbitos.
 
 Si deseas obtener más información sobre los fundamentos teóricos de **ggplot2** antes de comenzar, te recomendamos leer "La gramática de gráficos en capas", <http://vita.had.co.nz/papers/layered-grammar.pdf>.
 
@@ -34,7 +34,7 @@ Este capítulo se centra en **ggplot2**, uno de los paquetes  principales de tid
 library(tidyverse)
 ```
 
-Esa única línea de código carga el núcleo de tidyverse; compuesto por los paquetes que usarás en casi todos tus análisis de datos. Al correr esta línea verás cuáles  funciones de tidyverse pueden tener conflicto con funciones de R base (o de otros paquetes que puedas haber cargado previamente). 
+Esa única línea de código carga el núcleo del tidyverse; compuesto por los paquetes que usarás en casi todos tus análisis de datos. Al correr esta línea también verás cuáles funciones de tidyverse pueden tener conflicto con funciones de R base (o de otros paquetes que puedas haber cargado previamente).
 
 Si ejecutas este código y recibes el mensaje de error "no hay ningún paquete llamado 'tidyverse'", primero deberás instalarlo y luego ejecutar `library ()` una vez más.
 
@@ -46,15 +46,15 @@ library(tidyverse)
 
 Solo necesitas instalar el paquete una única vez, pero debes volver a cargarlo siempre que inicies una nueva sesión.
 
-Si necesitamos ser explícitos acerca de dónde viene una función (o un conjunto de datos), usaremos el formato especial `package::function()`. Por ejemplo, `ggplot2::ggplot()` dice explícitamente que estamos usando la función `ggplot()` del paquete ggplot2.
+Cuando necesitemos especificar la procedencia de una función (o un conjunto de datos), usaremos el formato especial `paquete::funcion()`. Por ejemplo, `ggplot2::ggplot()` dice explícitamente que estamos usando la función `ggplot()` del paquete ggplot2.
 
 ## Primeros pasos
 
 Usemos nuestro primer gráfico para responder una pregunta: ¿Los automóviles con motores grandes consumen más combustible que los automóviles con motores pequeños? Probablemente ya tengas una respuesta, pero trata de responder de forma precisa. ¿Cómo es la relación entre el tamaño del motor y la eficiencia del combustible? ¿Es positiva? ¿Es negativa? ¿Es lineal o no lineal?
 
-### El conjunto de datos `millas`
+### El data frame `millas`
 
-Puedes poner a prueba tu respuesta empleando el conjunto de datos `millas` que se encuentra en el paquete **datos** (`datos::millas`). Un conjunto de datos es una colección rectangular de variables (en las columnas) y observaciones (en las filas). `millas` contiene observaciones para 38 modelos de automóviles recopiladas por la Agencia de Protección Ambiental de los EE. UU. 
+Puedes poner a prueba tu respuesta empleando el *data frame* `millas` que se encuentra en el paquete **datos** (`datos::millas`). Un data frame es una colección rectangular de variables (columnas) y observaciones (filas). El data frame `millas` contiene observaciones para 38 modelos de automóviles recopiladas por la Agencia de Protección Ambiental de los EE. UU. 
 
 ```{r}
 library(datos)
@@ -66,9 +66,9 @@ Entre las variables en `millas` encontramos:
 
 1-`motor`. Tamaño del motor de un automóvil, en litros.
 
-2-`autopista`. La eficiencia del uso de combustible de un automóvil en la carretera, en millas por galón. Sobre la misma distancia, un automóvil de baja eficiencia consume más combustible que un automóvil de alta eficiencia. 
+2-`autopista`. La eficiencia del uso de combustible de un automóvil en la carretera, en millas por galón. Al recorrer la misma distancia, un automóvil de baja eficiencia consume más combustible que un automóvil de alta eficiencia. 
 
-Para obtener más información sobre el conjunto de datos millas, puedes abrir la página de ayuda ejecutando `?millas`.
+Para obtener más información sobre el data frame millas, puedes abrir la página de ayuda ejecutando `?millas`.
 
 ### Creando un gráfico con ggplot
 
@@ -79,13 +79,13 @@ ggplot(data = millas) +
   geom_point(mapping = aes(x = motor, y = autopista))
 ```
 
-El gráfico muestra una relación negativa entre el tamaño del motor (`motor`) y la eficiencia del combustible (`autopista`). En otras palabras, los autos con motores grandes usan más combustible. Este resultado, ¿confirma o refuta tu hipótesis acerca de la relación entre la eficiencia del combustible y el tamaño del motor?
+El gráfico muestra una relación negativa entre el tamaño del motor (`motor`) y la eficiencia del combustible (`autopista`). En otras palabras, los vehículos con motores grandes usan más combustible. Este resultado, ¿confirma o refuta tu hipótesis acerca de la relación entre la eficiencia del combustible y el tamaño del motor?
 
-Para graficar con **ggplot2**, comienzas un gráfico con la función `ggplot()`. `ggplot()` crea un sistema de coordenadas al cual puedes agregar capas. El primer argumento de `ggplot()` es el conjunto de datos para usar en el gráfico. Si corres `ggplot(data = millas)`, obtendrás un gráfico vacío. Como no es muy interesante, no vamos a mostrarlo aquí.
+Para comenzar un gráfico con **ggplot2** se utiliza la función `ggplot()`. `ggplot()` crea un sistema de coordenadas al cual puedes agregar capas. El primer argumento de `ggplot()` es el conjunto de datos para usar en el gráfico. Si corres `ggplot(data = millas)`, obtendrás un gráfico vacío. Como no es muy interesante, no vamos a mostrarlo aquí.
 
-Para completar tu gráfico debes agregar una o más capas a `ggplot()`. La función `geom_point()` agrega una capa de puntos al gráfico, que crea un diagrama de dispersión (*scatterplot*). **ggplot2** incluye muchas funciones llamadas geom, cada una de las cuales agrega un tipo de capa diferente a un gráfico. Aprenderás sobre muchas de ellas  a lo largo de este capítulo.
+Para completar tu gráfico debes agregar una o más capas a `ggplot()`. La función `geom_point()` agrega una capa de puntos al gráfico, que crea un diagrama de dispersión (*scatterplot*). **ggplot2** incluye muchas funciones geom, cada una de las cuales agrega un tipo de capa diferente a un gráfico. Aprenderás muchas de ellas a lo largo de este capítulo.
 
-Cada función geom en **ggplot2** tiene un argumento de `mapping`. Este define cómo se asignan o se “mapean” las variables del conjunto de datos a propiedades visuales. El argumento de `mapping` siempre aparece emparejado con `aes()`, y los argumentos `x` e `y` dentro de `aes()` especifican qué variables asignar a los ejes x e y. **ggplot2** busca la variable asignada en el argumento `data`, en este caso, `millas`.
+Cada función geom en **ggplot2** tiene un argumento de `mapping`. Este define cómo se "mapean" o se asignan las variables del conjunto de datos a propiedades visuales. El argumento de `mapping` siempre aparece emparejado con `aes()`, y los argumentos `x` e `y` dentro de `aes()` especifican qué variables asignar a los ejes x e y. **ggplot2** busca la variable asignada en el argumento `data`, en este caso, `millas`.
 
 ### Una plantilla de gráficos
 
@@ -96,7 +96,7 @@ ggplot(data = <DATOS>) +
   <GEOM_FUNCION>(mapping = aes(<MAPEOS>)) 
 ```
 
-El resto de este capítulo te mostrará cómo utilizar y adaptar esta planilla para crear diferentes tipos de gráficos. Comenzaremos por el componente `<MAPEOS>`
+El resto de este capítulo te mostrará cómo utilizar y adaptar esta plantilla para crear diferentes tipos de gráficos. Comenzaremos por el componente `<MAPEOS>`
 
 ### Ejercicios
 
@@ -106,7 +106,7 @@ El resto de este capítulo te mostrará cómo utilizar y adaptar esta planilla p
 
 3.  ¿Qué describe la variable `traccion`? Lee la ayuda de `?millas` para encontrar la respuesta.
      
-4.  Realiza un gráfico de dispersión de las variables `autopista` y `cilindros`.
+4.  Realiza un gráfico de dispersión de `autopista` versus `cilindros`.
 
 5.  ¿Qué sucede cuando haces un gráfico de dispersión de `clase` versus `traccion`? ¿Por qué no es útil este gráfico?
 
@@ -115,7 +115,7 @@ El resto de este capítulo te mostrará cómo utilizar y adaptar esta planilla p
 > "El mayor valor de una imagen es cuando nos obliga a observar
 > lo que no esperabamos ver". --- John Tukey
 
-En el siguiente gráfico, un grupo de puntos resaltados en rojo parece quedar fuera de la tendencia lineal. Estos autos tienen un kilometraje mayor de lo que esperaríamos. ¿Cómo puedes explicar estos autos?
+En el siguiente gráfico, un grupo de puntos (resaltados en rojo) parece quedar fuera de la tendencia lineal. Estos vehículos tienen un kilometraje mayor de lo que esperaríamos. ¿Cómo puedes explicar estos vehículos?
 
 ```{r, echo = FALSE}
 ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
@@ -138,7 +138,7 @@ ggplot() +
   theme(aspect.ratio = 1/3)
 ```
 
-El mapeo de las propiedades estéticas en tus gráficos a las variables en tu conjunto de datos te permite comunicar información de los mismos.  Por ejemplo, puedes asignar los colores de tus puntos a la variable `clase` para revelar la clase de cada automóvil.
+El mapeo entre las propiedades estéticas del gráfico y las variables del conjunto de datos te permite comunicar información de los mismos. Por ejemplo, puedes asignar los colores de los puntos de acuerdo con la variable `clase` para indicar la clase de cada automóvil.
 
 ```{r}
 ggplot(data = millas) + 
@@ -147,10 +147,9 @@ ggplot(data = millas) +
 
 (Si prefieres el inglés británico, como Hadley, puedes usar `colour` en lugar de `color`).
 
-(Si prefieres el inglés británico, como Hadley, puedes usar `colour` en lugar de `color`).
-Para asignar una estética a una variable, debes asociar el nombre de la estética al de la variable dentro de `aes()`. **ggplot2** asignará automáticamente un nivel único de la estética (en este ejemplo, un color ) a cada valor único de la variable. Este proceso es conocido como __escalamiento__ (*scaling*). **ggplot2** acompañará el gráfico con una leyenda que explica qué niveles corresponden a qué valores.
+Para mapear (o asignar) una estética a una variable, debes asociar el nombre de la estética al de la variable dentro de `aes()`. **ggplot2** asignará automáticamente un nivel único de la estética (en este ejemplo, un color) a cada valor único de la variable. Este proceso es conocido como __escalamiento__ (*scaling*). **ggplot2** acompañará el gráfico con una leyenda que explica qué niveles corresponden a qué valores.
 
-Los colores revelan que muchos de los puntos inusuales son los coches de dos asientos. ¡Estos automóviles no parecen híbridos, y son, de hecho, autos deportivos! Los autos deportivos tienen motores grandes, como camionetas todo terreno o pickups, a diferencia de los vehículos pequeños como los autos medianos y compactos, lo que mejora su consumo de gasolina. En retrospectiva, es poco probable que estos autos sean híbridos ya que tienen motores grandes.
+Los colores revelan que muchos de los puntos inusuales son los automóviles de dos asientos. ¡Estos automóviles no parecen híbridos, y son, de hecho, automóviles deportivos! Los automóviles deportivos tienen motores grandes, así como las camionetas todo terreno o pickups, a diferencia de los automóviles pequeños, medianos y compactos, lo que mejora su consumo de gasolina. En retrospectiva, es poco probable que estos automóviles sean híbridos ya que tienen motores grandes.
 
 En el ejemplo anterior, asignamos la variable `clase` a la estética del color , pero podríamos haber asignado a la estética del tamaño de la misma manera. En este caso, el tamaño exacto de cada punto revelaría clase. Recibimos aquí una __advertencia__ (*warning*), porque mapear una variable desordenada (`clase`) a una estética ordenada (`size`) no es una buena idea.
 
@@ -192,7 +191,7 @@ Aquí, el color no transmite información sobre una variable, sino que cambia la
 
 *	La forma de un punto como un número, como se muestra en la Figura \@ref(fig:shapes).Hay algunas que parecen duplicados: por ejemplo 0, 15 y 22 son todos cuadrados. La diferencia viene de la interacción entre las estéticas `color` y `fill` (*relleno*). Las formas vacías (0--14) tienen un borde determinado por `color`; las formas sólidas (15--18) están rellenas con `color`; las formas rellenas (21--24) tienen un borde de `color` y están rellenas por `fill`
 
-```{r shapes, echo = FALSE, out.width = "75%", fig.asp = 1/3, fig.cap="R tiene 25 formas de default que están identificadas por números. .", warning = FALSE}
+```{r shapes, echo = FALSE, out.width = "75%", fig.asp = 1/3, fig.cap="R tiene 25 formas de default que están identificadas por números. Hay algunas que parecen duplicados: por ejemplo 0, 15 y 22 son todos cuadrados. La diferencia viene de la interacción entre las estéticas `color` y `fill` (*relleno*). Las formas vacías (0--14) tienen un borde determinado por `color`; las formas sólidas (15--18) están rellenas con `color`; las formas rellenas (21--24) tienen un borde de `color` y están renellas por `fill`.", warning = FALSE}
 
 shapes <- tibble(
   shape = c(0, 1, 2, 5, 3, 4, 6:19, 22, 21, 24, 23, 20),
@@ -296,9 +295,9 @@ Si prefieres no separar en facetas las filas o columnas, remplaza por un `.` el 
 4.  Mira de nuevo el primer gráfico en facetas presentado en esta sección:
 
     ```{r, eval = FALSE}
-    ggplot(data = mpg) + 
-     geom_point(mapping = aes(x = displ, y = hwy)) + 
-     facet_wrap(~ class, nrow = 2)
+    ggplot(data = millas) + 
+     geom_point(mapping = aes(x = motor, y = autopista)) + 
+     facet_wrap(~ clase, nrow = 2)
     ```
     
    ¿Cuáles son las ventajas de separar en facetas en lugar de aplicar una estética de color?
@@ -392,8 +391,8 @@ ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
 Si colocas mapeos  en una función geom, ggplot2 los tratará como mapeos locales para la capa. Estas asignaciones serán usadas para extender o sobrescribir los mapeos globales *de solo esa capa*. Esto permite mostrar diferentes estéticas en diferentes capas.
 
 ```{r, message = FALSE}
-ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
-  geom_point(mapping = aes(color = class)) + 
+ggplot(data = millas, mapping = aes(x = motor, y = autopista)) + 
+  geom_point(mapping = aes(color = clase)) + 
   geom_smooth()
 ```
 
@@ -599,7 +598,7 @@ ggplot(data = diamantes, mapping = aes(x = corte, colour = claridad)) +
   geom_bar(fill = NA, position = "identity")
 ```
     
-El ajuste de `posición = identity` es más útil para geoms 2-D, como puntos, donde es la opción predeterminada.
+El ajuste de `position = identity` es más útil para geoms 2-D, como puntos, donde es la opción predeterminada.
    
 * `position = "fill"` funciona como el apilamiento, pero hace que cada conjunto de barras apiladas tenga la misma altura. Esto hace que sea más fácil comparar proporciones entre grupos.
 
@@ -640,7 +639,7 @@ Para obtener más información sobre ajustes de posición, busca la página de a
 1.  ¿Cuál es el problema con este gráfico? ¿Cómo podrías mejorarlo?
 
 ```{r}
-ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+ggplot(data = millas, mapping = aes(x = ciudad, y = autopista)) + 
   geom_point()
 ```
 
@@ -696,7 +695,7 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
 
 ### Ejercicios
 
-1.  Convierte un gráfico de barras apiladas en un gráfico circular usando `coord_polar ()`.
+1.  Convierte un gráfico de barras apiladas en un gráfico circular usando `coord_polar()`.
 
 2.  ¿Qué hace `labs()`? Lee la documentación.
 
