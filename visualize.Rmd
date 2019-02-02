@@ -631,7 +631,7 @@ ggplot(data = millas) +
   geom_point(mapping = aes(x = motor, y = autopista), position = "jitter")
 ```
 
-Si bien agregar aleatoriedad a los puntos puede parecer una forma extraña de mejorar tu gráfico ya que hace que sea menos preciso a escalas pequeñas, lo hace ser más revelador a gran escala. Como esta es una operación tan útil, ggplot2 viene con una abreviatura de geom_point (position = "jitter"): geom_jitter ().
+Si bien agregar aleatoriedad a los puntos puede parecer una forma extraña de mejorar tu gráfico ya que hace que sea menos preciso a escalas pequeñas, lo hace ser más revelador a gran escala. Como esta es una operación tan útil, ggplot2 viene con una abreviatura de `geom_point(position = "jitter")`: `geom_jitter()`.
 
 Para obtener más información sobre ajustes de posición, busca la página de ayuda asociada con cada ajuste: `?position_dodge`, `?position_fill`, `?position_identity`, `?position_jitter` y `?position_stack`.
 
