@@ -36,7 +36,7 @@ library(tidyverse)
 
 Esa única línea de código carga el núcleo del tidyverse; compuesto por los paquetes que usarás en casi todos tus análisis de datos. Al correr esta línea también verás cuáles funciones de tidyverse pueden tener conflicto con funciones de R base (o de otros paquetes que puedas haber cargado previamente).
 
-Si ejecutas este código y recibes el mensaje de error "no hay ningún paquete llamado 'tidyverse'", primero deberás instalarlo y luego ejecutar `library ()` una vez más.
+Si ejecutas este código y recibes el mensaje de error "no hay ningún paquete llamado 'tidyverse'", primero deberás instalarlo y luego ejecutar `library()` una vez más.
 
 ```{r eval = FALSE}
 install.packages("tidyverse")
@@ -226,7 +226,7 @@ ggplot(shapes, aes(x, y)) +
 
 5.  ¿Qué hace la estética `stroke`? ¿Con qué formas trabaja? (Sugerencia: consultar `?geom_point`)
 
-6.  ¿Qué ocurre si se asigna o mapea una estética a algo diferente del nombre de una variable, como ser `aes (color = motor <5)`?
+6.  ¿Qué ocurre si se asigna o mapea una estética a algo diferente del nombre de una variable, como ser `aes(color = motor < 5)`?
 
 ## Problemas comúnes
 
@@ -265,7 +265,7 @@ ggplot(data = millas) +
   facet_grid(traccion ~ cilindros)
 ```
 
-Si prefieres no separar en facetas las filas o columnas, remplaza por un `.` el nombre de alguna de las variables, por ejemplo ` + facet_grid (. ~ cyl)`.
+Si prefieres no separar en facetas las filas o columnas, remplaza por un `.` el nombre de alguna de las variables, por ejemplo ` + facet_grid(. ~ cyl)`.
 
 ### Ejercicios
 
@@ -481,7 +481,7 @@ En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje
 
 *	los diagramas de caja calculan un sólido resumen de la distribución y luego muestran un cuadro con formato especial.
 
-El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés  de transformación estadística. La siguiente figura describe cómo funciona este proceso con `geom_bar ()`.
+El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés  de transformación estadística. La siguiente figura describe cómo funciona este proceso con `geom_bar()`.
 
 ```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/visualization-stat-bar.png")
@@ -498,7 +498,7 @@ ggplot(data = diamantes) +
 
 Esto funciona porque cada geom tiene una estadística predeterminada; y cada estadística tiene un geom predeterminado. Esto significa que generalmente puedes usar geoms sin preocuparte por la transformación estadística subyacente. Hay tres razones por las que podrías necesitar usar una estadística explícitamente:
 
-1.	Es posible que desee anular la estadística predeterminada. En el siguiente código, cambio la estadística de `geom_bar()` de recuento   (el valor predeterminado) a identidad. Esto me permite asignar la altura de las barras a los valores brutos de una variable $y$  . Desafortunadamente, cuando la gente habla de gráficos de barras casualmente, podría estar refiriéndose a este tipo de gráfico de barras, donde la altura de la barra ya está presente en los datos, o al gráfico de barras anterior, donde la altura de la barra se determina contando filas.
+1.	Es posible que desee anular la estadística predeterminada. En el siguiente código, cambio la estadística de `geom_bar()` de recuento (el valor predeterminado) a identidad. Esto me permite asignar la altura de las barras a los valores brutos de una variable $y$  . Desafortunadamente, cuando la gente habla de gráficos de barras casualmente, podría estar refiriéndose a este tipo de gráfico de barras, donde la altura de la barra ya está presente en los datos, o al gráfico de barras anterior, donde la altura de la barra se determina contando filas.
 
     
     ```{r, warning = FALSE}
@@ -646,7 +646,7 @@ ggplot(data = millas, mapping = aes(x = ciudad, y = autopista)) +
 
 2. ¿Qué parámetros de `geom_jitter()` controlan la cantidad de ruido?
 
-3.  Compara y contrasta `geom_jitter()` con `geom_count ()`
+3.  Compara y contrasta `geom_jitter()` con `geom_count()`
 
 4.  ¿Cuál es el ajuste de posición predeterminado de `geom_boxplot()`? Crea una visualización del conjunto de datos de `millas` que lo demuestre.
 
