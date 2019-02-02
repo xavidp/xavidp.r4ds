@@ -271,7 +271,7 @@ Si prefieres no separar en facetas las filas o columnas, remplaza por un `.` el 
 
 1.  Qué ocurre si intentas separar en facetas a una variable continua?
 
-2.  ¿Qué significan las celdas vacías que aparecen en el gráfico generado usando `facet_grid (traccion ~ cilindros)`? 
+2.  ¿Qué significan las celdas vacías que aparecen en el gráfico generado usando `facet_grid(traccion ~ cilindros)`? 
 ¿Cómo se relacionan con este gráfico?
     
     ```{r, eval = FALSE}
@@ -326,7 +326,7 @@ Ambos gráficos contienen las mismas variables x e y, y describen los mismos dat
 
 Un __geom__ es el objeto geométrico usado para representar datos de forma gráfica. La gente a menudo llama los gráficos por el tipo de geom que utiliza. Por ejemplo, los diagramas de barras usan geoms de barra (*bar*), los diagramas de líneas usan geoms de línea (*line*), los diagramas de caja usan geoms de diagrama de caja (*boxplot*), y así sucesivamente. En inglés, los diagramas de puntos (llamados *scatterplots*)  rompen la tendencia; ellos usan geom de punto (o *point*).  Como vemos arriba, puedes usar diferentes geoms para graficar los mismos datos. La gráfica de la izquierda usa el geom de punto (`geom_point()`), y la gráfica de la derecha usa el geom liso (`geom_smooth()`), una línea suave ajustada a los datos.
 
-Para cambiar el geom de tu gráfico, modifica la función geom que acompaña a `ggplot ()`. Por ejemplo, para hacer los gráficos que se muestran arriba, puedes usar este código:
+Para cambiar el geom de tu gráfico, modifica la función geom que acompaña a `ggplot()`. Por ejemplo, para hacer los gráficos que se muestran arriba, puedes usar este código:
 
 ```{r eval = FALSE}
 # left
