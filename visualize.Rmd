@@ -686,9 +686,10 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
     geom_bar(
      mapping = aes(x = corte, fill = corte), 
      show.legend = FALSE,
-     width = 1) + 
-     theme(aspect.ratio = 1) +
-      labs(x = NULL, y = NULL)
+     width = 1
+    ) + 
+    theme(aspect.ratio = 1) +
+    labs(x = NULL, y = NULL)
 
     bar + coord_flip()
     bar + coord_polar()
