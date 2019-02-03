@@ -329,11 +329,11 @@ Un __geom__ es el objeto geométrico usado para representar datos de forma gráf
 Para cambiar el geom de tu gráfico, modifica la función geom que acompaña a `ggplot()`. Por ejemplo, para hacer los gráficos que se muestran arriba, puedes usar este código:
 
 ```{r eval = FALSE}
-# left
+# izquierda
 ggplot(data = millas) + 
   geom_point(mapping = aes(x = motor, y = autopista))
 
-# right
+# derecha
 ggplot(data = millas) + 
   geom_point(mapping = aes(x = motor, y = autopista))
 ```
@@ -424,7 +424,7 @@ Luego, ejecuta el código en R y verifica tus predicciones.
 
 4.  ¿Qué hace el argumento `se` en `geom_smooth()`?
 
-5.  Will these two graphs look different? Why/why not?
+5.  ¿Se verán distintos estos gráficos? ¿Por qué sí o por qué no?
 
     ```{r, eval = FALSE}
     ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
