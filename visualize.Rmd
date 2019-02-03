@@ -22,13 +22,13 @@ options(dplyr.print_min = 6, dplyr.print_max = 6)
 >"Un simple gráfico ha brindado más información a la mente del analista de datos
 >que cualquier otro dispositivo". --- John Tukey
 
-En este capítulo aprenderás cómo visualizar tus datos usando el paquete **ggplot2**. De los muchos sistemas que posee R para hacer gráficos, **ggplot2** es uno de los más elegantes y versátiles. Esto se debe a que **ggplot2** implementa  un sistema coherente para describir y construir gráficos, conocido como la **gramática de gráficos**. Con **ggplot2** puedes hacer más cosas en menor tiempo, aprendiendo un único sistema y aplicándolo en diferentes ámbitos.
+En este capítulo aprenderás cómo visualizar tus datos usando el paquete **ggplot2**. De los muchos sistemas que posee R para hacer gráficos, **ggplot2** es uno de los más elegantes y versátiles. Esto se debe a que **ggplot2** implementa un sistema coherente para describir y construir gráficos, conocido como la **gramática de gráficos**. Con **ggplot2** puedes hacer más cosas en menor tiempo, aprendiendo un único sistema y aplicándolo en diferentes ámbitos.
 
 Si deseas obtener más información sobre los fundamentos teóricos de **ggplot2** antes de comenzar, te recomendamos leer "La gramática de gráficos en capas", <http://vita.had.co.nz/papers/layered-grammar.pdf>.
 
 ### Prerrequisitos
 
-Este capítulo se centra en **ggplot2**, uno de los paquetes  principales de tidyverse. Para acceder a los conjuntos de datos, las páginas de ayuda y las funciones que utilizaremos en este capítulo, debes cargar tidyverse ejecutando este código:
+Este capítulo se centra en **ggplot2**, uno de los paquetes principales de tidyverse. Para acceder a los conjuntos de datos, las páginas de ayuda y las funciones que utilizaremos en este capítulo, debes cargar tidyverse ejecutando este código:
 
 ```{r setup}
 library(tidyverse)
@@ -89,7 +89,7 @@ Cada función geom en **ggplot2** tiene un argumento de `mapping`. Este define c
 
 ### Una plantilla de gráficos
 
-Convirtamos ahora este código en una plantilla reutilizable para hacer gráficos con **ggplot2**. Para hacer un gráfico, reemplaza las secciones entre corchetes  en el siguiente código con un conjunto de datos, una función geom o una colección de mapeos. 
+Convirtamos ahora este código en una plantilla reutilizable para hacer gráficos con **ggplot2**. Para hacer un gráfico, reemplaza las secciones entre corchetes en el siguiente código con un conjunto de datos, una función geom o una colección de mapeos. 
 
 ```{r eval = FALSE}
 ggplot(data = <DATOS>) + 
@@ -158,7 +158,7 @@ ggplot(data = millas) +
   geom_point(mapping = aes(x = motor, y = autopista, size = clase))
 ```
 
-También podríamos haber asignado la `clase` a la estética *alfa*, que controla la transparencia de los puntos o a la estética *shape* que controla la forma  (shape) de los puntos.
+También podríamos haber asignado la `clase` a la estética *alfa*, que controla la transparencia de los puntos o a la estética *shape* que controla la forma (shape) de los puntos.
 
 ```{r out.width = "50%", fig.align = 'default', warning = FALSE, fig.asp = 1/2, fig.cap =""}
 # Izquierda
@@ -174,7 +174,7 @@ ggplot(data = millas) +
 
 Para cada estética, se usa `aes()` para asociar el nombre de la estética con la variable seleccionada para graficar. La función `aes()` reúne cada una de las asignaciones estéticas utilizadas por una capa y las pasa al argumento de mapeo de la capa.  La sintaxis resalta una visión útil sobre `x` e `y`: las ubicaciones de x e y de un punto son en sí mismas también estéticas, es decir propiedades visuales que se puede asignar a las variables para mostrar información sobre los datos.
 
-Una vez que asignas una estética, **ggplot2** se ocupa del resto. El paquete selecciona una escala razonable para usar con la estética elegida y construye una leyenda que explica la relación entre niveles y valores. Para la estética x e y, **ggplot2** no crea una leyenda, pero crea una línea que delimita el eje con sus marcas   de graduación y una etiqueta. La línea del eje actúa como una leyenda; explica el mapeo entre ubicaciones y valores.
+Una vez que asignas una estética, **ggplot2** se ocupa del resto. El paquete selecciona una escala razonable para usar con la estética elegida y construye una leyenda que explica la relación entre niveles y valores. Para la estética x e y, **ggplot2** no crea una leyenda, pero crea una línea que delimita el eje con sus marcas de graduación y una etiqueta. La línea del eje actúa como una leyenda; explica el mapeo entre ubicaciones y valores.
 
 También puedes *fijar* las propiedades estéticas de tu geom manualmente. Por ejemplo, podemos hacer que todos los puntos del gráfico sean azules:
 
@@ -218,7 +218,7 @@ ggplot(shapes, aes(x, y)) +
       geom_point(mapping = aes(x = motor, y = autopista, color = "blue"))
     ```
     
-2. ¿Qué variables en `millas` son categóricas? ¿Qué variables son continuas? (Sugerencia: escribe `? millas` para leer la documentación de ayuda para este conjunto de datos). ¿Cómo puedes ver esta información cuando ejecutas  `millas`?
+2. ¿Qué variables en `millas` son categóricas? ¿Qué variables son continuas? (Sugerencia: escribe `? millas` para leer la documentación de ayuda para este conjunto de datos). ¿Cómo puedes ver esta información cuando ejecutas `millas`?
 
 3.  Asigna una variable continua a `color`, ` size`, y `shape`. ¿Cómo se comportan estas estéticas de manera diferente para variables categóricas y variables continuas?
     
@@ -230,9 +230,9 @@ ggplot(shapes, aes(x, y)) +
 
 ## Problemas comúnes
 
-Es probable que encuentres problemas con los primeros códigos que ejecutes en R, e. No te preocupes, es lo más común  . He estado escribiendo código en R durante años, ¡y todos los días sigo escribiendo código que no funciona!
+Es probable que encuentres problemas con los primeros códigos que ejecutes en R, e. No te preocupes, es lo más común. He estado escribiendo código en R durante años, ¡y todos los días sigo escribiendo código que no funciona!
 
-Comienza comparando cuidadosamente el código que estás ejecutando con el código en este libro. R es extremadamente exigente, y un carácter  fuera de lugar puede marcar la diferencia. Asegúrate de que cada `(` coincida con un `)` y cada `" ` esté emparejado con otro` "`. Algunas veces ejecutarás el código y no pasará nada. Comprueba la parte izquierda de tu consola: si es un `+`, significa que R no cree que hayas escrito una expresión completa y está esperando que la termines. En este caso, normalmente es fácil comenzar nuevamente desde cero presionando ESCAPE para cancelar el procesamiento del comando actual.
+Comienza comparando cuidadosamente el código que estás ejecutando con el código en este libro. R es extremadamente exigente, y un carácter fuera de lugar puede marcar la diferencia. Asegúrate de que cada `(` coincida con un `)` y cada `" ` esté emparejado con otro` "`. Algunas veces ejecutarás el código y no pasará nada. Comprueba la parte izquierda de tu consola: si es un `+`, significa que R no cree que hayas escrito una expresión completa y está esperando que la termines. En este caso, normalmente es fácil comenzar nuevamente desde cero presionando ESCAPE para cancelar el procesamiento del comando actual.
 
 Un problema común al crear gráficos con **ggplot2** es colocar el `+` en el lugar equivocado: debe encontrarse al final de la línea, no al inicio. En otras palabras, asegúrate de no haber escrito accidentalmente un código como este:
 
@@ -249,7 +249,7 @@ Si eso no ayuda, lee cuidadosamente el mensaje de error. ¡A veces la respuesta 
 
 Una forma de agregar variables adicionales es con las estéticas. Otra forma particularmente útil para las variables categóricas consiste en dividir el gráfico en __facetas__, sub-gráficos que muestran cada uno un subconjunto de los datos.
 
-Para separar en facetas un gráfico según una sola variable, usa `facet_wrap()` - del inglés *envolver una faceta*. El primer argumento de `facet_wrap()` debería ser una fórmula creada con `~` seguido por el nombre de una de las variable (aquí "fórmula" es el nombre de un tipo de estructura en R, no un sinónimo de "ecuación").  La variable que uses en  `facet_wrap()` debe ser discreta.
+Para separar en facetas un gráfico según una sola variable, usa `facet_wrap()` - del inglés *envolver una faceta*. El primer argumento de `facet_wrap()` debería ser una fórmula creada con `~` seguido por el nombre de una de las variable (aquí "fórmula" es el nombre de un tipo de estructura en R, no un sinónimo de "ecuación").  La variable que uses en `facet_wrap()` debe ser discreta.
 
 ```{r}
 ggplot(data = millas) + 
@@ -345,7 +345,7 @@ ggplot(data = millas) +
   geom_smooth(mapping = aes(x = motor, y = autopista, linetype=traccion))
 ```
 
-Aquí `geom_smooth()` separa los automóviles en tres líneas en función de su valor de `traccion`, que describe el tipo de transmisión   de un automóvil. Una línea describe todos los puntos con un valor de 4, otra línea los de valor d, y una tercera línea describe los puntos con un valor t. Aquí, `4` significa tracción en las cuatro ruedas, `d` tracción delantera y `t` tracción trasera.
+Aquí `geom_smooth()` separa los automóviles en tres líneas en función de su valor de `traccion`, que describe el tipo de transmisión de un automóvil. Una línea describe todos los puntos con un valor de 4, otra línea los de valor d, y una tercera línea describe los puntos con un valor t. Aquí, `4` significa tracción en las cuatro ruedas, `d` tracción delantera y `t` tracción trasera.
 
 Si esto suena extraño, podemos hacerlo más claro al superponer las líneas sobre los datos brutos y luego colorear todo según `traccion`. 
 
@@ -388,7 +388,7 @@ ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
   geom_smooth()
 ```
 
-Si colocas mapeos  en una función geom, ggplot2 los tratará como mapeos locales para la capa. Estas asignaciones serán usadas para extender o sobrescribir los mapeos globales *de solo esa capa*. Esto permite mostrar diferentes estéticas en diferentes capas.
+Si colocas mapeos en una función geom, ggplot2 los tratará como mapeos locales para la capa. Estas asignaciones serán usadas para extender o sobrescribir los mapeos globales *de solo esa capa*. Esto permite mostrar diferentes estéticas en diferentes capas.
 
 ```{r, message = FALSE}
 ggplot(data = millas, mapping = aes(x = motor, y = autopista)) + 
@@ -409,7 +409,7 @@ ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
 ### Ejercicios
 
 1.  ¿Qué geom usarías para generar un gráfico de líneas?
-¿Un diagrama de caja? ¿Un histograma? ¿Un gráfico de área  ?
+¿Un diagrama de caja? ¿Un histograma? ¿Un gráfico de área?
 
 2.  Ejecuta este código en tu mente y predice cómo se verá el *output*.
 Luego, ejecuta el código en R y verifica tus predicciones.
@@ -473,15 +473,15 @@ ggplot(data = diamantes) +
   geom_bar(mapping = aes(x = corte))
 ```
 
-En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje y  muestra recuento, ¡pero el recuento no es una variable en `diamantes`! ¿De dónde viene el recuento? Muchos gráficos, como los diagramas de dispersión, grafican los valores brutos de su conjunto de datos. Otros gráficos, como los gráficos de barras, calculan nuevos valores para presentar:
+En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje y muestra recuento, ¡pero el recuento no es una variable en `diamantes`! ¿De dónde viene el recuento? Muchos gráficos, como los diagramas de dispersión, grafican los valores brutos de su conjunto de datos. Otros gráficos, como los gráficos de barras, calculan nuevos valores para presentar:
 
 *	los gráficos de barras, los histogramas y los polígonos de frecuencia almacenan los datos y luego grafican los conteos de contenedores, sea el número de puntos que caen en cada contenedor.
 
-*	los suavizadores  ajustan un modelo a los datos y luego grafican las predicciones del modelo.
+*	los suavizadores ajustan un modelo a los datos y luego grafican las predicciones del modelo.
 
 *	los diagramas de caja calculan un sólido resumen de la distribución y luego muestran un cuadro con formato especial.
 
-El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés  de transformación estadística. La siguiente figura describe cómo funciona este proceso con `geom_bar()`.
+El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés de transformación estadística. La siguiente figura describe cómo funciona este proceso con `geom_bar()`.
 
 ```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/visualization-stat-bar.png")
@@ -498,7 +498,7 @@ ggplot(data = diamantes) +
 
 Esto funciona porque cada geom tiene una estadística predeterminada; y cada estadística tiene un geom predeterminado. Esto significa que generalmente puedes usar geoms sin preocuparte por la transformación estadística subyacente. Hay tres razones por las que podrías necesitar usar una estadística explícitamente:
 
-1.	Es posible que desees anular la estadística predeterminada. En el siguiente código, cambio la estadística de `geom_bar()` de recuento (el valor predeterminado) a identidad. Esto me permite asignar la altura de las barras a los valores brutos de una variable $y$  . Desafortunadamente, cuando la gente habla de gráficos de barras casualmente, podrían estar refiriéndose a este tipo de gráfico de barras, donde la altura de la barra ya está presente en los datos, o al gráfico de barras anterior, donde la altura de la barra se determina contando filas.
+1.	Es posible que desees anular la estadística predeterminada. En el siguiente código, cambio la estadística de `geom_bar()` de recuento (el valor predeterminado) a identidad. Esto me permite asignar la altura de las barras a los valores brutos de una variable $y$. Desafortunadamente, cuando la gente habla de gráficos de barras casualmente, podrían estar refiriéndose a este tipo de gráfico de barras, donde la altura de la barra ya está presente en los datos, o al gráfico de barras anterior, donde la altura de la barra se determina contando filas.
 
     
     ```{r, warning = FALSE}
@@ -652,7 +652,7 @@ ggplot(data = millas, mapping = aes(x = ciudad, y = autopista)) +
 
 ## Sistemas de coordenadas
 
-Los sistemas de coordenadas son probablemente la parte más complicada de ggplot2. El sistema predeterminado es el sistema de coordenadas cartesianas, donde las posiciones x e y  actúan independientemente para determinar la ubicación de cada punto. Hay varios otros sistemas de coordenadas que ocasionalmente son útiles.
+Los sistemas de coordenadas son probablemente la parte más complicada de ggplot2. El sistema predeterminado es el sistema de coordenadas cartesianas, donde las posiciones x e y actúan independientemente para determinar la ubicación de cada punto. Hay varios otros sistemas de coordenadas que ocasionalmente son útiles.
 
 *   `coord_flip()` cambia los ejes x e y. Esto es útil (por ejemplo), si quieres diagramas de caja horizontales. También es útil para etiquetas largas: es difícil ajustarlas sin superposición en el eje x.
     
