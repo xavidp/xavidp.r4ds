@@ -1,4 +1,4 @@
-# R for Data Science
+# R para Ciencia de Datos
 
 [![Travis-CI Build Status](https://travis-ci.org/cienciadedatos/r4ds.svg?branch=traduccion)](https://travis-ci.org/cienciadedatos/r4ds)
 
