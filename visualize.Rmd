@@ -64,9 +64,9 @@ millas
 
 Entre las variables en `millas` encontramos:
 
-1-`motor`. Tamaño del motor de un automóvil, en litros.
+1. `motor`. Tamaño del motor de un automóvil, en litros.
 
-2-`autopista`. La eficiencia del uso de combustible de un automóvil en la carretera, en millas por galón. Al recorrer la misma distancia, un automóvil de baja eficiencia consume más combustible que un automóvil de alta eficiencia. 
+2. `autopista`. La eficiencia del uso de combustible de un automóvil en la carretera, en millas por galón. Al recorrer la misma distancia, un automóvil de baja eficiencia consume más combustible que un automóvil de alta eficiencia. 
 
 Para obtener más información sobre el data frame millas, puedes abrir la página de ayuda ejecutando `?millas`.
 
