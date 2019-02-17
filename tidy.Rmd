@@ -130,7 +130,7 @@ Juntando estos parámetros se puede realizar una llamada a `gather()`:
 
 ```{r}
 tabla4a %>%
-  gather(`1999`, `2000`, key = "anio", value = "casos")
+  gather(X1999, X2000, key = "anio", value = "casos")
 ```
 
 Las columnas a contraer quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los escribimos con __backtick__. Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
@@ -143,17 +143,17 @@ En el resultado final, las columnas reunidas se eliminan y obtenemos la nuevas v
 
 ```{r}
 tabla4b %>%
-  gather(`1999`, `2000`, key = "anio", value = "poblacion")
+  gather(X1999, X2000, key = "anio", value = "poblacion")
 ```
 
 Para combinar las versiones ordenadas de `tabla4a` y `tabla4b` en un único tibble, necesitamos usar `dplyr::left_join()`, función que aprenderás en [datos relacionales].
 
 ```{r}
 tidy4a <- tabla4a %>%
-  gather(`1999`, `2000`, key = "anio", value = "casos")
+  gather(X1999, X2000, key = "anio", value = "casos")
 
 tidy4b <- tabla4b %>%
-  gather(`1999`, `2000`, key = "anio", value = "poblacion")
+  gather(X1999, X2000, key = "anio", value = "poblacion")
 
 left_join(tidy4a, tidy4b)
 ```
@@ -212,7 +212,7 @@ Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, 
 
 ```{r, error = TRUE}
 tabla4a %>%
-  gather(1999, 2000, key = "anio", value = "casos")
+  gather(`1999`, `2000`, key = "anio", value = "casos")
 ```
 
 1.  ¿Por qué no se puede extender la siguiente tabla? ¿Cómo agregarias una nueva columna para resolver el problema?
@@ -271,16 +271,16 @@ tabla3 %>%
 
 (Formalmente, `sep` es una expresión regular y aprenderás más sobre esto en [strings].)
 
-Look carefully at the column tipos: you'll notice that `casos` and `poblacion` are character columns. This is the default behaviour in `separate()`: it leaves the tipo of the column as is. Here, however, it's not very useful as those really are numbers. We can ask `separate()` to try and convert to better tipos using `convert = TRUE`:
+Mira atentamente los tipos de columna: notarás que `casos` y `poblacion` son columnas de tipo caracter. Este es el comportamiento por defecto en `separate()`: preserva el tipo de columna. Aquí, sin embargo, no es muy útil ya que se trata de números. Podemos pedir `separate()` a separate que intente convertir a un tipo más adecuado usando `convert = TRUE`:
 
 ```{r}
 tabla3 %>%
   separate(tasa, into = c("casos", "poblacion"), convert = TRUE)
 ```
 
-You can also pass a vector of integers to `sep`. `separate()` will interpret the integers as positions to split at. Positive values start at 1 on the far-left of the strings; negative value start at -1 on the far-right of the strings. When using integers to separate strings, the length of `sep` should be one less than the number of names in `into`.
+También puedes pasar un vector de enteros a `sep`. `separate()` interpreta los enteros como las posiciones donde dividir. Los valores positivos comienzan en 1 al extremo izquierdo de las cadenas de texto; los valores negativos comienzan en -1 al extremo derecho de las cadena de texto. Cuando uses enteros para separar cadenas de textos, el largo de `sep` debe ser uno menos que el número de nombres en `into`.
 
-You can use this arrangement to separate the last two digits of each anio. This make this data less tidy, but is useful in other casos, as you'll see in a little bit.
+Puedes usar este arreglo para separar los últimos dos dígitos de cada año. Esto deja los datos menos ordenados, pero es útil en otros casos, como se verá más adelante.
 
 ```{r}
 tabla3 %>%
@@ -311,8 +311,8 @@ tabla5 %>%
 
 ### Exercises
 
-1.  What do the `extra` and `fill` arguments do in `separate()`?
-    Experiment with the various options for the following two toy datasets.
+1.  ¿Qué hacen los argumentos `extra` y `fill` en `separate()`?
+    Experimenta con las diversas opciones a partir de los siguientes datasets de ejemplo.
 
     ```{r, eval = FALSE}
 tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>%
@@ -322,19 +322,18 @@ tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%
   separate(x, c("one", "two", "three"))
     ```
 
-1.  Both `unite()` and `separate()` have a `remove` argument. What does it
-    do? Why would you set it to `FALSE`?
+1.  Tanto `unite()` como `separate()` tienen un argumento `remove`. ¿Qué es lo que hace? 
+¿Por qué lo dejarías en `FALSE`?
 
-1.  Compare and contrast `separate()` and `extract()`.  Why are there
-    three variations of separation (by position, by separator, and with
-    groups), but only one unite?
+1.  Compara y contrasta `separate()` y `extract()`. ¿Por qué existen tres variaciones de 
+separación (por posición, separador y grupos), pero solo una forma de unir?
 
-## Missing values
+## Valores perdidos
 
-Changing the representation of a dataset brings up an important subtlety of missing values. Surprisingly, a value can be missing in one of two possible ways:
+Cambiar la representación de un dataset conlleva el riesgo de generar valores perdidos. Sorprendentemente, un valor puede perderse de dos formas:
 
-* __Explicitly__, i.e. flagged with `NA`.
-* __Implicitly__, i.e. simply not present in the data.
+* __Explícita__, i.e. aparece como `NA`.
+* __Implícita__, i.e. simplemente no aparece en los datos.
 
 Let's illustrate this idea with a very simple data set:
 
