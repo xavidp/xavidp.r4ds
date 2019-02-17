@@ -57,11 +57,11 @@ Necesitas el paquete __rmarkdown__, pero no necesitas cargarlo o instalarlo expl
 
 
 ```{r setup, include = FALSE}
-
-segmento <- "```"
-enlinea<-  function(x = "") paste0("`` `r ", x, "` ``")
+chunk <- "```"
+inline <-  function(x = "") paste0("`` `r ", x, "` ``")
 library(tidyverse)
 ```
+
 ## R Markdown basics
 ## R Markdown básico
 

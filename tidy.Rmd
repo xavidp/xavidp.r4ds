@@ -130,7 +130,7 @@ Juntando estos parámetros se puede realizar una llamada a `gather()`:
 
 ```{r}
 tabla4a %>%
-  gather(`1999`, `2000`, key = "anio", value = "casos")
+  gather(X1999, X2000, key = "anio", value = "casos")
 ```
 
 Las columnas a contraer quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los escribimos con __backtick__. Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
@@ -143,17 +143,17 @@ En el resultado final, las columnas reunidas se eliminan y obtenemos la nuevas v
 
 ```{r}
 tabla4b %>%
-  gather(`1999`, `2000`, key = "anio", value = "poblacion")
+  gather(X1999, X2000, key = "anio", value = "poblacion")
 ```
 
 Para combinar las versiones ordenadas de `tabla4a` y `tabla4b` en un único tibble, necesitamos usar `dplyr::left_join()`, función que aprenderás en [datos relacionales].
 
 ```{r}
 tidy4a <- tabla4a %>%
-  gather(`1999`, `2000`, key = "anio", value = "casos")
+  gather(X1999, X2000, key = "anio", value = "casos")
 
 tidy4b <- tabla4b %>%
-  gather(`1999`, `2000`, key = "anio", value = "poblacion")
+  gather(X1999, X2000, key = "anio", value = "poblacion")
 
 left_join(tidy4a, tidy4b)
 ```
@@ -212,7 +212,7 @@ Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, 
 
 ```{r, error = TRUE}
 tabla4a %>%
-  gather(1999, 2000, key = "anio", value = "casos")
+  gather(`1999`, `2000`, key = "anio", value = "casos")
 ```
 
 1.  ¿Por qué no se puede extender la siguiente tabla? ¿Cómo agregarias una nueva columna para resolver el problema?
@@ -330,10 +330,10 @@ separación (por posición, separador y grupos), pero solo una forma de unir?
 
 ## Valores perdidos
 
-Changing the representation of a dataset brings up an important subtlety of missing values. Surprisingly, a value can be missing in one of two possible ways:
+Cambiar la representación de un dataset conlleva el riesgo de generar valores perdidos. Sorprendentemente, un valor puede perderse de dos formas:
 
-* __Explicitly__, i.e. flagged with `NA`.
-* __Implicitly__, i.e. simply not present in the data.
+* __Explícita__, i.e. aparece como `NA`.
+* __Implícita__, i.e. simplemente no aparece en los datos.
 
 Let's illustrate this idea with a very simple data set:
 
