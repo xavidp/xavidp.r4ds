@@ -26,7 +26,7 @@ La diferencia principal entre vectores atómicos y listas es que los vectores at
 
 
 ```{r datatypes, echo = FALSE, out.width = "50%", fig.cap = "The hierarchy of R's vector types"}
-knitr::include_graphics("diagrams/es/data-structures-overview.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/data-structures-overview.png")
 ```
 
 Cada vector tiene dos propiedades claves:
@@ -358,7 +358,7 @@ x3 <- list(1, list(2, list(3)))
 
 Y a continuación, las grafico:
 ```{r, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("diagrams/es/lists-structure.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-structure.png")
 ```
 
 Existen tres principios, al momento de observer el gráfico anterior:
@@ -394,7 +394,7 @@ La diferencia entre el corchete simple `[` y el doble `[[` es realmente importan
 
 ```{r
 lists-subsetting, echo = FALSE, out.width = "75%", fig.cap = "Subdividir una lista, de manera visual."}
-knitr::include_graphics("diagrams/es/lists-subsetting.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-subsetting.png")
 ```
 
 ## Listas de Condimentos

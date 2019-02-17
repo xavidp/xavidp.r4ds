@@ -130,7 +130,7 @@ Juntando estos parámetros se puede realizar una llamada a `gather()`:
 
 ```{r}
 tabla4a %>%
-  gather(X1999, X2000, key = "anio", value = "casos")
+  gather(`1999`, `2000`, key = "anio", value = "casos")
 ```
 
 Las columnas a contraer quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los escribimos con __backtick__. Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
@@ -143,17 +143,17 @@ En el resultado final, las columnas reunidas se eliminan y obtenemos la nuevas v
 
 ```{r}
 tabla4b %>%
-  gather(X1999, X2000, key = "anio", value = "poblacion")
+  gather(`1999`, `2000`, key = "anio", value = "poblacion")
 ```
 
 Para combinar las versiones ordenadas de `tabla4a` y `tabla4b` en un único tibble, necesitamos usar `dplyr::left_join()`, función que aprenderás en [datos relacionales].
 
 ```{r}
 tidy4a <- tabla4a %>%
-  gather(X1999, X2000, key = "anio", value = "casos")
+  gather(`1999`, `2000`, key = "anio", value = "casos")
 
 tidy4b <- tabla4b %>%
-  gather(X1999, X2000, key = "anio", value = "poblacion")
+  gather(`1999`, `2000`, key = "anio", value = "poblacion")
 
 left_join(tidy4a, tidy4b)
 ```
@@ -335,7 +335,7 @@ Cambiar la representación de un dataset conlleva el riesgo de generar valores p
 * __Explícita__, i.e. aparece como `NA`.
 * __Implícita__, i.e. simplemente no aparece en los datos.
 
-Let's illustrate this idea with a very simple data set:
+Ilustremos esta idea con un dataset muy sencillo:
 
 ```{r}
 stocks <- tibble(
@@ -345,13 +345,11 @@ stocks <- tibble(
 )
 ```
 
-There are two missing values in this dataset:
+Existen dos valores perdidos en este dataset:
 
-* The return for the fourth quarter of 2015 is explicitly missing, because
-  the cell where its value should be instead contains `NA`.
+* El retorno del cuarto trimestre de 2015 que está explícitamente perdido, debido a que la celda donde el valor debiera estar contiene `NA`.
 
-* The return for the first quarter of 2016 is implicitly missing, because it
-  simply does not appear in the dataset.
+* El retorno del primer semestre de 2016 está implícitamente perdido, debido a que simplemente no aparece en el dataset.
 
 One way to think about the difference is with this Zen-like koan: An explicit missing value is the presence of an absence; an implicit missing value is the absence of a presence.
 
