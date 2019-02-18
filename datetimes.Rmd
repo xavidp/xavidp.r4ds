@@ -475,7 +475,7 @@ Para encontrar cuántos períodos caen dentro de un intervalo, tienes que usar l
 La figura \@ref(fig:dt-algebra) resume las operaciones artiméticas permitidas entre los tipos de datos.
 
 ```{r dt-algebra, echo = FALSE, fig.cap = "Las operaciones artiméticas permitidas entre pares de clases fecha/hora."}
-knitr::include_graphics("diagrams/es/datetimes-arithmetic.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/datetimes-arithmetic.svg")
 ```
 
 ### Ejercicios
