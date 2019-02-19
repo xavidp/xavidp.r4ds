@@ -1,3 +1,5 @@
+#!/bin/sh
+
 if [ -d diagrams_w_text_as_path ]; then
 	rm -rf diagrams_w_text_as_path
 fi
