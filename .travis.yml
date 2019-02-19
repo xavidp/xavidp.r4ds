@@ -1,3 +1,6 @@
+# inactive until I can solve why Travis is ignoring changes to datos package
+# even when it install from the last commit
+
 language: R
 sudo: required
 
