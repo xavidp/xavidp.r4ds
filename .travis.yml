@@ -2,17 +2,15 @@ language: R
 sudo: required
 cache: packages
 
+install:
+  - R -e 'devtools::install_github(force = TRUE)'
+
 r_github_packages:
   - hadley/r4ds
   - cienciadedatos/datos
 
 before_script:
   - chmod +x ./scripts/cibuild
-
-#before_install:                           # Install Ruby and html-proofer
-#  - rvm get stable --auto-dotfiles
-#  - rvm install 2.3.3
-#  - gem install html-proofer
 
 script:
   - ./scripts/cibuild
@@ -26,6 +24,5 @@ deploy:
   on:
     branch: traduccion
 
-#env:
-#  global:
-#    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true  # Speed up the html-proofer
+git:
+  depth: 1
