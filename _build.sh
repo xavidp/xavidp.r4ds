@@ -1,5 +1,9 @@
 #!/bin/sh
 
+git checkout gh-pages && git pull
+
+git checkout traduccion
+
 R --vanilla << EOF
 
 if (!require("pacman")) { install.packages("pacman") }
@@ -9,6 +13,8 @@ bookdown::render_book('index.Rmd', 'bookdown::gitbook')
 
 q()
 EOF
+
+git push origin --delete gh-pages
 
 git add . && git commit -m "weekly build `date +'%Y-%m-%d %H:%M:%S'`"
 
