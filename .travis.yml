@@ -2,13 +2,6 @@ language: R
 sudo: required
 cache: packages
 
-install:
-  - R -e 'devtools::install_github(force = TRUE)'
-
-r_github_packages:
-  - hadley/r4ds
-  - cienciadedatos/datos
-
 before_script:
   - chmod +x ./scripts/cibuild
 
