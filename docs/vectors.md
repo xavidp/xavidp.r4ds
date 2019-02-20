@@ -571,7 +571,7 @@ Así es como una función genérica típica luce:
 as.Date
 #> function (x, ...) 
 #> UseMethod("as.Date")
-#> <bytecode: 0x56330fc4ec00>
+#> <bytecode: 0x55dc16809af8>
 #> <environment: namespace:base>
 ```
 La llamada al método "UseMethod" significa que esta es una función genérica, y llamará a un metódo específico, una función, basada en la clase del primer argumento. (Todos los métodos son funciones; no todas las funciones son métodos). Puedes listar todos los métodos existentes para una función genérica utilizando la función: `methods()`:
@@ -599,7 +599,7 @@ getS3method("as.Date", "default")
 #>     else stop(gettextf("do not know how to convert '%s' to class %s", 
 #>         deparse(substitute(x)), dQuote("Date")), domain = NA)
 #> }
-#> <bytecode: 0x56330ff8e118>
+#> <bytecode: 0x55dc16b494a8>
 #> <environment: namespace:base>
 getS3method("as.Date", "numeric")
 #> function (x, origin, ...) 
@@ -608,7 +608,7 @@ getS3method("as.Date", "numeric")
 #>         stop("'origin' must be supplied")
 #>     as.Date(origin, ...) + x
 #> }
-#> <bytecode: 0x56330ff922a0>
+#> <bytecode: 0x55dc16b4b4e0>
 #> <environment: namespace:base>
 ```
 Lo mas importante del S3 genérico; sistema OO, es decir, orientado a objetos; es la función `print()`: el cual controla como el objeto es impreso cuando tipeas su nombre en la consola. Otras funciones genéricas importantes son las funciones de subdivisión `[`, `[[`, and `$`.
