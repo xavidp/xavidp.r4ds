@@ -31,7 +31,7 @@ rmd_files: [
   "model.Rmd",
   "model-basics.Rmd",
   "model-building.Rmd",
-  #"model-many.Rmd",
+  "model-many.Rmd",
 
   "communicate.Rmd",
   "rmarkdown.Rmd",

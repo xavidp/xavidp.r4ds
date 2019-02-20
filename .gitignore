@@ -12,3 +12,4 @@ figure/
 .idea/
 _book/
 _bookdown_files/
+packrat/lib*/
