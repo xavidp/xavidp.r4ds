@@ -309,7 +309,7 @@ tabla5 %>%
   unite(new, siglo, anio, sep = "")
 ```
 
-### Exercises
+### Ejercicios
 
 1.  ¿Qué hacen los argumentos `extra` y `fill` en `separate()`?
     Experimenta con las diversas opciones a partir de los siguientes datasets de ejemplo.
@@ -338,10 +338,10 @@ Cambiar la representación de un dataset conlleva el riesgo de generar valores p
 Ilustremos esta idea con un dataset muy sencillo:
 
 ```{r}
-stocks <- tibble(
+acciones <- tibble(
   anio = c(2015, 2015, 2015, 2015, 2016, 2016, 2016),
-  qtr = c(1, 2, 3, 4, 2, 3, 4),
-  return = c(1.88, 0.59, 0.35, NA, 0.92, 0.17, 2.66)
+  trimestre = c(1, 2, 3, 4, 2, 3, 4),
+  retorno = c(1.88, 0.59, 0.35, NA, 0.92, 0.17, 2.66)
 )
 ```
 
@@ -351,37 +351,37 @@ Existen dos valores perdidos en este dataset:
 
 * El retorno del primer semestre de 2016 está implícitamente perdido, debido a que simplemente no aparece en el dataset.
 
-One way to think about the difference is with this Zen-like koan: An explicit missing value is the presence of an absence; an implicit missing value is the absence of a presence.
+Una forma de pensar respecto de esta diferencia es al estilo de un mantra Zen: Un valor perdido explícito es la presencia de una ausencia; un valor perdido implícito es la ausencia de una presencia. 
 
-The way that a dataset is represented can make implicit values explicit. For example, we can make the implicit missing value explicit by putting anios in the columns:
+La forma en que se representa un dataset puede dejar explícitos los valores implícitos. Por ejemplo, podemos dejar explítico los valores perdidos implícitos moviendo los años a las columnas:
 
 ```{r}
-stocks %>%
-  spread(anio, return)
+acciones %>%
+  spread(anio, retorno)
 ```
 
-Because these explicit missing values may not be important in other representations of the data, you can set `na.rm = TRUE` in `gather()` to turn explicit missing values implicit:
+Debido a que estos valores perdidos explícitos pueden no ser tan importantes en otras representaciones de los datos, puedes especificar `na.rn = TRUE` en `gather()` para dejar explícitos los valores perdidos implícitos:
 
 ```{r}
-stocks %>%
-  spread(anio, return) %>%
-  gather(anio, return, `2015`:`2016`, na.rm = TRUE)
+acciones %>%
+  spread(anio, retorno) %>%
+  gather(anio, retorno, `2015`:`2016`, na.rm = TRUE)
 ```
 
-Another important tool for making missing values explicit in tidy data is `complete()`:
+Otra herramienta importante para hacer explícitos los valores perdidos en datos ordenados es `complete()`:
 
 ```{r}
-stocks %>%
-  complete(anio, qtr)
+acciones %>%
+  complete(anio, trimestre)
 ```
 
-`complete()` takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit `NA`s where necessary.
+`complete()` toma un conjunto de columnas y encuentra todas las combinaciones únicas. Luego se asegura de que el dataset original contiene todos los valores, completando con `NA`s donde sea necesario.
 
-There's one other important tool that you should know for working with missing values. Sometimes when a data source has primarily been used for data entry, missing values indicate that the previous value should be carried forward:
+Existe otra herramienta importante que deberías conocer al momento de trabajar con valores perdidos. En algunos casos en que la fuente de datos se a usado principalmente para ingresar datos, los valores perdidos indican que el valor previo debe arrastrarse hacia adelante:
 
 ```{r}
-treatment <- tribble(
-  ~ person, ~ treatment, ~ response,
+tratamiento <- tribble(
+  ~ sujeto, ~ tratamiento, ~ respuesta,
   "Derrick Whitmore", 1, 7,
   NA, 2, 10,
   NA, 3, 9,
@@ -389,85 +389,79 @@ treatment <- tribble(
 )
 ```
 
-You can fill in these missing values with `fill()`. It takes a set of columns where you want missing values to be replaced by the most recent non-missing value (sometimes called last observation carried forward).
+Puedes completar los valores perdidos usando `fill()`. Esta función toma un conjunto de columnas sobre las cuales los valores perdidos son reemplazados por el valor anterior más cercano que se haya reportado (debido a esto se habla de arrastrar los datos).
 
 ```{r}
-treatment %>%
-  fill(person)
+tratamiento %>%
+  fill(sujeto)
 ```
 
-### Exercises
+### Ejercicios
 
-1.  Compare and contrast the `fill` arguments to `spread()` and `complete()`.
+1.  Compara y contrasta el argumento `fill` que se usa en `spread()` respecto de `complete()`.
 
-1.  What does the direction argument to `fill()` do?
+1.  ¿Qué hace el argumento de dirección en `fill()`?
 
-## Case Study
+## Estudio de caso
 
-To finish off the chapter, let's pull together everything you've learned to tackle a realistic data tidying problem. The `tidyr::who` dataset contains tuberculosis (TB) casos broken down by anio, pais, age, gender, and diagnosis method. The data comes from the *2014 World Health Organization Global Tuberculosis Report*, available at <http://www.who.int/tb/pais/data/download/en/>.
+Para finalizar el capítulo, combinemos todo lo que aprendiste para atacar un problema real de ordenamiento de datos. El dataset `datos::oms` contiene datos de tuberculosis (TB) detallados por año, país, edad, sexo y método de diagnóstico. Los datos provienen del *Informe de Tuberculosis de la Organización Mundial de la Salud 2014*, disponible en <http://www.who.int/tb/pais/data/download/en/>.
 
-There's a wealth of epidemiological information in this dataset, but it's challenging to work with the data in the form that it's provided:
+Existe abundante información epidemiológica en este dataset, pero es complicado trabajar con estos datos tal como son entregados:
 
 ```{r}
-who
+oms
 ```
 
-This is a very typical real-life example dataset. It contains redundant columns, odd variable codes, and many missing values. In short, `who` is messy, and we'll need multiple steps to tidy it. Like dplyr, tidyr is designed so that each function does one thing well. That means in real-life situations you'll usually need to string together multiple verbs into a pipeline.
+Este es un ejemplo muy típico de un dataset de la vida real. Contiene columnas redundantes, códigos extraños de variables y muchos valores perdidos. En breve, `oms` está desordenado y necesitamos varios pasos para ordenarlo. Al igual que dplyr, tidyr está diseñado de modo tal que cada función hace bien una cosa. Esto significa que en una situación real deberás encadenar múltiples verbos.
 
-The best place to start is almost always to gather together the columns that are not variables. Let's have a look at what we've got:
+La mejor forma de comenzar es reunir las columnas que no representan variables. Miremos lo que hay:
 
-* It looks like `pais`, `iso2`, and `iso3` are three variables that
-  redundantly specify the pais.
+* Pareciera ser que `pais`, `iso2` e `iso3` son variables redundantes que se refieren al país.
 
-* `anio` is clearly also a variable.
+* `anio` es claramente una variable.
 
-* We don't know what all the other columns are yet, but given the structure
-  in the variable names (e.g. `new_sp_m014`, `new_ep_m014`, `new_ep_f014`)
-  these are likely to be values, not variables.
+* No sabemos aún el significado de las otras columnas, pero dada la estructura de los nombres de las variables (e.g. `nuevos_fpp_h014`, `nuevos_ep_h014`, `nuevos_ep_m014`) parecieran ser valores y no variables.
 
-So we need to gather together all the columns from `new_sp_m014` to `newrel_f65`. We don't know what those values represent yet, so we'll give them the generic name `"key"`. We know the cells represent the count of casos, so we'll use the variable `casos`. There are a lot of missing values in the current representation, so for now we'll use `na.rm` just so we can focus on the values that are present.
+Necesitamos agrupar todas las columnas desde `nuevos_fpp_h014` hasta `recaidas_m65`. No sabemos aún que representa esto, por lo que le daremos el nombre genérico de `"llave"`. Sabemos que las celdas representan la cuenta de casos, por lo que usaremos la variable `casos`.
+
+Existen múltiples valores perdidos en la representación actual, por lo que de momento usaremos `na.rm` para centrarnos en los valores que están presentes.
 
 ```{r}
-who1 <- who %>%
-  gather(new_sp_m014:newrel_f65, key = "key", value = "casos", na.rm = TRUE)
-who1
+oms1 <- oms %>%
+  gather(nuevos_fpp_h014:recaidas_m65, key = "key", value = "casos", na.rm = TRUE)
+oms1
 ```
 
-We can get some hint of the structure of the values in the new `key` column by counting them:
+Podemos tener una noción de la estructura de los valores en la nueva columna `llave` si hacemos un conteo:
 
 ```{r}
-who1 %>%
-  count(key)
+oms1 %>%
+  count(llave)
 ```
 
-You might be able to parse this out by yourself with a little thought and some experimentation, but luckily we have the data dictionary handy. It tells us:
+Puedes deducir lo siguiente por cuenta propia pensandoy experimentando un poco, pero afortunadamente tenemos el diccionario de datos a mano. Este nos dice lo siguiente:
 
-1.  The first three letters of each column denote whether the column
-    contains new or old casos of TB. In this dataset, each column contains
-    new casos.
+1.  Lo que aparece antes del primer `_` en las columnas denota si la columna contiene casos nuevos o antiguos de       
+    tuberculosis. En este dataset, cada columna contiene nuevos casos.
 
-1.  The next two letters describe the tipo of TB:
+2.  Lo que aparece luego de indicar si se refiere casos nuevos o antiguos es el tipo de tuberculosis:
 
-    *   `rel` stands for casos of relapse
-    *   `ep` stands for casos of extrapulmonary TB
-    *   `sn` stands for casos of pulmonary TB that could not be diagnosed by
-        a pulmonary smear (smear negative)
-    *   `sp` stands for casos of pulmonary TB that could be diagnosed be
-        a pulmonary smear (smear positive)
+    *   `recaida` se refiere a casos reincidentes
+    *   `ep` se refiere a tuberculosis extra pulmonar
+    *   `fpn` se refiere a casos de tuberculosis pulmonar que no se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar negativo)
+    *   `fpp` se refiere a casos de tuberculosis pulmonar que se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar positivo)
 
-3.  The sixth letter gives the sex of TB patients. The dataset groups
-    casos by males (`m`) and females (`f`).
+3.  A continuación del último `_` la letra que aparece se refiere al sexo de los pacientes. El dataset agrupa en hombres (`h`) y mujeres (`m`).
 
-4.  The remaining numbers gives the age group. The dataset groups casos into
-    seven age groups:
+4.  Los números finales se refieren al grupo etareo que se ha organizado en siete categorías:
 
-    * `014` = 0 -- 14 anios old
-    * `1524` = 15 -- 24 anios old
-    * `2534` = 25 -- 34 anios old
-    * `3544` = 35 -- 44 anios old
-    * `4554` = 45 -- 54 anios old
-    * `5564` = 55 -- 64 anios old
-    * `65` = 65 or older
+    * `014` = 0 -- 14 años de edad
+    * `1524` = 15 -- 24 años de edad
+    * `2534` = 25 -- 34 años de edad
+    * `3544` = 35 -- 44 años de edad
+    * `4554` = 45 -- 54 años de edad
+    * `5564` = 55 -- 64 años de edad
+    * `65` = 65 o más años de edad
 
 We need to make a minor fix to the format of the column names: unfortunately the names are slightly inconsistent because instead of `new_rel` we have `newrel` (it's hard to spot this here but if you don't fix it we'll get errors in subsequent steps). You'll learn about `str_replace()` in [strings], but the basic idea is pretty simple: replace the characters "newrel" with "new_rel". This makes all variable names consistent.
 
@@ -515,7 +509,7 @@ who %>%
   separate(sexage, c("sex", "age"), sep = 1)
 ```
 
-### Exercises
+### Ejercicios
 
 1.  In this case study I set `na.rm = TRUE` just to make it easier to
     check that we had the correct values. Is this reasonable? Think about
