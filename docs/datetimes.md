@@ -46,7 +46,7 @@ Para obtener la fecha (`date`) o fecha-hora (`date-time`) actual, puedes usar `t
 today()
 #> [1] "2019-02-20"
 now()
-#> [1] "2019-02-20 00:26:13 UTC"
+#> [1] "2019-02-20 14:25:53 UTC"
 ```
 
 De otra forma, hay tres modos en los que puedes crear una fecha/hora:

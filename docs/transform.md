@@ -724,7 +724,7 @@ summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
 by_day <- group_by(flights, year, month, day)
 summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
 #> # A tibble: 365 x 4
-#> # Groups:   year, month [12]
+#> # Groups:   year, month [?]
 #>    year month   day delay
 #>   <int> <int> <int> <dbl>
 #> 1  2013     1     1 11.5 
@@ -804,7 +804,7 @@ flights %>%
   group_by(year, month, day) %>%
   summarise(mean = mean(dep_delay))
 #> # A tibble: 365 x 4
-#> # Groups:   year, month [12]
+#> # Groups:   year, month [?]
 #>    year month   day  mean
 #>   <int> <int> <int> <dbl>
 #> 1  2013     1     1    NA
@@ -824,7 +824,7 @@ flights %>%
   group_by(year, month, day) %>%
   summarise(mean = mean(dep_delay, na.rm = TRUE))
 #> # A tibble: 365 x 4
-#> # Groups:   year, month [12]
+#> # Groups:   year, month [?]
 #>    year month   day  mean
 #>   <int> <int> <int> <dbl>
 #> 1  2013     1     1 11.5 
@@ -847,7 +847,7 @@ not_cancelled %>%
   group_by(year, month, day) %>%
   summarise(mean = mean(dep_delay))
 #> # A tibble: 365 x 4
-#> # Groups:   year, month [12]
+#> # Groups:   year, month [?]
 #>    year month   day  mean
 #>   <int> <int> <int> <dbl>
 #> 1  2013     1     1 11.4 
@@ -990,7 +990,7 @@ Just using means, counts, and sum can get you a long way, but R provides many ot
     avg_delay2 = mean(arr_delay[arr_delay > 0]) # the average positive delay
       )
     #> # A tibble: 365 x 5
-    #> # Groups:   year, month [12]
+    #> # Groups:   year, month [?]
     #>    year month   day avg_delay1 avg_delay2
     #>   <int> <int> <int>      <dbl>      <dbl>
     #> 1  2013     1     1      12.7        32.5
@@ -1041,7 +1041,7 @@ Just using means, counts, and sum can get you a long way, but R provides many ot
     last = max(dep_time)
       )
     #> # A tibble: 365 x 5
-    #> # Groups:   year, month [12]
+    #> # Groups:   year, month [?]
     #>    year month   day first  last
     #>   <int> <int> <int> <dbl> <dbl>
     #> 1  2013     1     1   517  2356
@@ -1068,7 +1068,7 @@ Just using means, counts, and sum can get you a long way, but R provides many ot
     last_dep = last(dep_time)
       )
     #> # A tibble: 365 x 5
-    #> # Groups:   year, month [12]
+    #> # Groups:   year, month [?]
     #>    year month   day first_dep last_dep
     #>   <int> <int> <int>     <int>    <int>
     #> 1  2013     1     1       517     2356
@@ -1180,7 +1180,7 @@ Just using means, counts, and sum can get you a long way, but R provides many ot
       group_by(year, month, day) %>%
       summarise(n_early = sum(dep_time < 500))
     #> # A tibble: 365 x 4
-    #> # Groups:   year, month [12]
+    #> # Groups:   year, month [?]
     #>    year month   day n_early
     #>   <int> <int> <int>   <int>
     #> 1  2013     1     1       0
@@ -1196,7 +1196,7 @@ Just using means, counts, and sum can get you a long way, but R provides many ot
       group_by(year, month, day) %>%
       summarise(hour_perc = mean(arr_delay > 60))
     #> # A tibble: 365 x 4
-    #> # Groups:   year, month [12]
+    #> # Groups:   year, month [?]
     #>    year month   day hour_perc
     #>   <int> <int> <int>     <dbl>
     #> 1  2013     1     1    0.0722
@@ -1217,7 +1217,7 @@ When you group by multiple variables, each summary peels off one level of the gr
 daily <- group_by(flights, year, month, day)
 (per_day <- summarise(daily, flights = n()))
 #> # A tibble: 365 x 4
-#> # Groups:   year, month [12]
+#> # Groups:   year, month [?]
 #>    year month   day flights
 #>   <int> <int> <int>   <int>
 #> 1  2013     1     1     842
@@ -1229,7 +1229,7 @@ daily <- group_by(flights, year, month, day)
 #> # … with 359 more rows
 (per_month <- summarise(per_day, flights = sum(flights)))
 #> # A tibble: 12 x 3
-#> # Groups:   year [1]
+#> # Groups:   year [?]
 #>    year month flights
 #>   <int> <int>   <int>
 #> 1  2013     1   27004

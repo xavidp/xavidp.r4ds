@@ -133,10 +133,10 @@ You will not be able to use the functions, objects, and help files in a package 
 ```r
 library(tidyverse)
 #> ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
-#> ✔ ggplot2 3.1.0.9000     ✔ purrr   0.3.0     
-#> ✔ tibble  2.0.1          ✔ dplyr   0.8.0.1   
-#> ✔ tidyr   0.8.2          ✔ stringr 1.4.0     
-#> ✔ readr   1.3.1          ✔ forcats 0.4.0
+#> ✔ ggplot2 3.1.0     ✔ purrr   0.2.5
+#> ✔ tibble  2.0.1     ✔ dplyr   0.7.8
+#> ✔ tidyr   0.8.2     ✔ stringr 1.4.0
+#> ✔ readr   1.3.1     ✔ forcats 0.3.0
 #> ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
 #> ✖ dplyr::filter() masks stats::filter()
 #> ✖ dplyr::lag()    masks stats::lag()
@@ -288,182 +288,91 @@ devtools::session_info(c("tidyverse"))
 #>  date     2019-02-20                  
 #> 
 #> ─ Packages ──────────────────────────────────────────────────────────────
-#>  package      * version    date       lib
-#>  askpass        1.1        2019-01-13 [2]
-#>  assertthat     0.2.0      2017-04-11 [2]
-#>  backports      1.1.3      2018-12-14 [2]
-#>  base64enc      0.1-3      2015-07-28 [1]
-#>  BH             1.69.0-1   2019-01-07 [1]
-#>  bindr          0.1.1      2018-03-13 [2]
-#>  bindrcpp       0.2.2      2018-03-29 [2]
-#>  broom          0.5.1      2018-12-05 [1]
-#>  callr          3.1.1      2018-12-21 [2]
-#>  cellranger     1.1.0      2016-07-27 [2]
-#>  cli            1.0.1      2018-09-25 [2]
-#>  clipr          0.5.0      2019-01-11 [1]
-#>  colorspace     1.4-0      2019-01-13 [2]
-#>  crayon         1.3.4      2017-09-16 [2]
-#>  curl           3.3        2019-01-10 [1]
-#>  DBI            1.0.0      2018-05-02 [2]
-#>  dbplyr         1.3.0      2019-01-09 [1]
-#>  digest         0.6.18     2018-10-10 [2]
-#>  dplyr        * 0.8.0.1    2019-02-15 [1]
-#>  ellipsis       0.1.0      2019-02-19 [1]
-#>  evaluate       0.13       2019-02-12 [1]
-#>  fansi          0.4.0      2018-10-05 [2]
-#>  forcats      * 0.4.0      2019-02-17 [1]
-#>  fs             1.2.6      2018-08-23 [2]
-#>  generics       0.0.2      2018-11-29 [1]
-#>  ggplot2      * 3.1.0.9000 2019-02-19 [1]
-#>  glue           1.3.0      2018-07-17 [2]
-#>  gtable         0.2.0      2016-02-26 [1]
-#>  haven          2.1.0      2019-02-19 [1]
-#>  highr          0.7        2018-06-09 [1]
-#>  hms            0.4.2      2018-03-10 [2]
-#>  htmltools      0.3.6      2017-04-28 [2]
-#>  httr           1.4.0      2018-12-11 [2]
-#>  jsonlite       1.6        2018-12-07 [1]
-#>  knitr          1.21       2018-12-10 [1]
-#>  labeling       0.3        2014-08-23 [2]
-#>  lattice        0.20-35    2017-03-25 [2]
-#>  lazyeval       0.2.1      2017-10-29 [1]
-#>  lubridate      1.7.4      2018-04-11 [1]
-#>  magrittr       1.5        2014-11-22 [2]
-#>  markdown       0.9        2018-12-07 [1]
-#>  MASS           7.3-50     2018-04-30 [2]
-#>  Matrix         1.2-14     2018-04-13 [2]
-#>  mgcv           1.8-24     2018-06-23 [2]
-#>  mime           0.6        2018-10-05 [2]
-#>  modelr         0.1.4      2019-02-18 [1]
-#>  munsell        0.5.0      2018-06-12 [2]
-#>  nlme           3.1-137    2018-04-07 [2]
-#>  openssl        1.2.1      2019-01-17 [2]
-#>  pillar         1.3.1      2018-12-15 [1]
-#>  pkgconfig      2.0.2      2018-08-16 [2]
-#>  plogr          0.2.0      2018-03-25 [2]
-#>  plyr           1.8.4      2016-06-08 [1]
-#>  prettyunits    1.0.2      2015-07-13 [2]
-#>  processx       3.2.1      2018-12-05 [2]
-#>  progress       1.2.0      2018-06-14 [1]
-#>  ps             1.3.0      2018-12-21 [2]
-#>  purrr        * 0.3.0      2019-01-27 [1]
-#>  R6             2.4.0      2019-02-14 [1]
-#>  RColorBrewer   1.1-2      2014-12-07 [2]
-#>  Rcpp           1.0.0      2018-11-07 [2]
-#>  readr        * 1.3.1      2018-12-21 [1]
-#>  readxl         1.3.0      2019-02-15 [1]
-#>  rematch        1.0.1      2016-04-21 [2]
-#>  reprex         0.2.1      2018-09-16 [1]
-#>  reshape2       1.4.3      2017-12-11 [1]
-#>  rlang          0.3.1      2019-01-08 [1]
-#>  rmarkdown      1.11.6     2019-02-19 [1]
-#>  rstudioapi     0.9.0      2019-01-09 [2]
-#>  rvest          0.3.2      2016-06-17 [1]
-#>  scales         1.0.0      2018-08-09 [2]
-#>  selectr        0.4-1      2018-04-06 [1]
-#>  stringi        1.3.1      2019-02-13 [1]
-#>  stringr      * 1.4.0      2019-02-10 [1]
-#>  sys            2.1        2018-11-13 [2]
-#>  tibble       * 2.0.1      2019-01-12 [1]
-#>  tidyr        * 0.8.2      2018-10-28 [2]
-#>  tidyselect     0.2.5      2018-10-11 [2]
-#>  tidyverse    * 1.2.1      2017-11-14 [1]
-#>  tinytex        0.10       2019-01-10 [1]
-#>  utf8           1.1.4      2018-05-24 [2]
-#>  viridisLite    0.3.0      2018-02-01 [2]
-#>  whisker        0.3-2      2013-04-28 [2]
-#>  withr          2.1.2      2018-03-15 [2]
-#>  xfun           0.4        2018-10-23 [1]
-#>  xml2           1.2.0      2018-01-24 [1]
-#>  yaml           2.2.0      2018-07-25 [2]
-#>  source                            
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  Github (hadley/ggplot2@033fb52)   
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  Github (rstudio/rmarkdown@bbd0786)
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
-#>  CRAN (R 3.5.1)                    
+#>  package      * version  date       lib source        
+#>  askpass        1.1      2019-01-13 [2] CRAN (R 3.5.1)
+#>  assertthat     0.2.0    2017-04-11 [2] CRAN (R 3.5.1)
+#>  backports      1.1.3    2018-12-14 [2] CRAN (R 3.5.1)
+#>  base64enc      0.1-3    2015-07-28 [1] CRAN (R 3.5.1)
+#>  BH             1.66.0-1 2018-02-13 [2] CRAN (R 3.5.1)
+#>  bindr          0.1.1    2018-03-13 [2] CRAN (R 3.5.1)
+#>  bindrcpp     * 0.2.2    2018-03-29 [2] CRAN (R 3.5.1)
+#>  broom          0.5.1    2018-12-05 [1] CRAN (R 3.5.1)
+#>  callr          3.1.1    2018-12-21 [2] CRAN (R 3.5.1)
+#>  cellranger     1.1.0    2016-07-27 [2] CRAN (R 3.5.1)
+#>  cli            1.0.1    2018-09-25 [2] CRAN (R 3.5.1)
+#>  clipr          0.4.1    2018-06-23 [2] CRAN (R 3.5.1)
+#>  colorspace     1.4-0    2019-01-13 [2] CRAN (R 3.5.1)
+#>  crayon         1.3.4    2017-09-16 [2] CRAN (R 3.5.1)
+#>  curl           3.2      2018-03-28 [2] CRAN (R 3.5.1)
+#>  DBI            1.0.0    2018-05-02 [2] CRAN (R 3.5.1)
+#>  dbplyr         1.3.0    2019-01-09 [1] CRAN (R 3.5.1)
+#>  digest         0.6.18   2018-10-10 [2] CRAN (R 3.5.1)
+#>  dplyr        * 0.7.8    2018-11-10 [1] CRAN (R 3.5.1)
+#>  evaluate       0.13     2019-02-12 [1] CRAN (R 3.5.1)
+#>  fansi          0.4.0    2018-10-05 [2] CRAN (R 3.5.1)
+#>  forcats      * 0.3.0    2018-02-19 [1] CRAN (R 3.5.1)
+#>  fs             1.2.6    2018-08-23 [2] CRAN (R 3.5.1)
+#>  generics       0.0.2    2018-11-29 [1] CRAN (R 3.5.1)
+#>  ggplot2      * 3.1.0    2018-10-25 [1] CRAN (R 3.5.1)
+#>  glue           1.3.0    2018-07-17 [2] CRAN (R 3.5.1)
+#>  gtable         0.2.0    2016-02-26 [1] CRAN (R 3.5.1)
+#>  haven          2.1.0    2019-02-19 [1] CRAN (R 3.5.1)
+#>  highr          0.7      2018-06-09 [1] CRAN (R 3.5.1)
+#>  hms            0.4.2    2018-03-10 [2] CRAN (R 3.5.1)
+#>  htmltools      0.3.6    2017-04-28 [2] CRAN (R 3.5.1)
+#>  httr           1.4.0    2018-12-11 [2] CRAN (R 3.5.1)
+#>  jsonlite       1.5      2017-06-01 [2] CRAN (R 3.5.1)
+#>  knitr          1.21     2018-12-10 [1] CRAN (R 3.5.1)
+#>  labeling       0.3      2014-08-23 [2] CRAN (R 3.5.1)
+#>  lattice        0.20-35  2017-03-25 [2] CRAN (R 3.5.1)
+#>  lazyeval       0.2.1    2017-10-29 [1] CRAN (R 3.5.1)
+#>  lubridate      1.7.4    2018-04-11 [1] CRAN (R 3.5.1)
+#>  magrittr       1.5      2014-11-22 [2] CRAN (R 3.5.1)
+#>  markdown       0.9      2018-12-07 [1] CRAN (R 3.5.1)
+#>  MASS           7.3-50   2018-04-30 [2] CRAN (R 3.5.1)
+#>  Matrix         1.2-14   2018-04-13 [2] CRAN (R 3.5.1)
+#>  mgcv           1.8-24   2018-06-23 [2] CRAN (R 3.5.1)
+#>  mime           0.6      2018-10-05 [2] CRAN (R 3.5.1)
+#>  modelr         0.1.4    2019-02-18 [1] CRAN (R 3.5.1)
+#>  munsell        0.5.0    2018-06-12 [2] CRAN (R 3.5.1)
+#>  nlme           3.1-137  2018-04-07 [2] CRAN (R 3.5.1)
+#>  openssl        1.2.1    2019-01-17 [2] CRAN (R 3.5.1)
+#>  pillar         1.3.1    2018-12-15 [1] CRAN (R 3.5.1)
+#>  pkgconfig      2.0.2    2018-08-16 [2] CRAN (R 3.5.1)
+#>  plogr          0.2.0    2018-03-25 [2] CRAN (R 3.5.1)
+#>  plyr           1.8.4    2016-06-08 [1] CRAN (R 3.5.1)
+#>  processx       3.2.1    2018-12-05 [2] CRAN (R 3.5.1)
+#>  ps             1.3.0    2018-12-21 [2] CRAN (R 3.5.1)
+#>  purrr        * 0.2.5    2018-05-29 [1] CRAN (R 3.5.1)
+#>  R6             2.4.0    2019-02-14 [1] CRAN (R 3.5.1)
+#>  RColorBrewer   1.1-2    2014-12-07 [2] CRAN (R 3.5.1)
+#>  Rcpp           1.0.0    2018-11-07 [2] CRAN (R 3.5.1)
+#>  readr        * 1.3.1    2018-12-21 [1] CRAN (R 3.5.1)
+#>  readxl         1.1.0    2018-04-20 [2] CRAN (R 3.5.1)
+#>  rematch        1.0.1    2016-04-21 [2] CRAN (R 3.5.1)
+#>  reprex         0.2.1    2018-09-16 [1] CRAN (R 3.5.1)
+#>  reshape2       1.4.3    2017-12-11 [1] CRAN (R 3.5.1)
+#>  rlang          0.3.1    2019-01-08 [1] url           
+#>  rmarkdown      1.11     2018-12-08 [1] CRAN (R 3.5.1)
+#>  rstudioapi     0.9.0    2019-01-09 [2] CRAN (R 3.5.1)
+#>  rvest          0.3.2    2016-06-17 [1] CRAN (R 3.5.1)
+#>  scales         1.0.0    2018-08-09 [2] CRAN (R 3.5.1)
+#>  selectr        0.4-1    2018-04-06 [1] CRAN (R 3.5.1)
+#>  stringi        1.3.1    2019-02-13 [1] CRAN (R 3.5.1)
+#>  stringr      * 1.4.0    2019-02-10 [1] CRAN (R 3.5.1)
+#>  sys            2.1      2018-11-13 [2] CRAN (R 3.5.1)
+#>  tibble       * 2.0.1    2019-01-12 [1] CRAN (R 3.5.1)
+#>  tidyr        * 0.8.2    2018-10-28 [1] CRAN (R 3.5.1)
+#>  tidyselect     0.2.5    2018-10-11 [2] CRAN (R 3.5.1)
+#>  tidyverse    * 1.2.1    2017-11-14 [1] CRAN (R 3.5.1)
+#>  tinytex        0.10     2019-01-10 [1] CRAN (R 3.5.1)
+#>  utf8           1.1.4    2018-05-24 [2] CRAN (R 3.5.1)
+#>  viridisLite    0.3.0    2018-02-01 [2] CRAN (R 3.5.1)
+#>  whisker        0.3-2    2013-04-28 [2] CRAN (R 3.5.1)
+#>  withr          2.1.2    2018-03-15 [2] CRAN (R 3.5.1)
+#>  xfun           0.4      2018-10-23 [1] CRAN (R 3.5.1)
+#>  xml2           1.2.0    2018-01-24 [1] CRAN (R 3.5.1)
+#>  yaml           2.2.0    2018-07-25 [2] CRAN (R 3.5.1)
 #> 
 #> [1] /home/pacha/R/x86_64-pc-linux-gnu-library/3.5
 #> [2] /opt/R/R-3.5.1-openblas/lib/R/library

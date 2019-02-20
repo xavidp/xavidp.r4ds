@@ -578,7 +578,7 @@ So far, the pairs of tables have always been joined by a single variable, and th
 1.  What happened on June 13 2013? Display the spatial pattern of delays,
     and then use Google to cross-reference with the weather.
 
-
+    
 
 ### Other implementations
 
@@ -807,9 +807,9 @@ union(df1, df2)
 #> # A tibble: 3 x 2
 #>       x     y
 #>   <dbl> <dbl>
-#> 1     1     1
+#> 1     1     2
 #> 2     2     1
-#> 3     1     2
+#> 3     1     1
 
 setdiff(df1, df2)
 #> # A tibble: 1 x 2
