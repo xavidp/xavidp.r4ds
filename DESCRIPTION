@@ -28,3 +28,4 @@ Imports:
   tidyverse,
   viridis
 Remotes: pachamaltese/datos
+RoxygenNote: 6.1.1
