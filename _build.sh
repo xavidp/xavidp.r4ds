@@ -19,4 +19,4 @@ git push origin --delete gh-pages
 
 git add . && git commit -m "weekly build `date +'%Y-%m-%d %H:%M:%S'`"
 
-git subtree push --prefix docs origin gh-pages
+git push && git subtree push --prefix docs origin gh-pages
