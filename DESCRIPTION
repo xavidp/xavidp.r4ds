@@ -27,5 +27,4 @@ Imports:
   pryr,
   tidyverse,
   viridis
-Remotes:
-  pachamaltese/datos
+Remotes: pachamaltese/datos
