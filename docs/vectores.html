@@ -1174,7 +1174,7 @@ knitr::include_graphics(&quot;diagrams_w_text_as_path/es/lists-subsetting.png&qu
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">as.Date
 <span class="co">#&gt; function (x, ...) </span>
 <span class="co">#&gt; UseMethod(&quot;as.Date&quot;)</span>
-<span class="co">#&gt; &lt;bytecode: 0x560492a7bff8&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x55dc16809af8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:base&gt;</span></code></pre></div>
 <p>La llamada al método “UseMethod” significa que esta es una función genérica, y llamará a un metódo específico, una función, basada en la clase del primer argumento. (Todos los métodos son funciones; no todas las funciones son métodos). Puedes listar todos los métodos existentes para una función genérica utilizando la función: <code>methods()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">methods</span>(<span class="st">&quot;as.Date&quot;</span>)
@@ -1193,7 +1193,7 @@ knitr::include_graphics(&quot;diagrams_w_text_as_path/es/lists-subsetting.png&qu
 <span class="co">#&gt;     else stop(gettextf(&quot;do not know how to convert &#39;%s&#39; to class %s&quot;, </span>
 <span class="co">#&gt;         deparse(substitute(x)), dQuote(&quot;Date&quot;)), domain = NA)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x5604909ecc70&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x55dc16b494a8&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:base&gt;</span>
 <span class="kw">getS3method</span>(<span class="st">&quot;as.Date&quot;</span>, <span class="st">&quot;numeric&quot;</span>)
 <span class="co">#&gt; function (x, origin, ...) </span>
@@ -1202,7 +1202,7 @@ knitr::include_graphics(&quot;diagrams_w_text_as_path/es/lists-subsetting.png&qu
 <span class="co">#&gt;         stop(&quot;&#39;origin&#39; must be supplied&quot;)</span>
 <span class="co">#&gt;     as.Date(origin, ...) + x</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x56049044bfb0&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x55dc16b4b4e0&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:base&gt;</span></code></pre></div>
 <p>Lo mas importante del S3 genérico; sistema OO, es decir, orientado a objetos; es la función <code>print()</code>: el cual controla como el objeto es impreso cuando tipeas su nombre en la consola. Otras funciones genéricas importantes son las funciones de subdivisión <code>[</code>, <code>[[</code>, and <code>$</code>.</p>
 </div>

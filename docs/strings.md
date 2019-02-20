@@ -1213,8 +1213,8 @@ There are three other functions you can use instead of `regex()`:
     )
     #> Unit: microseconds
     #>   expr   min    lq mean median  uq max neval
-    #>  fixed  81.9  91.1  123    114 126 386    20
-    #>  regex 378.2 383.7  421    388 412 772    20
+    #>  fixed  78.3  85.9  114    103 114 364    20
+    #>  regex 378.4 381.5  410    391 404 730    20
     ```
     
     Beware using `fixed()` with non-English data. It is problematic because 

@@ -1496,8 +1496,8 @@ fields <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">s
 )
 <span class="co">#&gt; Unit: microseconds</span>
 <span class="co">#&gt;   expr   min    lq mean median  uq max neval</span>
-<span class="co">#&gt;  fixed  81.9  91.1  123    114 126 386    20</span>
-<span class="co">#&gt;  regex 378.2 383.7  421    388 412 772    20</span></code></pre></div>
+<span class="co">#&gt;  fixed  78.3  85.9  114    103 114 364    20</span>
+<span class="co">#&gt;  regex 378.4 381.5  410    391 404 730    20</span></code></pre></div>
 <p>Beware using <code>fixed()</code> with non-English data. It is problematic because there are often multiple ways of representing the same character. For example, there are two ways to define “á”: either as a single character or as an “a” plus an accent:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a1 &lt;-<span class="st"> &quot;\u00e1&quot;</span>
 a2 &lt;-<span class="st"> &quot;a\u0301&quot;</span>
