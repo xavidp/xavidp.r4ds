@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo apt install pandoc
+
 git checkout traduccion
 
 R --vanilla << EOF
@@ -12,8 +14,8 @@ bookdown::render_book('index.Rmd', 'bookdown::gitbook')
 q()
 EOF
 
-git push origin --delete gh-pages
+#git push origin --delete gh-pages
 
-git add . && git commit -m "weekly build `date +'%Y-%m-%d %H:%M:%S'`"
+#git add . && git commit -m "weekly build `date +'%Y-%m-%d %H:%M:%S'`"
 
-git subtree push --prefix docs origin gh-pages
+#git subtree push --prefix docs origin gh-pages

@@ -27,5 +27,5 @@ Imports:
   pryr,
   tidyverse,
   viridis
-Remotes: pachamaltese/datos
+Remotes: git::https://github.com/pachamaltese/datos.git
 RoxygenNote: 6.1.1
