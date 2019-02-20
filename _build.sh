@@ -22,4 +22,6 @@ EOF
 
 cp CNAME docs/CNAME
 
-git add . && git commit -m "weekly build `date +'%Y-%m-%d %H:%M:%S'`"
+git add . & git commit -m "weekly build `date +'%Y-%m-%d %H:%M:%S'`" & git push
+
+cd docs & git add . & git commit -m "weekly build `date +'%Y-%m-%d %H:%M:%S'`" & git push
