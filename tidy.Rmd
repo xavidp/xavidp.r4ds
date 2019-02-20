@@ -428,7 +428,7 @@ Existen múltiples valores perdidos en la representación actual, por lo que de 
 
 ```{r}
 oms1 <- oms %>%
-  gather(nuevos_fpp_h014:recaidas_m65, key = "key", value = "casos", na.rm = TRUE)
+  gather(nuevos_fpp_h014:nuevosrecaida_m65, key = "llave", value = "casos", na.rm = TRUE)
 oms1
 ```
 
@@ -463,78 +463,72 @@ Puedes deducir lo siguiente por cuenta propia pensandoy experimentando un poco, 
     * `5564` = 55 -- 64 años de edad
     * `65` = 65 o más años de edad
 
-We need to make a minor fix to the format of the column names: unfortunately the names are slightly inconsistent because instead of `new_rel` we have `newrel` (it's hard to spot this here but if you don't fix it we'll get errors in subsequent steps). You'll learn about `str_replace()` in [strings], but the basic idea is pretty simple: replace the characters "newrel" with "new_rel". This makes all variable names consistent.
+Necesitamos hacer un pequeño cambio al formato de los nombres de las columnas: desafortunadamente lo nombres de las columnas son ligeramente inconsistentes debido a que en lugar de `nuevos_recaida` tenemos `nuevosrecaida` (es difícil darse cuenta de esto en esta parte, pero si no lo arreglas habrá errores en los pasos siguientes). Aprenderás sobre `str_replace()` en [strings], pero la idea básica es bastante simple: reemplazar los caracteres "nuevosrecaida" por "nuevos_recaida". Esto genera nombres de variables consistentes.
 
 ```{r}
-who2 <- who1 %>%
-  mutate(key = stringr::str_replace(key, "newrel", "new_rel"))
-who2
+oms2 <- oms1 %>%
+  mutate(key = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))
+oms2
 ```
 
-We can separate the values in each code with two passes of `separate()`. The first pass will split the codes at each underscore.
+Podemos separar los valores en cada código aplicando `separate()` dos veces. La primera aplicación dividirá los códigos en cada `_`.
 
 ```{r}
-who3 <- who2 %>%
-  separate(key, c("new", "tipo", "sexage"), sep = "_")
-who3
+oms3 <- oms2 %>%
+  separate(llave, c("nuevos", "tipo", "sexo_edad"), sep = "_")
+oms3
 ```
 
-Then we might as well drop the `new` column because it's constant in this dataset. While we're dropping columns, let's also drop `iso2` and `iso3` since they're redundant.
+A continuación podemos eliminar la columna `nuevos` ya que es constante en este dataset. Además eliminaremos `iso2` e `iso3` ya que son redundantes.
 
 ```{r}
-who3 %>%
-  count(new)
-who4 <- who3 %>%
-  select(-new, -iso2, -iso3)
+oms3 %>%
+  count(nuevos)
+oms4 <- oms3 %>%
+  select(-nuevos, -iso2, -iso3)
 ```
 
-Next we'll separate `sexage` into `sex` and `age` by splitting after the first character:
+Luego separamos `sexo_edad` en `sexo` y `edad` dividiendo luego del primer caracter:
 
 ```{r}
-who5 <- who4 %>%
-  separate(sexage, c("sex", "age"), sep = 1)
-who5
+oms5 <- oms4 %>%
+  separate(sexo_edad, c("sexo", "edad"), sep = 1)
+oms5
 ```
 
-The `who` dataset is now tidy!
+¡Ahora el dataset `oms` está ordenado!
 
-I've shown you the code a piece at a time, assigning each interim result to a new variable. This typically isn't how you'd work interactively. Instead, you'd gradually build up a complex pipe:
+Hemos mostrado el código parte por parte, asignando los resultados intermedios a nuevas variables. Esta no es la forma típica de trabajo. En cambio, lo que se hace es formar un encadenamiento incrementalmente complejo:
 
 ```{r, results = "hide"}
-who %>%
-  gather(key, value, new_sp_m014:newrel_f65, na.rm = TRUE) %>%
-  mutate(key = stringr::str_replace(key, "newrel", "new_rel")) %>%
-  separate(key, c("new", "var", "sexage")) %>%
-  select(-new, -iso2, -iso3) %>%
-  separate(sexage, c("sex", "age"), sep = 1)
+oms %>%
+  gather(llave, valor, nuevos_fpp_h014:nuevosrecaida_m65, na.rm = TRUE) %>%
+  mutate(llave = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida")) %>%
+  separate(llave, c("nuevos", "tipo", "sexo_edad")) %>%
+  select(-nuevos, -iso2, -iso3) %>%
+  separate(sexo_edad, c("sexo", "edad"), sep = 1)
 ```
 
 ### Ejercicios
 
-1.  In this case study I set `na.rm = TRUE` just to make it easier to
-    check that we had the correct values. Is this reasonable? Think about
-    how missing values are represented in this dataset. Are there implicit
-    missing values? What's the difference between an `NA` and zero?
+1.  En este caso de estudio fijamos `na.rm = TRUE` para simplificar la verificación de que tenemos los valores              correctos. ¿Es esto razonable? Piensa en como los valores perdidos están representados en este dataset. ¿Existen        valores perdidos implícitos? ¿Cuál es la diferencia entre `NA` y cero?
 
-1.  What happens if you neglect the `mutate()` step?
-    (`mutate(key = stringr::str_replace(key, "newrel", "new_rel"))`)
+1.  ¿Qué ocurre si omites la aplicación de `mutate()`?
+    (`mutate(key = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))`)
 
-1.  I claimed that `iso2` and `iso3` were redundant with `pais`.
-    Confirm this claim.
+1.  Afirmamos que `iso2` e `iso3` son redundantes respecto de `pais`. Confirma esta premisa.
 
-1.  For each pais, anio, and sex compute the total number of casos of
-    TB. Make an informative visualisation of the data.
+1.  Para cada país, año y sexo calcula el total del número de casos de tuberculosis. Crea una visualización informativade los datos.
 
-## Non-tidy data
+## Datos no ordenados
 
-Before we continue on to other topics, it's worth talking briefly about non-tidy data. Earlier in the chapter, I used the pejorative term "messy" to refer to non-tidy data. That's an oversimplification: there are lots of useful and well-founded data structures that are not tidy data. There are two main reasons to use other data structures:
+Antes de pasar a otros tópicos, es conveniente referirse brevemente a datos no ordenados Anteriormente en el capítulo, usamos el término peyorativo "desordenados" para referirnos a datos no ordenados. Aquello es una sobresimplificación: existen múltiples estructuras de datos debidamente fundamentadas que no corresponden a datos ordenados. Existen dos principales razones para usar otras estructuras de datos:
 
-* Alternative representations may have substantial performance or space
-  advantages.
+* Las representaciones alternativas pueden resultar en un mejor desempeño o una ventaja en tamaño.
 
-* Specialised fields have evolved their own conventions for storing data
-  that may be quite different to the conventions of  tidy data.
+* Algunos áreas especializadas han evolucionado y tienen sus propias convenciones para almacenar datos, las que pueden diferir respecto de las convenciones de datos ordenados.
 
-Either of these reasons means you'll need something other than a tibble (or data frame). If your data does fit naturally into a rectangular structure composed of observations and variables, I think tidy data should be your default choice. But there are good reasons to use other structures; tidy data is not the only way.
+Cada uno de estas razones significa que necesitarás algo distinto a un tibble (o data frame). Si tus datos naturalmente se ajustan a una estructura rectangular compuesta de observaciones y variables, pensamos que datos ordenados debería ser tu elección por defecto. Sin embargo, existen buenas razones para usar otras estructuras; datos ordenados no es la única forma.
 
-If you'd like to learn more about non-tidy data, I'd highly recommend this thoughtful blog post by Jeff Leek: <http://simplystatistics.org/2016/02/17/non-tidy-data/>
+Si quieres aprender más acerca de datos no ordenados, recomendamos fuertemente este articulo del blog de Jeff Leek:
+ <http://simplystatistics.org/2016/02/17/non-tidy-data/>
