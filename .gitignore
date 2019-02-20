@@ -5,7 +5,6 @@
 _main.rds
 _book
 *.md
-*.html
 search_index.json
 libs
 *.rds
