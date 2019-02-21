@@ -342,7 +342,7 @@ Cada función geom en **ggplot2** toma un argumento de `mapping`. Sin embargo, n
 
 ```{r message = FALSE}
 ggplot(data = millas) + 
-  geom_smooth(mapping = aes(x = motor, y = autopista, linetype=traccion))
+  geom_smooth(mapping = aes(x = motor, y = autopista, linetype = traccion))
 ```
 
 Aquí `geom_smooth()` separa los automóviles en tres líneas en función de su valor de `traccion`, que describe el tipo de transmisión de un automóvil. Una línea describe todos los puntos con un valor de 4, otra línea los de valor d, y una tercera línea describe los puntos con un valor t. Aquí, `4` significa tracción en las cuatro ruedas, `d` tracción delantera y `t` tracción trasera.
@@ -350,7 +350,7 @@ Aquí `geom_smooth()` separa los automóviles en tres líneas en función de su 
 Si esto suena extraño, podemos hacerlo más claro al superponer las líneas sobre los datos brutos y luego colorear todo según `traccion`. 
 
 ```{r echo = FALSE, message = FALSE}
-ggplot(data = millas, mapping = aes(x = motor, y = autopista, color= traccion)) + 
+ggplot(data = millas, mapping = aes(x = motor, y = autopista, color = traccion)) + 
   geom_point()+
   geom_smooth(mapping = aes(linetype = traccion))
 ```
