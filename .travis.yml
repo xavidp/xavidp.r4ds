@@ -2,7 +2,13 @@
 # even when it install from the last commit
 
 language: R
+
 sudo: required
+
+cache:
+  packages: true
+  directories:
+  - _book
 
 before_script:
   - chmod +x ./scripts/cibuild
