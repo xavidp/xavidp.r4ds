@@ -1,8 +1,8 @@
 #!/bin/sh
 
-sudo apt install pandoc
+sudo apt install pandoc libxml2-dev
 
-git checkout traduccion
+git checkout traduccion && git pull
 
 if [ -d docs ]; then
   rm -rf docs
