@@ -31,5 +31,6 @@ Remotes:
   pachamaltese/datos,
   hadley/ggplot2,
   slowkow/ggrepel,
+  tidyverse/tidyr,
   rstudio/bookdown,
   rstudio/rmarkdown
