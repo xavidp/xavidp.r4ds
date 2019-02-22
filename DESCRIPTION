@@ -28,7 +28,7 @@ Imports:
   tidyverse,
   viridis
 Remotes:
-  pachamaltese/datos
+  pachamaltese/datos,
   hadley/ggplot2,
   slowkow/ggrepel,
   rstudio/bookdown,
