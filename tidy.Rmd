@@ -94,7 +94,7 @@ ggplot(tabla1, aes(anio, casos)) +
 
 1.  Recrea el gráfico que muestra el cambio en el número de casos usando la `tabla2` en lugar de la `tabla1`. ¿Qué debes hacer en primer lugar?
 
-## Gather y Spread
+## Reunir y Esparcir
 
 Los principios de los datos ordenados parecen tan obvios que te preguntarás si acaso vas a encontrar un dataset que no esté ordenado. Desafortunadamente, gran parte de los datos que vas a encontrar están desordenados. Existen dos principales razones para esto:
 
@@ -133,9 +133,9 @@ tabla4a %>%
   gather(`1999`, `2000`, key = "anio", value = "casos")
 ```
 
-Las columnas a contraer quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los escribimos con __backtick__. Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
+Las columnas a reunir quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los rodeamos con acentos graves (o _backticks_, en inglés). Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
 
-```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Gathering `tabla4` into a tidy form."}
+```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Reuniendo `tabla4` a un formato ordenado."}
 knitr::include_graphics("diagrams_w_text_as_path/es/tidy-9.svg")
 ```
 
@@ -160,9 +160,7 @@ left_join(tidy4a, tidy4b)
 
 ### Spread
 
-Extender (__spread__) es lo opuesto de __gather__. Lo usas cuando una observación aparece en múltiples filas. Por ejemplo, toma la tabla `tabla2`: una observación 
-
-You use it when an observation is scattered across multiple rows. For example, take `tabla2`: una observación es un país en un año, pero cada observación se reparte entre dos filas.
+Extender (__spread__) es lo opuesto de __gather__. Lo usas cuando una observación aparece en múltiples filas. Por ejemplo, toma la tabla `tabla2`: una observación es un país en un año, pero cada observación aparece en dos filas.
 
 ```{r}
 tabla2
@@ -182,7 +180,7 @@ tabla2 %>%
   spread(key = tipo, value = cuenta)
 ```
 
-```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Spreading `tabla2` makes it tidy"}
+```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Esparcir la `tabla2` la vuelve ordenada"}
 knitr::include_graphics("diagrams_w_text_as_path/es/tidy-8.svg")
 ```
 
@@ -204,9 +202,9 @@ Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, 
     gather("anio", "retorno", `2015`:`2016`)
 ```
 
-    (Hint: observa los tipos de variables y piensa en los nombres de las columnas)
+    (Pista: observa los tipos de variables y piensa en los nombres de las columnas)
 
-    Tanto `spread()` como `gather()` tienen el argumento `convert` (convertir). ¿Qué hace dich argumento?
+    Tanto `spread()` como `gather()` tienen el argumento `convert` (convertir). ¿Qué hace dicho argumento?
 
 1.  ¿Por qué falla el siguiente código?
 
@@ -221,11 +219,11 @@ tabla4a %>%
 personas <- tribble(
   ~ nombre, ~ llave, ~ valor,
   #-----------------|--------|------
-  "Phillip Woods", "age", 45,
-  "Phillip Woods", "height", 186,
-  "Phillip Woods", "age", 50,
-  "Jessica Cordero", "age", 37,
-  "Jessica Cordero", "height", 156
+  "Phillip Woods", "edad", 45,
+  "Phillip Woods", "estatura", 186,
+  "Phillip Woods", "edad", 50,
+  "Jessica Cordero", "edad", 37,
+  "Jessica Cordero", "estatura", 156
 )
 ```
 
@@ -234,18 +232,18 @@ personas <- tribble(
 ```{r}
 embarazo <- tribble(
   ~ embarazo, ~ hombre, ~ mujer,
-  "yes", NA, 10,
+  "si", NA, 10,
   "no", 20, 12
 )
 ```
 
 ## Separar y unir
 
-Hasta ahora has aprendido a ordenar las tablas `tabla2` y `tabla4`, pero no la `tabla3` que tiene un problema diferente: contiene una columna (`tasa`) la cual contiene dos variables (`casos` y `poblacion`). Para solucionar este problema, necesitamos la función `separate()` (separar), También aprenderás acerca del complemento de `separate()`: `unite()` (unir), la cual se usa en los casos en que una única variable se reparte en varias columnas.
+Hasta ahora has aprendido a ordenar las tablas `tabla2` y `tabla4`, pero no la `tabla3` que tiene un problema diferente: contiene una columna (`tasa`) la cual contiene dos variables (`casos` y `poblacion`). Para solucionar este problema, necesitamos la función `separate()` (separar). También aprenderás acerca del complemento de `separate()`: `unite()` (unir), que se usa cuando una única variable se reparte en varias columnas.
 
 ### Separar
 
-`separate()`divide una columna en varias columnas, dividiendo de acuerdo a la posición de un carácter separador. Tomando la `tabla3`:
+`separate()` divide una columna en varias columnas, dividiendo de acuerdo a la posición de un carácter separador. Tomando la `tabla3`:
 
 ```{r}
 tabla3
@@ -518,7 +516,7 @@ oms %>%
 
 1.  Afirmamos que `iso2` e `iso3` son redundantes respecto a `pais`. Confirma esta premisa.
 
-1.  Para cada país, año y sexo calcula el total del número de casos de tuberculosis. Crea una visualización informativade los datos.
+1.  Para cada país, año y sexo calcula el total del número de casos de tuberculosis. Crea una visualización informativa de los datos.
 
 ## Datos no ordenados
 
