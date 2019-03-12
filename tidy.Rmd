@@ -2,15 +2,15 @@
 
 ## Introducción
 
-> "Todas las familias felices se parecen unas a otras, pero cada familia infeliz lo es a su manera." --– Leo Tolstoy
+> "Todas las familias felices se parecen unas a otras, pero cada familia infeliz lo es a su manera." --– León Tolstoy
 
 > "Todos los datos ordenados se parecen unos a otros, pero cada dato desordenado lo es a su manera" --- Hadley Wickham
 
 En este capítulo aprenderás una metodología consistente para organizar datos en R, a esta metodología le llamaremos __tidy data__ (datos ordenados). Llevar tus datos a este formato requiere algo de trabajo previo, sin embargo dicho trabajo tiene retorno positivo en el largo plazo. Una vez que tengas tus datos ordenados y las herramientas para ordenar datos que provee el tidyverse, vas a gastar mucho menos tiempo pasando de una forma de representar datos a otra, permietiéndote destinar más tiempo a las preguntas analíticas.
 
-Este capítulo te dará una introducción práctica a tidy data y las herramientas que provee el paquete __tidyr__. Si desear saber más acerca de la teoría subyacente, puede que te guste el artículo *Tidy Data* publicado en la revista Journal of Statistical Software, <http://www.jstatsoft.org/v59/i10/paper>.
+Este capítulo te dará una introducción práctica a datos ordenados (o *tidy data* en inglés) y las herramientas que provee el paquete __tidyr__. Si desear saber más acerca de la teoría subyacente, puede que te guste el artículo *Tidy Data* publicado en la revista Journal of Statistical Software, <http://www.jstatsoft.org/v59/i10/paper>.
 
-### Prerequisitos
+### Prerrequisitos
 
 En este capítulo nos enfocaremos en tidyr, un paquete que provee un conjunto de herramientas que te ayudarán a ordenar datos desordenados. tidyr es parte del núcleo del tidyverse.
 
@@ -21,21 +21,21 @@ library(datos)
 
 ## Datos ordenados
 
-Puedes representar la misma información de múltiples formas. El ejemplo a continuación muestra los mismos datos ordenados de cuatro manera distintas. Cada dataset muestra los mismos valores de cuatro variables *pais*, *anio*, *poblacion* y *casos*, pero cada dataset organiza los valores de forma distinta.
+Puedes representar la misma información de múltiples formas. El ejemplo a continuación muestra los mismos datos ordenados de cuatro manera distintas. Cada dataset muestra los mismos valores de cuatro variables *pais*, *anio*, *poblacion* y *casos*, pero cada conjunto de datos organiza los valores de forma distinta.
 
 ```{r}
 tabla1
 tabla2
 tabla3
 
-# Spread across two tibbles
+# Dividido en dos tibbles
 tabla4a # casos
 tabla4b # poblacion
 ```
 
-Todo lo anterior representa los mismos datos subyacentes, pero no es igualmente fácil de usar. Un dataset, el dataset ordenado, es mucho más fácil de trabajar en el tidyverse.
+Las anteriores son representaciones de los mismos datos subyacentes, pero no todas son igualmente fáciles de usar. Un tipo de conjunto de datos, el conjunto de datos ordenado, será mucho más fácil de trabajar en el tidyverse.
 
-Existen tres reglas interrelacionadas que hacen que un dataset sea ordenado:
+Existen tres reglas interrelacionadas que hacen que un conjunto de datos sea ordenado:
 
 1.  Cada variable tiene su propia columna.
 1.  Cada observación tiene su propia fila.
@@ -43,22 +43,22 @@ Existen tres reglas interrelacionadas que hacen que un dataset sea ordenado:
 
 La figura \@ref(fig:tidy-structure) muestra estas reglas visualmente.
 
-```{r tidy-structure, echo = FALSE, out.width = "100%", fig.cap = "Following three rules makes a dataset tidy: variables are in columns, observations are in rows, and values are in cells."}
-knitr::include_graphics("images/tidy-1.svg")
+```{r tidy-structure, echo = FALSE, out.width = "100%", fig.cap = "Reglas que hacen que un conjunto de datos sea ordenado: las variables están en columnas, las observaciones en filas, y los valores en celdas."}
+knitr::include_graphics("diagrams_w_text_as_path/es/tidy-1.svg")
 ```
 
 Estas reglas están interrelacionadas ya que es imposible cumplir dos de las tres.
 Esta interrelación lleva a un conjunto práctico de instrucciones mucho más simple:
 
-1.  Coloca cada dataset en un tibble.
+1.  Coloca cada conjunto de datos en un tibble.
 1.  Coloca cada variable en una columna.
 
 En este ejemplo, solo `tabla1` está ordenado. Es la única representación en que cada columna es una variable.
 
-¿Por qué asegurarse de que los datos están ordenados? Existen dos principales ventajas:
+¿Por qué asegurarse de que los datos estén ordenados? Existen dos principales ventajas:
 
-1.  Existe una ventaja general de elegir una forma consistente de almacenar datos. Si tienes     una estructura de datos consistente, es más fácil aprender las herramientas que sirven       con aquello ya que presenta una uniformidad subyacente.
-1.  Existe una ventaja específica al situar las variables en las columnas ya que permite que     la naturaleza vectorizada de R brille. Como habrás aprendido en [mutate](#mutate-funs)       y [summary functions](#summary-funs), muchas de las funciones que vienen con R trabajan      con vectores de valores. Esto hace que transformar datos ordenados sea casi natural.
+1.  Existe una ventaja general de elegir una forma consistente de almacenar datos. Si tienes una estructura de datos consistente, es más fácil aprender las herramientas que funcionan con ella ya que tienen una uniformidad subyacente.
+1.  Existe una ventaja específica al situar las variables en las columnas ya que permite que la naturaleza vectorizada de R brille. Como habrás aprendido en [mutate](#mutate-funs) y [summary](#summary-funs), muchas de las funciones que vienen con R trabajan con vectores de valores. Esto hace que transformar datos ordenados sea casi natural.
 
 dplyr, ggplot2 y el resto de los paquetes del tidyverse están diseñados para trabajar con datos ordenados. Aquí hay algunos ejemplos de cómo se podría trabajar con `tabla1`.
 
@@ -67,7 +67,7 @@ dplyr, ggplot2 y el resto de los paquetes del tidyverse están diseñados para t
 tabla1 %>%
   mutate(tasa = casos / poblacion * 10000)
 
-# Compute casos per anio
+# Calcular casos por anio
 tabla1 %>%
   count(anio, wt = casos)
 
@@ -80,9 +80,9 @@ ggplot(tabla1, aes(anio, casos)) +
 
 ### Ejercicios
 
-1.  Usando prosa, describe como las variables y observaciones se organizan en las tablas de      ejemplo.
+1.  Usando prosa, describe como las variables y observaciones se organizan en las tablas de ejemplo.
 
-1.  Calcula la `tasa` en las tablas `tabla2` y `tabla4a` + `tabla4b`.
+1.  Calcula la `tasa` para las tablas `tabla2` y `tabla4a` + `tabla4b`.
     Necesitarás las siguientes operaciones:
 
     1.  Extrae el número de casos de tuberculosis por país y año.
@@ -92,13 +92,13 @@ ggplot(tabla1, aes(anio, casos)) +
 
     ¿Cuál representación es más fácil de trabajar? ¿Cuál es la más difícil? ¿Por qué?
 
-1.  Recrea el gráfico que muestra el cambio en el número de casos usando la `tabla2` en lugar de la `tabla1`. ¿Qué debes hacer en primera lugar?
+1.  Recrea el gráfico que muestra el cambio en el número de casos usando la `tabla2` en lugar de la `tabla1`. ¿Qué debes hacer en primer lugar?
 
 ## Gather y Spread
 
-Los principios de tidy data parecen tan obvios que te preguntarás si acaso vas a encontrar un dataset que no está ordenado. Desafortunadamente, sin embargo, gran parte de los datos que vas a encontrar están desordenados. Existen dos principales razones para esto:
+Los principios de los datos ordenados parecen tan obvios que te preguntarás si acaso vas a encontrar un dataset que no esté ordenado. Desafortunadamente, gran parte de los datos que vas a encontrar están desordenados. Existen dos principales razones para esto:
 
-1. La mayoría de las personas no están familirizadas con los principios de datos ordenados y es difícil derivarlos por cuenta propia a menos que pases _mucho_ tiempo trabajando con datos.
+1. La mayoría de las personas no están familiarizadas con los principios de datos ordenados y es difícil derivarlos por cuenta propia a menos que pases _mucho_ tiempo trabajando con datos.
 
 2. Los datos a menudo están organizados para facilitar tareas distintas del análisis. Por ejemplo, los datos se organizan para que su registro sea lo más sencillo posible.
 
@@ -118,7 +118,7 @@ Un problema común se tiene cuando en un dataset los nombres de las columnas no 
 tabla4a
 ```
 
-Para ordenar un dataset como este necesitamos contraer (__gather__) tales columnas en un nuevo par de variables. Para describir dicha operación necesitamos tres parámetros:
+Para ordenar un dataset como este necesitamos reunir (__gather__) tales columnas en un nuevo par de variables. Para describir dicha operación necesitamos tres parámetros:
 
 * El conjunto de columnas que representan valores y no variables. En este ejemplo son las columnas `1999` y `2000`.
 
@@ -136,7 +136,7 @@ tabla4a %>%
 Las columnas a contraer quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los escribimos con __backtick__. Para refrescar tu memoria respecto de la selección de columnas, consulta [select](#select).
 
 ```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Gathering `tabla4` into a tidy form."}
-knitr::include_graphics("images/tidy-9.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/tidy-9.svg")
 ```
 
 En el resultado final, las columnas reunidas se eliminan y obtenemos la nuevas variables `key` y `value`. De otro modo, la relacién entre las variables originales se mantiene. Visualmente, esto se observa en la Figura \@ref(fig:tidy-gather). Podemos usar `gather()` para ordenar `tabla4b` de modo similar. La única diferencia es la variable almacenada en los valores de las celdas:
@@ -183,7 +183,7 @@ tabla2 %>%
 ```
 
 ```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Spreading `tabla2` makes it tidy"}
-knitr::include_graphics("images/tidy-8.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/tidy-8.svg")
 ```
 
 Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, `gather()` y `spread()` son complementarios. `gather()` genera tablas estrechas y largas, `spread()` genera tablas anchas y cortas.
@@ -245,24 +245,24 @@ Hasta ahora has aprendido a ordenar las tablas `tabla2` y `tabla4`, pero no la `
 
 ### Separar
 
-`separate()`divide una columna en varias columnas, dividiendo de acuerdo a la posición de un caracter separador. Tomando la `tabla3`:
+`separate()`divide una columna en varias columnas, dividiendo de acuerdo a la posición de un carácter separador. Tomando la `tabla3`:
 
 ```{r}
 tabla3
 ```
 
-La columna `tasa` contiene las variables `casos` y `poblacion`,necesitamos dividir esto en dos variables. `separate()` toma el nombre de la columna a separar y el nombre de las columnas a donde irá el resultado, tal como se muestra en la Figura \@ref(fig:tidy-separate) y el código a continuación.
+La columna `tasa` contiene las variables `casos` y `poblacion`, necesitamos dividir esto en dos variables. `separate()` toma el nombre de la columna a separar y el nombre de las columnas a donde irá el resultado, tal como se muestra en la Figura \@ref(fig:tidy-separate) y el código a continuación.
 
 ```{r}
 tabla3 %>%
   separate(tasa, into = c("casos", "poblacion"))
 ```
 
-```{r tidy-separate, echo = FALSE, out.width = "75%", fig.cap = "Separating `tabla3` makes it tidy"}
-knitr::include_graphics("images/tidy-17.svg")
+```{r tidy-separate, echo = FALSE, out.width = "75%", fig.cap = "Separar la `tabla3` la vuelve ordenada"}
+knitr::include_graphics("diagrams_w_text_as_path/es/tidy-17.svg")
 ```
 
-Por defecto, `separate()` dividirá una columna donde aparezca un caracter no no alfanumérico (i.e. un caracter que no es un número o letra). Por ejemplo, en el siguiente código, `separate()` divide los valores de `tasa` donde aparece el caracter __slash__. Si deseas usar un caracter específico para separar una columna, puedes especificarlo en el argumento `sep` de `separate()`. Por ejemplo, lo anterior se puede re-escribir del siguiente modo:
+Por defecto, `separate()` dividirá una columna donde aparezca un carácter no alfanumérico (i.e. un carácter que no es un número o letra). Por ejemplo, en el siguiente código, `separate()` divide los valores de `tasa` donde aparece la  _slash_. Si deseas usar un carácter específico para separar una columna, puedes especificarlo en el argumento `sep` de `separate()`. Por ejemplo, lo anterior se puede re-escribir del siguiente modo:
 
 ```{r eval = FALSE}
 tabla3 %>%
@@ -271,7 +271,7 @@ tabla3 %>%
 
 (Formalmente, `sep` es una expresión regular y aprenderás más sobre esto en [strings].)
 
-Mira atentamente los tipos de columna: notarás que `casos` y `poblacion` son columnas de tipo caracter. Este es el comportamiento por defecto en `separate()`: preserva el tipo de columna. Aquí, sin embargo, no es muy útil ya que se trata de números. Podemos pedir `separate()` a separate que intente convertir a un tipo más adecuado usando `convert = TRUE`:
+Mira atentamente los tipos de columna: notarás que `casos` y `poblacion` son columnas de tipo carácter. Este es el comportamiento por defecto en `separate()`: preserva el tipo de columna. Aquí, sin embargo, no es muy útil ya que se trata de números. Podemos pedir a separate() que intente convertir a un tipo más adecuado usando `convert = TRUE`:
 
 ```{r}
 tabla3 %>%
@@ -289,24 +289,24 @@ tabla3 %>%
 
 ### Unir
 
-`unite()` es el inverso de `separate()`: combina múltiples columnas en una única columna. Necesitarás esta función con mucha menos frecuencia que `separate()`, pero aún así es una buena herramienta a tener en el bolsillo trasero.
+`unite()` es el inverso de `separate()`: combina múltiples columnas en una única columna. Necesitarás esta función con mucha menos frecuencia que `separate()`, pero aún así es una buena herramienta para tener en el bolsillo trasero.
 
-```{r tidy-unite, echo = FALSE, out.width = "75%", fig.cap = "Uniting `tabla5` makes it tidy"}
-knitr::include_graphics("images/tidy-18.svg")
+```{r tidy-unite, echo = FALSE, out.width = "75%", fig.cap = "Unir la `tabla5` la vuelve ordenada"}
+knitr::include_graphics("diagrams_w_text_as_path/es/tidy-18.svg")
 ```
 
-Podemos usar `unite()` para unir las columnas *siglo* y *anio* creadas en el ejemplo anterior. Los datos están guardados en `tidyr::tabla5`. `unite()` toma un data frame, el nombre de la nueva variable a crear, y un conjunto de columnas a combinar, las que se especifican siguiendo el estilo de la función `dplyr::select()`:
+Podemos usar `unite()` para unir las columnas *siglo* y *anio* creadas en el ejemplo anterior. Los datos están guardados en `datos::tabla5`. `unite()` toma un data frame, el nombre de la nueva variable a crear, y un conjunto de columnas a combinar, las que se especifican siguiendo el estilo de la función `dplyr::select()`:
 
 ```{r}
 tabla5 %>%
-  unite(new, siglo, anio)
+  unite(nueva, siglo, anio)
 ```
 
 En este caso también necesitamos el arguento `sep`. El separador por defecto es el guión bajo (`_`) entre los valores de las distintas columnas. Si no queremos una separación usamos `""`:
 
 ```{r}
 tabla5 %>%
-  unite(new, siglo, anio, sep = "")
+  unite(nueva, siglo, anio, sep = "")
 ```
 
 ### Ejercicios
@@ -328,9 +328,9 @@ tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%
 1.  Compara y contrasta `separate()` y `extract()`. ¿Por qué existen tres variaciones de 
 separación (por posición, separador y grupos), pero solo una forma de unir?
 
-## Valores perdidos
+## Valores faltantes
 
-Cambiar la representación de un dataset conlleva el riesgo de generar valores perdidos. Sorprendentemente, un valor puede perderse de dos formas:
+Cambiar la representación de un dataset conlleva el riesgo de generar valores faltantes. Sorprendentemente, un valor puede perderse de dos formas:
 
 * __Explícita__, i.e. aparece como `NA`.
 * __Implícita__, i.e. simplemente no aparece en los datos.
@@ -345,7 +345,7 @@ acciones <- tibble(
 )
 ```
 
-Existen dos valores perdidos en este dataset:
+Existen dos valores faltantes en este dataset:
 
 * El retorno del cuarto trimestre de 2015 que está explícitamente perdido, debido a que la celda donde el valor debiera estar contiene `NA`.
 
@@ -353,14 +353,14 @@ Existen dos valores perdidos en este dataset:
 
 Una forma de pensar respecto de esta diferencia es al estilo de un mantra Zen: Un valor perdido explícito es la presencia de una ausencia; un valor perdido implícito es la ausencia de una presencia. 
 
-La forma en que se representa un dataset puede dejar explícitos los valores implícitos. Por ejemplo, podemos dejar explítico los valores perdidos implícitos moviendo los años a las columnas:
+La forma en que se representa un dataset puede dejar explícitos los valores implícitos. Por ejemplo, podemos volver explícitos los valores faltantes implícitos al mover los años a las columnas:
 
 ```{r}
 acciones %>%
   spread(anio, retorno)
 ```
 
-Debido a que estos valores perdidos explícitos pueden no ser tan importantes en otras representaciones de los datos, puedes especificar `na.rn = TRUE` en `gather()` para dejar explícitos los valores perdidos implícitos:
+Debido a que estos valores faltantes explícitos pueden no ser tan importantes en otras representaciones de los datos, puedes especificar `na.rm = TRUE` en `gather()` para dejar explícitos los valores faltantes implícitos:
 
 ```{r}
 acciones %>%
@@ -368,7 +368,7 @@ acciones %>%
   gather(anio, retorno, `2015`:`2016`, na.rm = TRUE)
 ```
 
-Otra herramienta importante para hacer explícitos los valores perdidos en datos ordenados es `complete()`:
+Otra herramienta importante para hacer explícitos los valores faltantes en datos ordenados es `complete()`:
 
 ```{r}
 acciones %>%
@@ -377,7 +377,7 @@ acciones %>%
 
 `complete()` toma un conjunto de columnas y encuentra todas las combinaciones únicas. Luego se asegura de que el dataset original contiene todos los valores, completando con `NA`s donde sea necesario.
 
-Existe otra herramienta importante que deberías conocer al momento de trabajar con valores perdidos. En algunos casos en que la fuente de datos se a usado principalmente para ingresar datos, los valores perdidos indican que el valor previo debe arrastrarse hacia adelante:
+Existe otra herramienta importante que deberías conocer al momento de trabajar con valores faltantes. En algunos casos en que la fuente de datos se ha usado principalmente para ingresar datos, los valores faltantes indican que el valor previo debe arrastrarse hacia adelante:
 
 ```{r}
 tratamiento <- tribble(
@@ -389,7 +389,7 @@ tratamiento <- tribble(
 )
 ```
 
-Puedes completar los valores perdidos usando `fill()`. Esta función toma un conjunto de columnas sobre las cuales los valores perdidos son reemplazados por el valor anterior más cercano que se haya reportado (debido a esto se habla de arrastrar los datos).
+Puedes completar los valores faltantes usando `fill()`. Esta función toma un conjunto de columnas sobre las cuales los valores faltantes son reemplazados por el valor anterior más cercano que se haya reportado (también conocido como el método LOCF, del inglés *last observation carried forward*).
 
 ```{r}
 tratamiento %>%
@@ -398,13 +398,13 @@ tratamiento %>%
 
 ### Ejercicios
 
-1.  Compara y contrasta el argumento `fill` que se usa en `spread()` respecto de `complete()`.
+1.  Compara y contrasta el argumento `fill` que se usa en `spread()` con `complete()`.
 
 1.  ¿Qué hace el argumento de dirección en `fill()`?
 
 ## Estudio de caso
 
-Para finalizar el capítulo, combinemos todo lo que aprendiste para atacar un problema real de ordenamiento de datos. El dataset `datos::oms` contiene datos de tuberculosis (TB) detallados por año, país, edad, sexo y método de diagnóstico. Los datos provienen del *Informe de Tuberculosis de la Organización Mundial de la Salud 2014*, disponible en <http://www.who.int/tb/pais/data/download/en/>.
+Para finalizar el capítulo, combinemos todo lo que aprendiste para atacar un problema real de ordenamiento de datos. El dataset `datos::oms` contiene datos de tuberculosis (TB) detallados por año, país, edad, sexo y método de diagnóstico. Los datos provienen del *Informe de Tuberculosis de la Organización Mundial de la Salud 2014*, disponible en <http://www.who.int/tb/country/data/download/en/>.
 
 Existe abundante información epidemiológica en este dataset, pero es complicado trabajar con estos datos tal como son entregados:
 
@@ -412,7 +412,7 @@ Existe abundante información epidemiológica en este dataset, pero es complicad
 oms
 ```
 
-Este es un ejemplo muy típico de un dataset de la vida real. Contiene columnas redundantes, códigos extraños de variables y muchos valores perdidos. En breve, `oms` está desordenado y necesitamos varios pasos para ordenarlo. Al igual que dplyr, tidyr está diseñado de modo tal que cada función hace bien una cosa. Esto significa que en una situación real deberás encadenar múltiples verbos.
+Este es un ejemplo muy típico de un dataset de la vida real. Contiene columnas redundantes, códigos extraños de variables y muchos valores faltantes. En breve, `oms` está desordenado y necesitamos varios pasos para ordenarlo. Al igual que dplyr, tidyr está diseñado de modo tal que cada función hace bien una cosa. Esto significa que en una situación real deberás encadenar múltiples verbos.
 
 La mejor forma de comenzar es reunir las columnas que no representan variables. Miremos lo que hay:
 
@@ -424,7 +424,7 @@ La mejor forma de comenzar es reunir las columnas que no representan variables. 
 
 Necesitamos agrupar todas las columnas desde `nuevos_fpp_h014` hasta `recaidas_m65`. No sabemos aún que representa esto, por lo que le daremos el nombre genérico de `"llave"`. Sabemos que las celdas representan la cuenta de casos, por lo que usaremos la variable `casos`.
 
-Existen múltiples valores perdidos en la representación actual, por lo que de momento usaremos `na.rm` para centrarnos en los valores que están presentes.
+Existen múltiples valores faltantes en la representación actual, por lo que de momento usaremos `na.rm` para centrarnos en los valores que están presentes.
 
 ```{r}
 oms1 <- oms %>%
@@ -439,7 +439,7 @@ oms1 %>%
   count(llave)
 ```
 
-Puedes deducir lo siguiente por cuenta propia pensandoy experimentando un poco, pero afortunadamente tenemos el diccionario de datos a mano. Este nos dice lo siguiente:
+Puedes deducir lo siguiente por cuenta propia pensando y experimentando un poco, pero afortunadamente tenemos el diccionario de datos a mano. Este nos dice lo siguiente:
 
 1.  Lo que aparece antes del primer `_` en las columnas denota si la columna contiene casos nuevos o antiguos de       
     tuberculosis. En este dataset, cada columna contiene nuevos casos.
@@ -451,7 +451,7 @@ Puedes deducir lo siguiente por cuenta propia pensandoy experimentando un poco, 
     *   `fpn` se refiere a casos de tuberculosis pulmonar que no se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar negativo)
     *   `fpp` se refiere a casos de tuberculosis pulmonar que se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar positivo)
 
-3.  A continuación del último `_` la letra que aparece se refiere al sexo de los pacientes. El dataset agrupa en hombres (`h`) y mujeres (`m`).
+3.  La letra que aparece después del último `_` se refiere al sexo de los pacientes. El conjunto de datos agrupa en hombres (`h`) y mujeres (`m`).
 
 4.  Los números finales se refieren al grupo etareo que se ha organizado en siete categorías:
 
@@ -467,7 +467,7 @@ Necesitamos hacer un pequeño cambio al formato de los nombres de las columnas: 
 
 ```{r}
 oms2 <- oms1 %>%
-  mutate(key = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))
+  mutate(llave = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))
 oms2
 ```
 
@@ -488,7 +488,7 @@ oms4 <- oms3 %>%
   select(-nuevos, -iso2, -iso3)
 ```
 
-Luego separamos `sexo_edad` en `sexo` y `edad` dividiendo luego del primer caracter:
+Luego separamos `sexo_edad` en `sexo` y `edad` dividiendo luego del primer carácter:
 
 ```{r}
 oms5 <- oms4 %>%
@@ -498,7 +498,7 @@ oms5
 
 ¡Ahora el dataset `oms` está ordenado!
 
-Hemos mostrado el código parte por parte, asignando los resultados intermedios a nuevas variables. Esta no es la forma típica de trabajo. En cambio, lo que se hace es formar un encadenamiento incrementalmente complejo:
+Hemos mostrado el código parte por parte, asignando los resultados intermedios a nuevas variables. Esta no es la forma típica de trabajo. En cambio, lo que se hace es formar incrementalmente un encadenamiento complejo:
 
 ```{r, results = "hide"}
 oms %>%
@@ -511,24 +511,24 @@ oms %>%
 
 ### Ejercicios
 
-1.  En este caso de estudio fijamos `na.rm = TRUE` para simplificar la verificación de que tenemos los valores              correctos. ¿Es esto razonable? Piensa en como los valores perdidos están representados en este dataset. ¿Existen        valores perdidos implícitos? ¿Cuál es la diferencia entre `NA` y cero?
+1.  En este caso de estudio fijamos `na.rm = TRUE` para simplificar la verificación de que tenemos los valores correctos. ¿Es esto razonable? Piensa en como los valores faltantes están representados en este dataset. ¿Existen valores faltantes implícitos? ¿Cuál es la diferencia entre `NA` y cero?
 
 1.  ¿Qué ocurre si omites la aplicación de `mutate()`?
-    (`mutate(key = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))`)
+    (`mutate(llave = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))`)
 
-1.  Afirmamos que `iso2` e `iso3` son redundantes respecto de `pais`. Confirma esta premisa.
+1.  Afirmamos que `iso2` e `iso3` son redundantes respecto a `pais`. Confirma esta premisa.
 
 1.  Para cada país, año y sexo calcula el total del número de casos de tuberculosis. Crea una visualización informativade los datos.
 
 ## Datos no ordenados
 
-Antes de pasar a otros tópicos, es conveniente referirse brevemente a datos no ordenados Anteriormente en el capítulo, usamos el término peyorativo "desordenados" para referirnos a datos no ordenados. Aquello es una sobresimplificación: existen múltiples estructuras de datos debidamente fundamentadas que no corresponden a datos ordenados. Existen dos principales razones para usar otras estructuras de datos:
+Antes de pasar a otros tópicos, es conveniente referirse brevemente a datos no ordenados. Anteriormente en el capítulo, usamos el término peyorativo "desordenados" para referirnos a datos no ordenados. Esto es una sobresimplificación: existen múltiples estructuras de datos debidamente fundamentadas que no corresponden a datos ordenados. Existen dos principales razones para usar otras estructuras de datos:
 
-* Las representaciones alternativas pueden resultar en un mejor desempeño o una ventaja en tamaño.
+* Las representaciones alternativas pueden traer ventajas importantes en términos de desempeño o tamaño.
 
 * Algunos áreas especializadas han evolucionado y tienen sus propias convenciones para almacenar datos, las que pueden diferir respecto de las convenciones de datos ordenados.
 
 Cada uno de estas razones significa que necesitarás algo distinto a un tibble (o data frame). Si tus datos naturalmente se ajustan a una estructura rectangular compuesta de observaciones y variables, pensamos que datos ordenados debería ser tu elección por defecto. Sin embargo, existen buenas razones para usar otras estructuras; datos ordenados no es la única forma.
 
-Si quieres aprender más acerca de datos no ordenados, recomendamos fuertemente este articulo del blog de Jeff Leek:
+Si quieres aprender más acerca de datos no ordenados, recomendamos fuertemente este artículo del blog de Jeff Leek:
  <http://simplystatistics.org/2016/02/17/non-tidy-data/>
