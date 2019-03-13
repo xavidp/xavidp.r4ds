@@ -1,6 +1,3 @@
-# inactive until I can solve why Travis is ignoring changes to datos package
-# even when it install from the last commit
-
 language: R
 
 sudo: required
@@ -8,10 +5,10 @@ sudo: required
 cache:
   packages: true
   directories:
-  - $TRAVIS_BUILD_DIR/packrat/
   - _book
 
 install:
+  - R -e "install.packages('devtools', repos = 'https://cran.rstudio.com/')"
   - R -e "0" --args --bootstrap-packrat
 
 warnings_are_errors: false
