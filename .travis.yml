@@ -6,9 +6,9 @@ language: R
 sudo: required
 
 cache:
-  directories: $TRAVIS_BUILD_DIR/packrat/
   packages: true
   directories:
+  - $TRAVIS_BUILD_DIR/packrat/
   - _book
 
 install:
