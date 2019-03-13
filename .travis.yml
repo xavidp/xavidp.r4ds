@@ -7,10 +7,6 @@ cache:
   directories:
   - _book
 
-install:
-  - R -e "install.packages('devtools', repos = 'https://cran.rstudio.com/')"
-  - R -e "0" --args --bootstrap-packrat
-
 warnings_are_errors: false
 
 addons:
