@@ -6,9 +6,15 @@ language: R
 sudo: required
 
 cache:
+  directories: $TRAVIS_BUILD_DIR/packrat/
   packages: true
   directories:
   - _book
+
+install:
+  - R -e "0" --args --bootstrap-packrat
+
+warnings_are_errors: false
 
 addons:
   apt:
