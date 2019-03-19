@@ -37,7 +37,7 @@ rmd_files: [
   "rmarkdown.Rmd",
   "communicate-plots.Rmd",
   "rmarkdown-formats.Rmd",
-  "rmarkdown-workflow.Rmd",
+  "rmarkdown-workflow.Rmd"
 ]
 
 before_chapter_script: "_common.R"

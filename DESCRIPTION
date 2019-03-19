@@ -13,6 +13,7 @@ Imports:
   datos,
   gapminder,
   ggrepel,
+  ggplot2,
   hexbin,
   htmltools,
   htmlwidgets,
@@ -25,12 +26,8 @@ Imports:
   nycflights13,
   png,
   pryr,
+  rmarkdown,
   tidyverse,
   viridis
 Remotes:
-  pachamaltese/datos,
-  hadley/ggplot2,
-  slowkow/ggrepel,
-  tidyverse/tidyr,
-  rstudio/bookdown,
-  rstudio/rmarkdown
+  pachamaltese/datos
