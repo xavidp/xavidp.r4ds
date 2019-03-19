@@ -25,6 +25,7 @@ We'll use the same tools as in the previous chapter, but add in some real datase
 
 ```{r setup, message = FALSE}
 library(tidyverse)
+library(hexbin)
 library(modelr)
 options(na.action = na.warn)
 

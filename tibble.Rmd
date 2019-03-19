@@ -15,7 +15,7 @@ En este capítulo exploraré el paquete __tibble__, parte de los paquetes princi
 library(tidyverse)
 ```
 
-## Creando tibbles {#tibbles}
+## Creando tibbles
 
 La mayoría de las funciones que usarás en este libro producen tibbles, ya que éstos son una de las características principales de tidyverse. La mayoría de los paquetes de R suelen usar data frames clásicos, así que quizás quieras convertir un data frame en un tibble. Esto lo puedes hacer con `as_tibble()`:
 
@@ -39,7 +39,7 @@ Un tibble puede usar nombres de columnas que no son nombres de variables válido
 
 ```{r}
 tb <- tibble(
-  `:)` = "sonrisa", 
+  `:)` = "sonrisa",
   ` ` = "espacio",
   `2000` = "número"
 )
@@ -80,12 +80,12 @@ tibble(
 )
 ```
 
-Los tibbles están diseñados para no inundar tu consola accidentalmente al mirar data frames muy grandes. Sin embargo, a veces es necesario un output mayor que el que se obtiene por default. Existen algunas opciones que pueden ayudar. 
+Los tibbles están diseñados para no inundar tu consola accidentalmente al mirar data frames muy grandes. Sin embargo, a veces es necesario un output mayor que el que se obtiene por default. Existen algunas opciones que pueden ayudar.
 
 Primero, puedes usar `print()` en el data frame y controlar el número de filas (`n`) y el ancho (`width`) mostrado. Por otro lado, `width = Inf` muestra todas las columnas:
 
 ```{r, eval = FALSE}
-vuelos %>% 
+vuelos %>%
   print(n = 10, width = Inf)
 ```
 
@@ -100,7 +100,7 @@ Puedes ver una lista completa de opciones en la ayuda del paquete con `package?t
 La opción final es usar el visualizador de datos de RStudio para obtener una versión interactiva del data frame completo. Esto también es útil luego de realizar una larga cadena de manipulaciones.
 
 ```{r, eval = FALSE}
-vuelos %>% 
+vuelos %>%
   View()
 ```
 
@@ -118,7 +118,7 @@ df <- tibble(
 df$x
 df[["x"]]
 
-# Extraer indicando la posición 
+# Extraer indicando la posición
 df[[1]]
 ```
 
@@ -147,7 +147,7 @@ La principal razón de que algunas funciones previas no funcionen con tibbles es
 1. ¿Cómo puedes saber si un objeto es un tibble? (Sugerencia: imprime `mtautos` en consola, que es un data frame clásico).
 
 1. Compara y contrasta las siguientes operaciones aplicadas a un `data.frame` y a un tibble equivalente. ¿Qué es diferente? ¿Por qué podría causarte problemas el comportamiento por defecto del data frame?
-    
+
     ```{r, eval = FALSE}
 df <- data.frame(abc = 1, xyz = "a")
 df$x
@@ -160,13 +160,13 @@ df[, c("abc", "xyz")]
 1.  Practica referenciar nombres no sintácticos en el siguiente data frame:
 
     1. Extrayendo la variable llamada `1`.
-    
+
     1. Generando un gráfico de dispersión de `1` vs `2`.
-    
+
     1. Creando una nueva columna llamada `3` que sea el resultado de la división de `2` por `1`.
 
     1. Renombrando las columnas como `uno`, `dos` y `tres`.
-    
+
     ```{r}
     molesto <- tibble(
       `1` = 1:10,

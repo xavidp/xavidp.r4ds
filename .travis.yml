@@ -1,6 +1,3 @@
-# inactive until I can solve why Travis is ignoring changes to datos package
-# even when it install from the last commit
-
 language: R
 
 sudo: required
@@ -9,6 +6,8 @@ cache:
   packages: true
   directories:
   - _book
+
+warnings_are_errors: false
 
 addons:
   apt:
