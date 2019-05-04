@@ -8,17 +8,17 @@ Sin embargo, antes de que podamos comenzar a usar modelos en conjuntos de datos 
 
 Hay dos partes en un modelo:
 
-1.  Primero, defines una __familia de modelos__ que expresa un patrón 
-    que quieras capturar. El patrón debe ser preciso, pero también genérico. 
-    Por ejemplo, el patrón podría ser una línea recta, o una curva cuadrática. 
-    Expresarás la familia de modelos con una ecuación como `y = a_1 * x + a_2` o 
-    `y = a_1 * x ^ a_2`. Aquí, `x` e `y` son variables conocidas de tus
-    datos, y `a_1` y `a_2` son parámetros que pueden variar al capturar
-    diferentes patrones.
+1. Primero, defines una __familia de modelos__ que expresa un patrón
+ que quieras capturar. El patrón debe ser preciso, pero también genérico.
+ Por ejemplo, el patrón podría ser una línea recta, o una curva cuadrática.
+ Expresarás la familia de modelos con una ecuación como `y = a_1 * x + a_2` o
+ `y = a_1 * x ^ a_2`. Aquí, `x` e `y` son variables conocidas de tus
+ datos, y `a_1` y `a_2` son parámetros que pueden variar al capturar
+ diferentes patrones.
 
-1.  Luego, generas un __modelo ajustado__ al encontrar un modelo de la
-    familia que sea lo más cercano a tus datos. Esto toma la familia de modelos 
-    genérica y la vuelve específica, como `y = 3 * x + 7` o `y = 9 * x ^ 2`.
+1. Luego, generas un __modelo ajustado__ al encontrar un modelo de la
+ familia que sea lo más cercano a tus datos. Esto toma la familia de modelos
+ genérica y la vuelve específica, como `y = 3 * x + 7` o `y = 9 * x ^ 2`.
 
 Es importante enteder que el modelo ajustado es solamente el modelo más cercano a la familia de modelos. Esto implica que tu tienes el "mejor" modelo (de acuerdo a cierto criterio); no implica que tu tienes un buen modelo y ciertamente no implica que ese modelo es "verdadero". George Box lo explica muy bien en su famoso aforismo:
 
@@ -27,12 +27,12 @@ Es importante enteder que el modelo ajustado es solamente el modelo más cercano
 Vale la pena leer el contexto más completo de la cita:
 
 > Ahora sería muy notable si cualquier sistema existente en el mundo real
-> pudiera ser representado exactamente por algún modelo simple. Sin embargo, 
+> pudiera ser representado exactamente por algún modelo simple. Sin embargo,
 > modelos simples astutamente escogidos a menudo proporcionan aproximaciones notablemente útiles.
 >
 > Por ejemplo, la ley PV = RT que relaciona la presión P, el volumen V y la temperatura
 > T de un gas "ideal" a través de una constante R no es exactamente verdadera para cualquier gas real, pero frecuentmente provee una aproximación útil y, además, su estructura
-> es informativa ya que proviene de un punto de vista físico del comportamiento de las 
+> es informativa ya que proviene de un punto de vista físico del comportamiento de las
 > moléculas de un gas.
 >
 > Para tal modelo, no hay necesidad de preguntarse "¿Es el modelo verdadero?".
@@ -57,11 +57,11 @@ options(na.action = na.warn)
 Miremos el conjunto de datos simulado `sim1`, incluído dentro del paquete __modelr__. Este contiene dos variables continuas, `x` e `y`. Grafiquémoslas para ver como están relacionadas:
 
 ```{r}
-ggplot(sim1, aes(x, y)) + 
+ggplot(sim1, aes(x, y)) +
   geom_point()
 ```
 
-Puedes ver un fuerte patrón en los datos. Usemos un modelo para capturar dicho patrón y hacerlo explícito. Es nuestro trabajo proporcionar la forma básica del modelo. En este caso, la relación parece ser lineal, es decir: `y = a_0 + a_1 * x`. Comencemos por tener una idea de cómo son los modelos de esa familia generando aleatoriamente unos pocos y superponiéndolos sobre los datos. Para este caso simple, podemos usar `geom_abline()` que toma una pendiente e intercepto (u ordenada al origen) como parámetros. Más adelante, aprenderemos técnicas más generales que funcionan con cualquier modelo. 
+Puedes ver un fuerte patrón en los datos. Usemos un modelo para capturar dicho patrón y hacerlo explícito. Es nuestro trabajo proporcionar la forma básica del modelo. En este caso, la relación parece ser lineal, es decir: `y = a_0 + a_1 * x`. Comencemos por tener una idea de cómo son los modelos de esa familia generando aleatoriamente unos pocos y superponiéndolos sobre los datos. Para este caso simple, podemos usar `geom_abline()` que toma una pendiente e intercepto (u ordenada al origen) como parámetros. Más adelante, aprenderemos técnicas más generales que funcionan con cualquier modelo.
 
 ```{r}
 modelos <- tibble(
@@ -69,9 +69,9 @@ modelos <- tibble(
   a2 = runif(250, -5, 5)
 )
 
-ggplot(sim1, aes(x, y)) + 
-  geom_abline(aes(intercept = a1, slope = a2), data = modelos, alpha = 1/4) +
-  geom_point() 
+ggplot(sim1, aes(x, y)) +
+  geom_abline(aes(intercept = a1, slope = a2), data = modelos, alpha = 1 / 4) +
+  geom_point()
 ```
 
 Hay 250 modelos en el gráfico, ¡pero muchos son realmente malos! Necesitamos encontrar los modelos buenos especificando nuestra intuición de que un buen modelo está "cerca" de los datos. Necesitamos una manera de cuantificar la distancia entre los datos y un modelo. Entonces podemos ajustar el modelo encontrando el valor de `a_0` y` a_1` que genera el modelo con la menor distancia a estos datos.
@@ -79,14 +79,14 @@ Hay 250 modelos en el gráfico, ¡pero muchos son realmente malos! Necesitamos e
 Un lugar fácil para comenzar es encontrar la distancia vertical entre cada punto y el modelo, como lo muestra el siguiente diagrama. (Nota que he cambiado ligeramente los valores x para que puedas ver las distancias individuales.)
 
 ```{r, echo = FALSE}
-dist1 <- sim1 %>% 
+dist1 <- sim1 %>%
   mutate(
     dodge = rep(c(-1, 0, 1) / 20, 10),
     x1 = x + dodge,
     pred = 7 + x1 * 1.5
   )
 
-ggplot(dist1, aes(x1, y)) + 
+ggplot(dist1, aes(x1, y)) +
   geom_abline(intercept = 7, slope = 1.5, colour = "grey40") +
   geom_point(colour = "grey40") +
   geom_linerange(aes(ymin = y, ymax = pred), colour = "#3366FF")
@@ -110,7 +110,7 @@ Una forma habitual de hacer esto en estadística es usar la "raíz del error cua
 ```{r}
 measure_distance <- function(mod, data) {
   diff <- data$y - model1(mod, data)
-  sqrt(mean(diff ^ 2))
+  sqrt(mean(diff^2))
 }
 measure_distance(c(7, 1.5), sim1)
 ```
@@ -122,7 +122,7 @@ sim1_dist <- function(a1, a2) {
   measure_distance(c(a1, a2), sim1)
 }
 
-modelos <- modelos %>% 
+modelos <- modelos %>%
   mutate(dist = purrr::map2_dbl(a1, a2, sim1_dist))
 modelos
 ```
@@ -130,10 +130,10 @@ modelos
 A continuación, vamos a superponer los mejores 10 modelos en los datos. He coloreado los modelos usando `-dist`: esto es una forma fácil de asegurarse de que los mejores modelos (es decir, aquellos con la menor distancia) tengan los colores más brillantes.
 
 ```{r}
-ggplot(sim1, aes(x, y)) + 
-  geom_point(size = 2, colour = "grey30") + 
+ggplot(sim1, aes(x, y)) +
+  geom_point(size = 2, colour = "grey30") +
   geom_abline(
-    aes(intercept = a1, slope = a2, colour = -dist), 
+    aes(intercept = a1, slope = a2, colour = -dist),
     data = filter(modelos, rank(dist) <= 10)
   )
 ```
@@ -152,22 +152,22 @@ En lugar de probar con múltples modelos aleatorios, se puede sistematizar y gen
 grid <- expand.grid(
   a1 = seq(-5, 20, length = 25),
   a2 = seq(1, 3, length = 25)
-  ) %>% 
+) %>%
   mutate(dist = purrr::map2_dbl(a1, a2, sim1_dist))
 
-grid %>% 
+grid %>%
   ggplot(aes(a1, a2)) +
   geom_point(data = filter(grid, rank(dist) <= 10), size = 4, colour = "red") +
-  geom_point(aes(colour = -dist)) 
+  geom_point(aes(colour = -dist))
 ```
 
 Cuando superpones los mejores 10 modelos en los datos originales, se ven bastante bien:
 
 ```{r}
-ggplot(sim1, aes(x, y)) + 
-  geom_point(size = 2, colour = "grey30") + 
+ggplot(sim1, aes(x, y)) +
+  geom_point(size = 2, colour = "grey30") +
   geom_abline(
-    aes(intercept = a1, slope = a2, colour = -dist), 
+    aes(intercept = a1, slope = a2, colour = -dist),
     data = filter(grid, rank(dist) <= 10)
   )
 ```
@@ -178,8 +178,8 @@ Podrás imaginarte que de forma iterativa puedo hacer la cuadrícula más y más
 best <- optim(c(0, 0), measure_distance, data = sim1)
 best$par
 
-ggplot(sim1, aes(x, y)) + 
-  geom_point(size = 2, colour = "grey30") + 
+ggplot(sim1, aes(x, y)) +
+  geom_point(size = 2, colour = "grey30") +
   geom_abline(intercept = best$par[1], slope = best$par[2])
 ```
 
@@ -196,42 +196,42 @@ coef(sim1_mod)
 
 ### Ejercicios
 
-1.  Una desventaja del modelo lineal es ser sensible a valores inusuales
-    debido a que la distancia incorpora un término al cuadrado. Ajusta un
-    modelo a los datos simulados que se presentan a continuación y visualiza
-    los resultados. Corre el modelo varias veces para generar diferentes conjuntos
-    de datos simulados. ¿Qué puedes observar respecto del modelo?
+1. Una desventaja del modelo lineal es ser sensible a valores inusuales
+ debido a que la distancia incorpora un término al cuadrado. Ajusta un
+ modelo a los datos simulados que se presentan a continuación y visualiza
+ los resultados. Corre el modelo varias veces para generar diferentes conjuntos
+ de datos simulados. ¿Qué puedes observar respecto del modelo?
 
-    ```{r}
-    sim1a <- tibble(
-      x = rep(1:10, each = 3),
-      y = x * 1.5 + 6 + rt(length(x), df = 2)
-    )
-    ```
+ ```{r}
+sim1a <- tibble(
+  x = rep(1:10, each = 3),
+  y = x * 1.5 + 6 + rt(length(x), df = 2)
+)
+ ```
 
-1.  Una forma de obtener un modelo lineal más robusto es usar una métrica distinta
-    para la distancia. Por ejemplo, en lugar de la raíz de la distancia media cuadrática
-    (del inglés *root-mean-squared distance*) se podría usar la media de la distancia absoluta:
+1. Una forma de obtener un modelo lineal más robusto es usar una métrica distinta
+ para la distancia. Por ejemplo, en lugar de la raíz de la distancia media cuadrática
+ (del inglés *root-mean-squared distance*) se podría usar la media de la distancia absoluta:
 
-    ```{r}
-    measure_distance <- function(mod, data) {
-      diff <- data$y - model1(mod, data)
-      mean(abs(diff))
-    }
-    ```
-    
-    Usa `optim()` para ajustar este modelo a los datos simulados anteriormente y 
-    compara el resultado con el modelo lineal.
+ ```{r}
+measure_distance <- function(mod, data) {
+  diff <- data$y - model1(mod, data)
+  mean(abs(diff))
+}
+ ```
 
-1.  Un desafío al realizar optimización numérica es que únicamente garantiza
-    encontrar un óptimo local. ¿Qué problema se presenta al optimizar un modelo de
-    tres parámetros como el que se presenta a continuación?
+ Usa `optim()` para ajustar este modelo a los datos simulados anteriormente y
+ compara el resultado con el modelo lineal.
 
-    ```{r}
-    model1 <- function(a, data) {
-      a[1] + data$x * a[2] + a[3]
-    }
-    ```
+1. Un desafío al realizar optimización numérica es que únicamente garantiza
+ encontrar un óptimo local. ¿Qué problema se presenta al optimizar un modelo de
+ tres parámetros como el que se presenta a continuación?
+
+ ```{r}
+model1 <- function(a, data) {
+  a[1] + data$x * a[2] + a[3]
+}
+ ```
 
 ## Visualizando modelos
 
@@ -241,11 +241,11 @@ También es útil observar lo que el modelo no captura, los llamados residuos qu
 
 ### Predicciones
 
-Para visualizar las predicciones de un modelo, podemos partir por generar una grilla de valores equidistantes que cubra la región donde se encuentran los datos. La forma más fácil de hacerlo es usando `modelr::data_grid()`. El primer argumento es un data frame y, por cada argumento adicional, encuentra las variables únicas y luego genera todas las combinaciones: 
+Para visualizar las predicciones de un modelo, podemos partir por generar una grilla de valores equidistantes que cubra la región donde se encuentran los datos. La forma más fácil de hacerlo es usando `modelr::data_grid()`. El primer argumento es un data frame y, por cada argumento adicional, encuentra las variables únicas y luego genera todas las combinaciones:
 
 ```{r}
-grid <- sim1 %>% 
-  data_grid(x) 
+grid <- sim1 %>%
+  data_grid(x)
 grid
 ```
 
@@ -254,8 +254,8 @@ grid
 Luego agregamos las predicciones. Usaremos `modelr::add_predictions()` que toma un data frame y un modelo. Esto agrega las predicciones del modelo en una nueva columna en el data frame:
 
 ```{r}
-grid <- grid %>% 
-  add_predictions(sim1_mod) 
+grid <- grid %>%
+  add_predictions(sim1_mod)
 grid
 ```
 
@@ -276,7 +276,7 @@ La otra cara de las predicciones son los residuos. Las predicciones te informan 
 Agregamos los residuos a los datos con `add_residuals()`, que funciona de manera similar a `add_predictions()`. Nota, sin embargo, que usamos el data frame original y no no una grilla manufacturada. Esto es porque para calcular los residuos se necesitan los valores de "y".
 
 ```{r}
-sim1 <- sim1 %>% 
+sim1 <- sim1 %>%
   add_residuals(sim1_mod)
 sim1
 ```
@@ -284,7 +284,7 @@ sim1
 Existen diferentes formas de entender qué nos dicen los residuos respecto del modelo. Una forma es dibujar un polígono de frecuencia que nos ayude a entender cómo se propagan los residuos:
 
 ```{r}
-ggplot(sim1, aes(resid)) + 
+ggplot(sim1, aes(resid)) +
   geom_freqpoly(binwidth = 0.5)
 ```
 
@@ -293,28 +293,28 @@ Esto ayuda a calibrar la calidad del modelo: ¿qué tan lejos se encuentran las 
 A menudo vas a querer crear gráficos usando los residuos en lugar del predictor original. Verás mucho de eso en el capítulo siguiente:
 
 ```{r}
-ggplot(sim1, aes(x, resid)) + 
+ggplot(sim1, aes(x, resid)) +
   geom_ref_line(h = 0) +
-  geom_point() 
+  geom_point()
 ```
 
 Esto parece ser ruido aleatorio, lo que sugiere que el modelo ha hecho un buen trabajo capturando los patrones del conjunto de datos.
 
 ### Ejercicios
 
-1.  En lugar de usar `lm()` para ajustar una línea recta, puedes usar `loess()`
-    para ajustar una curva suave. Repite el proceso de ajustar el modelo, 
-    generar la cuadrícula, predicciones y visualización con `sim1` usando `loess()`
-    en vez de `lm()`. ¿Cómo se compara el resultado a `geom_smooth()`.
+1. En lugar de usar `lm()` para ajustar una línea recta, puedes usar `loess()`
+ para ajustar una curva suave. Repite el proceso de ajustar el modelo,
+ generar la cuadrícula, predicciones y visualización con `sim1` usando `loess()`
+ en vez de `lm()`. ¿Cómo se compara el resultado a `geom_smooth()`.
 
-1.  `add_predictions()` está pareada con `gather_predictions()` y 
-    `spread_predictions()`. ¿Cómo difieren estas tres funciones?
-    
-1.  ¿Qué hace `geom_ref_line()`? ¿De qué paquete proviene? ¿Por qué es útil e importante 
-    incluir una línea de referencia en los gráficos que muestran residuos?
+1. `add_predictions()` está pareada con `gather_predictions()` y
+ `spread_predictions()`. ¿Cómo difieren estas tres funciones?
 
-1.  ¿Por qué quisieras mirar un polígono de frecuencias con los residuos absolutos? ¿Cuáles son las 
-    ventajas y desventajas de los residuos crudos?
+1. ¿Qué hace `geom_ref_line()`? ¿De qué paquete proviene? ¿Por qué es útil e importante
+ incluir una línea de referencia en los gráficos que muestran residuos?
+
+1. ¿Por qué quisieras mirar un polígono de frecuencias con los residuos absolutos? ¿Cuáles son las
+ ventajas y desventajas de los residuos crudos?
 
 ## Fórmulas y familias de modelos
 
@@ -349,11 +349,11 @@ Las siguientes secciones detallan cómo esta notación de fórmulas funciona con
 
 ### Variables categóricas
 
-Generar una función a partir de una fórmula es directo cuando el predictor es una variable continua, pero las cosas son más complicadas cuando el predictor es una variable categórica. Imagina que tienes una fórmula como `y ~ sexo`, donde el sexo puede ser hombre o mujer. No tiene sentido convertir a una fórmula del tipo `y = x_0 + x_1 * sexo` debido a que `sexo` no es un número - ¡no se puede multiplicar! En su lugar, lo que R hace es convertir a `y = x_0 + x_1 * sexo_hombre` donde `sexo_hombre`  tiene valor 1 si `sexo` corresponde a hombre y cero a mujer:
+Generar una función a partir de una fórmula es directo cuando el predictor es una variable continua, pero las cosas son más complicadas cuando el predictor es una variable categórica. Imagina que tienes una fórmula como `y ~ sexo`, donde el sexo puede ser hombre o mujer. No tiene sentido convertir a una fórmula del tipo `y = x_0 + x_1 * sexo` debido a que `sexo` no es un número - ¡no se puede multiplicar! En su lugar, lo que R hace es convertir a `y = x_0 + x_1 * sexo_hombre` donde `sexo_hombre` tiene valor 1 si `sexo` corresponde a hombre y cero a mujer:
 
 ```{r}
 df <- tribble(
-  ~ sex, ~ response,
+  ~sex, ~response,
   "male", 1,
   "female", 2,
   "male", 1
@@ -366,7 +366,7 @@ Quizá te preguntes por qué R no crea la columna `sexo_mujer`. El problema es q
 Afortunadamente, sin embargo, si te enfocas en visualizar las predicciones no necesitas preocuparte de la parametrización exacta. Veamos algunos datos y modelos para hacer algo concreto. Aquí está el dataset `sim2` de modelr:
 
 ```{r}
-ggplot(sim2) + 
+ggplot(sim2) +
   geom_point(aes(x, y))
 ```
 
@@ -375,8 +375,8 @@ Podemos ajustar un modelo a esto y generar predicciones:
 ```{r}
 mod2 <- lm(y ~ x, data = sim2)
 
-grid <- sim2 %>% 
-  data_grid(x) %>% 
+grid <- sim2 %>%
+  data_grid(x) %>%
   add_predictions(mod2)
 grid
 ```
@@ -384,7 +384,7 @@ grid
 Efectivamente, un modelo con una variable `x` categórica va a predecir el valor medio para cada categoría. (¿Por qué? porque la media minimiza la raíz de la distancia media cuadrática.) Es fácil de ver si superponemos la predicción sobre los datos originales:
 
 ```{r}
-ggplot(sim2, aes(x)) + 
+ggplot(sim2, aes(x)) +
   geom_point(aes(y = y)) +
   geom_point(data = grid, aes(y = pred), colour = "red", size = 4)
 ```
@@ -392,7 +392,7 @@ ggplot(sim2, aes(x)) +
 No es posible hacer predicciones sobre niveles no observados. A veces harás esto por accidente, por lo que es bueno reconocer el siguiente mensaje de error:
 
 ```{r, error = TRUE}
-tibble(x = "e") %>% 
+tibble(x = "e") %>%
   add_predictions(mod2)
 ```
 
@@ -401,7 +401,7 @@ tibble(x = "e") %>%
 ¿Qué ocurre si combinas una variable continua y una categórica? `sim3` contiene un predictor categórico y otro predictor continuo. Podemos visualizarlos con un gráfico simple:
 
 ```{r}
-ggplot(sim3, aes(x1, y)) + 
+ggplot(sim3, aes(x1, y)) +
   geom_point(aes(colour = x2))
 ```
 
@@ -416,18 +416,18 @@ Cuando agregas variables con `+` el modelo va a estimar cada efecto independient
 
 Para visualizar estos modelos necesitamos dos nuevos trucos:
 
-1.  Tenemos dos predictores, por lo que necesitamos pasar ambas variables a `data_grid()`.
-    Esto encontrará todos los valores únicos de `x1` y `x2` y luego generará todas las combinaciones,
+1. Tenemos dos predictores, por lo que necesitamos pasar ambas variables a `data_grid()`.
+ Esto encontrará todos los valores únicos de `x1` y `x2` y luego generará todas las combinaciones,
 
-1.  Para generar predicciones de ambos modelos simultáneamente, podemos usar `gather_predictions()` que
-    incorpora cada predicción como una fila. El complemento de `gather_predictions()` es `spread_predictions()`
-    que incluye cada predicción en una nueva columna.
+1. Para generar predicciones de ambos modelos simultáneamente, podemos usar `gather_predictions()` que
+ incorpora cada predicción como una fila. El complemento de `gather_predictions()` es `spread_predictions()`
+ que incluye cada predicción en una nueva columna.
 
 Esto combinado nos da:
 
 ```{r}
-grid <- sim3 %>% 
-  data_grid(x1, x2) %>% 
+grid <- sim3 %>%
+  data_grid(x1, x2) %>%
   gather_predictions(mod1, mod2)
 grid
 ```
@@ -435,10 +435,10 @@ grid
 Podemos visualizar los resultados de ambos modelos en un gráfico usando separando en facetas:
 
 ```{r}
-ggplot(sim3, aes(x1, y, colour = x2)) + 
-  geom_point() + 
-  geom_line(data = grid, aes(y = pred)) + 
-  facet_wrap(~ model)
+ggplot(sim3, aes(x1, y, colour = x2)) +
+  geom_point() +
+  geom_line(data = grid, aes(y = pred)) +
+  facet_wrap(~model)
 ```
 
 Observa que el modelo que usa `+` tiene la misma pendiente para cada recta, pero distintos interceptos (u ordenadas al origen). El modelo que usa `*` tiene distinta pendiente e intercepto.
@@ -446,11 +446,11 @@ Observa que el modelo que usa `+` tiene la misma pendiente para cada recta, pero
 ¿Qué modelo es el más adecuado para los datos? Podemos mirar los residuos. Aquí hemos separado facetas por modelo y por `x2`ya que facilita ver el patrón dentro de cada grupo.
 
 ```{r}
-sim3 <- sim3 %>% 
+sim3 <- sim3 %>%
   gather_residuals(mod1, mod2)
 
-ggplot(sim3, aes(x1, resid, colour = x2)) + 
-  geom_point() + 
+ggplot(sim3, aes(x1, resid, colour = x2)) +
+  geom_point() +
   facet_grid(model ~ x2)
 ```
 
@@ -464,62 +464,62 @@ Demos un vistazo al modelo equivalente para dos variables continuas. Para comenz
 mod1 <- lm(y ~ x1 + x2, data = sim4)
 mod2 <- lm(y ~ x1 * x2, data = sim4)
 
-grid <- sim4 %>% 
+grid <- sim4 %>%
   data_grid(
-    x1 = seq_range(x1, 5), 
-    x2 = seq_range(x2, 5) 
-  ) %>% 
+    x1 = seq_range(x1, 5),
+    x2 = seq_range(x2, 5)
+  ) %>%
   gather_predictions(mod1, mod2)
 grid
 ```
 
 Observa el uso de `seq_range()` dentro de `data_grid()`. En lugar de usar cada valor único de `x`, usamos una cuadrícula uniformemente espaciada de cinco valores entre los números mínimo y máximo. Quizá no es lo más importante aquí, pero es una técnica útil en general. Existen otros dos argumentos en `seq_range()`:
 
-*  `pretty = TRUE` generará una secuencia "bonita", por ejemplo algo agradable al ojo humano. Esto es útil si quieres generar tablas a partir del output:
-    
-    ```{r}
-    seq_range(c(0.0123, 0.923423), n = 5)
-    seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)
-    ```
-    
-*   `trim = 0.1` eliminará el 10% de los valores en el extremo de la cola. Esto es útil si las variables 
-    tienen una distribución con una cola larga y te quieres enfocar en generar valores cerca del centro:
+* `pretty = TRUE` generará una secuencia "bonita", por ejemplo algo agradable al ojo humano. Esto es útil si quieres generar tablas a partir del output:
 
-    ```{r}
-    x1 <- rcauchy(100)
-    seq_range(x1, n = 5)
-    seq_range(x1, n = 5, trim = 0.10)
-    seq_range(x1, n = 5, trim = 0.25)
-    seq_range(x1, n = 5, trim = 0.50)
-    ```
-    
-*   `expand = 0.1` es en cierta medida el opuesto de `trim()` ya que expande el rango en un 10%.
-    
-    ```{r}
-    x2 <- c(0, 1)
-    seq_range(x2, n = 5)
-    seq_range(x2, n = 5, expand = 0.10)
-    seq_range(x2, n = 5, expand = 0.25)
-    seq_range(x2, n = 5, expand = 0.50)
-    ```
+ ```{r}
+seq_range(c(0.0123, 0.923423), n = 5)
+seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)
+ ```
+
+* `trim = 0.1` eliminará el 10% de los valores en el extremo de la cola. Esto es útil si las variables
+ tienen una distribución con una cola larga y te quieres enfocar en generar valores cerca del centro:
+
+ ```{r}
+x1 <- rcauchy(100)
+seq_range(x1, n = 5)
+seq_range(x1, n = 5, trim = 0.10)
+seq_range(x1, n = 5, trim = 0.25)
+seq_range(x1, n = 5, trim = 0.50)
+ ```
+
+* `expand = 0.1` es en cierta medida el opuesto de `trim()` ya que expande el rango en un 10%.
+
+ ```{r}
+x2 <- c(0, 1)
+seq_range(x2, n = 5)
+seq_range(x2, n = 5, expand = 0.10)
+seq_range(x2, n = 5, expand = 0.25)
+seq_range(x2, n = 5, expand = 0.50)
+ ```
 
 A continuación intentemos visualizar el modelo. Tenemos dos predictores continuos, por lo que te imaginarás el modelo como una superficie 3d. Podemos mostrar esto usando `geom_tile()`:
 
 ```{r}
-ggplot(grid, aes(x1, x2)) + 
-  geom_tile(aes(fill = pred)) + 
-  facet_wrap(~ model)
+ggplot(grid, aes(x1, x2)) +
+  geom_tile(aes(fill = pred)) +
+  facet_wrap(~model)
 ```
 
 ¡Esto no sugiere que los modelos sean muy distintos! Pero eso es en parte una ilusión: nuestros ojos y cerebros no son muy buenos en comparar sombras de color de forma adecuada. En lugar de mirar la superficie desde arriba, podríamos mirarla desde los costados, mostrando múltiples cortes:
 
 ```{r, asp = 1/2}
-ggplot(grid, aes(x1, pred, colour = x2, group = x2)) + 
+ggplot(grid, aes(x1, pred, colour = x2, group = x2)) +
   geom_line() +
-  facet_wrap(~ model)
-ggplot(grid, aes(x2, pred, colour = x1, group = x1)) + 
+  facet_wrap(~model)
+ggplot(grid, aes(x2, pred, colour = x1, group = x1)) +
   geom_line() +
-  facet_wrap(~ model)
+  facet_wrap(~model)
 ```
 
 Esto muestra la interacción entre dos variables continuas que básicamente opera del mismo modo que una variable continua y una categórica. Una interacción dice que no existe un resultado fijo: necesitas considerar los valores de `x1` y `x2` simultáneamente para predecir `y`.
@@ -530,16 +530,16 @@ Pasé un tiempo mirando los residuos para ver si acaso `mod2` es mejor que `mod1
 
 ### Transformaciones
 
-Puedes hacer transformaciones dentro de la fórmula del modelo. Por ejemplo `log(y) ~ sqrt(x1) + x2` se transforma en `log(y) = a_1 + a_2 * sqrt(x1) + a_3 * x2`. Si la transformación involucra `+`, `*`, `^` o `-`, necesitas dejar eso dentro de `I()` para que R no lo tome como parte de la especificación del modelo. Por ejemplo, `y ~ x + I(x ^ 2)` se traduce en `y = a_1 + a_2 * x + a_3 * x^2`. Si olvidas incluir `I()` y especificas `y ~ x ^ 2 + x`, R va a calcular `y ~ x * x + x`. `x * x`  lo que resulta en la interacción de `x` consigo misma, lo que se reduce a `x`. R automáticamente elimina las variables redundantes, por lo que `x + x` se convierte en `x`, lo que significa que `y ~ x ^ 2 + x`  especifica la función `y = a_1 + a_2 * x`. ¡Eso probablemente no es lo que querías!
+Puedes hacer transformaciones dentro de la fórmula del modelo. Por ejemplo `log(y) ~ sqrt(x1) + x2` se transforma en `log(y) = a_1 + a_2 * sqrt(x1) + a_3 * x2`. Si la transformación involucra `+`, `*`, `^` o `-`, necesitas dejar eso dentro de `I()` para que R no lo tome como parte de la especificación del modelo. Por ejemplo, `y ~ x + I(x ^ 2)` se traduce en `y = a_1 + a_2 * x + a_3 * x^2`. Si olvidas incluir `I()` y especificas `y ~ x ^ 2 + x`, R va a calcular `y ~ x * x + x`. `x * x` lo que resulta en la interacción de `x` consigo misma, lo que se reduce a `x`. R automáticamente elimina las variables redundantes, por lo que `x + x` se convierte en `x`, lo que significa que `y ~ x ^ 2 + x` especifica la función `y = a_1 + a_2 * x`. ¡Eso probablemente no es lo que querías!
 
 Nuevamente, si te confunde lo que el modelo hace, puedes usar `model_matrix()` para ver exactamente lo que la ecuación `lm()` está ajustando:
 
 ```{r}
 df <- tribble(
   ~y, ~x,
-   1,  1,
-   2,  2, 
-   3,  3
+  1, 1,
+  2, 2,
+  3, 3
 )
 model_matrix(df, y ~ x^2 + x)
 model_matrix(df, y ~ I(x^2) + x)
@@ -579,37 +579,37 @@ mod3 <- lm(y ~ splines::ns(x, 3), data = sim5)
 mod4 <- lm(y ~ splines::ns(x, 4), data = sim5)
 mod5 <- lm(y ~ splines::ns(x, 5), data = sim5)
 
-grid <- sim5 %>% 
-  data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>% 
+grid <- sim5 %>%
+  data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>%
   gather_predictions(mod1, mod2, mod3, mod4, mod5, .pred = "y")
 
-ggplot(sim5, aes(x, y)) + 
+ggplot(sim5, aes(x, y)) +
   geom_point() +
   geom_line(data = grid, colour = "red") +
-  facet_wrap(~ model)
+  facet_wrap(~model)
 ```
 
 Observa que la extrapolación fuera del rango de los datos es claramente mala. Esta es la desventaja de aproximar una función mediante un polinomio. Pero este es un problema real con cualquier modelo: el modelo nunca te dirá si el comportamiento es verdadero cuando extrapolas fuera del rango de los datos que has observado. Deberás apoyarte en la teoría y la ciencia.
 
 ### Ejercicios
 
-1.  ¿Qué pasa si repites el análisis de `sim2` usando un modelo sin intercepto? ¿Qué ocurre con la 
-    ecuación del modelo? ¿Qué ocurre con las predicciones?
+1. ¿Qué pasa si repites el análisis de `sim2` usando un modelo sin intercepto? ¿Qué ocurre con la
+ ecuación del modelo? ¿Qué ocurre con las predicciones?
 
-1.  Usa `model_matrix()` para explorar las ecuaciones generadas por los modelos ajustados a `sim3` y
-    `sim4`. ¿Por qué `*` es un atajo para la interacción?
+1. Usa `model_matrix()` para explorar las ecuaciones generadas por los modelos ajustados a `sim3` y
+ `sim4`. ¿Por qué `*` es un atajo para la interacción?
 
-1.  Usando los principios básicos, convierte las fórmulas de los siguientes modelos en funciones.
-    (Sugerencia: comienza por convertir las variables categóricas en ceros y unos.)
+1. Usando los principios básicos, convierte las fórmulas de los siguientes modelos en funciones.
+ (Sugerencia: comienza por convertir las variables categóricas en ceros y unos.)
 
-    ```{r, eval = FALSE}
-    mod1 <- lm(y ~ x1 + x2, data = sim3)
-    mod2 <- lm(y ~ x1 * x2, data = sim3)
-    ```
+ ```{r, eval = FALSE}
+mod1 <- lm(y ~ x1 + x2, data = sim3)
+mod2 <- lm(y ~ x1 * x2, data = sim3)
+ ```
 
-1.  Para `sim4`, ¿Es mejor `mod1` o `mod2`? Yo creo que `mod2` es ligeramente mejor
-    removiendo las tendencias, pero es bastante sutil. ¿Puedes generar un gráfico
-    que de sustento a esta hipótesis?
+1. Para `sim4`, ¿Es mejor `mod1` o `mod2`? Yo creo que `mod2` es ligeramente mejor
+ removiendo las tendencias, pero es bastante sutil. ¿Puedes generar un gráfico
+ que de sustento a esta hipótesis?
 
 ## Valores faltantes
 
@@ -645,27 +645,27 @@ nobs(mod)
 Este capítulo se centró de forma exclusiva en la familia de modelos lineales, la cual asume una relación de la forma `y = a_1 * x1 + a_2 * x2 + ... + a_n * xn`. Además, los modelos lineales asumen que los residuos siguen una distribución normal, algo de lo que no hemos hablado. Existe un amplio conjunto de familias de modelos que extienden la familia de modelos lineales de varias formas interesantes. Algunos son:
 
 * __Modelos lineales generalizados__, es decir, `stats::glm()`. Los modelos lineales asumen que la respuesta es una
-  variable continua y que el error sigue una distribución normal. Los modelos lineales generalizados extienden
-  los modelos lineales para incluir respuestas no continuas (es decir, datos binarios o conteos). Definen una distancia métrica basada en la idea estadística de verosimilitud.
+ variable continua y que el error sigue una distribución normal. Los modelos lineales generalizados extienden
+ los modelos lineales para incluir respuestas no continuas (es decir, datos binarios o conteos). Definen una distancia métrica basada en la idea estadística de verosimilitud.
 
 * __Modelos generalizados aditivos__, es decir, `mgcv::gam()`, extienden los modelos lineales generalizados
-  para incorporar funciones suaves arbitrarias. Esto significa que puedes escribir una fórmula del tipo
-  `y ~ s(x)` que se transforma en una ecuación de la forma `y = f(x)` y dejar que `gam()` estime la función
-  (sujeto a algunas restricciones de suavidad para que el problema sea manejable).
+ para incorporar funciones suaves arbitrarias. Esto significa que puedes escribir una fórmula del tipo
+ `y ~ s(x)` que se transforma en una ecuación de la forma `y = f(x)` y dejar que `gam()` estime la función
+ (sujeto a algunas restricciones de suavidad para que el problema sea manejable).
 
-* __Modelos lineales penalizados__, es decir, `glmnet::glmnet()`, incorporan un término de penalización a la 
-  distancia y así penalizan modelos complejos (definidos por la distancia entre el vector de parámetros y el 
-  origen). Esto tiende a entregar modelos que generalizan mejor respecto de nuevos conjuntos de datos para
-  la misma población.
+* __Modelos lineales penalizados__, es decir, `glmnet::glmnet()`, incorporan un término de penalización a la
+ distancia y así penalizan modelos complejos (definidos por la distancia entre el vector de parámetros y el
+ origen). Esto tiende a entregar modelos que generalizan mejor respecto de nuevos conjuntos de datos para
+ la misma población.
 
 * __Modelos lineales robustos__, es decir, `MASS:rlm()`, modifican la distancia para restar importancia a los
-  puntos que quedan muy alejados. Esto resulta en modelos menos sensibles a valores extremos, con el
-  inconveniente de que no son muy buenos cuando no hay valores extremos.
+ puntos que quedan muy alejados. Esto resulta en modelos menos sensibles a valores extremos, con el
+ inconveniente de que no son muy buenos cuando no hay valores extremos.
 
 * __Árboles__, es decir, `rpart::rpart()`, atacan un problema de un modo totalmente distinto a los
-  modelos lineales. Ajustan un modelo constante por partes, dividiendo los datos en partes progresivamente
-  más y más pequeñas. Los árboles no son tremendamente efectivos por sí solos, pero son muy poderosos cuando se usan en modelos agregados como __bosques aleatorios__, del inglés *random forests*), (es decir, 
-  `randomForest::randomForest()`) o __máquinas aceleradoras de gradiente__, del inglés *gradient boosting 
-  machines* (es decir, `xgboost::xgboost`.).
+ modelos lineales. Ajustan un modelo constante por partes, dividiendo los datos en partes progresivamente
+ más y más pequeñas. Los árboles no son tremendamente efectivos por sí solos, pero son muy poderosos cuando se usan en modelos agregados como __bosques aleatorios__, del inglés *random forests*), (es decir,
+ `randomForest::randomForest()`) o __máquinas aceleradoras de gradiente__, del inglés *gradient boosting
+ machines* (es decir, `xgboost::xgboost`.).
 
 Estos modelos son todos similares desde una perspectiva de programación. Una vez que hayas manejado los modelos lineales, te resultará sencillo entender la mecánica de otras clases de modelos. Ser un modelador hábil consiste en tener buenos principios generales y una gran caja de herramientas técnicas. Ahora que has aprendido algunas herramientas y algunas clases de modelos, puedes continuar aprendiendo sobre otras clases en otras fuentes.

@@ -40,7 +40,7 @@ There are three other common types of variables that aren't used in this dataset
 * `lgl` stands for logical, vectors that contain only `TRUE` or `FALSE`.
 
 * `fctr` stands for factors, which R uses to represent categorical variables
-  with fixed possible values.
+ with fixed possible values.
 
 * `date` stands for dates.
 
@@ -58,12 +58,12 @@ These can all be used in conjunction with `group_by()` which changes the scope o
 
 All verbs work similarly:
 
-1.  The first argument is a data frame.
+1. The first argument is a data frame.
 
-1.  The subsequent arguments describe what to do with the data frame,
-    using the variable names (without quotes).
+1. The subsequent arguments describe what to do with the data frame,
+ using the variable names (without quotes).
 
-1.  The result is a new data frame.
+1. The result is a new data frame.
 
 Together these properties make it easy to chain together multiple simple steps to achieve a complex result. Let's dive in and see how these verbs work.
 
@@ -125,7 +125,7 @@ The following code finds all flights that departed in November or December:
 filter(flights, month == 11 | month == 12)
 ```
 
-The order of operations doesn't work like English. You can't write `filter(flights, month == 11 | 12)`, which you might literally translate into  "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `TRUE`. In a numeric context (like here), `TRUE` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
+The order of operations doesn't work like English. You can't write `filter(flights, month == 11 | 12)`, which you might literally translate into "finds all flights that departed in November or December". Instead it finds all months that equal `11 | 12`, an expression that evaluates to `TRUE`. In a numeric context (like here), `TRUE` becomes one, so this finds all flights in January, not November or December. This is quite confusing!
 
 A useful short-hand for this problem is `x %in% y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code above:
 
@@ -191,26 +191,26 @@ filter(df, is.na(x) | x > 1)
 
 ### Exercises
 
-1.  Find all flights that
+1. Find all flights that
 
-    1. Had an arrival delay of two or more hours
-    1. Flew to Houston (`IAH` or `HOU`)
-    1. Were operated by United, American, or Delta
-    1. Departed in summer (July, August, and September)
-    1. Arrived more than two hours late, but didn't leave late
-    1. Were delayed by at least an hour, but made up over 30 minutes in flight
-    1. Departed between midnight and 6am (inclusive)
+ 1. Had an arrival delay of two or more hours
+ 1. Flew to Houston (`IAH` or `HOU`)
+ 1. Were operated by United, American, or Delta
+ 1. Departed in summer (July, August, and September)
+ 1. Arrived more than two hours late, but didn't leave late
+ 1. Were delayed by at least an hour, but made up over 30 minutes in flight
+ 1. Departed between midnight and 6am (inclusive)
 
-1.  Another useful dplyr filtering helper is `between()`. What does it do?
-    Can you use it to simplify the code needed to answer the previous
-    challenges?
+1. Another useful dplyr filtering helper is `between()`. What does it do?
+ Can you use it to simplify the code needed to answer the previous
+ challenges?
 
-1.  How many flights have a missing `dep_time`? What other variables are
-    missing? What might these rows represent?
+1. How many flights have a missing `dep_time`? What other variables are
+ missing? What might these rows represent?
 
-1.  Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing?
-    Why is `FALSE & NA` not missing? Can you figure out the general
-    rule?  (`NA * 0` is a tricky counterexample!)
+1. Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing?
+ Why is `FALSE & NA` not missing? Can you figure out the general
+ rule? (`NA * 0` is a tricky counterexample!)
 
 ## Arrange rows with `arrange()`
 
@@ -236,15 +236,15 @@ arrange(df, desc(x))
 
 ### Exercises
 
-1.  How could you use `arrange()` to sort all missing values to the start?
-    (Hint: use `is.na()`).
+1. How could you use `arrange()` to sort all missing values to the start?
+ (Hint: use `is.na()`).
 
-1.  Sort `flights` to find the most delayed flights. Find the flights that
-    left earliest.
+1. Sort `flights` to find the most delayed flights. Find the flights that
+ left earliest.
 
-1.  Sort `flights` to find the fastest flights.
+1. Sort `flights` to find the fastest flights.
 
-1.  Which flights travelled the longest? Which travelled the shortest?
+1. Which flights travelled the longest? Which travelled the shortest?
 
 ## Select columns with `select()` {#select}
 
@@ -270,10 +270,10 @@ There are a number of helper functions you can use within `select()`:
 * `contains("ijk")`: matches names that contain "ijk".
 
 * `matches("(.)\\1")`: selects variables that match a regular expression.
-   This one matches any variables that contain repeated characters. You'll
-   learn more about regular expressions in [strings].
+ This one matches any variables that contain repeated characters. You'll
+ learn more about regular expressions in [strings].
 
-*  `num_range("x", 1:3)`: matches `x1`, `x2` and `x3`.
+* `num_range("x", 1:3)`: matches `x1`, `x2` and `x3`.
 
 See `?select` for more details.
 
@@ -291,25 +291,25 @@ select(flights, time_hour, air_time, everything())
 
 ### Exercises
 
-1.  Brainstorm as many ways as possible to select `dep_time`, `dep_delay`,
-    `arr_time`, and `arr_delay` from `flights`.
+1. Brainstorm as many ways as possible to select `dep_time`, `dep_delay`,
+ `arr_time`, and `arr_delay` from `flights`.
 
-1.  What happens if you include the name of a variable multiple times in
-    a `select()` call?
+1. What happens if you include the name of a variable multiple times in
+ a `select()` call?
 
-1.  What does the `one_of()` function do? Why might it be helpful in conjunction
-    with this vector?
+1. What does the `one_of()` function do? Why might it be helpful in conjunction
+ with this vector?
 
-    ```{r}
+ ```{r}
 vars <- c("year", "month", "day", "dep_delay", "arr_delay")
-    ```
+ ```
 
-1.  Does the result of running the following code surprise you?  How do the
-    select helpers deal with case by default? How can you change that default?
+1. Does the result of running the following code surprise you? How do the
+ select helpers deal with case by default? How can you change that default?
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 select(flights, contains("TIME"))
-    ```
+ ```
 
 ## Add new variables with `mutate()`
 
@@ -355,88 +355,88 @@ transmute(flights,
 
 There are many functions for creating new variables that you can use with `mutate()`. The key property is that the function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output. There's no way to list every possible function that you might use, but here's a selection of functions that are frequently useful:
 
-*   Arithmetic operators: `+`, `-`, `*`, `/`, `^`. These are all vectorised,
-    using the so called "recycling rules". If one parameter is shorter than
-    the other, it will be automatically extended to be the same length. This
-    is most useful when one of the arguments is a single number: `air_time / 60`,
-    `hours * 60 + minute`, etc.
+* Arithmetic operators: `+`, `-`, `*`, `/`, `^`. These are all vectorised,
+ using the so called "recycling rules". If one parameter is shorter than
+ the other, it will be automatically extended to be the same length. This
+ is most useful when one of the arguments is a single number: `air_time / 60`,
+ `hours * 60 + minute`, etc.
 
-    Arithmetic operators are also useful in conjunction with the aggregate
-    functions you'll learn about later. For example, `x / sum(x)` calculates
-    the proportion of a total, and `y - mean(y)` computes the difference from
-    the mean.
+ Arithmetic operators are also useful in conjunction with the aggregate
+ functions you'll learn about later. For example, `x / sum(x)` calculates
+ the proportion of a total, and `y - mean(y)` computes the difference from
+ the mean.
 
-*   Modular arithmetic: `%/%` (integer division) and `%%` (remainder), where
-    `x == y * (x %/% y) + (x %% y)`. Modular arithmetic is a handy tool because
-    it allows you to break integers up into pieces. For example, in the
-    flights dataset, you can compute `hour` and `minute` from `dep_time` with:
+* Modular arithmetic: `%/%` (integer division) and `%%` (remainder), where
+ `x == y * (x %/% y) + (x %% y)`. Modular arithmetic is a handy tool because
+ it allows you to break integers up into pieces. For example, in the
+ flights dataset, you can compute `hour` and `minute` from `dep_time` with:
 
-    ```{r}
+ ```{r}
 transmute(flights,
   dep_time,
   hour = dep_time %/% 100,
   minute = dep_time %% 100
 )
-    ```
+ ```
 
-*   Logs: `log()`, `log2()`, `log10()`. Logarithms are an incredibly useful
-    transformation for dealing with data that ranges across multiple orders of
-    magnitude. They also convert multiplicative relationships to additive, a
-    feature we'll come back to in modelling.
+* Logs: `log()`, `log2()`, `log10()`. Logarithms are an incredibly useful
+ transformation for dealing with data that ranges across multiple orders of
+ magnitude. They also convert multiplicative relationships to additive, a
+ feature we'll come back to in modelling.
 
-    All else being equal, I recommend using `log2()` because it's easy to
-    interpret: a difference of 1 on the log scale corresponds to doubling on
-    the original scale and a difference of -1 corresponds to halving.
+ All else being equal, I recommend using `log2()` because it's easy to
+ interpret: a difference of 1 on the log scale corresponds to doubling on
+ the original scale and a difference of -1 corresponds to halving.
 
-*   Offsets: `lead()` and `lag()` allow you to refer to leading or lagging
-    values. This allows you to compute running differences (e.g. `x - lag(x)`)
-    or find when values change (`x != lag(x)`). They are most useful in
-    conjunction with `group_by()`, which you'll learn about shortly.
+* Offsets: `lead()` and `lag()` allow you to refer to leading or lagging
+ values. This allows you to compute running differences (e.g. `x - lag(x)`)
+ or find when values change (`x != lag(x)`). They are most useful in
+ conjunction with `group_by()`, which you'll learn about shortly.
 
-    ```{r}
+ ```{r}
 (x <- 1:10)
 lag(x)
 lead(x)
-    ```
+ ```
 
-*   Cumulative and rolling aggregates: R provides functions for running sums,
-    products, mins and maxes: `cumsum()`, `cumprod()`, `cummin()`, `cummax()`;
-    and dplyr provides `cummean()` for cumulative means. If you need rolling
-    aggregates (i.e. a sum computed over a rolling window), try the RcppRoll
-    package.
+* Cumulative and rolling aggregates: R provides functions for running sums,
+ products, mins and maxes: `cumsum()`, `cumprod()`, `cummin()`, `cummax()`;
+ and dplyr provides `cummean()` for cumulative means. If you need rolling
+ aggregates (i.e. a sum computed over a rolling window), try the RcppRoll
+ package.
 
-    ```{r}
+ ```{r}
 x
 cumsum(x)
 cummean(x)
-    ```
+ ```
 
-*   Logical comparisons, `<`, `<=`, `>`, `>=`, `!=`, which you learned about
-    earlier. If you're doing a complex sequence of logical operations it's
-    often a good idea to store the interim values in new variables so you can
-    check that each step is working as expected.
+* Logical comparisons, `<`, `<=`, `>`, `>=`, `!=`, which you learned about
+ earlier. If you're doing a complex sequence of logical operations it's
+ often a good idea to store the interim values in new variables so you can
+ check that each step is working as expected.
 
-*   Ranking: there are a number of ranking functions, but you should
-    start with `min_rank()`. It does the most usual type of ranking
-    (e.g. 1st, 2nd, 2nd, 4th). The default gives smallest values the small
-    ranks; use `desc(x)` to give the largest values the smallest ranks.
+* Ranking: there are a number of ranking functions, but you should
+ start with `min_rank()`. It does the most usual type of ranking
+ (e.g. 1st, 2nd, 2nd, 4th). The default gives smallest values the small
+ ranks; use `desc(x)` to give the largest values the smallest ranks.
 
-    ```{r}
+ ```{r}
 y <- c(1, 2, 2, NA, 3, 4)
 min_rank(y)
 min_rank(desc(y))
-    ```
+ ```
 
-    If `min_rank()` doesn't do what you need, look at the variants
-    `row_number()`, `dense_rank()`, `percent_rank()`, `cume_dist()`,
-    `ntile()`.  See their help pages for more details.
+ If `min_rank()` doesn't do what you need, look at the variants
+ `row_number()`, `dense_rank()`, `percent_rank()`, `cume_dist()`,
+ `ntile()`. See their help pages for more details.
 
-    ```{r}
+ ```{r}
 row_number(y)
 dense_rank(y)
 percent_rank(y)
 cume_dist(y)
-    ```
+ ```
 
 ### Exercises
 
@@ -453,23 +453,23 @@ ggplot(flights, aes(dep_sched %% 60)) + geom_histogram(binwidth = 1)
 ggplot(flights, aes(air_time - airtime2)) + geom_histogram()
 ```
 
-1.  Currently `dep_time` and `sched_dep_time` are convenient to look at, but
-    hard to compute with because they're not really continuous numbers.
-    Convert them to a more convenient representation of number of minutes
-    since midnight.
+1. Currently `dep_time` and `sched_dep_time` are convenient to look at, but
+ hard to compute with because they're not really continuous numbers.
+ Convert them to a more convenient representation of number of minutes
+ since midnight.
 
-1.  Compare `air_time` with `arr_time - dep_time`. What do you expect to see?
-    What do you see? What do you need to do to fix it?
+1. Compare `air_time` with `arr_time - dep_time`. What do you expect to see?
+ What do you see? What do you need to do to fix it?
 
-1.  Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you
-    expect those three numbers to be related?
+1. Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you
+ expect those three numbers to be related?
 
-1.  Find the 10 most delayed flights using a ranking function. How do you want
-    to handle ties? Carefully read the documentation for `min_rank()`.
+1. Find the 10 most delayed flights using a ranking function. How do you want
+ to handle ties? Carefully read the documentation for `min_rank()`.
 
-1.  What does `1:3 + 1:10` return? Why?
+1. What does `1:3 + 1:10` return? Why?
 
-1.  What trigonometric functions does R provide?
+1. What trigonometric functions does R provide?
 
 ## Grouped summaries with `summarise()`
 
@@ -513,12 +513,12 @@ ggplot(data = delay, mapping = aes(x = dist, y = delay)) +
 
 There are three steps to prepare this data:
 
-1.  Group flights by destination.
+1. Group flights by destination.
 
-1.  Summarise to compute distance, average delay, and number of flights.
+1. Summarise to compute distance, average delay, and number of flights.
 
-1.  Filter to remove noisy points and Honolulu airport, which is almost
-    twice as far away as the next closest airport.
+1. Filter to remove noisy points and Honolulu airport, which is almost
+ twice as far away as the next closest airport.
 
 This code is a little frustrating to write because we have to give each intermediate data frame a name, even though we don't care about it. Naming things is hard, so this slows down our analysis.
 
@@ -618,16 +618,16 @@ RStudio tip: a useful keyboard shortcut is Cmd/Ctrl + Shift + P. This resends th
 
 --------------------------------------------------------------------------------
 
-There's another common variation of this type of pattern. Let's look at how the average performance of batters in baseball is related to the number of times they're at bat. Here I use data from the __Lahman__ package to compute the batting average (number of hits / number of attempts) of every major league baseball player.  
+There's another common variation of this type of pattern. Let's look at how the average performance of batters in baseball is related to the number of times they're at bat. Here I use data from the __Lahman__ package to compute the batting average (number of hits / number of attempts) of every major league baseball player.
 
 When I plot the skill of the batter (measured by the batting average, `ba`) against the number of opportunities to hit the ball (measured by at bat, `ab`), you see two patterns:
 
-1.  As above, the variation in our aggregate decreases as we get more
-    data points.
+1. As above, the variation in our aggregate decreases as we get more
+ data points.
 
-2.  There's a positive correlation between skill (`ba`) and opportunities to
-    hit the ball (`ab`). This is because teams control who gets to play,
-    and obviously they'll pick their best players.
+2. There's a positive correlation between skill (`ba`) and opportunities to
+ hit the ball (`ab`). This is because teams control who gets to play,
+ and obviously they'll pick their best players.
 
 ```{r}
 # Convert to a tibble so it prints nicely
@@ -660,42 +660,42 @@ You can find a good explanation of this problem at <http://varianceexplained.org
 
 Just using means, counts, and sum can get you a long way, but R provides many other useful summary functions:
 
-*   Measures of location: we've used `mean(x)`, but `median(x)` is also
-    useful. The mean is the sum divided by the length; the median is a value
-    where 50% of `x` is above it, and 50% is below it.
+* Measures of location: we've used `mean(x)`, but `median(x)` is also
+ useful. The mean is the sum divided by the length; the median is a value
+ where 50% of `x` is above it, and 50% is below it.
 
-    It's sometimes useful to combine aggregation with logical subsetting.
-    We haven't talked about this sort of subsetting yet, but you'll learn more
-    about it in [subsetting].
+ It's sometimes useful to combine aggregation with logical subsetting.
+ We haven't talked about this sort of subsetting yet, but you'll learn more
+ about it in [subsetting].
 
-    ```{r}
+ ```{r}
 not_cancelled %>%
   group_by(year, month, day) %>%
   summarise(
     avg_delay1 = mean(arr_delay),
     avg_delay2 = mean(arr_delay[arr_delay > 0]) # the average positive delay
   )
-    ```
+ ```
 
-*   Measures of spread: `sd(x)`, `IQR(x)`, `mad(x)`. The root mean squared deviation,
-    or standard deviation or sd for short, is the standard measure of spread.
-    The interquartile range `IQR()` and median absolute deviation `mad(x)`
-    are robust equivalents that may be more useful if you have outliers.
+* Measures of spread: `sd(x)`, `IQR(x)`, `mad(x)`. The root mean squared deviation,
+ or standard deviation or sd for short, is the standard measure of spread.
+ The interquartile range `IQR()` and median absolute deviation `mad(x)`
+ are robust equivalents that may be more useful if you have outliers.
 
-    ```{r}
+ ```{r}
 # Why is distance to some destinations more variable than to others?
 not_cancelled %>%
   group_by(dest) %>%
   summarise(distance_sd = sd(distance)) %>%
   arrange(desc(distance_sd))
-    ```
+ ```
 
-*   Measures of rank: `min(x)`, `quantile(x, 0.25)`, `max(x)`. Quantiles
-    are a generalisation of the median. For example, `quantile(x, 0.25)`
-    will find a value of `x` that is greater than 25% of the values,
-    and less than the remaining 75%.
+* Measures of rank: `min(x)`, `quantile(x, 0.25)`, `max(x)`. Quantiles
+ are a generalisation of the median. For example, `quantile(x, 0.25)`
+ will find a value of `x` that is greater than 25% of the values,
+ and less than the remaining 75%.
 
-    ```{r}
+ ```{r}
 # When do the first and last flights leave each day?
 not_cancelled %>%
   group_by(year, month, day) %>%
@@ -703,68 +703,68 @@ not_cancelled %>%
     first = min(dep_time),
     last = max(dep_time)
   )
-    ```
+ ```
 
-*   Measures of position: `first(x)`, `nth(x, 2)`, `last(x)`. These work
-    similarly to `x[1]`, `x[2]`, and `x[length(x)]` but let you set a default
-    value if that position does not exist (i.e. you're trying to get the 3rd
-    element from a group that only has two elements). For example, we can
-    find the first and last departure for each day:
+* Measures of position: `first(x)`, `nth(x, 2)`, `last(x)`. These work
+ similarly to `x[1]`, `x[2]`, and `x[length(x)]` but let you set a default
+ value if that position does not exist (i.e. you're trying to get the 3rd
+ element from a group that only has two elements). For example, we can
+ find the first and last departure for each day:
 
-    ```{r}
+ ```{r}
 not_cancelled %>%
   group_by(year, month, day) %>%
   summarise(
     first_dep = first(dep_time),
     last_dep = last(dep_time)
   )
-    ```
+ ```
 
-    These functions are complementary to filtering on ranks. Filtering gives
-    you all variables, with each observation in a separate row:
+ These functions are complementary to filtering on ranks. Filtering gives
+ you all variables, with each observation in a separate row:
 
-    ```{r}
+ ```{r}
 not_cancelled %>%
   group_by(year, month, day) %>%
   mutate(r = min_rank(desc(dep_time))) %>%
   filter(r %in% range(r))
-    ```
+ ```
 
-*   Counts: You've seen `n()`, which takes no arguments, and returns the
-    size of the current group. To count the number of non-missing values, use
-    `sum(!is.na(x))`. To count the number of distinct (unique) values, use
-    `n_distinct(x)`.
+* Counts: You've seen `n()`, which takes no arguments, and returns the
+ size of the current group. To count the number of non-missing values, use
+ `sum(!is.na(x))`. To count the number of distinct (unique) values, use
+ `n_distinct(x)`.
 
-    ```{r}
+ ```{r}
 # Which destinations have the most carriers?
 not_cancelled %>%
   group_by(dest) %>%
   summarise(carriers = n_distinct(carrier)) %>%
   arrange(desc(carriers))
-    ```
+ ```
 
-    Counts are so useful that dplyr provides a simple helper if all you want is
-    a count:
+ Counts are so useful that dplyr provides a simple helper if all you want is
+ a count:
 
-    ```{r}
+ ```{r}
 not_cancelled %>%
   count(dest)
-    ```
+ ```
 
-    You can optionally provide a weight variable. For example, you could use
-    this to "count" (sum) the total number of miles a plane flew:
+ You can optionally provide a weight variable. For example, you could use
+ this to "count" (sum) the total number of miles a plane flew:
 
-    ```{r}
+ ```{r}
 not_cancelled %>%
   count(tailnum, wt = distance)
-    ```
+ ```
 
-*   Counts and proportions of logical values: `sum(x > 10)`, `mean(y == 0)`.
-    When used with numeric functions, `TRUE` is converted to 1 and `FALSE` to 0.
-    This makes `sum()` and `mean()` very useful: `sum(x)` gives the number of
-    `TRUE`s in `x`, and `mean(x)` gives the proportion.
+* Counts and proportions of logical values: `sum(x > 10)`, `mean(y == 0)`.
+ When used with numeric functions, `TRUE` is converted to 1 and `FALSE` to 0.
+ This makes `sum()` and `mean()` very useful: `sum(x)` gives the number of
+ `TRUE`s in `x`, and `mean(x)` gives the proportion.
 
-    ```{r}
+ ```{r}
 # How many flights left before 5am? (these usually indicate delayed
 # flights from the previous day)
 not_cancelled %>%
@@ -775,7 +775,7 @@ not_cancelled %>%
 not_cancelled %>%
   group_by(year, month, day) %>%
   summarise(hour_perc = mean(arr_delay > 60))
-    ```
+ ```
 
 ### Grouping by multiple variables
 
@@ -802,97 +802,97 @@ daily %>%
 
 ### Exercises
 
-1.  Brainstorm at least 5 different ways to assess the typical delay
-    characteristics of a group of flights. Consider the following scenarios:
+1. Brainstorm at least 5 different ways to assess the typical delay
+ characteristics of a group of flights. Consider the following scenarios:
 
-    * A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of
-      the time.
+ * A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of
+ the time.
 
-    * A flight is always 10 minutes late.
+ * A flight is always 10 minutes late.
 
-    * A flight is 30 minutes early 50% of the time, and 30 minutes late 50% of
-      the time.
+ * A flight is 30 minutes early 50% of the time, and 30 minutes late 50% of
+ the time.
 
-    * 99% of the time a flight is on time. 1% of the time it's 2 hours late.
+ * 99% of the time a flight is on time. 1% of the time it's 2 hours late.
 
-    Which is more important: arrival delay or departure delay?
+ Which is more important: arrival delay or departure delay?
 
-1.  Come up with another approach that will give you the same output as
-    `not_cancelled %>% count(dest)` and
-    `not_cancelled %>% count(tailnum, wt = distance)` (without using
-    `count()`).
+1. Come up with another approach that will give you the same output as
+ `not_cancelled %>% count(dest)` and
+ `not_cancelled %>% count(tailnum, wt = distance)` (without using
+ `count()`).
 
-1.  Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)`
-    ) is slightly suboptimal. Why? Which is the most important column?
+1. Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)`
+ ) is slightly suboptimal. Why? Which is the most important column?
 
-1.  Look at the number of cancelled flights per day. Is there a pattern?
-    Is the proportion of cancelled flights related to the average delay?
+1. Look at the number of cancelled flights per day. Is there a pattern?
+ Is the proportion of cancelled flights related to the average delay?
 
-1.  Which carrier has the worst delays? Challenge: can you disentangle the
-    effects of bad airports vs. bad carriers? Why/why not? (Hint: think about
-    `flights %>% group_by(carrier, dest) %>% summarise(n())`)
+1. Which carrier has the worst delays? Challenge: can you disentangle the
+ effects of bad airports vs. bad carriers? Why/why not? (Hint: think about
+ `flights %>% group_by(carrier, dest) %>% summarise(n())`)
 
-1.  What does the `sort` argument to `count()` do. When might you use it?
+1. What does the `sort` argument to `count()` do. When might you use it?
 
 ## Grouped mutates (and filters)
 
 Grouping is most useful in conjunction with `summarise()`, but you can also do convenient operations with `mutate()` and `filter()`:
 
-*   Find the worst members of each group:
+* Find the worst members of each group:
 
-    ```{r}
+ ```{r}
 flights_sml %>%
   group_by(year, month, day) %>%
   filter(rank(desc(arr_delay)) < 10)
-    ```
+ ```
 
-*   Find all groups bigger than a threshold:
+* Find all groups bigger than a threshold:
 
-    ```{r}
+ ```{r}
 popular_dests <- flights %>%
   group_by(dest) %>%
   filter(n() > 365)
 popular_dests
-    ```
+ ```
 
-*   Standardise to compute per group metrics:
+* Standardise to compute per group metrics:
 
-    ```{r}
+ ```{r}
 popular_dests %>%
   filter(arr_delay > 0) %>%
   mutate(prop_delay = arr_delay / sum(arr_delay)) %>%
   select(year:day, dest, arr_delay, prop_delay)
-    ```
+ ```
 
 A grouped filter is a grouped mutate followed by an ungrouped filter. I generally avoid them except for quick and dirty manipulations: otherwise it's hard to check that you've done the manipulation correctly.
 
-Functions that work most naturally in grouped mutates and filters are known as  window functions (vs. the summary functions used for summaries). You can learn more about useful window functions in the corresponding vignette: `vignette("window-functions")`.
+Functions that work most naturally in grouped mutates and filters are known as window functions (vs. the summary functions used for summaries). You can learn more about useful window functions in the corresponding vignette: `vignette("window-functions")`.
 
 ### Exercises
 
-1.  Refer back to the lists of useful mutate and filtering functions.
-    Describe how each operation changes when you combine it with grouping.
+1. Refer back to the lists of useful mutate and filtering functions.
+ Describe how each operation changes when you combine it with grouping.
 
-1.  Which plane (`tailnum`) has the worst on-time record?
+1. Which plane (`tailnum`) has the worst on-time record?
 
-1.  What time of day should you fly if you want to avoid delays as much
-    as possible?
+1. What time of day should you fly if you want to avoid delays as much
+ as possible?
 
-1.  For each destination, compute the total minutes of delay. For each
-    flight, compute the proportion of the total delay for its destination.
+1. For each destination, compute the total minutes of delay. For each
+ flight, compute the proportion of the total delay for its destination.
 
-1.  Delays are typically temporally correlated: even once the problem that
-    caused the initial delay has been resolved, later flights are delayed
-    to allow earlier flights to leave. Using `lag()`, explore how the delay
-    of a flight is related to the delay of the immediately preceding flight.
+1. Delays are typically temporally correlated: even once the problem that
+ caused the initial delay has been resolved, later flights are delayed
+ to allow earlier flights to leave. Using `lag()`, explore how the delay
+ of a flight is related to the delay of the immediately preceding flight.
 
-1.  Look at each destination. Can you find flights that are suspiciously
-    fast? (i.e. flights that represent a potential data entry error). Compute
-    the air time a flight relative to the shortest flight to that destination.
-    Which flights were most delayed in the air?
+1. Look at each destination. Can you find flights that are suspiciously
+ fast? (i.e. flights that represent a potential data entry error). Compute
+ the air time a flight relative to the shortest flight to that destination.
+ Which flights were most delayed in the air?
 
-1.  Find all destinations that are flown by at least two carriers. Use that
-    information to rank the carriers.
+1. Find all destinations that are flown by at least two carriers. Use that
+ information to rank the carriers.
 
-1.  For each plane, count the number of flights before the first delay
-    of greater than 1 hour.
+1. For each plane, count the number of flights before the first delay
+ of greater than 1 hour.

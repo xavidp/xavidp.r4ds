@@ -41,29 +41,29 @@ There is no rule about which questions you should ask to guide your research. Ho
 
 1. What type of covariation occurs between my variables?
 
-The rest of this chapter will look at these two questions. I'll explain what variation and covariation are, and I'll show you several ways to answer each question. To make the discussion easier, let's define some terms: 
+The rest of this chapter will look at these two questions. I'll explain what variation and covariation are, and I'll show you several ways to answer each question. To make the discussion easier, let's define some terms:
 
-*   A __variable__ is a quantity, quality, or property that you can measure. 
+* A __variable__ is a quantity, quality, or property that you can measure.
 
-*   A __value__ is the state of a variable when you measure it. The value of a
-    variable may change from measurement to measurement.
-  
-*   An __observation__ is a set of measurements made under similar conditions
-    (you usually make all of the measurements in an observation at the same 
-    time and on the same object). An observation will contain several values, 
-    each associated with a different variable. I'll sometimes refer to 
-    an observation as a data point.
+* A __value__ is the state of a variable when you measure it. The value of a
+ variable may change from measurement to measurement.
 
-*   __Tabular data__ is a set of values, each associated with a variable and an
-    observation. Tabular data is _tidy_ if each value is placed in its own
-    "cell", each variable in its own column, and each observation in its own 
-    row. 
+* An __observation__ is a set of measurements made under similar conditions
+ (you usually make all of the measurements in an observation at the same
+ time and on the same object). An observation will contain several values,
+ each associated with a different variable. I'll sometimes refer to
+ an observation as a data point.
+
+* __Tabular data__ is a set of values, each associated with a variable and an
+ observation. Tabular data is _tidy_ if each value is placed in its own
+ "cell", each variable in its own column, and each observation in its own
+ row.
 
 So far, all of the data that you've seen has been tidy. In real-life, most data isn't tidy, so we'll come back to these ideas again in [tidy data].
 
 ## Variation
 
-**Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Categorical variables can also vary if you measure across different subjects (e.g. the eye colors of different people), or different times (e.g. the energy levels of an electron at different moments). 
+**Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Categorical variables can also vary if you measure across different subjects (e.g. the eye colors of different people), or different times (e.g. the energy levels of an electron at different moments).
 Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable's values.
 
 ### Visualising distributions
@@ -96,7 +96,7 @@ diamonds %>%
   count(cut_width(carat, 0.5))
 ```
 
-A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a `carat` value between 0.25 and 0.75, which are the left and right edges of the bar. 
+A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a `carat` value between 0.25 and 0.75, which are the left and right edges of the bar.
 
 You can set the width of the intervals in a histogram with the `binwidth` argument, which is measured in the units of the `x` variable. You should always explore a variety of binwidths when working with histograms, as different binwidths can reveal different patterns. For example, here is how the graph above looks when we zoom into just the diamonds with a size of less than three carats and choose a smaller binwidth.
 
@@ -129,13 +129,13 @@ In both bar charts and histograms, tall bars show the common values of a variabl
 
 * Can you see any unusual patterns? What might explain them?
 
-As an example, the histogram below suggests several interesting questions: 
+As an example, the histogram below suggests several interesting questions:
 
 * Why are there more diamonds at whole carats and common fractions of carats?
 
-* Why are there more diamonds slightly to the right of each peak than there 
-  are slightly to the left of each peak?
-  
+* Why are there more diamonds slightly to the right of each peak than there
+ are slightly to the left of each peak?
+
 * Why are there no diamonds bigger than 3 carats?
 
 ```{r}
@@ -158,18 +158,18 @@ The histogram below shows the length (in minutes) of 272 eruptions of the Old Fa
 ```{r}
 ggplot(data = faithful, mapping = aes(x = eruptions)) +
   geom_histogram(binwidth = 0.25)
-```  
+```
 
 Many of the questions above will prompt you to explore a relationship *between* variables, for example, to see if the values of one variable can explain the behavior of another variable. We'll get to that shortly.
 
 ### Unusual values
 
-Outliers are observations that are unusual; data points that don't seem to fit the pattern. Sometimes outliers are data entry errors; other times outliers suggest important new science. When you have a lot of data, outliers are sometimes difficult to see in a histogram.  For example, take the distribution of the `y` variable from the diamonds dataset. The only evidence of outliers is the unusually wide limits on the x-axis.
+Outliers are observations that are unusual; data points that don't seem to fit the pattern. Sometimes outliers are data entry errors; other times outliers suggest important new science. When you have a lot of data, outliers are sometimes difficult to see in a histogram. For example, take the distribution of the `y` variable from the diamonds dataset. The only evidence of outliers is the unusually wide limits on the x-axis.
 
 ```{r}
 ggplot(diamonds) +
   geom_histogram(mapping = aes(x = y), binwidth = 0.5)
-```   
+```
 
 There are so many observations in the common bins that the rare bins are so short that you can't see them (although maybe if you stare intently at 0 you'll spot something). To make it easy to see the unusual values, we need to zoom to small values of the y-axis with `coord_cartesian()`:
 
@@ -177,11 +177,11 @@ There are so many observations in the common bins that the rare bins are so shor
 ggplot(diamonds) +
   geom_histogram(mapping = aes(x = y), binwidth = 0.5) +
   coord_cartesian(ylim = c(0, 50))
-```   
+```
 
 (`coord_cartesian()` also has an `xlim()` argument for when you need to zoom into the x-axis. ggplot2 also has `xlim()` and `ylim()` functions that work slightly differently: they throw away the data outside the limits.)
 
-This allows us to see that there are three unusual values: 0, ~30, and ~60. We pluck them out with dplyr: 
+This allows us to see that there are three unusual values: 0, ~30, and ~60. We pluck them out with dplyr:
 
 ```{r, include = FALSE}
 old <- options(tibble.print_max = 10, tibble.print_min = 10)
@@ -206,46 +206,46 @@ It's good practice to repeat your analysis with and without the outliers. If the
 
 ### Exercises
 
-1.  Explore the distribution of each of the `x`, `y`, and `z` variables 
-    in `diamonds`. What do you learn? Think about a diamond and how you
-    might decide which dimension is the length, width, and depth.
+1. Explore the distribution of each of the `x`, `y`, and `z` variables
+ in `diamonds`. What do you learn? Think about a diamond and how you
+ might decide which dimension is the length, width, and depth.
 
-1.  Explore the distribution of `price`. Do you discover anything unusual
-    or surprising? (Hint: Carefully think about the `binwidth` and make sure
-    you try a wide range of values.)
+1. Explore the distribution of `price`. Do you discover anything unusual
+ or surprising? (Hint: Carefully think about the `binwidth` and make sure
+ you try a wide range of values.)
 
-1.  How many diamonds are 0.99 carat? How many are 1 carat? What
-    do you think is the cause of the difference?
-    
-1.  Compare and contrast `coord_cartesian()` vs `xlim()` or `ylim()` when
-    zooming in on a histogram. What happens if you leave `binwidth` unset?
-    What happens if you try and zoom so only half a bar shows?
-    
+1. How many diamonds are 0.99 carat? How many are 1 carat? What
+ do you think is the cause of the difference?
+
+1. Compare and contrast `coord_cartesian()` vs `xlim()` or `ylim()` when
+ zooming in on a histogram. What happens if you leave `binwidth` unset?
+ What happens if you try and zoom so only half a bar shows?
+
 ## Missing values
 
 If you've encountered unusual values in your dataset, and simply want to move on to the rest of your analysis, you have two options.
 
-1.  Drop the entire row with the strange values:
+1. Drop the entire row with the strange values:
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 diamonds2 <- diamonds %>%
   filter(between(y, 3, 20))
-    ```
-    
-    I don't recommend this option because just because one measurement
-    is invalid, doesn't mean all the measurements are. Additionally, if you
-    have low quality data, by time that you've applied this approach to every
-    variable you might find that you don't have any data left!
+ ```
 
-1.  Instead, I recommend replacing the unusual values with missing values.
-    The easiest way to do this is to use `mutate()` to replace the variable
-    with a modified copy. You can use the `ifelse()` function to replace
-    unusual values with `NA`:
+ I don't recommend this option because just because one measurement
+ is invalid, doesn't mean all the measurements are. Additionally, if you
+ have low quality data, by time that you've applied this approach to every
+ variable you might find that you don't have any data left!
 
-    ```{r}
+1. Instead, I recommend replacing the unusual values with missing values.
+ The easiest way to do this is to use `mutate()` to replace the variable
+ with a modified copy. You can use the `ifelse()` function to replace
+ unusual values with `NA`:
+
+ ```{r}
 diamonds2 <- diamonds %>%
   mutate(y = ifelse(y < 3 | y > 20, NA, y))
-    ```
+ ```
 
 `ifelse()` has three arguments. The first argument `test` should be a logical vector. The result will contain the value of the second argument, `yes`, when `test` is `TRUE`, and the value of the third argument, `no`, when it is false. Alternatively to ifelse, use `dplyr::case_when()`. `case_when()` is particularly useful inside mutate when you want to create a new variable that relies on a complex combination of existing variables.
 
@@ -281,10 +281,10 @@ However this plot isn't great because there are many more non-cancelled flights 
 
 ### Exercises
 
-1.  What happens to missing values in a histogram?  What happens to missing
-    values in a bar chart? Why is there a difference?
+1. What happens to missing values in a histogram? What happens to missing
+ values in a bar chart? Why is there a difference?
 
-1.  What does `na.rm = TRUE` do in `mean()` and `sum()`?
+1. What does `na.rm = TRUE` do in `mean()` and `sum()`?
 
 ## Covariation
 
@@ -313,23 +313,23 @@ ggplot(data = diamonds, mapping = aes(x = price, y = ..density..)) +
   geom_freqpoly(mapping = aes(colour = cut), binwidth = 500)
 ```
 
-There's something rather surprising about this plot - it appears that fair diamonds (the lowest quality) have the highest average price!  But maybe that's because frequency polygons are a little hard to interpret - there's a lot going on in this plot.
+There's something rather surprising about this plot - it appears that fair diamonds (the lowest quality) have the highest average price! But maybe that's because frequency polygons are a little hard to interpret - there's a lot going on in this plot.
 
 Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the boxplot. A **boxplot** is a type of visual shorthand for a distribution of values that is popular among statisticians. Each boxplot consists of:
 
-* A box that stretches from the 25th percentile of the distribution to the 
-  75th percentile, a distance known as the interquartile range (IQR). In the
-  middle of the box is a line that displays the median, i.e. 50th percentile,
-  of the distribution. These three lines give you a sense of the spread of the
-  distribution and whether or not the distribution is symmetric about the
-  median or skewed to one side. 
+* A box that stretches from the 25th percentile of the distribution to the
+ 75th percentile, a distance known as the interquartile range (IQR). In the
+ middle of the box is a line that displays the median, i.e. 50th percentile,
+ of the distribution. These three lines give you a sense of the spread of the
+ distribution and whether or not the distribution is symmetric about the
+ median or skewed to one side.
 
-* Visual points that display observations that fall more than 1.5 times the 
-  IQR from either edge of the box. These outlying points are unusual
-  so are plotted individually.
+* Visual points that display observations that fall more than 1.5 times the
+ IQR from either edge of the box. These outlying points are unusual
+ so are plotted individually.
 
-* A line (or whisker) that extends from each end of the box and goes to the   
-  farthest non-outlier point in the distribution.
+* A line (or whisker) that extends from each end of the box and goes to the
+ farthest non-outlier point in the distribution.
 
 ```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/EDA-boxplot.png")
@@ -370,32 +370,32 @@ ggplot(data = mpg) +
 
 #### Exercises
 
-1.  Use what you've learned to improve the visualisation of the departure times
-    of cancelled vs. non-cancelled flights.
+1. Use what you've learned to improve the visualisation of the departure times
+ of cancelled vs. non-cancelled flights.
 
-1.  What variable in the diamonds dataset is most important for predicting
-    the price of a diamond? How is that variable correlated with cut?
-    Why does the combination of those two relationships lead to lower quality
-    diamonds being more expensive?
+1. What variable in the diamonds dataset is most important for predicting
+ the price of a diamond? How is that variable correlated with cut?
+ Why does the combination of those two relationships lead to lower quality
+ diamonds being more expensive?
 
-1.  Install the ggstance package, and create a horizontal boxplot.
-    How does this compare to using `coord_flip()`?
+1. Install the ggstance package, and create a horizontal boxplot.
+ How does this compare to using `coord_flip()`?
 
-1.  One problem with boxplots is that they were developed in an era of 
-    much smaller datasets and tend to display a prohibitively large
-    number of "outlying values". One approach to remedy this problem is
-    the letter value plot. Install the lvplot package, and try using
-    `geom_lv()` to display the distribution of price vs cut. What
-    do you learn? How do you interpret the plots?
+1. One problem with boxplots is that they were developed in an era of
+ much smaller datasets and tend to display a prohibitively large
+ number of "outlying values". One approach to remedy this problem is
+ the letter value plot. Install the lvplot package, and try using
+ `geom_lv()` to display the distribution of price vs cut. What
+ do you learn? How do you interpret the plots?
 
-1.  Compare and contrast `geom_violin()` with a facetted `geom_histogram()`,
-    or a coloured `geom_freqpoly()`. What are the pros and cons of each 
-    method?
+1. Compare and contrast `geom_violin()` with a facetted `geom_histogram()`,
+ or a coloured `geom_freqpoly()`. What are the pros and cons of each
+ method?
 
-1.  If you have a small dataset, it's sometimes useful to use `geom_jitter()`
-    to see the relationship between a continuous and categorical variable.
-    The ggbeeswarm package provides a number of methods similar to 
-    `geom_jitter()`. List them and briefly describe what each one does.
+1. If you have a small dataset, it's sometimes useful to use `geom_jitter()`
+ to see the relationship between a continuous and categorical variable.
+ The ggbeeswarm package provides a number of methods similar to
+ `geom_jitter()`. List them and briefly describe what each one does.
 
 ### Two categorical variables
 
@@ -406,7 +406,7 @@ ggplot(data = diamonds) +
   geom_count(mapping = aes(x = cut, y = color))
 ```
 
-The size of each circle in the plot displays how many observations occurred at each combination of values. Covariation will appear as a strong correlation between specific x values and specific y values. 
+The size of each circle in the plot displays how many observations occurred at each combination of values. Covariation will appear as a strong correlation between specific x values and specific y values.
 
 Another approach is to compute the count with dplyr:
 
@@ -428,15 +428,15 @@ If the categorical variables are unordered, you might want to use the seriation 
 
 #### Exercises
 
-1.  How could you rescale the count dataset above to more clearly show
-    the distribution of cut within colour, or colour within cut?
+1. How could you rescale the count dataset above to more clearly show
+ the distribution of cut within colour, or colour within cut?
 
-1.  Use `geom_tile()` together with dplyr to explore how average flight
-    delays vary by destination and month of year.  What makes the 
-    plot difficult to read? How could you improve it?
+1. Use `geom_tile()` together with dplyr to explore how average flight
+ delays vary by destination and month of year. What makes the
+ plot difficult to read? How could you improve it?
 
-1.  Why is it slightly better to use `aes(x = color, y = cut)` rather
-    than `aes(x = cut, y = color)` in the example above?
+1. Why is it slightly better to use `aes(x = color, y = cut)` rather
+ than `aes(x = cut, y = color)` in the example above?
 
 ### Two continuous variables
 
@@ -486,31 +486,31 @@ ggplot(data = smaller, mapping = aes(x = carat, y = price)) +
 
 #### Exercises
 
-1.  Instead of summarising the conditional distribution with a boxplot, you
-    could use a frequency polygon. What do you need to consider when using
-    `cut_width()` vs `cut_number()`? How does that impact a visualisation of
-    the 2d distribution of `carat` and `price`?
+1. Instead of summarising the conditional distribution with a boxplot, you
+ could use a frequency polygon. What do you need to consider when using
+ `cut_width()` vs `cut_number()`? How does that impact a visualisation of
+ the 2d distribution of `carat` and `price`?
 
-1.  Visualise the distribution of carat, partitioned by price.
+1. Visualise the distribution of carat, partitioned by price.
 
-1.  How does the price distribution of very large diamonds compare to small 
-    diamonds? Is it as you expect, or does it surprise you?
-    
-1.  Combine two of the techniques you've learned to visualise the 
-    combined distribution of cut, carat, and price.
+1. How does the price distribution of very large diamonds compare to small
+ diamonds? Is it as you expect, or does it surprise you?
 
-1. Two dimensional plots reveal outliers that are not visible in one 
-   dimensional plots. For example, some points in the plot below have an 
-   unusual combination of `x` and `y` values, which makes the points outliers 
-   even though their `x` and `y` values appear normal when examined separately.
-  
-    ```{r, dev = "png"}
+1. Combine two of the techniques you've learned to visualise the
+ combined distribution of cut, carat, and price.
+
+1. Two dimensional plots reveal outliers that are not visible in one
+ dimensional plots. For example, some points in the plot below have an
+ unusual combination of `x` and `y` values, which makes the points outliers
+ even though their `x` and `y` values appear normal when examined separately.
+
+ ```{r, dev = "png"}
 ggplot(data = diamonds) +
   geom_point(mapping = aes(x = x, y = y)) +
   coord_cartesian(xlim = c(4, 11), ylim = c(4, 11))
-    ```
-    
-    Why is a scatterplot a better display than a binned plot for this case?
+ ```
+
+ Why is a scatterplot a better display than a binned plot for this case?
 
 ## Patterns and models
 
@@ -531,11 +531,11 @@ A scatterplot of Old Faithful eruption lengths versus the wait time between erup
 ```{r fig.height = 2}
 ggplot(data = faithful) +
   geom_point(mapping = aes(x = eruptions, y = waiting))
-``` 
+```
 
 Patterns provide one of the most useful tools for data scientists because they reveal covariation. If you think of variation as a phenomenon that creates uncertainty, covariation is a phenomenon that reduces it. If two variables covary, you can use the values of one variable to make better predictions about the values of the second. If the covariation is due to a causal relationship (a special case), then you can use the value of one variable to control the value of the second.
 
-Models are a tool for extracting patterns out of data. For example, consider the diamonds data. It's hard to understand the relationship between cut and price, because cut and carat, and carat and price are tightly related. It's possible to use a model to remove the very strong relationship between price and carat so we can explore the subtleties that remain. The following code fits a model that predicts `price` from `carat` and then computes the residuals (the difference between the predicted value and the actual value). The residuals give us a view of the price of the diamond, once the effect of carat has been removed. 
+Models are a tool for extracting patterns out of data. For example, consider the diamonds data. It's hard to understand the relationship between cut and price, because cut and carat, and carat and price are tightly related. It's possible to use a model to remove the very strong relationship between price and carat so we can explore the subtleties that remain. The following code fits a model that predicts `price` from `carat` and then computes the residuals (the difference between the predicted value and the actual value). The residuals give us a view of the price of the diamond, once the effect of carat has been removed.
 
 ```{r, dev = "png"}
 library(modelr)
@@ -550,7 +550,7 @@ ggplot(data = diamonds2) +
   geom_point(mapping = aes(x = carat, y = resid))
 ```
 
-Once you've removed the strong relationship between carat and price, you can see what you expect in the relationship between cut and price: relative to their size, better quality diamonds are more expensive. 
+Once you've removed the strong relationship between carat and price, you can see what you expect in the relationship between cut and price: relative to their size, better quality diamonds are more expensive.
 
 ```{r}
 ggplot(data = diamonds2) +
@@ -592,4 +592,4 @@ If you want to learn more about the mechanics of ggplot2, I'd highly recommend g
 
 Another useful resource is the [_R Graphics Cookbook_](https://amzn.com/1449316956) by Winston Chang. Much of the contents are available online at <http://www.cookbook-r.com/Graphs/>.
 
-I also recommend [_Graphical Data Analysis with R_](https://amzn.com/1498715230), by Antony Unwin. This is a book-length treatment similar to the material covered in this chapter, but has the space to go into much greater depth. 
+I also recommend [_Graphical Data Analysis with R_](https://amzn.com/1498715230), by Antony Unwin. This is a book-length treatment similar to the material covered in this chapter, but has the space to go into much greater depth.

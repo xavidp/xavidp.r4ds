@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,700|Fira+Mono:400,700');
+@import url('https://code.cdn.mozilla.net/fonts/fira.css');
 
 body, h1, h2, h3, h4, h5, p, a, .book.font-family-1 { font-family: 'Fira Sans', sans-serif;}
 

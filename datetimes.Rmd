@@ -31,7 +31,7 @@ Hay tres tipos de datos de horas/fechas que se refieren a un instante en el tiem
 
 * Un `time` u hora (del ingles, _hora_) dentro de un día. Los _tibbles_ lo imprimen como `<time>`.
 
-* Un  `date-time` o fecha-hora (del inglés, _fecha-hora_) es una fecha con una hora adjunta:  identifica de forma única como un instante en el tiempo (típicamente al segundo más cercano). Los _tibbles_ imprimen esto como `<dttm>`. En otras partes de R, éstos se llaman POSIXct, pero yo no creo que sea un nombre muy útil.
+* Un `date-time` o fecha-hora (del inglés, _fecha-hora_) es una fecha con una hora adjunta: identifica de forma única como un instante en el tiempo (típicamente al segundo más cercano). Los _tibbles_ imprimen esto como `<dttm>`. En otras partes de R, éstos se llaman POSIXct, pero yo no creo que sea un nombre muy útil.
 
 En este capítulo sólo nos concentraremos en fechas (`date`) y fechas con horas (`date-time`) ya que R no tiene una clase nativa para almacenar horas. Si necesitas una, puedes usar el paquete __hms__.
 
@@ -63,7 +63,7 @@ mdy("Enero 31, 2017")
 dmy("31-Ene-2017")
 ```
 
-Estas funciones también reciben números sin comillas. Esta es la forma más concisa de crear un sólo objeto fecha/hora, ya que puedes necesitarlo cuando filtres datos temporales. `ymd()` (del inglés _año-mes-día_)  es corto y no ambigüo:
+Estas funciones también reciben números sin comillas. Esta es la forma más concisa de crear un sólo objeto fecha/hora, ya que puedes necesitarlo cuando filtres datos temporales. `ymd()` (del inglés _año-mes-día_) es corto y no ambigüo:
 
 ```{r}
 ymd(20170131)
@@ -140,7 +140,7 @@ Mira con detenimiento, ya que cuando usas `date-times` en un contexto numérico 
 
 ### Desde otros tipos
 
-Puedes querer cambiar entre una fecha-hora y una fecha. Ese es el trabajo de  `as_datetime()` (del inglés, _como fecha-hora_) y `as_date()` (del inglés, _como fecha_):
+Puedes querer cambiar entre una fecha-hora y una fecha. Ese es el trabajo de `as_datetime()` (del inglés, _como fecha-hora_) y `as_date()` (del inglés, _como fecha_):
 
 ```{r}
 as_datetime(today())
@@ -158,21 +158,21 @@ as_date(365 * 10 + 2)
 
 1. ¿Qué sucede si analizas una cadena de caracteres que contiene fechas inválidas?
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 ymd(c("2010-10-10", "bananas"))
-    ```
+ ```
 
 1. ¿Qué hace el argumento `tzone` (del inglés, _huso horario_ abreviado) para `today()`? ¿Por qué es importante?
 
 1. Usa la función de __lubridate__ apropiada para analizar las siguientes fechas:
 
-    ```{r}
+ ```{r}
 d1 <- "Enero 1, 2010"
 d2 <- "2015-Mar-07"
 d3 <- "06-Jun-2017"
 d4 <- c("Agosto 19 (2015)", "Julio 1 (2015)")
 d5 <- "12/30/14" # Diciembre 30, 2014
-    ```
+ ```
 
 ## Componentes fecha-hora
 
@@ -539,18 +539,18 @@ Puedes cambiar el huso horario de dos formas:
 
 * Mantener el instante en el tiempo igual, y cambiar sólo cómo se representa. Usa esto cuando el instante es correcto, pero quieres una visualización más natural.
 
-    ```{r}
+ ```{r}
 x4a <- with_tz(x4, tzone = "Australia/Lord_Howe")
 x4a
 x4a - x4
-    ```
+ ```
 
-    (Esto también ilustra otro desafío de los husos horarios: ¡no todos los desfasajes son horas como números enteros!)
+ (Esto también ilustra otro desafío de los husos horarios: ¡no todos los desfasajes son horas como números enteros!)
 
 * Cambia el instante en el tiempo. Usa esto cuando tienes un instante que ha sido etiquetado con un huso horario incorrecto, y necesitas arreglarlo.
 
-    ```{r}
+ ```{r}
 x4b <- force_tz(x4, tzone = "Australia/Lord_Howe")
 x4b
 x4b - x4
-    ```
+ ```

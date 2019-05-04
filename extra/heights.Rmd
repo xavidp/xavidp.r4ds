@@ -114,7 +114,7 @@ grid <- heights %>%
 ggplot(heights, aes(height, income)) +
   geom_point() +
   geom_line(data = grid) +
-  facet_wrap(~ sex)
+  facet_wrap(~sex)
 ```
 
 Need to commment about predictions for tall women and short men - there is not a lot of data there.  Need to be particularly sceptical.
@@ -129,7 +129,7 @@ grid <- heights %>%
 
 ggplot(grid, aes(height, pred, colour = sex)) +
   geom_line() +
-  facet_wrap(~ model)
+  facet_wrap(~model)
 ```
 
 ### Continuous
@@ -160,7 +160,7 @@ grid <- heights_ed %>%
 
 ggplot(grid, aes(height, education, fill = pred)) +
   geom_raster() +
-  facet_wrap(~ model)
+  facet_wrap(~model)
 ```
 
 It's easier to see what's going on in a line plot:
@@ -168,10 +168,10 @@ It's easier to see what's going on in a line plot:
 ```{r}
 ggplot(grid, aes(height, pred, group = education)) +
   geom_line() +
-  facet_wrap(~ model)
+  facet_wrap(~model)
 ggplot(grid, aes(education, pred, group = height)) +
   geom_line() +
-  facet_wrap(~ model)
+  facet_wrap(~model)
 ```
 
 One of the big advantages to `+` instead of `*` is that because the terms are independent we display them using two simple plots instead of one complex plot:

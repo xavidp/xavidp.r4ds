@@ -53,7 +53,7 @@ Otra forma de crear un tibble es con `tribble()`, que es una abreviación de tib
 
 ```{r}
 tribble(
-  ~ x, ~ y, ~ z,
+  ~x, ~y, ~z,
   #--|--|----
   "a", 2, 3.6,
   "b", 1, 8.5
@@ -129,7 +129,7 @@ df %>% .$x
 df %>% .[["x"]]
 ```
 
-En comparación a un `data.frame`, los tibbles son más estrictos: nunca funcionan con  coincidencias parciales, y generan una advertencia si la columna a la que intentas de acceder no existe.
+En comparación a un `data.frame`, los tibbles son más estrictos: nunca funcionan con coincidencias parciales, y generan una advertencia si la columna a la que intentas de acceder no existe.
 
 ## Interactuando con código previo
 
@@ -139,7 +139,7 @@ Algunas funciones previas no funcionan con tibbles. Si te encuentras uno de esos
 class(as.data.frame(tb))
 ```
 
-La principal razón de que algunas funciones previas no funcionen con tibbles es la función `[`. En este libro no usamos mucho `[` porque `dplyr::filter()` y `dplyr::select()` resuelven los mismos problemas con un código más claro (aprenderás un poco sobre ello en [vector subsetting](#vector-subsetting) XXX). Con los data frames de R base, `[`  a veces devuelve un data frame y a veces devuelve un vector. Con tibbles, `[` siempre devuelve otro tibble.
+La principal razón de que algunas funciones previas no funcionen con tibbles es la función `[`. En este libro no usamos mucho `[` porque `dplyr::filter()` y `dplyr::select()` resuelven los mismos problemas con un código más claro (aprenderás un poco sobre ello en [vector subsetting](#vector-subsetting) XXX). Con los data frames de R base, `[` a veces devuelve un data frame y a veces devuelve un vector. Con tibbles, `[` siempre devuelve otro tibble.
 
 ## Ejercicios
 
@@ -148,32 +148,32 @@ La principal razón de que algunas funciones previas no funcionen con tibbles es
 
 1. Compara y contrasta las siguientes operaciones aplicadas a un `data.frame` y a un tibble equivalente. ¿Qué es diferente? ¿Por qué podría causarte problemas el comportamiento por defecto del data frame?
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 df <- data.frame(abc = 1, xyz = "a")
 df$x
 df[, "xyz"]
 df[, c("abc", "xyz")]
-    ```
+ ```
 
 1. Si tienes el nombre de una variable guardada en un objeto, p.e., `var <- "mpg"`, ¿cómo puedes extraer esta variable de un tibble?
 
-1.  Practica referenciar nombres no sintácticos en el siguiente data frame:
+1. Practica referenciar nombres no sintácticos en el siguiente data frame:
 
-    1. Extrayendo la variable llamada `1`.
+ 1. Extrayendo la variable llamada `1`.
 
-    1. Generando un gráfico de dispersión de `1` vs `2`.
+ 1. Generando un gráfico de dispersión de `1` vs `2`.
 
-    1. Creando una nueva columna llamada `3` que sea el resultado de la división de `2` por `1`.
+ 1. Creando una nueva columna llamada `3` que sea el resultado de la división de `2` por `1`.
 
-    1. Renombrando las columnas como `uno`, `dos` y `tres`.
+ 1. Renombrando las columnas como `uno`, `dos` y `tres`.
 
-    ```{r}
-    molesto <- tibble(
-      `1` = 1:10,
-      `2` = `1` * 2 + rnorm(length(`1`))
-    )
-    ```
+ ```{r}
+molesto <- tibble(
+  `1` = 1:10,
+  `2` = `1` * 2 + rnorm(length(`1`))
+)
+ ```
 
-1.  ¿Qué hace `tibble::enframe()`? ¿Cuándo lo usarías?
+1. ¿Qué hace `tibble::enframe()`? ¿Cuándo lo usarías?
 
 1. ¿Qué opción controla cuántos nombres de columnas adicionales se muestran al pie de un tibble?

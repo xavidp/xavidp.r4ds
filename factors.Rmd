@@ -33,16 +33,16 @@ x1 <- c("Dic", "Abr", "Ene", "Mar")
 Usar una cadena de caracteres (o _string_, en inglés) para guardar esta variable tiene dos problemas:
 
 1. Sólo hay doce meses posibles, y no hay nada que te resguarde de errores de tipeo:
-     
-    ```{r}
+
+ ```{r}
 x2 <- c("Dic", "Abr", "Eme", "Mar")
-    ```
-    
+ ```
+
 1. No ordena de una forma útil:
 
-    ```{r}
+ ```{r}
 sort(x1)
-    ```
+ ```
 
 Puedes solucionar ambos problemas con un factor. Para crearlo debes empezar armando una lista de los __niveles__ válidos:
 
@@ -140,7 +140,7 @@ Cuando se trabaja con factores, las dos operaciones más comunes son cambiar el 
 1. ¿Cuál es la `religion` más común de la encuesta? ¿Cuál es el `partido` más común?
 
 1. ¿A qué `religion` se aplica cada `denominacion`? ¿Cómo puedes encontrarlo con una tabla? ¿Cómo lo puedes descubrir con una visualización?
- 
+
 ## Modificar el orden de los factores
 
 A menudo resulta útil cambiar el orden de los niveles de factores en una visualización. Por ejemplo, imagina que quieres explorar el número promedio de horas consumidas mirando televisión por día, para cada religión:
