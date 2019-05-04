@@ -37,9 +37,9 @@ Las anteriores son representaciones de los mismos datos subyacentes, pero no tod
 
 Existen tres reglas interrelacionadas que hacen que un conjunto de datos sea ordenado:
 
-1.  Cada variable tiene su propia columna.
-1.  Cada observación tiene su propia fila.
-1.  Cada valor tiene su propia celda.
+1. Cada variable tiene su propia columna.
+1. Cada observación tiene su propia fila.
+1. Cada valor tiene su propia celda.
 
 La figura \@ref(fig:tidy-structure) muestra estas reglas visualmente.
 
@@ -50,15 +50,15 @@ knitr::include_graphics("diagrams_w_text_as_path/es/tidy-1.svg")
 Estas reglas están interrelacionadas ya que es imposible cumplir dos de las tres.
 Esta interrelación lleva a un conjunto práctico de instrucciones mucho más simple:
 
-1.  Coloca cada conjunto de datos en un tibble.
-1.  Coloca cada variable en una columna.
+1. Coloca cada conjunto de datos en un tibble.
+1. Coloca cada variable en una columna.
 
 En este ejemplo, solo `tabla1` está ordenado. Es la única representación en que cada columna es una variable.
 
 ¿Por qué asegurarse de que los datos estén ordenados? Existen dos principales ventajas:
 
-1.  Existe una ventaja general de elegir una forma consistente de almacenar datos. Si tienes una estructura de datos consistente, es más fácil aprender las herramientas que funcionan con ella ya que tienen una uniformidad subyacente.
-1.  Existe una ventaja específica al situar las variables en las columnas ya que permite que la naturaleza vectorizada de R brille. Como habrás aprendido en [mutate](#mutate-funs) y [summary](#summary-funs), muchas de las funciones que vienen con R trabajan con vectores de valores. Esto hace que transformar datos ordenados sea casi natural.
+1. Existe una ventaja general de elegir una forma consistente de almacenar datos. Si tienes una estructura de datos consistente, es más fácil aprender las herramientas que funcionan con ella ya que tienen una uniformidad subyacente.
+1. Existe una ventaja específica al situar las variables en las columnas ya que permite que la naturaleza vectorizada de R brille. Como habrás aprendido en [mutate](#mutate-funs) y [summary](#summary-funs), muchas de las funciones que vienen con R trabajan con vectores de valores. Esto hace que transformar datos ordenados sea casi natural.
 
 dplyr, ggplot2 y el resto de los paquetes del tidyverse están diseñados para trabajar con datos ordenados. Aquí hay algunos ejemplos de cómo se podría trabajar con `tabla1`.
 
@@ -80,19 +80,19 @@ ggplot(tabla1, aes(anio, casos)) +
 
 ### Ejercicios
 
-1.  Usando prosa, describe como las variables y observaciones se organizan en las tablas de ejemplo.
+1. Usando prosa, describe como las variables y observaciones se organizan en las tablas de ejemplo.
 
-1.  Calcula la `tasa` para las tablas `tabla2` y `tabla4a` + `tabla4b`.
-    Necesitarás las siguientes operaciones:
+1. Calcula la `tasa` para las tablas `tabla2` y `tabla4a` + `tabla4b`.
+ Necesitarás las siguientes operaciones:
 
-    1.  Extrae el número de casos de tuberculosis por país y año.
-    1.  Extrae la población por país y año.
-    1.  Divide los casos por la población y multiplica por 10000.
-    1.  Inserta los datos en el lugar adecuado.
+ 1. Extrae el número de casos de tuberculosis por país y año.
+ 1. Extrae la población por país y año.
+ 1. Divide los casos por la población y multiplica por 10000.
+ 1. Inserta los datos en el lugar adecuado.
 
-    ¿Cuál representación es más fácil de trabajar? ¿Cuál es la más difícil? ¿Por qué?
+ ¿Cuál representación es más fácil de trabajar? ¿Cuál es la más difícil? ¿Por qué?
 
-1.  Recrea el gráfico que muestra el cambio en el número de casos usando la `tabla2` en lugar de la `tabla1`. ¿Qué debes hacer en primer lugar?
+1. Recrea el gráfico que muestra el cambio en el número de casos usando la `tabla2` en lugar de la `tabla1`. ¿Qué debes hacer en primer lugar?
 
 ## Reunir y Esparcir
 
@@ -188,36 +188,36 @@ Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, 
 
 ### Ejercicios
 
-1.  ¿Por qué `gather()` y `spread()` no son perfectamente simétricas?
-    Observa cuidadosamente el siguiente ejemplo:
+1. ¿Por qué `gather()` y `spread()` no son perfectamente simétricas?
+ Observa cuidadosamente el siguiente ejemplo:
 
 ```{r, eval = FALSE}
-  stocks <- tibble(
-    anio = c(2015, 2015, 2016, 2016),
-    semestre = c(1, 2, 1, 2),
-    retorno = c(1.88, 0.59, 0.92, 0.17)
-  )
-  stocks %>%
-    spread(anio, retorno) %>%
-    gather("anio", "retorno", `2015`:`2016`)
+stocks <- tibble(
+  anio = c(2015, 2015, 2016, 2016),
+  semestre = c(1, 2, 1, 2),
+  retorno = c(1.88, 0.59, 0.92, 0.17)
+)
+stocks %>%
+  spread(anio, retorno) %>%
+  gather("anio", "retorno", `2015`:`2016`)
 ```
 
-    (Pista: observa los tipos de variables y piensa en los nombres de las columnas)
+ (Pista: observa los tipos de variables y piensa en los nombres de las columnas)
 
-    Tanto `spread()` como `gather()` tienen el argumento `convert` (convertir). ¿Qué hace dicho argumento?
+ Tanto `spread()` como `gather()` tienen el argumento `convert` (convertir). ¿Qué hace dicho argumento?
 
-1.  ¿Por qué falla el siguiente código?
+1. ¿Por qué falla el siguiente código?
 
 ```{r, error = TRUE}
 tabla4a %>%
   gather(`1999`, `2000`, key = "anio", value = "casos")
 ```
 
-1.  ¿Por qué no se puede extender la siguiente tabla? ¿Cómo agregarias una nueva columna para resolver el problema?
+1. ¿Por qué no se puede extender la siguiente tabla? ¿Cómo agregarias una nueva columna para resolver el problema?
 
 ```{r}
 personas <- tribble(
-  ~ nombre, ~ llave, ~ valor,
+  ~nombre, ~llave, ~valor,
   #-----------------|--------|------
   "Phillip Woods", "edad", 45,
   "Phillip Woods", "estatura", 186,
@@ -227,11 +227,11 @@ personas <- tribble(
 )
 ```
 
-1.  Ordena la siguiente tabla. ¿Necesitas extenderla o contraerla? ¿Cuáles son las variables?
+1. Ordena la siguiente tabla. ¿Necesitas extenderla o contraerla? ¿Cuáles son las variables?
 
 ```{r}
 embarazo <- tribble(
-  ~ embarazo, ~ hombre, ~ mujer,
+  ~embarazo, ~hombre, ~mujer,
   "si", NA, 10,
   "no", 20, 12
 )
@@ -260,7 +260,7 @@ tabla3 %>%
 knitr::include_graphics("diagrams_w_text_as_path/es/tidy-17.svg")
 ```
 
-Por defecto, `separate()` dividirá una columna donde aparezca un carácter no alfanumérico (i.e. un carácter que no es un número o letra). Por ejemplo, en el siguiente código, `separate()` divide los valores de `tasa` donde aparece la  _slash_. Si deseas usar un carácter específico para separar una columna, puedes especificarlo en el argumento `sep` de `separate()`. Por ejemplo, lo anterior se puede re-escribir del siguiente modo:
+Por defecto, `separate()` dividirá una columna donde aparezca un carácter no alfanumérico (i.e. un carácter que no es un número o letra). Por ejemplo, en el siguiente código, `separate()` divide los valores de `tasa` donde aparece la _slash_. Si deseas usar un carácter específico para separar una columna, puedes especificarlo en el argumento `sep` de `separate()`. Por ejemplo, lo anterior se puede re-escribir del siguiente modo:
 
 ```{r eval = FALSE}
 tabla3 %>%
@@ -309,21 +309,21 @@ tabla5 %>%
 
 ### Ejercicios
 
-1.  ¿Qué hacen los argumentos `extra` y `fill` en `separate()`?
-    Experimenta con las diversas opciones a partir de los siguientes datasets de ejemplo.
+1. ¿Qué hacen los argumentos `extra` y `fill` en `separate()`?
+ Experimenta con las diversas opciones a partir de los siguientes datasets de ejemplo.
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>%
   separate(x, c("one", "two", "three"))
 
 tibble(x = c("a,b,c", "d,e", "f,g,i")) %>%
   separate(x, c("one", "two", "three"))
-    ```
+ ```
 
-1.  Tanto `unite()` como `separate()` tienen un argumento `remove`. ¿Qué es lo que hace? 
+1. Tanto `unite()` como `separate()` tienen un argumento `remove`. ¿Qué es lo que hace?
 ¿Por qué lo dejarías en `FALSE`?
 
-1.  Compara y contrasta `separate()` y `extract()`. ¿Por qué existen tres variaciones de 
+1. Compara y contrasta `separate()` y `extract()`. ¿Por qué existen tres variaciones de
 separación (por posición, separador y grupos), pero solo una forma de unir?
 
 ## Valores faltantes
@@ -349,7 +349,7 @@ Existen dos valores faltantes en este dataset:
 
 * El retorno del primer semestre de 2016 está implícitamente perdido, debido a que simplemente no aparece en el dataset.
 
-Una forma de pensar respecto de esta diferencia es al estilo de un mantra Zen: Un valor perdido explícito es la presencia de una ausencia; un valor perdido implícito es la ausencia de una presencia. 
+Una forma de pensar respecto de esta diferencia es al estilo de un mantra Zen: Un valor perdido explícito es la presencia de una ausencia; un valor perdido implícito es la ausencia de una presencia.
 
 La forma en que se representa un dataset puede dejar explícitos los valores implícitos. Por ejemplo, podemos volver explícitos los valores faltantes implícitos al mover los años a las columnas:
 
@@ -379,7 +379,7 @@ Existe otra herramienta importante que deberías conocer al momento de trabajar 
 
 ```{r}
 tratamiento <- tribble(
-  ~ sujeto, ~ tratamiento, ~ respuesta,
+  ~sujeto, ~tratamiento, ~respuesta,
   "Derrick Whitmore", 1, 7,
   NA, 2, 10,
   NA, 3, 9,
@@ -396,9 +396,9 @@ tratamiento %>%
 
 ### Ejercicios
 
-1.  Compara y contrasta el argumento `fill` que se usa en `spread()` con `complete()`.
+1. Compara y contrasta el argumento `fill` que se usa en `spread()` con `complete()`.
 
-1.  ¿Qué hace el argumento de dirección en `fill()`?
+1. ¿Qué hace el argumento de dirección en `fill()`?
 
 ## Estudio de caso
 
@@ -439,27 +439,27 @@ oms1 %>%
 
 Puedes deducir lo siguiente por cuenta propia pensando y experimentando un poco, pero afortunadamente tenemos el diccionario de datos a mano. Este nos dice lo siguiente:
 
-1.  Lo que aparece antes del primer `_` en las columnas denota si la columna contiene casos nuevos o antiguos de       
-    tuberculosis. En este dataset, cada columna contiene nuevos casos.
+1. Lo que aparece antes del primer `_` en las columnas denota si la columna contiene casos nuevos o antiguos de
+ tuberculosis. En este dataset, cada columna contiene nuevos casos.
 
-2.  Lo que aparece luego de indicar si se refiere casos nuevos o antiguos es el tipo de tuberculosis:
+2. Lo que aparece luego de indicar si se refiere casos nuevos o antiguos es el tipo de tuberculosis:
 
-    *   `recaida` se refiere a casos reincidentes
-    *   `ep` se refiere a tuberculosis extra pulmonar
-    *   `fpn` se refiere a casos de tuberculosis pulmonar que no se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar negativo)
-    *   `fpp` se refiere a casos de tuberculosis pulmonar que se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar positivo)
+ * `recaida` se refiere a casos reincidentes
+ * `ep` se refiere a tuberculosis extra pulmonar
+ * `fpn` se refiere a casos de tuberculosis pulmonar que no se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar negativo)
+ * `fpp` se refiere a casos de tuberculosis pulmonar que se pueden detectar mediante examen de frotis pulmonar (frotis pulmonar positivo)
 
-3.  La letra que aparece después del último `_` se refiere al sexo de los pacientes. El conjunto de datos agrupa en hombres (`h`) y mujeres (`m`).
+3. La letra que aparece después del último `_` se refiere al sexo de los pacientes. El conjunto de datos agrupa en hombres (`h`) y mujeres (`m`).
 
-4.  Los números finales se refieren al grupo etareo que se ha organizado en siete categorías:
+4. Los números finales se refieren al grupo etareo que se ha organizado en siete categorías:
 
-    * `014` = 0 -- 14 años de edad
-    * `1524` = 15 -- 24 años de edad
-    * `2534` = 25 -- 34 años de edad
-    * `3544` = 35 -- 44 años de edad
-    * `4554` = 45 -- 54 años de edad
-    * `5564` = 55 -- 64 años de edad
-    * `65` = 65 o más años de edad
+ * `014` = 0 -- 14 años de edad
+ * `1524` = 15 -- 24 años de edad
+ * `2534` = 25 -- 34 años de edad
+ * `3544` = 35 -- 44 años de edad
+ * `4554` = 45 -- 54 años de edad
+ * `5564` = 55 -- 64 años de edad
+ * `65` = 65 o más años de edad
 
 Necesitamos hacer un pequeño cambio al formato de los nombres de las columnas: desafortunadamente lo nombres de las columnas son ligeramente inconsistentes debido a que en lugar de `nuevos_recaida` tenemos `nuevosrecaida` (es difícil darse cuenta de esto en esta parte, pero si no lo arreglas habrá errores en los pasos siguientes). Aprenderás sobre `str_replace()` en [strings], pero la idea básica es bastante simple: reemplazar los caracteres "nuevosrecaida" por "nuevos_recaida". Esto genera nombres de variables consistentes.
 
@@ -509,14 +509,14 @@ oms %>%
 
 ### Ejercicios
 
-1.  En este caso de estudio fijamos `na.rm = TRUE` para simplificar la verificación de que tenemos los valores correctos. ¿Es esto razonable? Piensa en como los valores faltantes están representados en este dataset. ¿Existen valores faltantes implícitos? ¿Cuál es la diferencia entre `NA` y cero?
+1. En este caso de estudio fijamos `na.rm = TRUE` para simplificar la verificación de que tenemos los valores correctos. ¿Es esto razonable? Piensa en como los valores faltantes están representados en este dataset. ¿Existen valores faltantes implícitos? ¿Cuál es la diferencia entre `NA` y cero?
 
-1.  ¿Qué ocurre si omites la aplicación de `mutate()`?
-    (`mutate(llave = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))`)
+1. ¿Qué ocurre si omites la aplicación de `mutate()`?
+ (`mutate(llave = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))`)
 
-1.  Afirmamos que `iso2` e `iso3` son redundantes respecto a `pais`. Confirma esta premisa.
+1. Afirmamos que `iso2` e `iso3` son redundantes respecto a `pais`. Confirma esta premisa.
 
-1.  Para cada país, año y sexo calcula el total del número de casos de tuberculosis. Crea una visualización informativa de los datos.
+1. Para cada país, año y sexo calcula el total del número de casos de tuberculosis. Crea una visualización informativa de los datos.
 
 ## Datos no ordenados
 

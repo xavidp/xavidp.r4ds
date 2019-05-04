@@ -4,16 +4,16 @@
 
 In [functions], we talked about how important it is to reduce duplication in your code by creating functions instead of copying-and-pasting. Reducing code duplication has three main benefits:
 
-1.  It's easier to see the intent of your code, because your eyes are
-    drawn to what's different, not what stays the same.
+1. It's easier to see the intent of your code, because your eyes are
+ drawn to what's different, not what stays the same.
 
-1.  It's easier to respond to changes in requirements. As your needs
-    change, you only need to make changes in one place, rather than
-    remembering to change every place that you copied-and-pasted the
-    code.
+1. It's easier to respond to changes in requirements. As your needs
+ change, you only need to make changes in one place, rather than
+ remembering to change every place that you copied-and-pasted the
+ code.
 
-1.  You're likely to have fewer bugs because each line of code is
-    used in more places.
+1. You're likely to have fewer bugs because each line of code is
+ used in more places.
 
 One tool for reducing duplication is functions, which reduce duplication by identifying repeated patterns of code and extract them out into independent pieces that can be easily reused and updated. Another tool for reducing duplication is __iteration__, which helps you when you need to do the same thing to multiple inputs: repeating the same operation on different columns, or on different datasets.
 In this chapter you'll learn about two important iteration paradigms: imperative programming and functional programming. On the imperative side you have tools like for loops and while loops, which are a great place to start because they make iteration very explicit, so it's obvious what's happening. However, for loops are quite verbose, and require quite a bit of bookkeeping code that is duplicated for every for loop. Functional programming (FP) offers tools to extract out this duplicated code, so each common for loop pattern gets its own function. Once you master the vocabulary of FP, you can solve many common iteration problems with less code, more ease, and fewer errors.
@@ -60,57 +60,57 @@ output
 
 Every for loop has three components:
 
-1.  The __output__: `output <- vector("double", length(x))`.
-    Before you start the loop, you must always allocate sufficient space
-    for the output. This is very important for efficiency: if you grow
-    the for loop at each iteration using `c()` (for example), your for loop
-    will be very slow.
+1. The __output__: `output <- vector("double", length(x))`.
+ Before you start the loop, you must always allocate sufficient space
+ for the output. This is very important for efficiency: if you grow
+ the for loop at each iteration using `c()` (for example), your for loop
+ will be very slow.
 
-    A general way of creating an empty vector of given length is the `vector()`
-    function. It has two arguments: the type of the vector ("logical",
-    "integer", "double", "character", etc) and the length of the vector.
+ A general way of creating an empty vector of given length is the `vector()`
+ function. It has two arguments: the type of the vector ("logical",
+ "integer", "double", "character", etc) and the length of the vector.
 
-1.  The __sequence__: `i in seq_along(df)`. This determines what to loop over:
-    each run of the for loop will assign `i` to a different value from
-    `seq_along(df)`. It's useful to think of `i` as a pronoun, like "it".
+1. The __sequence__: `i in seq_along(df)`. This determines what to loop over:
+ each run of the for loop will assign `i` to a different value from
+ `seq_along(df)`. It's useful to think of `i` as a pronoun, like "it".
 
-    You might not have seen `seq_along()` before. It's a safe version of the
-    familiar `1:length(l)`, with an important difference: if you have a
-    zero-length vector, `seq_along()` does the right thing:
+ You might not have seen `seq_along()` before. It's a safe version of the
+ familiar `1:length(l)`, with an important difference: if you have a
+ zero-length vector, `seq_along()` does the right thing:
 
-    ```{r}
+ ```{r}
 y <- vector("double", 0)
 seq_along(y)
 1:length(y)
-    ```
+ ```
 
-    You probably won't create a zero-length vector deliberately, but
-    it's easy to create them accidentally. If you use `1:length(x)` instead
-    of `seq_along(x)`, you're likely to get a confusing error message.
+ You probably won't create a zero-length vector deliberately, but
+ it's easy to create them accidentally. If you use `1:length(x)` instead
+ of `seq_along(x)`, you're likely to get a confusing error message.
 
-1.  The __body__: `output[[i]] <- median(df[[i]])`. This is the code that does
-    the work. It's run repeatedly, each time with a different value for `i`.
-    The first iteration will run `output[[1]] <- median(df[[1]])`,
-    the second will run `output[[2]] <- median(df[[2]])`, and so on.
+1. The __body__: `output[[i]] <- median(df[[i]])`. This is the code that does
+ the work. It's run repeatedly, each time with a different value for `i`.
+ The first iteration will run `output[[1]] <- median(df[[1]])`,
+ the second will run `output[[2]] <- median(df[[2]])`, and so on.
 
 That's all there is to the for loop! Now is a good time to practice creating some basic (and not so basic) for loops using the exercises below. Then we'll move on some variations of the for loop that help you solve other problems that will crop up in practice.
 
 ### Exercises
 
-1.  Write for loops to:
+1. Write for loops to:
 
-    1. Compute the mean of every column in `mtcars`.
-    1. Determine the type of each column in `nycflights13::flights`.
-    1. Compute the number of unique values in each column of `iris`.
-    1. Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.
+ 1. Compute the mean of every column in `mtcars`.
+ 1. Determine the type of each column in `nycflights13::flights`.
+ 1. Compute the number of unique values in each column of `iris`.
+ 1. Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.
 
-    Think about the output, sequence, and body __before__ you start writing
-    the loop.
+ Think about the output, sequence, and body __before__ you start writing
+ the loop.
 
-1.  Eliminate the for loop in each of the following examples by taking
-    advantage of an existing function that works with vectors:
+1. Eliminate the for loop in each of the following examples by taking
+ advantage of an existing function that works with vectors:
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 out <- ""
 for (x in letters) {
   out <- stringr::str_c(out, x)
@@ -129,32 +129,32 @@ out[1] <- x[1]
 for (i in 2:length(x)) {
   out[i] <- out[i - 1] + x[i]
 }
-    ```
+ ```
 
-1.  Combine your function writing and for loop skills:
+1. Combine your function writing and for loop skills:
 
-    1. Write a for loop that `prints()` the lyrics to the children's song
-       "Alice the camel".
+ 1. Write a for loop that `prints()` the lyrics to the children's song
+ "Alice the camel".
 
-    1. Convert the nursery rhyme "ten in the bed" to a function. Generalise
-       it to any number of people in any sleeping structure.
+ 1. Convert the nursery rhyme "ten in the bed" to a function. Generalise
+ it to any number of people in any sleeping structure.
 
-    1. Convert the song "99 bottles of beer on the wall" to a function.
-       Generalise to any number of any vessel containing any liquid on
-       any surface.
+ 1. Convert the song "99 bottles of beer on the wall" to a function.
+ Generalise to any number of any vessel containing any liquid on
+ any surface.
 
-1.  It's common to see for loops that don't preallocate the output and instead
-    increase the length of a vector at each step:
+1. It's common to see for loops that don't preallocate the output and instead
+ increase the length of a vector at each step:
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 output <- vector("integer", 0)
 for (i in seq_along(x)) {
   output <- c(output, lengths(x[[i]]))
 }
 output
-    ```
+ ```
 
-    How does this affect performance? Design and execute an experiment.
+ How does this affect performance? Design and execute an experiment.
 
 ## For loop variations
 
@@ -162,10 +162,10 @@ Once you have the basic for loop under your belt, there are some variations that
 
 There are four variations on the basic theme of the for loop:
 
-1.  Modifying an existing object, instead of creating a new object.
-1.  Looping over names or values, instead of indices.
-1.  Handling outputs of unknown length.
-1.  Handling sequences of unknown length.
+1. Modifying an existing object, instead of creating a new object.
+1. Looping over names or values, instead of indices.
+1. Handling outputs of unknown length.
+1. Handling sequences of unknown length.
 
 ### Modifying an existing object
 
@@ -191,12 +191,12 @@ df$d <- rescale01(df$d)
 
 To solve this with a for loop we again think about the three components:
 
-1.  __Output__: we already have the output --- it's the same as the input!
+1. __Output__: we already have the output --- it's the same as the input!
 
-1.  __Sequence__: we can think about a data frame as a list of columns, so
-    we can iterate over each column with `seq_along(df)`.
+1. __Sequence__: we can think about a data frame as a list of columns, so
+ we can iterate over each column with `seq_along(df)`.
 
-1.  __Body__: apply `rescale01()`.
+1. __Body__: apply `rescale01()`.
 
 This gives us:
 
@@ -212,19 +212,19 @@ Typically you'll be modifying a list or data frame with this sort of loop, so re
 
 There are three basic ways to loop over a vector. So far I've shown you the most general: looping over the numeric indices with `for (i in seq_along(xs))`, and extracting the value with `x[[i]]`. There are two other forms:
 
-1.  Loop over the elements: `for (x in xs)`. This is most useful if you only
-    care about side-effects, like plotting or saving a file, because it's
-    difficult to save the output efficiently.
+1. Loop over the elements: `for (x in xs)`. This is most useful if you only
+ care about side-effects, like plotting or saving a file, because it's
+ difficult to save the output efficiently.
 
-1.  Loop over the names: `for (nm in names(xs))`. This gives you name, which
-    you can use to access the value with `x[[nm]]`. This is useful if you want
-    to use the name in a plot title or a file name. If you're creating
-    named output, make sure to name the results vector like so:
+1. Loop over the names: `for (nm in names(xs))`. This gives you name, which
+ you can use to access the value with `x[[nm]]`. This is useful if you want
+ to use the name in a plot title or a file name. If you're creating
+ named output, make sure to name the results vector like so:
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 results <- vector("list", length(x))
 names(results) <- names(x)
-    ```
+ ```
 
 Iteration over the numeric indices is the most general form, because given the position you can extract both the name and the value:
 
@@ -268,15 +268,15 @@ Here I've used `unlist()` to flatten a list of vectors into a single vector. A s
 
 This pattern occurs in other places too:
 
-1.  You might be generating a long string. Instead of `paste()`ing together
-    each iteration with the previous, save the output in a character vector and
-    then combine that vector into a single string with
-    `paste(output, collapse = "")`.
+1. You might be generating a long string. Instead of `paste()`ing together
+ each iteration with the previous, save the output in a character vector and
+ then combine that vector into a single string with
+ `paste(output, collapse = "")`.
 
-1.  You might be generating a big data frame. Instead of sequentially
-    `rbind()`ing in each iteration, save the output in a list, then use
-    `dplyr::bind_rows(output)` to combine the output into a single
-    data frame.
+1. You might be generating a big data frame. Instead of sequentially
+ `rbind()`ing in each iteration, save the output in a list, then use
+ `dplyr::bind_rows(output)` to combine the output into a single
+ data frame.
 
 Watch out for this pattern. Whenever you see it, switch to a more complex result object, and then combine in one step at the end.
 
@@ -328,33 +328,33 @@ I mention while loops only briefly, because I hardly ever use them. They're most
 
 ### Exercises
 
-1.  Imagine you have a directory full of CSV files that you want to read in.
-    You have their paths in a vector,
-    `files <- dir("data/", pattern = "\\.csv$", full.names = TRUE)`, and now
-    want to read each one with `read_csv()`. Write the for loop that will
-    load them into a single data frame.
+1. Imagine you have a directory full of CSV files that you want to read in.
+ You have their paths in a vector,
+ `files <- dir("data/", pattern = "\\.csv$", full.names = TRUE)`, and now
+ want to read each one with `read_csv()`. Write the for loop that will
+ load them into a single data frame.
 
-1.  What happens if you use `for (nm in names(x))` and `x` has no names?
-    What if only some of the elements are named? What if the names are
-    not unique?
+1. What happens if you use `for (nm in names(x))` and `x` has no names?
+ What if only some of the elements are named? What if the names are
+ not unique?
 
-1.  Write a function that prints the mean of each numeric column in a data
-    frame, along with its name. For example, `show_mean(iris)` would print:
+1. Write a function that prints the mean of each numeric column in a data
+ frame, along with its name. For example, `show_mean(iris)` would print:
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 show_mean(iris)
 # > Sepal.Length: 5.84
-# > Sepal.Width:  3.06
+# > Sepal.Width: 3.06
 # > Petal.Length: 3.76
-# > Petal.Width:  1.20
-    ```
+# > Petal.Width: 1.20
+ ```
 
-    (Extra challenge: what function did I use to make sure that the numbers
-    lined up nicely, even though the variable names had different lengths?)
+ (Extra challenge: what function did I use to make sure that the numbers
+ lined up nicely, even though the variable names had different lengths?)
 
-1.  What does this code do? How does it work?
+1. What does this code do? How does it work?
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 trans <- list(
   disp = function(x) x * 0.0163871,
   am = function(x) {
@@ -364,7 +364,7 @@ trans <- list(
 for (var in names(trans)) {
   mtcars[[var]] <- trans[[var]](mtcars[[var]])
 }
-    ```
+ ```
 
 ## For loops vs. functionals
 
@@ -459,30 +459,30 @@ The idea of passing a function to another function is extremely powerful idea, a
 The goal of using purrr functions instead of for loops is to allow you break common list manipulation challenges into independent pieces:
 
 1. How can you solve the problem for a single element of the list? Once
-   you've solved that problem, purrr takes care of generalising your
-   solution to every element in the list.
+ you've solved that problem, purrr takes care of generalising your
+ solution to every element in the list.
 
 1. If you're solving a complex problem, how can you break it down into
-   bite-sized pieces that allow you to advance one small step towards a
-   solution? With purrr, you get lots of small pieces that you can
-   compose together with the pipe.
+ bite-sized pieces that allow you to advance one small step towards a
+ solution? With purrr, you get lots of small pieces that you can
+ compose together with the pipe.
 
 This structure makes it easier to solve new problems. It also makes it easier to understand your solutions to old problems when you re-read your old code.
 
 ### Exercises
 
-1.  Read the documentation for `apply()`. In the 2d case, what two for loops
-    does it generalise?
+1. Read the documentation for `apply()`. In the 2d case, what two for loops
+ does it generalise?
 
-1.  Adapt `col_summary()` so that it only applies to numeric columns
-    You might want to start with an `is_numeric()` function that returns
-    a logical vector that has a TRUE corresponding to each numeric column.
+1. Adapt `col_summary()` so that it only applies to numeric columns
+ You might want to start with an `is_numeric()` function that returns
+ a logical vector that has a TRUE corresponding to each numeric column.
 
 ## The map functions
 
 The pattern of looping over a vector, doing something to each element and saving the results is so common that the purrr package provides a family of functions to do it for you. There is one function for each type of output:
 
-* `map()`     makes a list.
+* `map()` makes a list.
 * `map_lgl()` makes a logical vector.
 * `map_int()` makes an integer vector.
 * `map_dbl()` makes a double vector.
@@ -512,30 +512,30 @@ df %>% map_dbl(sd)
 
 There are a few differences between `map_*()` and `col_summary()`:
 
-*   All purrr functions are implemented in C. This makes them a little faster
-    at the expense of readability.
+* All purrr functions are implemented in C. This makes them a little faster
+ at the expense of readability.
 
-*   The second argument, `.f`, the function to apply, can be a formula, a
-    character vector, or an integer vector. You'll learn about those handy
-    shortcuts in the next section.
+* The second argument, `.f`, the function to apply, can be a formula, a
+ character vector, or an integer vector. You'll learn about those handy
+ shortcuts in the next section.
 
-*   `map_*()` uses ... ([dot dot dot]) to pass along additional arguments
-    to `.f` each time it's called:
+* `map_*()` uses ... ([dot dot dot]) to pass along additional arguments
+ to `.f` each time it's called:
 
-    ```{r}
+ ```{r}
 map_dbl(df, mean, trim = 0.5)
-    ```
+ ```
 
-*   The map functions also preserve names:
+* The map functions also preserve names:
 
-    ```{r}
+ ```{r}
 z <- list(x = 1:3, y = 4:5)
 map_int(z, length)
-    ```
+ ```
 
 ### Shortcuts
 
-There are a few shortcuts that you can use with `.f` in order to save a little typing. Imagine you want to fit a linear model to each group in a dataset. The following toy example splits the up the `mtcars` dataset in to three pieces (one for each value of cylinder) and fits the same linear model to each piece:  
+There are a few shortcuts that you can use with `.f` in order to save a little typing. Imagine you want to fit a linear model to each group in a dataset. The following toy example splits the up the `mtcars` dataset in to three pieces (one for each value of cylinder) and fits the same linear model to each piece:
 
 ```{r}
 models <- mtcars %>%
@@ -580,16 +580,16 @@ x %>% map_dbl(2)
 
 If you're familiar with the apply family of functions in base R, you might have noticed some similarities with the purrr functions:
 
-*   `lapply()` is basically identical to `map()`, except that `map()` is
-    consistent with all the other functions in purrr, and you can use the
-    shortcuts for `.f`.
+* `lapply()` is basically identical to `map()`, except that `map()` is
+ consistent with all the other functions in purrr, and you can use the
+ shortcuts for `.f`.
 
-*   Base `sapply()` is a wrapper around `lapply()` that automatically
-    simplifies the output. This is useful for interactive work but is
-    problematic in a function because you never know what sort of output
-    you'll get:
+* Base `sapply()` is a wrapper around `lapply()` that automatically
+ simplifies the output. This is useful for interactive work but is
+ problematic in a function because you never know what sort of output
+ you'll get:
 
-    ```{r}
+ ```{r}
 x1 <- list(
   c(0.27, 0.37, 0.57, 0.91, 0.20),
   c(0.90, 0.94, 0.66, 0.63, 0.06),
@@ -604,38 +604,38 @@ x2 <- list(
 threshold <- function(x, cutoff = 0.8) x[x > cutoff]
 x1 %>% sapply(threshold) %>% str()
 x2 %>% sapply(threshold) %>% str()
-    ```
+ ```
 
-*   `vapply()` is a safe alternative to `sapply()` because you supply an
-    additional argument that defines the type. The only problem with
-    `vapply()` is that it's a lot of typing:
-    `vapply(df, is.numeric, logical(1))` is equivalent to
-    `map_lgl(df, is.numeric)`. One advantage of `vapply()` over purrr's map
-    functions is that it can also produce matrices --- the map functions only
-    ever produce vectors.
+* `vapply()` is a safe alternative to `sapply()` because you supply an
+ additional argument that defines the type. The only problem with
+ `vapply()` is that it's a lot of typing:
+ `vapply(df, is.numeric, logical(1))` is equivalent to
+ `map_lgl(df, is.numeric)`. One advantage of `vapply()` over purrr's map
+ functions is that it can also produce matrices --- the map functions only
+ ever produce vectors.
 
 I focus on purrr functions here because they have more consistent names and arguments, helpful shortcuts, and in the future will provide easy parallelism and progress bars.
 
 ### Exercises
 
-1.  Write code that uses one of the map functions to:
+1. Write code that uses one of the map functions to:
 
-    1. Compute the mean of every column in `mtcars`.
-    1. Determine the type of each column in `nycflights13::flights`.
-    1. Compute the number of unique values in each column of `iris`.
-    1. Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.
+ 1. Compute the mean of every column in `mtcars`.
+ 1. Determine the type of each column in `nycflights13::flights`.
+ 1. Compute the number of unique values in each column of `iris`.
+ 1. Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.
 
-1.  How can you create a single vector that for each column in a data frame
-    indicates whether or not it's a factor?
+1. How can you create a single vector that for each column in a data frame
+ indicates whether or not it's a factor?
 
-1.  What happens when you use the map functions on vectors that aren't lists?
-    What does `map(1:5, runif)` do? Why?
+1. What happens when you use the map functions on vectors that aren't lists?
+ What does `map(1:5, runif)` do? Why?
 
-1.  What does `map(-2:2, rnorm, n = 5)` do? Why?
-    What does `map_dbl(-2:2, rnorm, n = 5)` do? Why?
+1. What does `map(-2:2, rnorm, n = 5)` do? Why?
+ What does `map_dbl(-2:2, rnorm, n = 5)` do? Why?
 
-1.  Rewrite `map(x, function(df) lm(mpg ~ wt, data = df))` to eliminate the
-    anonymous function.
+1. Rewrite `map(x, function(df) lm(mpg ~ wt, data = df))` to eliminate the
+ anonymous function.
 
 ## Dealing with failure
 
@@ -646,7 +646,7 @@ In this section you'll learn how to deal this situation with a new function: `sa
 1. `result` is the original result. If there was an error, this will be `NULL`.
 
 1. `error` is an error object. If the operation was successful, this will be
-   `NULL`.
+ `NULL`.
 
 (You might be familiar with the `try()` function in base R. It's similar, but because it sometimes returns the original result and it sometimes returns an error object it's more difficult to work with.)
 
@@ -685,21 +685,21 @@ y$result[is_ok] %>% flatten_dbl()
 
 Purrr provides two other useful adverbs:
 
-*   Like `safely()`, `possibly()` always succeeds. It's simpler than `safely()`,
-    because you give it a default value to return when there is an error.
+* Like `safely()`, `possibly()` always succeeds. It's simpler than `safely()`,
+ because you give it a default value to return when there is an error.
 
-    ```{r}
+ ```{r}
 x <- list(1, 10, "a")
 x %>% map_dbl(possibly(log, NA_real_))
-    ```
+ ```
 
-*   `quietly()` performs a similar role to `safely()`, but instead of capturing
-    errors, it captures printed output, messages, and warnings:
+* `quietly()` performs a similar role to `safely()`, but instead of capturing
+ errors, it captures printed output, messages, and warnings:
 
-    ```{r}
+ ```{r}
 x <- list(1, -1)
 x %>% map(quietly(log)) %>% str()
-    ```
+ ```
 
 ## Mapping over multiple arguments
 
@@ -782,7 +782,7 @@ Since the arguments are all the same length, it makes sense to store them in a d
 
 ```{r}
 params <- tribble(
-  ~ mean, ~ sd, ~ n,
+  ~mean, ~sd, ~n,
   5, 1, 1,
   10, 5, 3,
   -3, 10, 5
@@ -822,7 +822,7 @@ And again, you can use `tribble()` to make creating these matching pairs a littl
 
 ```{r, eval = FALSE}
 sim <- tribble(
-  ~ f, ~ params,
+  ~f, ~params,
   "runif", list(min = -1, max = 1),
   "rnorm", list(sd = 5),
   "rpois", list(lambda = 10)
@@ -950,26 +950,26 @@ x %>% accumulate(`+`)
 
 ### Exercises
 
-1.  Implement your own version of `every()` using a for loop. Compare it with
-    `purrr::every()`. What does purrr's version do that your version doesn't?
+1. Implement your own version of `every()` using a for loop. Compare it with
+ `purrr::every()`. What does purrr's version do that your version doesn't?
 
-1.  Create an enhanced `col_sum()` that applies a summary function to every
-    numeric column in a data frame.
+1. Create an enhanced `col_sum()` that applies a summary function to every
+ numeric column in a data frame.
 
-1.  A possible base R equivalent of `col_sum()` is:
+1. A possible base R equivalent of `col_sum()` is:
 
-    ```{r}
+ ```{r}
 col_sum3 <- function(df, f) {
   is_num <- sapply(df, is.numeric)
   df_num <- df[, is_num]
 
   sapply(df_num, f)
 }
-    ```
+ ```
 
-    But it has a number of bugs as illustrated with the following inputs:
+ But it has a number of bugs as illustrated with the following inputs:
 
-    ```{r, eval = FALSE}
+ ```{r, eval = FALSE}
 df <- tibble(
   x = 1:3,
   y = 3:1,
@@ -981,6 +981,6 @@ col_sum3(df, mean)
 col_sum3(df[1:2], mean)
 col_sum3(df[1], mean)
 col_sum3(df[0], mean)
-    ```
+ ```
 
-    What causes the bugs?
+ What causes the bugs?

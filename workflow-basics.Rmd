@@ -32,7 +32,7 @@ You will make lots of assignments and `<-` is a pain to type. Don't be lazy and 
 
 ## What's in a name?
 
-Object names must start with a letter, and can only contain letters, numbers, `_` and `.`. You want your object names to be descriptive, so you'll need a convention for multiple words. I recommend __snake_case__ where you separate lowercase words with `_`. 
+Object names must start with a letter, and can only contain letters, numbers, `_` and `.`. You want your object names to be descriptive, so you'll need a convention for multiple words. I recommend __snake_case__ where you separate lowercase words with `_`.
 
 ```{r, eval = FALSE}
 i_use_snake_case
@@ -57,21 +57,21 @@ this_is_a_really_long_name <- 2.5
 
 To inspect this object, try out RStudio's completion facility: type "this", press TAB, add characters until you have a unique prefix, then press return.
 
-Ooops, you made a mistake! `this_is_a_really_long_name` should have value 3.5 not 2.5. Use another keyboard shortcut to help you fix it.  Type "this" then press Cmd/Ctrl + ↑. That will list all the commands you've typed that start those letters. Use the arrow keys to navigate, then press enter to retype the command. Change 2.5 to 3.5 and rerun.
+Ooops, you made a mistake! `this_is_a_really_long_name` should have value 3.5 not 2.5. Use another keyboard shortcut to help you fix it. Type "this" then press Cmd/Ctrl + ↑. That will list all the commands you've typed that start those letters. Use the arrow keys to navigate, then press enter to retype the command. Change 2.5 to 3.5 and rerun.
 
 Make yet another assignment:
 
 ```{r}
-r_rocks <- 2 ^ 3
+r_rocks <- 2^3
 ```
 
 Let's try to inspect it:
 
 ```{r, eval = FALSE}
 r_rock
-#> Error: object 'r_rock' not found
+# > Error: object 'r_rock' not found
 R_rocks
-#> Error: object 'R_rocks' not found
+# > Error: object 'R_rocks' not found
 ```
 
 There's an implied contract between you and R: it will do the tedious computation for you, but in return, you must be completely precise in your instructions. Typos matter. Case matters.
@@ -84,7 +84,7 @@ R has a large collection of built-in functions that are called like this:
 function_name(arg1 = val1, arg2 = val2, ...)
 ```
 
-Let's try using `seq()` which makes regular **seq**uences of numbers and, while we're at it, learn more helpful features of RStudio. Type `se` and hit TAB. A popup shows you possible completions. Specify `seq()` by typing more (a "q") to disambiguate, or by using ↑/↓ arrows to select. Notice the floating tooltip that pops up, reminding you of the function's arguments and purpose. If you want more help, press F1 to get all the details in the help tab in the lower right pane. 
+Let's try using `seq()` which makes regular **seq**uences of numbers and, while we're at it, learn more helpful features of RStudio. Type `se` and hit TAB. A popup shows you possible completions. Specify `seq()` by typing more (a "q") to disambiguate, or by using ↑/↓ arrows to select. Notice the floating tooltip that pops up, reminding you of the function's arguments and purpose. If you want more help, press F1 to get all the details in the help tab in the lower right pane.
 
 Press TAB once more when you've selected the function you want. RStudio will add matching opening (`(`) and closing (`)`) parentheses for you. Type the arguments `1, 10` and hit return.
 
@@ -130,29 +130,28 @@ Here you can see all of the objects that you've created.
 
 ## Practice
 
-1.  Why does this code not work?
+1. Why does this code not work?
 
-    ```{r, error = TRUE}
-    my_variable <- 10
-    my_varıable
-    ```
-    
-    Look carefully! (This may seem like an exercise in pointlessness, but
-    training your brain to notice even the tiniest difference will pay off
-    when programming.)
-    
-1.  Tweak each of the following R commands so that they run correctly:
+ ```{r, error = TRUE}
+my_variable <- 10
+my_varıable
+ ```
 
-    ```{r, eval = FALSE}
-    library(tidyverse)
+ Look carefully! (This may seem like an exercise in pointlessness, but
+ training your brain to notice even the tiniest difference will pay off
+ when programming.)
 
-    ggplot(data = mpg) + 
-      geom_point(mapping = aes(x = displ, y = hwy))
-    
-    fliter(mpg, cyl = 8)
-    filter(diamond, carat > 3)
-    ```
-    
-1.  Press Alt + Shift + K. What happens? How can you get to the same place
-    using the menus?
+1. Tweak each of the following R commands so that they run correctly:
 
+ ```{r, eval = FALSE}
+library(tidyverse)
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+fliter(mpg, cyl = 8)
+filter(diamond, carat > 3)
+ ```
+
+1. Press Alt + Shift + K. What happens? How can you get to the same place
+ using the menus?

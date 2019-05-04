@@ -2,27 +2,27 @@
 
 ## Introducción
 
-Un pipe es una herramienta poderosa para claramente expresar una secuencia de operaciones múltiples. Hasta aquí, has venido usándolas sin saber cómo funcionan, o cuales son las alternativas. Ahora, en este capítulo, es tiempo de explorar las Pipes en más detalle. Aprenderás las alternativas a las Pipes, cuando no deberías usar las pipes y algunas herramientas relacionadas útiles. 
+Un pipe es una herramienta poderosa para claramente expresar una secuencia de operaciones múltiples. Hasta aquí, has venido usándolas sin saber cómo funcionan, o cuales son las alternativas. Ahora, en este capítulo, es tiempo de explorar las Pipes en más detalle. Aprenderás las alternativas a las Pipes, cuando no deberías usar las pipes y algunas herramientas relacionadas útiles.
 
-### Prerequisitos 
+### Prerequisitos
 
-Un pipe, `%>%`, viene del paquete __magrittr__  de Stefan Milton Bache. Los paquetes en el tidyverse cargan %>% automáticamente, así que no cargaras magrittr explícitamente. Aquí, sin embargo, nos enfocamos en la tubería, y no estamos cargando otros paquetes, por lo que nosotros lo cargaremos explícitamente
+Un pipe, `%>%`, viene del paquete __magrittr__ de Stefan Milton Bache. Los paquetes en el tidyverse cargan %>% automáticamente, así que no cargaras magrittr explícitamente. Aquí, sin embargo, nos enfocamos en la tubería, y no estamos cargando otros paquetes, por lo que nosotros lo cargaremos explícitamente
 
 ```{r setup, message = FALSE}
 library(magrittr)
 library(datos)
 ```
 
-## Alternativas a los pipes 
+## Alternativas a los pipes
 
 El objetivo de un pipe es ayudarte a escribir código en una manera que sea más fácil de leer y entender. Para ver porque un pipe es tan útil, vamos a explorar diferentes formas de escribir el mismo código. Usemos el código para contar una historia acerca de un pequeño conejito llamado Foo Foo:
 
-> Pequeño conejito Foo Foo  
-> Fue saltando por el bosque 
-> Recogiendo ratones del campo   
+> Pequeño conejito Foo Foo
+> Fue saltando por el bosque
+> Recogiendo ratones del campo
 > Y golpeándolos en la cabeza
 
-Este es un poema popular para los niños que se acompaña mediante gesticulación con las manos. 
+Este es un poema popular para los niños que se acompaña mediante gesticulación con las manos.
 
 Empezaremos por definir un objeto que representa un pequeño conejito Foo Foo:
 
@@ -32,12 +32,12 @@ foo_foo <- pequeño_conejito()
 
 Y usaremos una función para cada verbo: `saltar()`, `recoger()`, and `golpear()`. Usando este objeto y estos verbos, hay (al menos) cuatro maneras en las que podemos volver a contar la historia en código:
 
-1.	Guardar cada paso intermedio como un nuevo objeto. 
-2.	Sobreescribir el objeto original muchas veces. 
-3.	Componer las funciones. 
+1.	Guardar cada paso intermedio como un nuevo objeto.
+2.	Sobreescribir el objeto original muchas veces.
+3.	Componer las funciones.
 4.	Usar un pipe.
 
-Trabajaremos a través de cada enfoque, mostrándote el código y hablando de las ventajas y desventajas. 
+Trabajaremos a través de cada enfoque, mostrándote el código y hablando de las ventajas y desventajas.
 
 
 ### Pasos intermedios
@@ -52,11 +52,11 @@ foo_foo_3 <- golpear(foo_foo_2, en_la = cabeza)
 
 La máxima desventaja de esta manera es la obligación de nombrar cada paso intermedio. Si hay nombres naturales, es una buena idea, y deberías hacerlo. Pero muchas veces, como en este ejemplo, no hay nombres naturales, y agregando sufijos numéricos para hacer los nombres únicos. Esto conduce a dos problemas:
 
-1. El código está abarrotado con nombres poco importantes. 
+1. El código está abarrotado con nombres poco importantes.
 
-1. Hay que incrementar cuidadosamente el sufijo en cada línea. 
+1. Hay que incrementar cuidadosamente el sufijo en cada línea.
 
-Cada vez que escribo código como este, invariablemente uso el número incorrecto en una línea y luego pierdo 10 minutos rascándome la cabeza tratándome de dar cuenta que hay de malo con mi código. 
+Cada vez que escribo código como este, invariablemente uso el número incorrecto en una línea y luego pierdo 10 minutos rascándome la cabeza tratándome de dar cuenta que hay de malo con mi código.
 Probablemente te preocupes que esta forma cree muchas copias de tus datos y ocupe demasiada memoria. Sorprendentemente, este no es el caso. Primero, ten en cuenta que preocuparse proactivamente acerca de la memoria no es una manera útil de invertir tu tiempo: preocupate acerca de ello cuando se convierta en un problema (ej. cuando te quedes sin memoria), no antes. En segundo lugar, R no es estúpido, compartirá las columnas a lo largo de los marcos de datos, cuando sea posible. Veamos a una tubería de manipulación de datos cuando agregamos un nueva columna al `ggplot2::diamantes`:
 
 ```{r}
@@ -74,7 +74,7 @@ pryr::object_size(diamantes, diamantes2)
 * `diamantes2` ocupa 3.89 MB,
 * `diamantes` y `diamantes2` juntos ocupan 3.89 MB!
 
-¿Cómo funciona esto? Bien, `diamantes2` tiene 10 columnas en común con `diamantes`: no hay necesidad de duplicar los datos, así que ambos dataframes tienen variables en común. Estas variables solo serán copiadas si tu modificas una de ellas. En el siguiente ejemplo, nosotros modificamos un solo valor en `diamantes$quilates`. Esto significa que la variable `carat` no será más compartida entre dos dataframes, y una copia debe ser realizada. El tamaño de cada dataframe no se cambia, pero el tamaño colectivo se incrementa: 
+¿Cómo funciona esto? Bien, `diamantes2` tiene 10 columnas en común con `diamantes`: no hay necesidad de duplicar los datos, así que ambos dataframes tienen variables en común. Estas variables solo serán copiadas si tu modificas una de ellas. En el siguiente ejemplo, nosotros modificamos un solo valor en `diamantes$quilates`. Esto significa que la variable `carat` no será más compartida entre dos dataframes, y una copia debe ser realizada. El tamaño de cada dataframe no se cambia, pero el tamaño colectivo se incrementa:
 
 ```{r}
 diamantes$quilates[1] <- NA
@@ -97,35 +97,26 @@ foo_foo <- bop(foo_foo, en_la = cabeza)
 
 Esto es menos tipeo (y menos pensamiento), así que es menos probable que cometas errores. Sin embargo, hay dos problemas:
 
-1.  Debugging es doloroso: si cometes un error vas a necesitar correr de nuevo el pipeline desde el principio. 
-    
-1.  La repetición de un objeto siendo transformado (hemos escrito foo_foo 6 veces!) oscurece lo que está siendo cambiado en cada línea.  
+1. Debugging es doloroso: si cometes un error vas a necesitar correr de nuevo el pipeline desde el principio.
+
+1. La repetición de un objeto siendo transformado (hemos escrito foo_foo 6 veces!) oscurece lo que está siendo cambiado en cada línea.
 
 ### Composición de funciones
 
 Otro enfoque es abandonar la asignación y encadenar las llamadas a las funciones juntas:
 
 ```{r, eval = FALSE}
-COMENTARIO PACHA: DEJAMOS ESTO
 saltar(
   recoger(
-    golpear(foo_foo, por_el = bosque),
-    arriba = en_la_cabeza
-  ), 
-  en = la_cabeza
-
-O ESTO
-bop(
-  scoop(
-    hop(foo_foo, through = forest),
-    up = field_mice
+    golpear(bla_bla, por_el = bosque),
+    arriba = raton_de_campo
   ),
-  on = head
+  en = la_cabeza
 )
 ```
 
-Aquí está la desventaja es que se debe leer de dentro hacia afuera, de derecha a izquierda, y que los argumentos terminan separados 
-[dagwood sandwhich](https://en.wikipedia.org/wiki/Dagwood_sandwich)). En resumen, este código es difícil para un ser humano. 
+Aquí está la desventaja es que se debe leer de dentro hacia afuera, de derecha a izquierda, y que los argumentos terminan separados
+[dagwood sandwhich](https://en.wikipedia.org/wiki/Dagwood_sandwich)). En resumen, este código es difícil para un ser humano.
 
 ### Uso de pipe
 
@@ -138,8 +129,8 @@ foo_foo %>%
   golpear(en = la_cabeza)
 ```
 
-Esta es mi forma preferida, ya que se enfoca en los verbos, no en los sustantivos. Puedes leer esto como una serie de composición de funciones como un set de acciones imperativas. Foo salta, luego recoge y luego golpea. La desventaja, por supuesto, es que necesitas estar familiarizado con el uso de los pipes. Si nunca has visto `%>%` antes, no tendras idea acerca de lo que realiza el código. Afortunadamente, la mayoría de la gente entiende la idea facilmente, así que cuando compartes tu código con otros que no están familiarizados con los pipes, tu pueden enseñarles facilmente. 
- 
+Esta es mi forma preferida, ya que se enfoca en los verbos, no en los sustantivos. Puedes leer esto como una serie de composición de funciones como un set de acciones imperativas. Foo salta, luego recoge y luego golpea. La desventaja, por supuesto, es que necesitas estar familiarizado con el uso de los pipes. Si nunca has visto `%>%` antes, no tendras idea acerca de lo que realiza el código. Afortunadamente, la mayoría de la gente entiende la idea facilmente, así que cuando compartes tu código con otros que no están familiarizados con los pipes, tu pueden enseñarles facilmente.
+
 El pipe trabaja realizando una "transformación léxica": detrás de escena, magrittr reensambla el código en el pipe a una forma que funciona por sobreescritura en un objeto intermedio. Cuando se ejecuta un pipe como el de arriba, magrittr hace algo como esto:
 
 ```{r, eval = FALSE}
@@ -153,7 +144,7 @@ mi_pipe(foo_foo)
 
 Esto significa que un pipe no trabajara para dos clases de funciones:
 1. Funciones que usan el entorno actual. Por ejemplo, `asignar()`creará una nueva variable con el nombre dado en el entorno actual:
-     
+
 ```{r}
 assign("x", 10)
 x
@@ -161,46 +152,46 @@ x
 "x" %>% assign(100)
 x
 ```
-    
+
 El uso de la asignación con el pipe no funciona porque lo asigna a un entorno temporario usado por `%>%`. Si quieres usar la asignación con pipe, debes explicitar el entorno:
-    
+
 ```{r}
 env <- environment()
 "x" %>% assign(100, envir = env)
 x
 ```
-    
-Otras funciones con este problema incluyen  `get()` y `load()`.
 
-1. Funciones que usan una evaluación perezosa. En R, los argumentos de las funciones son solamente computados cuando la función los usa, no antes de llamar a la función. El pipe computa cada elemento de a turno, así que no puedes confiar en este comportamiento. 
+Otras funciones con este problema incluyen `get()` y `load()`.
+
+1. Funciones que usan una evaluación perezosa. En R, los argumentos de las funciones son solamente computados cuando la función los usa, no antes de llamar a la función. El pipe computa cada elemento de a turno, así que no puedes confiar en este comportamiento.
 
 Un lugar para este problema es `tryCatch()`, que te permite capturar y manejar errores:
-    
+
 ```{r, error = TRUE}
 tryCatch(stop("!"), error = function(e) "An error")
 
 stop("!") %>%
   tryCatch(error = function(e) "An error")
 ```
-    
-Hay una relativa gran cantidad de funciones con este comportamiento, incluyendo a `try()`, `suppressMessages()`, y `suppressWarnings()` en R base. 
+
+Hay una relativa gran cantidad de funciones con este comportamiento, incluyendo a `try()`, `suppressMessages()`, y `suppressWarnings()` en R base.
 
 ## Cuando no usar el pipe
 
 El pipe es una herramienta poderosa, pero no es la única herramienta a tu disposición, ¡y no soluciona ningún problema! Los pipes son mayoritariamente usados para reescribir una secuencia lineal bastante corta de operaciones. Pienso que deberías buscar otra herramienta cuando:
 
-* Tus pipes no son más largas que (digamos) 10 pasos. En ese caso, creamos objetos intermedios con nombres significativos. Esto hará el debugging más fácil, porque puede más facilmente chequear los resultados intermedios, y hace más simple entender tu código, porque los nombres de las variables pueden ayudar a comunicar la intención. 
-* Tienes múltiples inputs y outputs. Si no hay un objeto primario para ser transformado, pero sí dos o más objetos siendo combinados juntos, no uses el pipe. 
-* Si estas empezando a pensar acerca de un gráfico directo con una estructura compleja de dependencia. Los pipes son fundamentalmente lineales y expresan relaciones complejas que típicamente llevarán a un código confuso. 
+* Tus pipes no son más largas que (digamos) 10 pasos. En ese caso, creamos objetos intermedios con nombres significativos. Esto hará el debugging más fácil, porque puede más facilmente chequear los resultados intermedios, y hace más simple entender tu código, porque los nombres de las variables pueden ayudar a comunicar la intención.
+* Tienes múltiples inputs y outputs. Si no hay un objeto primario para ser transformado, pero sí dos o más objetos siendo combinados juntos, no uses el pipe.
+* Si estas empezando a pensar acerca de un gráfico directo con una estructura compleja de dependencia. Los pipes son fundamentalmente lineales y expresan relaciones complejas que típicamente llevarán a un código confuso.
 
 ## Otras herramientas de magrittr
 
-Todos los paquetes en tidyverse automaticamente harán  `%>%` disponible para tí, así que normalmente no se carga magrittr explicitamente. De todas formas, hay otras herramientas útiles dentro de magrittr que podrías querer utilizar:
+Todos los paquetes en tidyverse automaticamente harán `%>%` disponible para tí, así que normalmente no se carga magrittr explicitamente. De todas formas, hay otras herramientas útiles dentro de magrittr que podrías querer utilizar:
 
-* Cuando se trabaja en un pipe más complejo, es a veces más útil llamar a una función por sus efectos secundarios. Tal vez quieras imprimir el objeto actual, o graficarlo, o guardarlo en el disco. Muchas veces, estas funciones no devuelven nada, efectivamente terminando el pipe. 
+* Cuando se trabaja en un pipe más complejo, es a veces más útil llamar a una función por sus efectos secundarios. Tal vez quieras imprimir el objeto actual, o graficarlo, o guardarlo en el disco. Muchas veces, estas funciones no devuelven nada, efectivamente terminando el pipe.
 
 Para trabajar en torno a este problema, puedes usar el pipe "T". `%T>%`trabaja igual que `%>%` excepto que este devuelve el lado izquierdo en vez del lado derecho. Se lo llama "T" porque literalmente tiene la forma de una T.
-  
+
 ```{r}
 rnorm(100) %>%
   matrix(ncol = 2) %>%
@@ -213,25 +204,25 @@ rnorm(100) %>%
   str()
 ```
 
-*   Si estas trabajando con funciones que no están basados en una API (ej., tu pasas vectores individuales, no un dataframe o expresiones a ser evaluadas en el contexto de un dataframe), pueden encontrar `%$%` útil. El operador explota las variables en un dataframe así que te puedes referir a ellos explícitamente. Esto es útil cuando se trabaja con muchas funciones en R base:
+* Si estas trabajando con funciones que no están basados en una API (ej., tu pasas vectores individuales, no un dataframe o expresiones a ser evaluadas en el contexto de un dataframe), pueden encontrar `%$%` útil. El operador explota las variables en un dataframe así que te puedes referir a ellos explícitamente. Esto es útil cuando se trabaja con muchas funciones en R base:
 
 ```{r}
 mtautos %$%
   cor(cilindrada, millas)
 ```
 
-*   Para asignaciones magrittr provee el operador `%<>%` te permite reemplazar el código como: 
-  
+* Para asignaciones magrittr provee el operador `%<>%` te permite reemplazar el código como:
+
 ```{r, eval = FALSE}
 mtautos <- mtautos %>%
   transform(cilindros = cilindros * 2)
 ```
-    
+
 con
-     
+
 ```{r, eval = FALSE}
 mtautos %<>% transform(cilindros = cilindros * 2)
 ```
 
 No soy partidario de este operador porque pienso que una asignación es una operación especial que siempre debe ser clara cuando sucede.
-En mi opinión, un poco de duplicación (ej repetir el nombre de un objeto dos veces) está bien para lograr hacerlo más explícito. 
+En mi opinión, un poco de duplicación (ej repetir el nombre de un objeto dos veces) está bien para lograr hacerlo más explícito.

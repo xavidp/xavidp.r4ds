@@ -14,7 +14,7 @@ As well as tools to simplify iteration, purrr provides tools for handling deeply
 The map functions apply a function to every element in a list. They are the most commonly used part of purrr, but not the only part. Since lists are often used to represent complex hierarchies, purrr also provides tools to work with hierarchy:
 
 * You can extract deeply nested elements in a single call by supplying
-  a character vector to the map functions.
+ a character vector to the map functions.
 
 * You can remove a level of the hierarchy with the flatten functions.
 
@@ -50,12 +50,12 @@ str(issues[[1]])
 
 ```{r}
 tibble::tibble(
-  i = seq_along(issues),
-  names = issues %>% map(names)
+ i = seq_along(issues),
+ names = issues %>% map(names)
 ) %>%
-  tidyr::unnest(names) %>%
-  table() %>%
-  t()
+ tidyr::unnest(names) %>%
+ table() %>%
+ t()
 ```
 
 Another alternative is the __listviewer__ package, <https://github.com/timelyportfolio/listviewer>.
@@ -142,8 +142,8 @@ Other times the hierarchy feels "inside out". You can use `transpose()` to flip 
 
 ```{r}
 x <- list(
-  x = list(a = 1, b = 3, c = 5),
-  y = list(a = 2, b = 4, c = 6)
+ x = list(a = 1, b = 3, c = 5),
+ y = list(a = 2, b = 4, c = 6)
 )
 x %>% str()
 x %>% transpose() %>% str()
@@ -176,12 +176,12 @@ df %>% transpose() %>% str()
 
 ### Exercises
 
-1.  Challenge: read all the CSV files in a directory. Which ones failed
-    and why?
+1. Challenge: read all the CSV files in a directory. Which ones failed
+ and why?
 
-    ```{r, eval = FALSE}
-    files <- dir("data", pattern = "\\.csv$")
-    files %>%
-      set_names(., basename(.)) %>%
-      map_df(safely(readr::read_csv), .id = "filename") %>%
-    ```
+ ```{r, eval = FALSE}
+ files <- dir("data", pattern = "\\.csv$")
+ files %>%
+ set_names(., basename(.)) %>%
+ map_df(safely(readr::read_csv), .id = "filename") %>%
+ ```
