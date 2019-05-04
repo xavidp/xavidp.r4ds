@@ -69,7 +69,7 @@ Una forma es usar el mismo enfoque que en el último capítulo: hay una señal f
 Ya sabes cómo hacer eso si tenemos un solo país:
 
 ```{r, out.width = "33%", fig.asp = 1, fig.width = 3, fig.align='default'}
-nz <- filter(paises, pais == "Nueva Zelandia")
+nz <- filter(paises, pais == "Nueva Zelanda")
 nz %>%
   ggplot(aes(anio, esperanza_de_vida)) +
   geom_line() +
