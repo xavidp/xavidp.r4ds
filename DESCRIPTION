@@ -11,6 +11,7 @@ Imports:
   bookdown,
   condvis,
   datos,
+  devtools,
   gapminder,
   ggrepel,
   ggplot2,
