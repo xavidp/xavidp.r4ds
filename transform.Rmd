@@ -18,7 +18,7 @@ Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquet
 
 ### vuelos
 
-Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `datos::vuelos`. Este conjunto de datos contiene todos los vuelos `r format(nrow (datos::vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?vuelos`.
+Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `vuelos`. Este conjunto de datos contiene todos los vuelos `r format(nrow (vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?vuelos`.
 
 ```{r}
 vuelos
@@ -457,14 +457,14 @@ atraso <- summarise(por_destino,
   distancia = mean(distancia, na.rm = TRUE),
   atraso = mean(atraso_llegada, na.rm = TRUE)
 )
-atraso <- filter(atraso, count > 20, destino != "HNL")
+atraso <- filter(atraso, conteo > 20, destino != "HNL")
 
 # Parece que las demoras aumentan con una distancia de hasta ~ 750 millas
 # y luego disminuyen. Tal vez a medida que los vuelos se hacen más 
 # largos, hay más habilidad para compensar las demoras en el aire?
 
 ggplot(data = atraso, mapping = aes(x = distancia, y = atraso)) +
-  geom_point(aes(size = count), alpha = 1/3) +
+  geom_point(aes(size = conteo), alpha = 1/3) +
   geom_smooth(se = FALSE)
 ```
 
@@ -584,7 +584,7 @@ Cuando graficas la habilidad del bateador (medido por el promedio de bateo, `ba`
 
 ```{r}
 # Convierte a tibble para puedas imprimirlo de una manera legible
-bateo <- as_tibble(datos::bateadores)
+bateo <- as_tibble(bateadores)
 
 bateadores <- bateo %>% 
   group_by(ID_jugador) %>% 
