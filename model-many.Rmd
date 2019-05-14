@@ -4,33 +4,33 @@
 
 En este capítulo vas a aprender tres ideas poderosas que te van a ayudar a trabajar fácilmente con un gran número de modelos:
 
-1.  Usar muchos modelos simples para entender mejor conjuntos de datos complejos.
+1. Usar muchos modelos simples para entender mejor conjuntos de datos complejos.
 
-1.  Usar columnas-lista (_list-columns_) para almacenar estructuras de datos arbitrarias en un _data frame_.
-    Ésto, por ejemplo, te permitirá tener una columna que contenga modelos lineales.
-   
-1.  Usar el paquete __broom__, de David Robinson, para transformar modelos en datos ordenados.
-    Ésta es una técnica poderosa para trabajar con un gran número de modelos
-    porque una vez que tienes datos ordenados, puedes aplicar todas las técnicas que 
-    has aprendido anteriormente en el libro.
+1. Usar columnas-lista (_list-columns_) para almacenar estructuras de datos arbitrarias en un _data frame_.
+ Ésto, por ejemplo, te permitirá tener una columna que contenga modelos lineales.
+
+1. Usar el paquete __broom__, de David Robinson, para transformar modelos en datos ordenados.
+ Ésta es una técnica poderosa para trabajar con un gran número de modelos
+ porque una vez que tienes datos ordenados, puedes aplicar todas las técnicas que
+ has aprendido anteriormente en el libro.
 
 Empezaremos entrando de lleno en un ejemplo motivador usando datos sobre la esperanza de vida alrededor del mundo. Es un conjunto de datos pequeño pero que ilustra cuán importante puede ser modelar para mejorar tus visualizaciones. Utilizaremos un número grande de modelos simples para extraer algunas de las señales más fuertes y que podamos ver las sutiles que permanecen. También veremos cómo las medidas de resumen de los modelos nos pueden ayudar a encontrar datos atípicos y tendencias inusuales.
 
 Las siguientes secciones ahondarán en más detalles acerca de las técnicas:
 
 1. En [columnas-lista], aprenderás más acerca de la estructura de datos columna-lista,
-   y por qué es válido poner listas en _data frames_.
-   
-1. En [creando columnas-lista], aprenderás las tres maneras principales en las que 
-   crearás columnas-lista.
-   
+ y por qué es válido poner listas en _data frames_.
+
+1. En [creando columnas-lista], aprenderás las tres maneras principales en las que
+ crearás columnas-lista.
+
 1. En [simplificando columnas-lista] aprenderás cómo convertir columnas-lista de vuelta
-   a vectores atómicos regulares (o conjuntos de vectores atómicos) para que puedas trabajar
-   con ellos más fácilmente.
-   
+ a vectores atómicos regulares (o conjuntos de vectores atómicos) para que puedas trabajar
+ con ellos más fácilmente.
+
 1. En [haciendo datos ordenados con broom], aprenderás sobre el conjunto de herramientas completo
-   provisto por __broom__ (del inglés _escoba_), y verás cómo puede ser aplicado a otros tipos de 
-   estructuras de datos.
+ provisto por __broom__ (del inglés _escoba_), y verás cómo puede ser aplicado a otros tipos de
+ estructuras de datos.
 
 Este capítulo es aspiracional en cierta medida: si este libro es tu primera introducción a R, este capítulo es probable que sea una lucha para ti. Requiere que tengas profundamente internalizadas ideas acerca de modelamiento, estructuras de datos, e iteración. Así que no te preocupes si no lo entiendes --- solo aparta este capítulo por un par de meses, y vuelve cuando quieras ejercitar tu cerebro.
 
@@ -69,7 +69,7 @@ Una forma es usar el mismo enfoque que en el último capítulo: hay una señal f
 Ya sabes cómo hacer eso si tenemos un solo país:
 
 ```{r, out.width = "33%", fig.asp = 1, fig.width = 3, fig.align='default'}
-nz <- filter(paises, pais == "Nueva Zelandia")
+nz <- filter(paises, pais == "Nueva Zelanda")
 nz %>%
   ggplot(aes(anio, esperanza_de_vida)) +
   geom_line() +
@@ -172,7 +172,7 @@ residuos <- unnest(por_pais, residuos)
 residuos
 ```
 
-Nota que cada columna regular está repetida una vez por cada fila en la columna anidada. 
+Nota que cada columna regular está repetida una vez por cada fila en la columna anidada.
 
 Ahora tenemos un _data frame_ regular, podemos graficar los residuos:
 
@@ -184,12 +184,12 @@ residuos %>%
 ```
 
 Separar facetas por continente es particularmente revelador:
- 
+
 ```{r}
 residuos %>%
   ggplot(aes(anio, resid, group = pais)) +
   geom_line(alpha = 1 / 3) +
-  facet_wrap(~ continente)
+  facet_wrap(~continente)
 ```
 
 Parece que hemos perdido algunos patrones suaves. También hay algo interesante pasando en África: vemos algunos residuos muy grandes lo que sugiere que nuestro modelo no está ajustando muy bien. Exploraremos más eso en la próxima sección, atacando el problema desde un ángulo un poco diferente.
@@ -210,7 +210,7 @@ por_pais %>%
   unnest(glance)
 ```
 
-Este no es exactamente el _output_ que queremos, porque aún incluye todas las columnas que son una lista. Éste es el comportamiento por defecto cuando `unnest()` trabaja sobre _data frames_ con una única fila. Para suprimir esas columnas usamos `.drop = TRUE` (`drop`  — del inglés _descartar_):
+Este no es exactamente el _output_ que queremos, porque aún incluye todas las columnas que son una lista. Éste es el comportamiento por defecto cuando `unnest()` trabaja sobre _data frames_ con una única fila. Para suprimir esas columnas usamos `.drop = TRUE` (`drop` — del inglés _descartar_):
 
 ```{r}
 glance <- por_pais %>%
@@ -251,21 +251,21 @@ Vemos dos efectos principales aquí: las tragedias de la epidemia de VIH/SIDA y 
 
 ### Ejercicios
 
-1.  Una tendencia lineal parece ser demasiado simple para la tendencia general.
-    ¿Puedes hacerlo mejor con un polinomio cuadrático? ¿Cómo puedes interpretar
-    el coeficiente del término cuadrático? (Pista: puedes querer transformar
-    `year` para que tenga media cero.)
+1. Una tendencia lineal parece ser demasiado simple para la tendencia general.
+ ¿Puedes hacerlo mejor con un polinomio cuadrático? ¿Cómo puedes interpretar
+ el coeficiente del término cuadrático? (Pista: puedes querer transformar
+ `year` para que tenga media cero.)
 
-1.  Explora otros métodos para visualizar la distribución del $R^2$ por
-    continente. Puedes querer probar el paquete __ggbeeswarm__, que provee 
-    métodos similares para evitar superposiciones como jitter, pero usa métodos
-    determinísticos.
+1. Explora otros métodos para visualizar la distribución del $R^2$ por
+ continente. Puedes querer probar el paquete __ggbeeswarm__, que provee
+ métodos similares para evitar superposiciones como jitter, pero usa métodos
+ determinísticos.
 
-1.  Para crear el último gráfico (mostrando los datos para los países con los
-    peores ajustes del modelo), precisamos dos pasos: creamos un _data frame_ con
-    una fila por país y después hicimos un _semi-join_ (del inglés _semi juntar_) (TODO: deberíamos aclarar algo?) al conjunto de datos original.
-    Es posible evitar este _join_ si usamos `unnest()` en lugar de 
-    `unnest(.drop = TRUE)`. ¿Cómo?
+1. Para crear el último gráfico (mostrando los datos para los países con los
+ peores ajustes del modelo), precisamos dos pasos: creamos un _data frame_ con
+ una fila por país y después hicimos un _semi-join_ (del inglés _semi juntar_) (TODO: deberíamos aclarar algo?) al conjunto de datos original.
+ Es posible evitar este _join_ si usamos `unnest()` en lugar de
+ `unnest(.drop = TRUE)`. ¿Cómo?
 
 ## Columnas-lista
 
@@ -297,7 +297,7 @@ Es incluso más fácil con `tribble()` ya que automáticamente puede interpretar
 
 ```{r}
 tribble(
-  ~ x, ~ y,
+  ~x, ~y,
   1:3, "1, 2",
   3:5, "3, 4, 5"
 )
@@ -307,27 +307,27 @@ Columnas-lista son usualmente más útiles como estructuras de datos intermedias
 
 Generalmente hay tres partes de un _pipeline_ (del inglés _tubería_) efectivo de columnas-lista:
 
-1.  Creas la columna-lista usando uno entre `nest()`, `summarise()` + `list()`,
-    o `mutate()` + una función map, como se describió en [Creando columnas-lista].
+1. Creas la columna-lista usando uno entre `nest()`, `summarise()` + `list()`,
+ o `mutate()` + una función map, como se describió en [Creando columnas-lista].
 
-1.  Creas otra columna-lista intermedia transformando columnas lista 
-    existentes con `map()`, `map2()` o `pmap()`. Por ejemplo, 
-    en el caso de estudio de arriba, creamos una columna-lista de modelos transformando
-    una columna-lista de _data frames_.
-    
-1.  Simplificas la columna-lista de vuelta en un _data frame_ o vector atómico,
-    como se describió en [Simplificando columnas-lista].
+1. Creas otra columna-lista intermedia transformando columnas lista
+ existentes con `map()`, `map2()` o `pmap()`. Por ejemplo,
+ en el caso de estudio de arriba, creamos una columna-lista de modelos transformando
+ una columna-lista de _data frames_.
+
+1. Simplificas la columna-lista de vuelta en un _data frame_ o vector atómico,
+ como se describió en [Simplificando columnas-lista].
 
 ## Creando columnas-lista
 
-Típicamente, no crearás columnas-lista con `tibble()`. En cambio, las crearás a partir de columnas regulares, usando uno de tres métodos: 
+Típicamente, no crearás columnas-lista con `tibble()`. En cambio, las crearás a partir de columnas regulares, usando uno de tres métodos:
 
-1.  Con `tidyr::nest()` para convertir un _data frame_ agrupado en uno anidado
-    donde tengas columnas-lista de _data frames_.
-    
-1.  Con `mutate()` y funciones vectorizadas que retornan una lista.
+1. Con `tidyr::nest()` para convertir un _data frame_ agrupado en uno anidado
+ donde tengas columnas-lista de _data frames_.
 
-1.  Con `summarise()` y funciones de resumen que retornan múltiples resultados.
+1. Con `mutate()` y funciones vectorizadas que retornan una lista.
+
+1. Con `summarise()` y funciones de resumen que retornan múltiples resultados.
 
 Alternativamente, podrías crearlas a partir de una lista nombrada, usando `tibble::enframe()`.
 
@@ -358,7 +358,7 @@ Algunas funciones útiles toman un vector atómico y retornan una lista. Por eje
 
 ```{r}
 df <- tribble(
-  ~ x1,
+  ~x1,
   "a,b,c",
   "d,e,f,g"
 )
@@ -381,7 +381,7 @@ Otro ejemplo de este patrón es usar `map()`, `map2()`, `pmap()` de __purrr__. P
 
 ```{r}
 sim <- tribble(
-  ~ f, ~ params,
+  ~f, ~params,
   "runif", list(min = -1, max = 1),
   "rnorm", list(sd = 5),
   "rpois", list(lambda = 10)
@@ -423,7 +423,7 @@ mtautos %>%
 
 ### A partir de una lista nombrada
 
-_Data frames_ con columnas-lista proveen una solución a un problema común: ¿qué haces si quieres iterar sobre el contenido de una lista y también sobre sus elementos? En lugar de tratar de juntar todo en un único objeto, usualmente es más fácil hacer un _data frame_: una columna puede contener los elementos y otra columna la lista. Una forma fácil de crear un _data frame_ como éste desde una lista es `tibble::enframe()`.  
+_Data frames_ con columnas-lista proveen una solución a un problema común: ¿qué haces si quieres iterar sobre el contenido de una lista y también sobre sus elementos? En lugar de tratar de juntar todo en un único objeto, usualmente es más fácil hacer un _data frame_: una columna puede contener los elementos y otra columna la lista. Una forma fácil de crear un _data frame_ como éste desde una lista es `tibble::enframe()`.
 
 ```{r}
 x <- list(
@@ -449,14 +449,14 @@ df %>%
 
 ### Ejercicios
 
-1.  Lista todas las funciones en las que puedas pensar que tomen como _input_ un vector atómico y 
-    retornen una lista.
-    
-1.  Piensa en funciones de resumen útiles que, como `quantile()`, retornen
-    múltiples valores.
-    
-1.  ¿Qué es lo que falta en el siguiente _data frame_? ¿Cómo `quantile()` retorna
-    eso que falta? ¿Por qué eso no es tan útil aquí?
+1. Lista todas las funciones en las que puedas pensar que tomen como _input_ un vector atómico y
+ retornen una lista.
+
+1. Piensa en funciones de resumen útiles que, como `quantile()`, retornen
+ múltiples valores.
+
+1. ¿Qué es lo que falta en el siguiente _data frame_? ¿Cómo `quantile()` retorna
+ eso que falta? ¿Por qué eso no es tan útil aquí?
 
 ```{r}
 mtautos %>%
@@ -465,7 +465,7 @@ mtautos %>%
   unnest()
 ```
 
-1.  ¿Qué hace este código? ¿Por qué podría ser útil?
+1. ¿Qué hace este código? ¿Por qué podría ser útil?
 
 ```{r, eval = FALSE}
 mtautos %>%
@@ -477,11 +477,11 @@ mtautos %>%
 
 Para aplicar las técnicas de manipulación de datos y visualización que has aprendido en este libro, necesitarás simplificar la columna-lista de vuelta a una columna regular (un vector atómico), o conjunto de columnas. La técnica que usarás para volver a una estructura más sencilla depende de si quieres un único valor por elemento, o múltiples valores.
 
-1.  Si quieres un único valor, usa `mutate()` con `map_lgl()`, 
-    `map_int()`, `map_dbl()`, y `map_chr()` para crear un vector atómico.
-    
-1.  Si quieres varios valores, usa `unnest()` para convertir columnas-lista de vuelta a
-    columnas regulares, repitiendo las filas tantas veces como sea necesario.
+1. Si quieres un único valor, usa `mutate()` con `map_lgl()`,
+ `map_int()`, `map_dbl()`, y `map_chr()` para crear un vector atómico.
+
+1. Si quieres varios valores, usa `unnest()` para convertir columnas-lista de vuelta a
+ columnas regulares, repitiendo las filas tantas veces como sea necesario.
 
 Estas técnicas están descritas con más detalle abajo.
 
@@ -491,7 +491,7 @@ Si puedes reducir tu columna lista a un vector atómico entonces será una colum
 
 ```{r}
 df <- tribble(
-  ~ x,
+  ~x,
   letters[1:5],
   1:3,
   runif(5)
@@ -509,7 +509,7 @@ No te olvides de los atajos de `map_*()` - puedes usar `map_chr(x, "manzana")` p
 
 ```{r}
 df <- tribble(
-  ~ x,
+  ~x,
   list(a = 1, b = 2),
   list(a = 2, c = 4)
 )
@@ -533,7 +533,7 @@ Esto significa que no puedes simultáneamente desanidar dos columnas que conteng
 # Funciona, porque y y z tienen el mismo número de elementos en
 # cada fila
 df1 <- tribble(
-  ~ x, ~ y, ~ z,
+  ~x, ~y, ~z,
   1, c("a", "b"), 1:2,
   2, "c", 3
 )
@@ -542,7 +542,7 @@ df1 %>% unnest(y, z)
 
 # No funciona porque y y z tienen un número diferente de elementos
 df2 <- tribble(
-  ~ x, ~ y, ~ z,
+  ~x, ~y, ~z,
   1, "a", 1:2,
   2, c("b", "c"), 3
 )
@@ -554,24 +554,22 @@ El mismo principio aplica al desanidar columnas-lista de _data frames_. Puedes d
 
 ### Ejercicios
 
-1.  ¿Por qué podría ser útil la función `lengths()` para crear columnas de 
-    vectores atómicos a partir de columnas-lista?
-    
-1.  Lista los tipos de vectores más comúnes que se encuentran en un _data frame_. ¿Qué hace que las 
-    listas sean diferentes?
+1. ¿Por qué podría ser útil la función `lengths()` para crear columnas de
+ vectores atómicos a partir de columnas-lista?
+
+1. Lista los tipos de vectores más comúnes que se encuentran en un _data frame_. ¿Qué hace que las
+ listas sean diferentes?
 
 ## Haciendo datos ordenados con broom
 
 El paquete __broom__ provee tres herramientas generales para transformar modelos en en _data frames_ ordenados:
 
-1.  `broom::glance(modelo)` retorna una fila para cada modelo. Cada columna tiene una 
-    medida de resumen del modelo: o bien una medida de la calidad del modelo, o complejidad, o 
-    una combinación de ambos.
-   
-1.  `broom::tidy(modelo)` retorna una fila por cada coeficiente en el modelo. Cada 
-    columna brinda información acerca de la estimación o su variabilidad.
-    
-1.  `broom::augment(modelo, datos)` retorna una fila por cada fila en `datos`, agregando
-    valores adicionales como residuos, y estadísticos de influencia.
-    
-    
+1. `broom::glance(modelo)` retorna una fila para cada modelo. Cada columna tiene una
+ medida de resumen del modelo: o bien una medida de la calidad del modelo, o complejidad, o
+ una combinación de ambos.
+
+1. `broom::tidy(modelo)` retorna una fila por cada coeficiente en el modelo. Cada
+ columna brinda información acerca de la estimación o su variabilidad.
+
+1. `broom::augment(modelo, datos)` retorna una fila por cada fila en `datos`, agregando
+ valores adicionales como residuos, y estadísticos de influencia.

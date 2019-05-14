@@ -1,13 +1,8 @@
 .Rproj.user
 .Rhistory
 *_cache
-*_files
 _main.rds
 _book
-*.md
-*.html
-search_index.json
-libs
 *.rds
 _main.*
 bookdown*
@@ -17,3 +12,5 @@ figure/
 .idea/
 _book/
 _bookdown_files/
+packrat/lib*/
+docs/

@@ -4,7 +4,7 @@
 
 En [análisis de datos exploratorios] aprendistes a usar gráficos como herramientas de *exploración*. Cuando haces gráficos exploratorios, sabes incluso antes de mirar, qué variables mostrará el gráfico. Hicistes cada gráfico con un propósito, lo miraste rápidamente y luego pasaste al siguiente. En el transcurso de la mayoría de los análisis, producirás decenas o cientos de gráficos, muchos de los cuales se desecharán inmediatamente.
 
-Ahora que comprendes tus  datos, debes *comunicar* tu  conocimiento a los demás. Es probable que tu audiencia no comparta tus conocimientos previos y no esté profundamente involucrada en los datos. Para ayudar a otros a construir rápidamente un buen modelo mental de los datos, deberás invertir un esfuerzo considerable para que tus gráficos se expliquen por sí solos . En este capítulo, aprenderás algunas de las herramientas que proporciona **ggplot2** para hacerlo.
+Ahora que comprendes tus datos, debes *comunicar* tu conocimiento a los demás. Es probable que tu audiencia no comparta tus conocimientos previos y no esté profundamente involucrada en los datos. Para ayudar a otros a construir rápidamente un buen modelo mental de los datos, deberás invertir un esfuerzo considerable para que tus gráficos se expliquen por sí solos . En este capítulo, aprenderás algunas de las herramientas que proporciona **ggplot2** para hacerlo.
 
 Este capítulo se centra en las herramientas necesarias para crear buenos gráficos. Supongo que sabes lo que quieres y solo te falta saber cómo hacerlo. Por esa razón, recomiendo combinar este capítulo con un buen libro de visualización general. Me gusta especialmente [_The Truthful Art_](https://amzn.com/0321934075), de Albert Cairo. No enseña la mecánica de crear visualizaciones, sino que se enfoca en lo que necesitas pensar para crear gráficos efectivos.
 
@@ -33,10 +33,10 @@ El propósito del título de un gráfico es resumir el hallazgo principal. Evita
 
 Si necesitas agregar más texto, hay otras dos etiquetas útiles que puedes usar en **ggplot2** versión 2.2.0 y superiores (que deberían estar disponibles para cuando estés leyendo este libro):
 
-*   el `subtítulo`, del inglés *subtitle*, agrega detalles adicionales en una fuente más pequeña debajo del título.
+* el `subtítulo`, del inglés *subtitle*, agrega detalles adicionales en una fuente más pequeña debajo del título.
 
-*   la `leyenda`, del inglés *caption*, agrega texto en la parte inferior derecha del gráfico, suele usarse para describir la fuente de los datos.
-           
+* la `leyenda`, del inglés *caption*, agrega texto en la parte inferior derecha del gráfico, suele usarse para describir la fuente de los datos.
+
 
 ```{r, message = FALSE}
 ggplot(millas, aes(motor, autopista)) +
@@ -49,7 +49,7 @@ ggplot(millas, aes(motor, autopista)) +
   )
 ```
 
-También puedes  usar `labs()` para reemplazar los títulos de ejes y leyendas. Por lo general, es una buena idea reemplazar los nombres cortos de las variables con descripciones más detalladas e incluir las unidades.
+También puedes usar `labs()` para reemplazar los títulos de ejes y leyendas. Por lo general, es una buena idea reemplazar los nombres cortos de las variables con descripciones más detalladas e incluir las unidades.
 
 ```{r, message = FALSE}
 ggplot(millas, aes(motor, autopista)) +
@@ -61,7 +61,7 @@ ggplot(millas, aes(motor, autopista)) +
     colour = "Tipo de automóvil"
   )
 ```
-Es posible usar ecuaciones matemáticas en lugar de cadenas de texto. Simplemente cambia `""` por `quote()` y lee  acerca de las opciones disponibles en `?plotmath`:
+Es posible usar ecuaciones matemáticas en lugar de cadenas de texto. Simplemente cambia `""` por `quote()` y lee acerca de las opciones disponibles en `?plotmath`:
 
 ```{r, fig.asp = 1, out.width = "50%", fig.width = 3}
 df <- tibble(
@@ -79,11 +79,11 @@ ggplot(df, aes(x, y)) +
 
 ### Ejercicios
 
-1.  Crea un gráfico  partiendo de los datos de economía de combustible con etiquetas para `title` , `subtitle`, `caption`, `x`, `y` y `color` personalizadas.
+1. Crea un gráfico partiendo de los datos de economía de combustible con etiquetas para `title` , `subtitle`, `caption`, `x`, `y` y `color` personalizadas.
 
-2.  La función `geom_smooth()` es un poco engañosa porque `autopista` está sesgada positivamente para motores grandes, debido a la inclusión de autos deportivos livianos con motores grandes. Usa tus herramientas de modelado para ajustar y mostrar un modelo mejor.
+2. La función `geom_smooth()` es un poco engañosa porque `autopista` está sesgada positivamente para motores grandes, debido a la inclusión de autos deportivos livianos con motores grandes. Usa tus herramientas de modelado para ajustar y mostrar un modelo mejor.
 
-3.  Elige un gráfico exploratorio que hayas creado en el último mes y agrégale títulos informativos para volverlo más fácil de comprender para otros.
+3. Elige un gráfico exploratorio que hayas creado en el último mes y agrégale títulos informativos para volverlo más fácil de comprender para otros.
 
 ## Anotaciones
 
@@ -199,28 +199,28 @@ ggplot(df, aes(x, y)) +
   labs(x = NULL, y = NULL)
 ```
 
-Recuerda que además de `geom_text()`, en ggplot2 tienes  muchos otros geoms disponibles para ayudar a agregar notas a tu gráfico . Algunas ideas:
+Recuerda que además de `geom_text()`, en ggplot2 tienes muchos otros geoms disponibles para ayudar a agregar notas a tu gráfico . Algunas ideas:
 
-*   Emplea `geom_hline()` y `geom_vline()` para agregar líneas de referencia. A menudo las hago gruesas (`size = 2`) y blancas (` color = white`), y las dibujo debajo de la primera capa de datos. Eso las hace fáciles de ver, sin distraer la atención de los datos.
+* Emplea `geom_hline()` y `geom_vline()` para agregar líneas de referencia. A menudo las hago gruesas (`size = 2`) y blancas (` color = white`), y las dibujo debajo de la primera capa de datos. Eso las hace fáciles de ver, sin distraer la atención de los datos.
 
-*   Emplea `geom_rect()` para dibujar un rectángulo alrededor de los puntos de interés. Los límites del rectángulo están definidos por las estéticas  `xmin`,` xmax`, `ymin`,` ymax`.
+* Emplea `geom_rect()` para dibujar un rectángulo alrededor de los puntos de interés. Los límites del rectángulo están definidos por las estéticas `xmin`,` xmax`, `ymin`,` ymax`.
 
-*   Emplea `geom_segment()` con el argumento `arrow` para destacar un punto en particular con una flecha. Usa la estética `x` e ` y` para definir la ubicación inicial, y `xend` y ` yend` para definir la ubicación final.
+* Emplea `geom_segment()` con el argumento `arrow` para destacar un punto en particular con una flecha. Usa la estética `x` e ` y` para definir la ubicación inicial, y `xend` y ` yend` para definir la ubicación final.
 
 ¡El único límite es tu imaginación! (y tu paciencia para posicionar las anotaciones de forma estéticamente agradable)
 
 ### Ejercicios
 
-1.  Usa las infinitas posiciones que permite `geom_text()` para colocar texto en cada una de las cuatro esquinas del gráfico.
+1. Usa las infinitas posiciones que permite `geom_text()` para colocar texto en cada una de las cuatro esquinas del gráfico.
 
-2.  Lee la documentación de la función `annotate()`. ¿Cómo puedes usarla para agregar una etiqueta de texto a un gráfico sin tener que crear un tibble?
+2. Lee la documentación de la función `annotate()`. ¿Cómo puedes usarla para agregar una etiqueta de texto a un gráfico sin tener que crear un tibble?
 
-3.  ¿Cómo interactúan las etiquetas  producidas por `geom_text()` con la separación en facetas? ¿Cómo puedes agregar una etiqueta a una sola faceta? ¿Cómo puedes poner una etiqueta diferente en cada faceta? (Sugerencia: piensa  en los datos subyacentes).
+3. ¿Cómo interactúan las etiquetas producidas por `geom_text()` con la separación en facetas? ¿Cómo puedes agregar una etiqueta a una sola faceta? ¿Cómo puedes poner una etiqueta diferente en cada faceta? (Sugerencia: piensa en los datos subyacentes).
 
-4.  ¿Qué argumentos para `geom_label()` controlan la apariencia de la caja que se ve atrás?
+4. ¿Qué argumentos para `geom_label()` controlan la apariencia de la caja que se ve atrás?
 
-5.  ¿Cuáles son los cuatro argumentos de `arrow()`? ¿Cómo funcionan? Crea una serie
-     de gráficos que demuestren las opciones más importantes.
+5. ¿Cuáles son los cuatro argumentos de `arrow()`? ¿Cómo funcionan? Crea una serie
+ de gráficos que demuestren las opciones más importantes.
 
 ## Escalas
 
@@ -241,13 +241,13 @@ ggplot(millas, aes(motor, autopista)) +
   scale_colour_discrete()
 ```
 
-Ten en cuenta que los nombres de las escalas comienzan siempre igual: `scale_` seguido del nombre de la estética, luego `_` y finalmente el nombre de la escala. Las escalas predeterminadas se nombran según el tipo de variable con la que se alinean: continua, discreta, fecha y hora (datetime) o fecha. Hay muchas escalas no predeterminadas  que aprenderás  a continuación.
+Ten en cuenta que los nombres de las escalas comienzan siempre igual: `scale_` seguido del nombre de la estética, luego `_` y finalmente el nombre de la escala. Las escalas predeterminadas se nombran según el tipo de variable con la que se alinean: continua, discreta, fecha y hora (datetime) o fecha. Hay muchas escalas no predeterminadas que aprenderás a continuación.
 
 Las escalas predeterminadas se han elegido cuidadosamente para ser adecuadas para una gama amplia de valores. Sin embargo, es posible que desees sobrescribir los valores predeterminados por dos razones:
 
-*   Es posible que desees modificar algunos de los parámetros de la escala predeterminada. Esto te  permite hacer cosas como cambiar los intervalos de valores en los ejes o las etiquetas de cada valor visible. 
+* Es posible que desees modificar algunos de los parámetros de la escala predeterminada. Esto te permite hacer cosas como cambiar los intervalos de valores en los ejes o las etiquetas de cada valor visible.
 
-*   Es posible que desees reemplazar la escala por completo, y utilizar un algoritmo completamente diferente. Por lo general tu opción será mejor que la predeterminada ya que sabes más acerca de los datos.
+* Es posible que desees reemplazar la escala por completo, y utilizar un algoritmo completamente diferente. Por lo general tu opción será mejor que la predeterminada ya que sabes más acerca de los datos.
 
 ### Marcas de los ejes y leyendas
 
@@ -259,7 +259,7 @@ ggplot(millas, aes(motor, autopista)) +
   scale_y_continuous(breaks = seq(15, 40, by = 5))
 ```
 
-Puedes  usar `labels` de la misma manera (un vector de caracteres de la misma longitud que `breaks`), o puedes establecerlas como `NULL` del inglés *nulo*, para suprimir las etiquetas por completo. Esto es útil para mapas, o para publicar gráficos donde no puedes  compartir los números absolutos.
+Puedes usar `labels` de la misma manera (un vector de caracteres de la misma longitud que `breaks`), o puedes establecerlas como `NULL` del inglés *nulo*, para suprimir las etiquetas por completo. Esto es útil para mapas, o para publicar gráficos donde no puedes compartir los números absolutos.
 
 ```{r}
 ggplot(millas, aes(motor, autopista)) +
@@ -285,7 +285,7 @@ Ten en cuenta que la especificación de `breaks` y `labels` para escalas en form
 
 * `date_labels` toma en cuenta la especificación de formato, en la misma forma que `parse_datetime()`.
 
-*	`date_breaks` (no se muestra aquí), toma una cadena  como "2 días" o "1 mes".
+*	`date_breaks` (no se muestra aquí), toma una cadena como "2 días" o "1 mes".
 
 ### Diseño de leyendas
 
@@ -349,7 +349,7 @@ ggplot(millas, aes(motor, autopista)) +
   scale_colour_brewer(palette = "Set1")
 ```
 
-No olvides las técnicas más simples. Si solo hay unos pocos colores, puedes  agregar un mapeo de forma redundante. Esto también ayudará a asegurar que tu gráfico sea interpretable en blanco y negro.
+No olvides las técnicas más simples. Si solo hay unos pocos colores, puedes agregar un mapeo de forma redundante. Esto también ayudará a asegurar que tu gráfico sea interpretable en blanco y negro.
 
 ```{r}
 ggplot(millas, aes(motor, autopista)) +
@@ -398,14 +398,14 @@ Ten en cuenta que todas las escalas de color vienen en dos variedades: `scale_co
 
 ### Ejercicios
 
-1.  ¿Por qué el siguiente código no reemplaza la escala predeterminada?
+1. ¿Por qué el siguiente código no reemplaza la escala predeterminada?
 
-    ```{r fig.show = "hide"}
+ ```{r fig.show = "hide"}
 ggplot(df, aes(x, y)) +
   geom_hex() +
   scale_colour_gradient(low = "white", high = "red") +
   coord_fixed()
-    ```
+ ```
 
 2. ¿Cuál es el primer argumento para cada escala? ¿Cómo se compara con `labs()`?
 
@@ -414,15 +414,15 @@ ggplot(df, aes(x, y)) +
 I.	Combinando las dos variantes que se muestran arriba.
 II.	Mejorando la visualización del eje y.
 III.	Etiquetando cada término con el nombre del presidente.
-IV.	Agregandoetiquetas informativas al gráfico. 
+IV.	Agregandoetiquetas informativas al gráfico.
 V.	Poniendo intervalos de 4 años (¡esto es más complicado de lo que parece!).
 
-4.  Utiliza `override.aes` para que la leyenda en el siguiente gráfico sea más fácil de ver:
+4. Utiliza `override.aes` para que la leyenda en el siguiente gráfico sea más fácil de ver:
 
-    ```{r, dev = "png", out.width = "50%"}
+ ```{r, dev = "png", out.width = "50%"}
 ggplot(diamantes, aes(quilate, precio)) +
   geom_point(aes(colour = corte, alpha = 1 / 20))
-    ```
+ ```
 
 ## Haciendo Zoom
 
@@ -447,7 +447,7 @@ millas %>%
   geom_smooth()
 ```
 
-También puedes  establecer `limits` del inglés *límites* en escalas individuales. La reducción de los límites del gráfico es equivalente a seleccionar un subconjunto de los datos. En general es más útil si deseas *expandir* los límites, por ejemplo, cuando quieres hacer coincidir escalas de diferentes gráficos. A modo de ejemplo, si extraemos  dos clases de automóviles y los graficamos por separado, son difíciles de comparar ya que las tres escalas (el eje x, el eje y y la estética del color) tienen rangos diferentes.
+También puedes establecer `limits` del inglés *límites* en escalas individuales. La reducción de los límites del gráfico es equivalente a seleccionar un subconjunto de los datos. En general es más útil si deseas *expandir* los límites, por ejemplo, cuando quieres hacer coincidir escalas de diferentes gráficos. A modo de ejemplo, si extraemos dos clases de automóviles y los graficamos por separado, son difíciles de comparar ya que las tres escalas (el eje x, el eje y y la estética del color) tienen rangos diferentes.
 
 ```{r out.width = "50%", fig.align = "default", fig.width = 4}
 suv <- millas %>% filter(clase == "suv")
@@ -500,7 +500,7 @@ knitr::include_graphics("images/visualization-themes.png")
 ```
 Muchas personas se preguntan por qué el tema predeterminado tiene un fondo gris. Esta fue una elección deliberada ya que el fondo gris pone los datos por delante mientras siguen siendo visibles las líneas de la cuadrícula. Las líneas blancas de la cuadrícula son visibles (lo cual es importante porque ayudan significativamente a evaluar la posición), pero tienen poco impacto visual y son fáciles de eliminar. El fondo gris le da a al gráfico un color tipográfico similar al del texto, asegurando que los gráficos encajen con el flujo de un documento sin saltar con un fondo blanco brillante. Finalmente, el fondo gris crea un campo continuo de color que asegura que el gráfico se perciba como una sola entidad visual.
 
-También es posible controlar componentes individuales de cada tema, como el tamaño y el color de la fuente utilizada para el eje y. Desafortunadamente, este nivel de detalle está fuera del alcance de este libro, por lo que deberás leer el libro [ggplot2 book](https://amzn.com/331924275X) para obtener todos los detalles. También puedes  crear tus  propios temas, si estás  tratando de hacer coincidir un estilo corporativo o de revista en particular.
+También es posible controlar componentes individuales de cada tema, como el tamaño y el color de la fuente utilizada para el eje y. Desafortunadamente, este nivel de detalle está fuera del alcance de este libro, por lo que deberás leer el libro [ggplot2 book](https://amzn.com/331924275X) para obtener todos los detalles. También puedes crear tus propios temas, si estás tratando de hacer coincidir un estilo corporativo o de revista en particular.
 
 ## Guardando tus gráficos
 
@@ -553,7 +553,7 @@ Al mezclar código y texto, como hago en este libro, recomiendo configurar `fig.
 
 Para agregar un título al gráfico, usa `fig.cap`. En R Markdown esto cambiará la figura de "inline" a "floating".
 
-Si estás produciendo resultados en formato PDF, el tipo de gráficos predeterminado es PDF. Esta  es una buena configuración predeterminada porque los PDF son gráficos vectoriales de alta calidad. Sin embargo, pueden generar gráficos muy grandes y lentos si muestras miles de puntos. En ese caso, configura `dev = "png"` para forzar el uso de PNG. Son de calidad ligeramente inferior, pero serán mucho más compactos.
+Si estás produciendo resultados en formato PDF, el tipo de gráficos predeterminado es PDF. Esta es una buena configuración predeterminada porque los PDF son gráficos vectoriales de alta calidad. Sin embargo, pueden generar gráficos muy grandes y lentos si muestras miles de puntos. En ese caso, configura `dev = "png"` para forzar el uso de PNG. Son de calidad ligeramente inferior, pero serán mucho más compactos.
 
 Es una buena idea darles nombres a los bloques de código que producen figuras, incluso si no etiquetas rutinariamente otros bloques. Etiquetar el bloque se utiliza para generar el nombre de archivo del gráfico en el disco, por lo que darle un nombre a los bloques hace que sea mucho más fácil seleccionar gráficas y reutilizarlas en otras circunstancias (por ejemplo, si deseas colocar rápidamente un solo gráfico en un correo electrónico o un tweet).
 

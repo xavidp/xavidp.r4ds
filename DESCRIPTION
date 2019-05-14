@@ -1,17 +1,20 @@
 Package: r4ds
-Title: R for data science.
+Title: R para Ciencia de Datos.
 Version: 0.1
 Authors@R: c(
   person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
   person("Garrett", "Grolemund", , "garrett@rstudio.com", "aut")
   )
 Depends: R (>= 3.1.0)
-URL: https://github.com/hadley/r4ds
+URL: https://github.com/cienciadedatos/r4ds
 Imports:
   bookdown,
   condvis,
+  datos,
+  devtools,
   gapminder,
   ggrepel,
+  ggplot2,
   hexbin,
   htmltools,
   htmlwidgets,
@@ -24,10 +27,8 @@ Imports:
   nycflights13,
   png,
   pryr,
+  rmarkdown,
   tidyverse,
   viridis
 Remotes:
-  hadley/ggplot2,
-  slowkow/ggrepel,
-  rstudio/bookdown,
-  rstudio/rmarkdown
+  pachamaltese/datos

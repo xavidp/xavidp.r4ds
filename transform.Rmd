@@ -115,7 +115,7 @@ near(1 / 49 * 49, 1)
 Múltiples argumentos para `filter()` se combinan con "y": cada expresión debe ser verdadera para que una fila se incluya en el *output*. Para otros tipos de combinaciones, necesitarás usar operadores Booleanos: `&` es "y", `|` es "o", y `!` es "no". La figura @ref(fig:bool-ops) muestra el conjunto completo de operaciones Booleanas.
 
 ```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."}
-knitr::include_graphics("diagrams/transform-logical.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/transform-logical.svg")
 ```
 
 El siguiente código encuentra todos los vuelos que partieron en noviembre o diciembre:
