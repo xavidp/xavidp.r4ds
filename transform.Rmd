@@ -586,14 +586,14 @@ Cuando graficas la habilidad del bateador (medido por el promedio de bateo, `ba`
 # Convierte a tibble para puedas imprimirlo de una manera legible
 bateo <- as_tibble(bateadores)
 
-bateadores <- bateo %>% 
+rendimiento_bateadores <- bateo %>% 
   group_by(ID_jugador) %>% 
   summarise(
     ba = sum(golpes, na.rm = TRUE) / sum(al_bate, na.rm = TRUE),
     ab = sum(al_bate, na.rm = TRUE)
   )
 
-bateadores %>% 
+rendimiento_bateadores %>% 
   filter(ab > 100) %>% 
   ggplot(mapping = aes(x = ab, y = ba)) +
   geom_point() +
@@ -603,7 +603,7 @@ bateadores %>%
 Esto también tiene implicaciones importantes para la clasificación. Si ingenuamente ordenas `desc(ba)`, verás que las personas con los mejores promedios de bateo tienen claramente mucha suerte, pero no son necesariamente habilidosos:
 
 ```{r}
-bateadores %>% 
+rendimiento_bateadores %>% 
   arrange(desc(ba))
 ```
 
