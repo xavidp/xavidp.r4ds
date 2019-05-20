@@ -8,7 +8,7 @@ La visualización es una herramienta importante para para la generación de cono
 
 En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central de tidyverse. Ilustraremos las ideas clave con el conjunto de datos *vuelos* que aparecen originalmente en el paquete **nycflights13**, pero para este caso utilizaremos la versión traducida incluida en el paquete **datos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
 
-```{r setup, message = FALSE}
+```{r setup, message = FALSE, cache = FALSE}
 #devtools::install_github("cienciadedatos/datos")
 library(datos)
 library(tidyverse)

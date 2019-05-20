@@ -31,4 +31,4 @@ Imports:
   tidyverse,
   viridis
 Remotes:
-  pachamaltese/datos
+  cienciadedatos/datos
