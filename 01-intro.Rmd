@@ -59,7 +59,6 @@ Hay algunos temas importantes que este libro no aborda. Creemos que es important
 ### Big data
 
 Este libro se enfoca con orgullo en conjuntos de datos pequeños procesables en la memoria de tu computadora. Este es el lugar adecuado para partir, ya que no es posible que te enfrentes a datos de gran tamaño sin antes haber tenido antes experiencia con otros más pequeños. Las herramientas que aprenderás en este libro permiten manejar fácilmente datos de cientos de megabytes y, con un poco de cuidado, normalmente podrías hacerlas funcionar con 1 o 2 Gb de datos. Si habitualmente trabajas con datos más grandes (por ejemplo, 10-100 Gb), sería bueno que aprendieras sobre  [data.table](https://github.com/Rdatatable/data.table). Este libro no enseña `data.table`, ya que su interfaz concisa hace que sea difícil de aprender por las pocas pistas lingüisticas que entrega. Sin embargo, si trabajas con datos grandes, la ventaja en términos de rendimiento hace que valga la pena el esfuerzo extra que requiere aprenderlo. 
-
 Si tus datos son más grandes que eso, es importante que consideres cuidadosamente si tu problema de _big data_ no es, en realidad, un problema de datos pequeños oculto. Si bien los datos completos pueden ser grandes, muchas veces los necesarios para responder una pregunta específica son menos. Puede que encuentres un subconjunto, una submuestra o un resumen de datos que sí caben en la memoria y que de todos modos te permiten reponder la pregunta que te interesa. El desafío en este caso es encontrar los datos pequeños adecuados, lo que usualmente requiere muchas iteraciones. 
 
 Otra posibilidad es que tu problema de _big data_ sea realmente una suma de problemas de datos pequeños. Puede que cada uno de estos problema individuales quepa en la memoria; el problema es que tienes millones de ellos. Por ejemplo, puedes querer ajustar un modelo para cada persona de tu conjunto de datos. Eso sería trivial si tuvieras solo 10 o 100 personas, pero no si tienes un millón. Afortunadamente, cada problema es independiente del resto (una configuración a la que a veces se le llama de manera vergonzosa _paralela_), por lo que solo necesitas un sistema (como Hadoop o Spark) que te permita enviar diferentes sets de datos a diferentes computadoras para procesarlos. Una vez que hayas resuelto cómo responder la pregunta para un subset de datos usando las herramientas descritas en este libro, podrás aprender otras nuevas como sparklyr, rhipe y ddr para responder la pregunta para todo el _dataset_. 
@@ -255,9 +254,9 @@ Este libro no es solo el producto de Hadley y Garrett, sino el resultado de much
 
 * Jenny Bryan y Lionel Henry, por las muchas conversaciones útiles en torno
  al trabajo con listas y listas-columnas. 
-  
-* Los tres capítulos sobre flujo de trabajo fueron adaptados (con permiso) de
- <http://stat545.com/block002_hello-r-workspace-wd-project.html> de
+ 
+* Los tres capítulos sobre flujo de trabajo fueron adaptados (con permiso)
+ de <http://stat545.com/block002_hello-r-workspace-wd-project.html> de
  Jenny Bryan.
 
 * Genevera Allen por las dicusiones acerca de modelos, modelado,
@@ -296,7 +295,7 @@ cat(".\n")
 
 ## Colofón
 
-La versión online de este libro está disponible en <http://es.r4ds.hadley.nz>. El original en inglés puedes encontrarlo en <http://r4ds.had.co.nz>. Las versiones online seguirán evolucionando entre reimpresiones del libro físico. 
+La versión _online_ de este libro está disponible en <http://es.r4ds.hadley.nz>. El original en inglés puedes encontrarlo en <http://r4ds.had.co.nz>. Las versiones _online_ seguirán evolucionando entre reimpresiones del libro físico. 
 La fuente del libro en español está disponible en <https://github.com/cienciadedatos/r4ds> y la del libro en inglés en <https://github.com/hadley/r4ds>. El libro funciona con <https://bookdown.org>, que hace fácil convertir archivos de R Markdown a HTML, PDF e EPUB.
 
 Este libro fue construido con: 
