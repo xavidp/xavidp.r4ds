@@ -16,7 +16,7 @@ documentclass: book
 
 Este es el sitio web de la versión en español de __"R for Data Science"__, de Hadley Wickham y Garrett Grolemund. Este texto te enseñará cómo hacer ciencia de datos con R: aprenderás a importar datos, llevarlos a la estructura más conveniente, transformarlos, visualizarlos y modelarlos. Con él podrás poner en pŕactica las habilidades necesarias para hacer ciencia de datos. Tal como los químicos aprenden a limpiar tubos de ensayo y ordenar un laboratorio, aprenderás a limpiar datos y crear gráficos--- junto a muchas otras habilidades que permiten que la ciencia de datos tenga lugar. En este libro encontrarás las mejores prácticas para desarrollar dichas tareas usando R. También aprenderás a usar la gramática de gráficos, programación letrada e investigación reproducible para ahorrar tiempo. Además, aprenderás a manejar recursos cognitivos para facilitar el hacer descubrimientos al momento de manipular, visualizar y explorar datos.
 
-## Sobre la traducción
+## Sobre la traducción {-}
 
 <img src="hex_r4ds-es.png" width="300" height="300" align="right" alt="Hex logo" />
 
@@ -28,7 +28,7 @@ Este proyecto no solo implica la traducción del texto, sino también de los set
 
 Si quieres conocer más sobre los principios que han orientado nuestro trabajo y saber cómo participar en el proceso de revisión de las traducciones, puedes leer la documentación del proyecto [aquí](https://github.com/cienciadedatos/descripcion-y-orientaciones).
 
-## Sobre la versión original en inglés
+## Sobre la versión original en inglés {-}
 
 Puedes consultar la versión original del libro en [r4ds.had.co.nz/](http://r4ds.had.co.nz/). Existe una edición impresa, que fue publicada por O'Reilly en enero de 2017. Puedes adquirir una copia en [Amazon](http://amzn.to/2aHLAQ1).
 
