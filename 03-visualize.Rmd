@@ -484,7 +484,7 @@ En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje
 El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés de transformación estadística. La siguiente figura describe cómo funciona este proceso con `geom_bar()`.
 
 ```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("images/visualization-stat-bar.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/visualization-stat-bar.svg")
 ```
 
 Puedes aprender qué stat usa cada geom inspeccionando el valor predeterminado para el argumento stat. Por ejemplo, `?geom_bar` muestra que el valor predeterminado para `stat` es "count", lo que significa que `geom_bar()` usa `stat_count()`. `stat_count()` está documentado en la misma página que `geom_bar()`, y si te desplazas hacia abajo puedes encontrar una sección llamada "Variables calculadas" (*Computed variables*). Eso describe cómo calcula dos nuevas variables: `count` y `prop`.
@@ -735,19 +735,19 @@ Los siete parámetros en la plantilla componen la gramática de los gráficos, u
 Para ver cómo funciona esto, considera cómo podrías construir un gráfico básico desde cero: podrías comenzar con un conjunto de datos y luego transformarlo en la información que deseas mostrar (con una estadística).
 
 ```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("images/visualization-grammar-1.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/visualization-grammar-1.svg")
 ```
 
 A continuación, podrías elegir un objeto geométrico para representar cada observación en los datos transformados. Luego podrías usar las propiedades estéticas de los geoms para representar variables de los datos. Asignarías los valores de cada variable a los niveles de una estética.
 
 ```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("images/visualization-grammar-2.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/visualization-grammar-2.svg")
 ```
 
 Posteriormente, seleccionarías un sistema de coordenadas para colocar los geoms. Podrías utilizar la ubicación de los objetos (que es en sí misma una propiedad estética) para mostrar los valores de las variables x e y. Ya en este punto podrías tener un gráfico completo, pero también podrías ajustar aún más las posiciones de los geoms dentro del sistema de coordenadas (un ajuste de posición) o dividir el gráfico en subtramas (facetas). También podrías extender el gráfico agregando una o más capas adicionales, donde cada capa adicional usaría un conjunto de datos, un geom, un conjunto de asignaciones, una estadística y un ajuste de posición.
 
 ```{r, echo = FALSE, out.width = "100%"}
-knitr::include_graphics("images/visualization-grammar-3.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/visualization-grammar-3.svg")
 ```
 
 Puedes usar este método para construir *cualquier* gráfico que imagines. En otras palabras, puedes usar la plantilla de código aprendiste en este capítulo para construir cientos de miles de gráficos únicos.
