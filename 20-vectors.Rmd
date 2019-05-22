@@ -6,7 +6,7 @@ Hasta ahora este libro se ha enfocado en tibbles y sus paquetes correspondientes
 Los vectores son particularmente importantes, al igual que la mayoría de las funciones que escribirás y utilizarás con dichos vectores. Es posible desarrollar funciones que trabajen con tibbles (como ggplot2, dplyr and tidyr) pero las herramientas que necesitas para ello son peculiares e inmaduras. Por esto, estoy desarrollando un mejor enfoque, el cual puedes consultar en https://github.com/hadley/lazyeval, pero este no estará listo a tiempo para la publicación del libro. Incluso aún cuando esté completo, de todas maneras necesitarás entender el concepto de vectores, esto solo facilitará la escritura de capas finales que sean user-friendly (amigables al usuario).
 
 
-## Pre-requisitos
+### Pre-requisitos
 
 Este capítulo se enfoca en las estructuras de datos de R base, por lo que no es esencial cargar ningún paquete. Sin embargo, usaremos un conjunto de funciones del paquete purrr para evitar algunas insonsistencias en R Base.
 
@@ -106,7 +106,7 @@ Ya has aprendido un montón acerca de cómo trabajar con strings en [strings]. E
 
 
 ```{r}
-x <- "Esto es un string razonablemente largo."
+x <- "Esta es una cadena razonablemente larga."
 pryr::object_size(x)
 
 y <- rep(x, 1000)
@@ -326,8 +326,10 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una TIBBLE. La s
 ## Vectores Recursivos (listas)
 Las listas son un escalon más en complejidad partiendo de los vectores atómicos, debido a que las listas pueden contener otras listas. Lo cual las hace adecuadas para representar una estructura jerárquica o de tipo árbol. Puedes crear una lista con ´list()´:
 
-x <- list(1, 2, 3) (del inglés lista)
+```{r}
+x <- list(1, 2, 3) 
 x
+```
 Un herramienta muy útil para trabajar con listas es ´str()´ ya que se enfoca en la estructura, no en los contenidos.
 ```{r}
 str(x)
@@ -348,7 +350,7 @@ z <- list(list(1, 2), list(3, 4))
 str(z)
 ```
 
-## Visualizando listas
+### Visualizando listas
 Para explicar funciones de manipulacion de listas más complicadas, es útil tener una representacion visual de las mismas. Por ejemplo, defino estas tres listas:
 ```{r}
 x1 <- list(c(1, 2), c(3, 4))
@@ -369,7 +371,7 @@ Existen tres principios, al momento de observer el gráfico anterior:
 Subdivisión (Subsetting)
 Existen tres maneras de subdividir una lista, lo cual ilustraré con una lista denominada ´a´:
 ```{r}
-a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
+a <- list(a = 1:3, b = "una cadena", c = pi, d = list(-1, -5))
 ```
 El corchete simple ´[´ extrae una sub-lista. Por lo que, el resultado siempre será una lista.
 
@@ -397,7 +399,7 @@ lists-subsetting, echo = FALSE, out.width = "75%", fig.cap = "Subdividir una lis
 knitr::include_graphics("diagrams_w_text_as_path/es/lists-subsetting.png")
 ```
 
-## Listas de Condimentos
+### Listas de Condimentos
 La diferencia entre ambos `[` y `[[` es muy importante, pero es muy fácil confundirlos. Para ayudarte a recordar, permiteme mostrarte un pimientero inusual
 ```{r, echo = FALSE, out.width = "25%"}
 knitr::include_graphics("images/pepper.jpg")
@@ -435,8 +437,8 @@ Cualquier vector puede contener metadata arbitraria adicional mediante sus atrib
 ```{r}
 x <- 1:10
 attr(x, "saludo")
-attr(x, "saludo") <- "Hola!"
-attr(x, " despedida") <- "Adiós!"
+attr(x, "saludo") <- "¡Hola!"
+attr(x, " despedida") <- "¡Adiós!"
 attributes(x)
 ```
 
@@ -499,9 +501,9 @@ attributes(x)
 ```
 El atributo `tzone` es opcional. Este controla como se muestra la hora, y no hace referencia al tiempo en términos absolutos.
 ```{r}
-attr(x, "tzone") <- "US/Pacifico"
+attr(x, "tzone") <- "US/Pacific"
 x
-attr(x, "tzone") <- "US/ Oriental"
+attr(x, "tzone") <- "US/Eastern"
 x
 ```
 Existe otro tipo de vector date-time llamado POSIXlt. Éstos son construidos en base a listas con nombres (named lists).

@@ -1,4 +1,4 @@
-# Conceptos básicos
+# Modelos: conceptos básicos
 
 ## Introducción
 
@@ -353,12 +353,12 @@ Generar una función a partir de una fórmula es directo cuando el predictor es 
 
 ```{r}
 df <- tribble(
-  ~sex, ~response,
-  "male", 1,
-  "female", 2,
-  "male", 1
+  ~genero, ~respuesta,
+  "masculino", 1,
+  "femenino", 2,
+  "masculino", 1
 )
-model_matrix(df, response ~ sex)
+model_matrix(df, respuesta ~ genero)
 ```
 
 Quizá te preguntes por qué R no crea la columna `sexo_mujer`. El problema es que eso crearía una columna perfectamente predecible a partir de las otras columnas (es decir, `sexo_mujer = 1 - sexo_hombre`). Desafortunadamete los detalles exactos de por qué esto es un problema van más allá del alcance del libro, pero básicamente crea una familia de modelos que es muy flexible y genera infinitos modelos igualmente cercanos a los datos.

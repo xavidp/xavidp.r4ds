@@ -85,7 +85,7 @@ Los tibbles están diseñados para no inundar tu consola accidentalmente al mira
 Primero, puedes usar `print()` en el data frame y controlar el número de filas (`n`) y el ancho (`width`) mostrado. Por otro lado, `width = Inf` muestra todas las columnas:
 
 ```{r, eval = FALSE}
-vuelos %>%
+datos::vuelos %>%
   print(n = 10, width = Inf)
 ```
 
@@ -100,7 +100,7 @@ Puedes ver una lista completa de opciones en la ayuda del paquete con `package?t
 La opción final es usar el visualizador de datos de RStudio para obtener una versión interactiva del data frame completo. Esto también es útil luego de realizar una larga cadena de manipulaciones.
 
 ```{r, eval = FALSE}
-vuelos %>%
+datos::vuelos %>%
   View()
 ```
 
