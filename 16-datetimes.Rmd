@@ -59,8 +59,8 @@ Los datos de fecha/hora a menudo vienen como cadenas de caracteres. Ya has visto
 
 ```{r}
 ymd("2017-01-31")
-mdy("Enero 31, 2017")
-dmy("31-Ene-2017")
+mdy("enero 31, 2017")
+dmy("31-ene-2017")
 ```
 
 Estas funciones también reciben números sin comillas. Esta es la forma más concisa de crear un sólo objeto fecha/hora, ya que puedes necesitarlo cuando filtres datos temporales. `ymd()` (del inglés _año-mes-día_) es corto y no ambigüo:

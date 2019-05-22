@@ -34,6 +34,7 @@ Necesitas el paquete __rmarkdown__, pero no necesitas cargarlo o instalarlo expl
 chunk <- "```"
 inline <- function(x = "") paste0("`` `r ", x, "` ``")
 library(tidyverse)
+library(datos)
 ```
 
 ## R Markdown básico
@@ -207,37 +208,36 @@ Hay también una gran cantidad de opciones para controlar como las figuras estan
 Normalmente, cada *knit* de un documento empieza desde una sesión limpia. Esto es genial para reproducibilidad, porque se asegura que has capturado cada cómputo importante en el código. Sin embargo, puede ser dolorosos si tienes cómputos que toman mucho tiempo. La solución es `cache = TRUE`. Cuando está funcionando, esto guarda el output del bloque a un archivo especialmente en el disco. En corridas subsecuentes, _knitr_ revisara si el código ha cambiado y si no ha cambiado, reutilizará los resultados del cache.
 
 El sistema de cache debe ser usado con cuidado, porque por defecto está solo basado en el código, no en sus dependencias. Por ejemplo , aqui el bloque `datos_procesados` depende del bloque `datos_crudos`:
+ 
+    `r chunk`{r datos_crudos}
+    datos_crudos <- readr::read_csv("un_archivo_muy_grande.csv")
+    `r chunk`
+    
+    `r chunk`{r datos_procesados, cache = TRUE}
+    datos_procesados <- datos_crudos %>% 
+      filter(!is.na(variable_important)) %>% 
+      mutate(nueva_variable = transformacion_complicada(x, y, z))
+    `r chunk`
 
 
- `r chunk`{r datos_crudos}
- datosCrudos <- readr::read_csv("un_archivo_muy_grande.csv")
- `r chunk`
-
- `r chunk`{r datos_procesados, cache = TRUE}
- datosProcesados <- datosCrudos %>%
- filter(!is.na(variableImportada)) %>%
- mutate(nuevaVariable = transformacionComplicada(x, y, z))
- `r chunk`
 
 *Caching* el bloque `processed_data` significa que tendrás que re-ejecutar si cambia el pipeline de _dplyr_, pero no podrás re-ejecutarlo si cambia el `read_csv()`. Puedes evitar este problema con la opción de bloque `dependson`:
 
- `r chunk`{r datos_procesados, cache = TRUE, dependson = "raw_data"}
- datosProcesados <- datosCrudos %>%
- filter(!is.na(variableImportada)) %>%
- mutate(nuevaVariable = transformacionComplicada(x, y, z))
- `r chunk`
+
+    `r chunk`{r datos_procesados, cache = TRUE, dependson = "datos_crudos"}
+    datos_procesados <- datos_crudos %>% 
+      filter(!is.na(variable_important)) %>% 
+      mutate(nueva_variable = transformacion_complicada(x, y, z))
+    `r chunk`
+
 
 `dependson` debería incluir un vector de caracteres  para *cada* bloque en el que el bloque cached dependa. _Knitr_ actualizará los resultados para el vector cached cada vez que detecta que una de sus dependencias ha cambiado.
 
 Nota que los bloques de código no se actualizaran si el archivo `un_archivo_muy_grande.csv` cambia, porque _knitr_ hace *cache* solo los cambios dentro del archivo `.Rmd`. Si quieres seguir los cambios a ese archivo puedes usar la opción `cache.extra`. Esta es una expresión arbritaria de R que invalidará el *cache* cada vez que cambie. Una buena función a usar es `file.info()`: genera mucha información sobre el archivo incluyendo cuando fue su última modificación. Puedes escribir entonces:
 
- `r chunk`{r raw_data, cache.extra = file.info("a_very_large_file.csv")}
- rawdata <- readr::read_csv("a_very_large_file.csv")
- `r chunk`
-
- `r chunk`{r datos_crudos, cache.extra = file.info("un_archivo_muy_grande.csv")}
- datosCrudos <- readr::read_csv("un_archivo_muy_grande.csv")
- `r chunk`
+    `r chunk`{r datos_crudos, cache.extra = file.info("un_archivo_muy_grande.csv")}
+    datos_crudos <- readr::read_csv("un_archivo_muy_grande.csv")
+    `r chunk`
 
 A medida que tus estrategias de *caching* se vuelven progresivamente mas complicadas, es una buena idea limpiar regularmente todos tus *caches* con `knitr::clean_cache()`.
 
@@ -268,13 +268,13 @@ Esto ocultará el código por defecto, así que solo mostrará los bloques que d
 Hay otro modo de incluir código R en un documento R Markdown: directamente en el texto, con:`r inline()`. Esto puede ser muy útil si mencionas propiedades de tu datos en el texto. Por ejemplo, en el documento de ejemplo que utilice al comienzo del capitulo tenía:
 
 > Tenemos datos sobre `r inline('nrow(diamonds)')` diamantes.
-> Solo `r inline('nrow(diamonds) - nrow(smaller)')` son mayores que
-> 2.5 quilates. La distribución de lo restante se muestra abajo:
+> Solo `r inline('nrow(diamonds) - nrow(smaller)')` son de más de
+> 2.5 quilates. La distribución de los restante se muestra a continuación:
 
 Cuando hacemos *knit*, los resultados de estos computós estan insertos en el texto:
 
-> Tenemos datos de 53940 diamantes. solo 126 son mas grandes que
-> 2.5 quilates. La distribución de lo restante se muestra abajo:
+> Tenemos datos de 53940 diamantes. Solo 126 son de más de
+> 2.5 quilates. La distribución de los restante se muestra a continuación:
 
 Cuando insertas números en el texto, `format()` es tu amigo. Esto permite establecer el número de `digitos` para que no imprimas con un grado rídiculo de precision, y una `big.mark` para hacer que los números sean mas fáciles de leer. Siempre combino estos en una función de ayuda:
 

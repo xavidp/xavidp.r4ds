@@ -192,12 +192,12 @@ Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, 
  Observa cuidadosamente el siguiente ejemplo:
 
 ```{r, eval = FALSE}
-stocks <- tibble(
+acciones <- tibble(
   anio = c(2015, 2015, 2016, 2016),
   semestre = c(1, 2, 1, 2),
   retorno = c(1.88, 0.59, 0.92, 0.17)
 )
-stocks %>%
+acciones %>%
   spread(anio, retorno) %>%
   gather("anio", "retorno", `2015`:`2016`)
 ```
@@ -217,7 +217,7 @@ tabla4a %>%
 
 ```{r}
 personas <- tribble(
-  ~nombre, ~llave, ~valor,
+  ~nombre, ~clave, ~valor,
   #-----------------|--------|------
   "Phillip Woods", "edad", 45,
   "Phillip Woods", "estatura", 186,
@@ -232,7 +232,7 @@ personas <- tribble(
 ```{r}
 embarazo <- tribble(
   ~embarazo, ~hombre, ~mujer,
-  "si", NA, 10,
+  "sí", NA, 10,
   "no", 20, 12
 )
 ```
@@ -426,15 +426,15 @@ Existen múltiples valores faltantes en la representación actual, por lo que de
 
 ```{r}
 oms1 <- oms %>%
-  gather(nuevos_fpp_h014:nuevosrecaida_m65, key = "llave", value = "casos", na.rm = TRUE)
+  gather(nuevos_fpp_h014:nuevosrecaida_m65, key = "clave", value = "casos", na.rm = TRUE)
 oms1
 ```
 
-Podemos tener una noción de la estructura de los valores en la nueva columna `llave` si hacemos un conteo:
+Podemos tener una noción de la estructura de los valores en la nueva columna `clave` si hacemos un conteo:
 
 ```{r}
 oms1 %>%
-  count(llave)
+  count(clave)
 ```
 
 Puedes deducir lo siguiente por cuenta propia pensando y experimentando un poco, pero afortunadamente tenemos el diccionario de datos a mano. Este nos dice lo siguiente:
@@ -465,7 +465,7 @@ Necesitamos hacer un pequeño cambio al formato de los nombres de las columnas: 
 
 ```{r}
 oms2 <- oms1 %>%
-  mutate(llave = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida"))
+  mutate(clave = stringr::str_replace(clave, "nuevosrecaida", "nuevos_recaida"))
 oms2
 ```
 
@@ -473,7 +473,7 @@ Podemos separar los valores en cada código aplicando `separate()` dos veces. La
 
 ```{r}
 oms3 <- oms2 %>%
-  separate(llave, c("nuevos", "tipo", "sexo_edad"), sep = "_")
+  separate(clave, c("nuevos", "tipo", "sexo_edad"), sep = "_")
 oms3
 ```
 
@@ -500,9 +500,9 @@ Hemos mostrado el código parte por parte, asignando los resultados intermedios 
 
 ```{r, results = "hide"}
 oms %>%
-  gather(llave, valor, nuevos_fpp_h014:nuevosrecaida_m65, na.rm = TRUE) %>%
-  mutate(llave = stringr::str_replace(llave, "nuevosrecaida", "nuevos_recaida")) %>%
-  separate(llave, c("nuevos", "tipo", "sexo_edad")) %>%
+  gather(clave, valor, nuevos_fpp_h014:nuevosrecaida_m65, na.rm = TRUE) %>%
+  mutate(clave = stringr::str_replace(clave, "nuevosrecaida", "nuevos_recaida")) %>%
+  separate(clave, c("nuevos", "tipo", "sexo_edad")) %>%
   select(-nuevos, -iso2, -iso3) %>%
   separate(sexo_edad, c("sexo", "edad"), sep = 1)
 ```

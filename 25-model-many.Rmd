@@ -377,7 +377,7 @@ df %>%
 
 (Si usas mucho este patrón, asegúrate de chequear `tidyr::separate_rows()` (del inglés _separar filas_) que es un _wrapper_ (TODO: cuando esté el capítulo de Joshua poner explicación) alrededor de este patrón común).
 
-Otro ejemplo de este patrón es usar `map()`, `map2()`, `pmap()` de __purrr__. Por ejemplo, podríamos tomar el ejemplo final de [Invoking different functions] (TODO: chequear nombre en español) y reescribirlo usando `mutate()`:
+Otroejemplo de este patrón es usar `map()`, `map2()`, `pmap()` de __purrr__. Por ejemplo, podríamos tomar el ejemplo final de [Invoking different functions] (TODO: chequear nombre en español) y reescribirlo usando `mutate()`:
 
 ```{r}
 sim <- tribble(

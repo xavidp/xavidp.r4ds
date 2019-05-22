@@ -26,7 +26,7 @@ El punto de inicio más sencillo para convertir un gráfico exploratorio en un g
 ggplot(millas, aes(motor, autopista)) +
   geom_point(aes(color = clase)) +
   geom_smooth(se = FALSE) +
-  labs(title = "La eficiencia en el uso de combustible disminuye con el tamaño del motor")
+  labs(title = "La eficiencia del combustible generalmente disminuye con el tamaño del motor")
 ```
 
 El propósito del título de un gráfico es resumir el hallazgo principal. Evita títulos que simplemente describen el gráfico, por ejemplo "Diagrama de dispersión del desplazamiento del motor frente al ahorro de combustible".
@@ -43,7 +43,7 @@ ggplot(millas, aes(motor, autopista)) +
   geom_point(aes(color = clase)) +
   geom_smooth(se = FALSE) +
   labs(
-    title = "La eficiencia en el uso de combustible disminuye con el tamaño del motor",
+    title = "La eficiencia del combustible generalmente disminuye con el tamaño del motor",
     subtitle = "Los automóviles deportivos de dos asientos son la excepción debido a su peso liviano",
     caption = "Datos de fueleconomy.gov"
   )
@@ -451,7 +451,7 @@ También puedes establecer `limits` del inglés *límites* en escalas individual
 
 ```{r out.width = "50%", fig.align = "default", fig.width = 4}
 suv <- millas %>% filter(clase == "suv")
-compacto <- millas %>% filter(clase == "compact")
+compacto <- millas %>% filter(clase == "compacto")
 
 ggplot(suv, aes(motor, autopista, colour = traccion)) +
   geom_point()
@@ -472,7 +472,7 @@ ggplot(suv, aes(motor, autopista, colour = traccion)) +
   y_scale +
   col_scale
 
-ggplot(suv, aes(motor, autopista, colour = traccion)) +
+ggplot(compacto, aes(motor, autopista, colour = traccion)) +
   geom_point() +
   x_scale +
   y_scale +
@@ -508,7 +508,7 @@ Hay dos formas principales de obtener tus gráficos desde R: `ggsave()` y `knitr
 
 ```{r, fig.show = "none"}
 ggplot(millas, aes(motor, autopista)) + geom_point()
-ggsave("my-plot.pdf")
+ggsave("mi_grafico.pdf")
 ```
 ```{r, include = FALSE}
 file.remove("my-plot.pdf")

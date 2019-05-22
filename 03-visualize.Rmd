@@ -605,7 +605,7 @@ El ajuste de `position = identity` es más útil para geoms 2-D, como puntos, do
 
 ```{r}
 ggplot(data = diamantes) +
- geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
+ geom_bar(mapping = aes(x = corte, fill = claridad), position = "fill")
 ```
 
 * `position = "dodge"` coloca objetos superpuestos directamente uno al lado del otro. Esto hace que sea más fácil comparar valores individuales.

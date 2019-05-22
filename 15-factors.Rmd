@@ -101,7 +101,6 @@ levels(f2)
 Por el resto del capítulo, nos vamos a concentrar en `encuesta`. Ésta es la versión traducida al español de un conjunto de datos de ejemplo de [General Social Survey](http://gss.norc.org); ésta es una encuesta realizada en Estados Unidos desde hace mucho tiempo, conducida por la organización de investigación independiente llamada NORC, en la Universidad de Chicago. La encuesta tiene miles de preguntas, así que en el conjunto de datos he seleccionado aquellas que ilustran algunos de los desafíos comunes que encontrarás al trabajar con factores.
 
 ```{r}
-library(datos)
 encuesta
 ```
 
@@ -290,9 +289,9 @@ Si quieres colapsar muchos niveles, `fct_collapse()` (del inglés, _colapsar fac
 encuesta %>%
   mutate(partido = fct_collapse(partido,
     otro = c("Sin respuesta", "No sabe", "Otro partido"),
-    republicano = c("Republicano Acérrimo", "Republicado No Acérrimo"),
-    independiente = c("Independiente, pro-Rep", "Independiente", "Independiente, pro-Dem"),
-    democrata = c("Demócrata No Acérrimo", "Demócrata Acérrimo")
+    republicano = c("Republicano duro", "Republicado moderado"),
+    independiente = c("Independiente pro republicano", "Independiente", "Independiente pro demócrata"),
+    democrata = c("Demócrata moderado", "Demócrata duro")
   )) %>%
   count(partido)
 ```
