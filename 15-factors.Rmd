@@ -300,7 +300,7 @@ A veces, simplemente quieres agrupar todos los grupos pequeños para simplificar
 
 ```{r}
 encuesta %>%
-  mutate(religion = fct_lump(religion)) %>%
+  mutate(religion = fct_lump(religion, other_level = "Otra")) %>%
   count(religion)
 ```
 
@@ -310,7 +310,7 @@ En cambio, podemos usar el parámetro `n` para especificar cuántos grupos (excl
 
 ```{r}
 encuesta %>%
-  mutate(religion = fct_lump(religion, n = 10)) %>%
+  mutate(religion = fct_lump(religion, n = 10, other_level = "Otra")) %>%
   count(religion, sort = TRUE) %>%
   print(n = Inf)
 ```
