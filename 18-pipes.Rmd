@@ -77,7 +77,7 @@ pryr::object_size(diamantes, diamantes2)
 ¿Cómo funciona esto? Bien, `diamantes2` tiene 10 columnas en común con `diamantes`: no hay necesidad de duplicar los datos, así que ambos data frames tienen variables en común. Estas variables solo serán copiadas si tu modificas una de ellas. En el siguiente ejemplo, nosotros modificamos un solo valor en `diamantes$quilate`. Esto significa que la variable `quilate` no será más compartida entre dos data frames, y una copia debe ser realizada. El tamaño de cada data frame no se cambia, pero el tamaño colectivo se incrementa:
 
 ```{r}
-diamantes$quilates[1] <- NA
+diamantes$quilate[1] <- NA
 pryr::object_size(diamantes)
 pryr::object_size(diamantes2)
 pryr::object_size(diamantes, diamantes2)
