@@ -23,6 +23,7 @@ Una vez que hayas dominado los bucles _for_ proporcionados por R base, aprender�
 
 ```{r setup, message = FALSE}
 library(tidyverse)
+library(datos)
 ```
 
 ## Bucles _for_
@@ -572,17 +573,16 @@ x %>% map_dbl(2)
 ```
 
 ### R Base
-  
-If you're familiar with the apply family of functions in base R, you might have noticed some similarities with the purrr functions:
 
-*   `lapply()` is basically identical to `map()`, except that `map()` is 
-    consistent with all the other functions in purrr, and you can use the 
-    shortcuts for `.f`.
+Si estás familiarizado con la familia de funciones apply en R base, podrás haber notado algunas similitudes con las funciones de purrr:
 
-*   Base `sapply()` is a wrapper around `lapply()` that automatically
-    simplifies the output. This is useful for interactive work but is 
-    problematic in a function because you never know what sort of output
-    you'll get:
+* `lapply()` es básicamente idéntica a `map()`, excepto que `map()` es consistente
+  con todas las otras funciones de purrr y puedes usar atajos para `.f`.
+
+* `sapply()` de base es una envolvente de `lapply()` que automáticamente
+  simplifica la salida. Esto es útilpara el trabajo interactivo pero es
+  problemático en una función ya que nunca sabrás que tipo de salida
+  vas a obtener:
     
     ```{r}
     x1 <- list(
@@ -601,15 +601,14 @@ If you're familiar with the apply family of functions in base R, you might have 
     x2 %>% sapply(threshold) %>% str()
     ```
 
-*   `vapply()` is a safe alternative to `sapply()` because you supply an
-    additional argument that defines the type. The only problem with 
-    `vapply()` is that it's a lot of typing: 
-    `vapply(df, is.numeric, logical(1))` is equivalent to
-    `map_lgl(df, is.numeric)`. One advantage of `vapply()` over purrr's map
-    functions is that it can also produce matrices --- the map functions only 
-    ever produce vectors.
+* `vapply()` es una alternativa más segura a `sapply()` porque debes
+  ingresar un argumento adicional que define el tipo. El único problema con
+  `vapply()` es es que requiere mucha escritura:
+  `vapply(df, is.numeric, logical(1))` es equivalente a `map_lgl(df, is.numeric)`. 
+  Una ventaja de `vapply()` sobre las funciones map de purrr, es que también
+  puede generar matrices --- las funciones map sólo generan vectores.
 
-I focus on purrr functions here because they have more consistent names and arguments, helpful shortcuts, and in the future will provide easy parallelism and progress bars.
+Aquí nos enfocamos en las funciones de purrr ya que proveen nombres y argumentos consistentes, atajos útiles y en el futuro proveerán paralelización simple y barras de progreso.
 
 ### Exercises
 
