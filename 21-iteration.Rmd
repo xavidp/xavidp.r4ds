@@ -610,41 +610,40 @@ Si estás familiarizado con la familia de funciones apply en R base, podrás hab
 
 Aquí nos enfocamos en las funciones de purrr ya que proveen nombres y argumentos consistentes, atajos útiles y en el futuro proveerán paralelización simple y barras de progreso.
 
-### Exercises
+### Ejercicios
 
-1.  Write code that uses one of the map functions to:
+1. Escribe un código que use una de las funciones de map para:
 
-    1. Compute the mean of every column in `mtcars`.
-    1. Determine the type of each column in `nycflights13::flights`.
-    1. Compute the number of unique values in each column of `iris`.
-    1. Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.
+    1. Calcular la media de cada columna en `mautos`.
+    1. Obtener de que tipo es cada columna en `vuelos`.
+    1. Calcular la cantidad de valores únicos en cada columna de `iris`.
+    1. Generar diez normales aleatorias para cada $\mu = -10$, $0$, $10$, and $100$.
 
-1.  How can you create a single vector that for each column in a data frame
-    indicates whether or not it's a factor?
+1.  ¿Cómo puedes crear un vector tal que para cada columna en un cuadro de datos indique si
+    corresponde o no a un factor?
 
-1.  What happens when you use the map functions on vectors that aren't lists?
-    What does `map(1:5, runif)` do? Why?
-    
-1.  What does `map(-2:2, rnorm, n = 5)` do? Why?
-    What does `map_dbl(-2:2, rnorm, n = 5)` do? Why?
+1.  ¿Qué ocurre si usas las funciones map en vectores que no son listas?
+    ¿Qué hace `map(1:5, runif)`? ¿Por qué?
 
-1.  Rewrite `map(x, function(df) lm(mpg ~ wt, data = df))` to eliminate the 
-    anonymous function. 
+1.  ¿Qué hace `map(-2:2, rnorm, n = 5)`? ¿Por qué?
+    ¿Qué hace `map_dbl(-2:2, rnorm, n = 5)`? ¿Por qué?
 
-## Dealing with failure
+1.  Reescribe `map(x, function(df) lm(mpg ~ wt, data = df))` para eliminar
+    todas las funciones anónimas.
 
-When you use the map functions to repeat many operations, the chances are much higher that one of those operations will fail. When this happens, you'll get an error message, and no output. This is annoying: why does one failure prevent you from accessing all the other successes? How do you ensure that one bad apple doesn't ruin the whole barrel?
+## Manejando los errores
 
-In this section you'll learn how to deal this situation with a new function: `safely()`. `safely()` is an adverb: it takes a function (a verb) and returns a modified version. In this case, the modified function will never throw an error. Instead, it always returns a list with two elements:
+Cuando usas las funciones map para repetir muchas operaciones, la probabilidad de que una de las operaciones falle es mucho más alta. Cuando esto ocurre, obtendrás un mensaje de error y no una salida. Esto es molesto: ¿Por qué un error evita que accedas a todo lo que funcionó? ¿Cómo te aseguras de que una manzana podrida no arruine todo el barril?
 
-1. `result` is the original result. If there was an error, this will be `NULL`.
+En esta sección aprenderás a manejar estas situaciones con una nueva función: `safely()`. `safely()` es un adverbio: toma una función (un verbo) y entrega una versión modificada. En este caso, la función modificada nunca lanzará un error. En cambio, siempre devolverá una lista de dos elementos:
 
-1. `error` is an error object. If the operation was successful, this will be 
-   `NULL`.
+1. `result` es el resultado original. Si hubo un error, aparecerá como `NULL`,
 
-(You might be familiar with the `try()` function in base R. It's similar, but because it sometimes returns the original result and it sometimes returns an error object it's more difficult to work with.)
+1. `error` es un objeto de error. Si la operación fue exitosa, será `NULL`.
 
-Let's illustrate this with a simple example: `log()`:
+(Puede que estés familiarizado con la función `try()` de R base. Es similar, pero dado que a veces entrega el resultado original y a veces un objeto de error, es más díficil para trabajar.) 
+
+Veamos esto con un ejemplo simple: `log()`:
 
 ```{r}
 safe_log <- safely(log)
@@ -652,9 +651,9 @@ str(safe_log(10))
 str(safe_log("a"))
 ```
 
-When the function succeeds, the `result` element contains the result and the `error` element is `NULL`. When the function fails, the `result` element is `NULL` and the `error` element contains an error object.
+Cuando la función es exitosa, el elemento `result` contiene el resultado y el elemento `error` es `NULL`. Cuando la función falla, el elemento `result` es `NULL` y el elemento `error` contiene un objeto de error.
 
-`safely()` is designed to work with map:
+`safely()` está diseñada para funcionar con map:
 
 ```{r}
 x <- list(1, 10, "a")
@@ -662,14 +661,14 @@ y <- x %>% map(safely(log))
 str(y)
 ```
 
-This would be easier to work with if we had two lists: one of all the errors and one of all the output. That's easy to get with `purrr::transpose()`:
+Esto sería más fácil de trabajar si tuvieramos dos listas: una con todos los errores y otra con todas las salidas, Esto es fácil de obtener con `purrr::transpose()`:
 
 ```{r}
 y <- y %>% transpose()
 str(y)
 ```
 
-It's up to you how to deal with the errors, but typically you'll either look at the values of `x` where `y` is an error, or work with the values of `y` that are ok:
+Queda a tu criterio como manejar los errores, pero típicamente puedes mirar los valores de `x` donde `y` es un error, o trabajar con los valores que `y` que están ok:
 
 ```{r}
 is_ok <- y$error %>% map_lgl(is_null)
@@ -677,27 +676,27 @@ x[!is_ok]
 y$result[is_ok] %>% flatten_dbl()
 ```
 
-Purrr provides two other useful adverbs:
+Purrr provee otros dos adverbios de cantidad:
 
-*   Like `safely()`, `possibly()` always succeeds. It's simpler than `safely()`, 
-    because you give it a default value to return when there is an error. 
-    
+*   Como `safely()`, `possibly()` siempre da éxito. Es más simple que `safely()`, 
+    ya que le das un valor por defecto para devolver cuando hay un error.
+
     ```{r}
     x <- list(1, 10, "a")
     x %>% map_dbl(possibly(log, NA_real_))
     ```
     
-*   `quietly()` performs a similar role to `safely()`, but instead of capturing
-    errors, it captures printed output, messages, and warnings:
-    
+*   `quietly()` tiene un rol similar a `safely()`, pero en lugar de capturar
+    los errores, captura la salida impresa, mensajes y advertencias:
+
     ```{r}
     x <- list(1, -1)
     x %>% map(quietly(log)) %>% str()
     ```
 
-## Mapping over multiple arguments
+## Mapear sobre múltiples argumentos
 
-So far we've mapped along a single input. But often you have multiple related inputs that you need iterate along in parallel. That's the job of the `map2()` and `pmap()` functions. For example, imagine you want to simulate some random normals with different means. You know how to do that with `map()`:
+Hasta ahora hemos mapeado sobre una única entrada. Pero a menudo tienes multiples entradas relacionadas y necesitas iterar sobre ellas en paralelo. Ese es el trabajo de las funciones `map2()` and `pmap()` functions. Por ejemplo, imagina que debes simular normales aleatorias con distintas medias. Ya sabes hacerlo con `map()`:
 
 ```{r}
 mu <- list(5, 10, -3)
@@ -706,7 +705,7 @@ mu %>%
   str()
 ```
 
-What if you also want to vary the standard deviation? One way to do that would be to iterate over the indices and index into vectors of means and sds:
+¿Qué ocurre si también necesitas cambiar la desviación estándar? Una forma de hacerlo sería iterar sobre los índices e indexar en vectores de medias y desviaciones estándar:
 
 ```{r}
 sigma <- list(1, 5, 10)
@@ -715,21 +714,21 @@ seq_along(mu) %>%
   str()
 ```
 
-But that obfuscates the intent of the code. Instead we could use `map2()` which iterates over two vectors in parallel:
+Pero esto oscurece la intención del código. En su lugar podríamos usar `map2()` que itera sobre dos vectores en paralelo:
 
 ```{r}
 map2(mu, sigma, rnorm, n = 5) %>% str()
 ```
 
-`map2()` generates this series of function calls:
+`map2()` genera esta serie de llamadas a funciones:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-map2.png")
+knitr::include_graphics("diagrams_w_text_as_path/lists-map2.svg")
 ```
 
-Note that the arguments that vary for each call come _before_ the function; arguments that are the same for every call come _after_.
+Observa que los argumentos que varían para cada llamada van _antes_ de la función; argumentos que son los mismos para cada llamada van _después_.
 
-Like `map()`, `map2()` is just a wrapper around a for loop:
+Al igual que `map()`, `map2()` es una envolvente en torno a un loop for:
 
 ```{r}
 map2 <- function(x, y, f, ...) {
@@ -741,7 +740,7 @@ map2 <- function(x, y, f, ...) {
 }
 ```
 
-You could also imagine `map3()`, `map4()`, `map5()`, `map6()` etc, but that would get tedious quickly. Instead, purrr provides `pmap()` which takes a list of arguments. You might use that if you wanted to vary the mean, standard deviation, and number of samples:
+También te podrás imaginar `map3()`, `map4()`, `map5()`, `map6()` etc, pero eso se vuelve tedioso rápidamente. En cambio, purrr provee `pmap()` que toma una lista de argumentos. Puedes usar eso si quieres cambiar la media, desviación estándar y el número de muestras:
 
 ```{r}
 n <- list(1, 3, 5)
@@ -751,13 +750,13 @@ args1 %>%
   str()
 ```
 
-That looks like:
+Esto se ve así:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-pmap-unnamed.png")
+knitr::include_graphics("diagrams_w_text_as_path/lists-pmap-unnamed.svg")
 ```
 
-If you don't name the elements of list, `pmap()` will use positional matching when calling the function. That's a little fragile, and makes the code harder to read, so it's better to name the arguments:
+Si no quieres nombrar todos los elementos de la lista, `pmap()` usará una coincidencia posicional al llamar a la función. Esto es un poco frágil y hace el código más difícil de entender, por lo que es mejor nombrar los argumentos:
 
 ```{r, eval = FALSE}
 args2 <- list(mean = mu, sd = sigma, n = n)
@@ -766,13 +765,13 @@ args2 %>%
   str()
 ```
 
-That generates longer, but safer, calls:
+Esto genera llamadas más largas, pero más seguras:
 
 ```{r, echo = FALSE}
 knitr::include_graphics("diagrams/lists-pmap-named.png")
 ```
 
-Since the arguments are all the same length, it makes sense to store them in a data frame:
+Dado que los argumentos son todos del mismo largo, tiene sentido almacenarlos en un data frame:
 
 ```{r}
 params <- tribble(
@@ -785,11 +784,11 @@ params %>%
   pmap(rnorm)
 ```
 
-As soon as your code gets complicated, I think a data frame is a good approach because it ensures that each column has a name and is the same length as all the other columns.
+En cuanto el código se vuelva complicado, creemos que un data frame es una aproximación ya que se asegura de que cada columna tenga nombre y el mismo largo que las demás columnas.
 
-### Invoking different functions
+### Llamando distintas funciones
 
-There's one more step up in complexity - as well as varying the arguments to the function you might also vary the function itself:
+Existe un paso adicional en complejidad - así como cambias los argumentos de la función también puedes cambiar la función misma:
 
 ```{r}
 f <- c("runif", "rnorm", "rpois")
@@ -800,7 +799,7 @@ param <- list(
 )
 ```
 
-To handle this case, you can use `invoke_map()`:
+Para manejar esto, puedes usar `invoke_map()`:
 
 ```{r}
 invoke_map(f, param, n = 5) %>% str()
@@ -810,9 +809,9 @@ invoke_map(f, param, n = 5) %>% str()
 knitr::include_graphics("diagrams/lists-invoke.png")
 ```
 
-The first argument is a list of functions or character vector of function names. The second argument is a list of lists giving the arguments that vary for each function. The subsequent arguments are passed on to every function.
+El primer argumento es una lista de funciones o vectores de caracteres de nombres de funciones. El segundo argumento es una lista de listas que entrega los argumentos que cambian en cada función. Los argumentos subsecuentes pasan a cada función.
 
-And again, you can use `tribble()` to make creating these matching pairs a little easier:
+Nuevamente, puedes usar `tribble()` para hacer que crear tuplas coincidentes sea un poco más fácil:
 
 ```{r, eval = FALSE}
 sim <- tribble(
@@ -827,7 +826,7 @@ sim %>%
 
 ## Walk {#walk}
 
-Walk is an alternative to map that you use when you want to call a function for its side effects, rather than for its return value. You typically do this because you want to render output to the screen or save files to disk - the important thing is the action, not the return value. Here's a very simple example:
+Walk es una alternativa a map que puedes usar cuando quieres llamar a una función por sus efectos colaterales, por sobre el valor entregado. Típicamente hacemos esto cuando queremos mostrar la salida en pantalla o escribir archivos al disco - lo importante es la acción, no el valor resultante. Aquí hay un ejemplo simple:
 
 ```{r}
 x <- list(1, "a", 3)
@@ -836,7 +835,7 @@ x %>%
   walk(print)
 ```
 
-`walk()` is generally not that useful compared to `walk2()` or `pwalk()`. For example, if you had a list of plots and a vector of file names, you could use `pwalk()` to save each file to the corresponding location on disk:
+`walk()` no es generalmente útil si se compara con `walk2()` o `pwalk()`. Por ejemplo, si tienes una lista de gráficos y un vector con nombres de archivos, puedes usar `pwalk()` para guardar cada archivo en su ubicación correspondiente en el disco:
 
 ```{r, eval = FALSE}
 library(ggplot2)
@@ -848,17 +847,18 @@ paths <- stringr::str_c(names(plots), ".pdf")
 pwalk(list(paths, plots), ggsave, path = tempdir())
 ```
 
-`walk()`, `walk2()` and `pwalk()` all invisibly return `.x`, the first argument. This makes them suitable for use in the middle of pipelines. 
+`walk()`, `walk2()` y `pwalk()` todas entregan `.x` invisiblemente, el primer argumento. Esto hace que sea útil para usar con cadenas de pipes.
 
-## Other patterns of for loops
+## Otros patrones para los loops for
 
-Purrr provides a number of other functions that abstract over other types of for loops. You'll use them less frequently than the map functions, but they're useful to know about. The goal here is to briefly illustrate each function, so hopefully it will come to mind if you see a similar problem in the future. Then you can go look up the documentation for more details.
+Purr entrega algunas funciones que se abstraen de los loops for. Los usarás de manera menos frecuente que las funciones mao, pero son útiles de conocer. El objetivo aquí es ilustrar brevemente cada función, afortundamente las recordarás si ves un problema similar en el futuro. Luego puedes consultar la documentación para más detalles.
 
-### Predicate functions
 
-A number of functions work with __predicate__ functions that return either a single `TRUE` or `FALSE`.
+### Funciones predicativas
 
-`keep()` and `discard()` keep elements of the input where the predicate is `TRUE` or `FALSE` respectively:
+Algunas funciones trabajan con funciones _predicativas_  que entregan un valor `TRUE` o `FALSE`.
+
+`keep()` y `discard()` mantienen los elementos de la entrada donde el predicado es `TRUE` o `FALSE` respectivamente:
 
 ```{r}
 iris %>% 
@@ -870,8 +870,7 @@ iris %>%
   str()
 ```
 
-`some()` and `every()` determine if the predicate is true for any or for all of
-the elements.
+`some()` y `every()` determinan si el predicado es verdadero para todos o para algunos de los elementos.
 
 ```{r}
 x <- list(1:5, letters, list(10))
@@ -883,7 +882,7 @@ x %>%
   every(is_vector)
 ```
 
-`detect()` finds the first element where the predicate is true; `detect_index()` returns its position.
+`detect()` encuentra el primer elemento donde el predicado es verdadero; `detect_index()` entrega su posición.
 
 ```{r}
 x <- sample(10)
@@ -896,7 +895,7 @@ x %>%
   detect_index(~ . > 5)
 ```
 
-`head_while()` and `tail_while()` take elements from the start or end of a vector while a predicate is true:
+`head_while()` y `tail_while()` toman elementos al inicio y final de un vector cuando el predicado es verdadero:
 
 ```{r}
 x %>% 
@@ -906,9 +905,9 @@ x %>%
   tail_while(~ . > 5)
 ```
 
-### Reduce and accumulate
+### Reduce y accumulate
 
-Sometimes you have a complex list that you want to reduce to a simple list by repeatedly applying a function that reduces a pair to a singleton. This is useful if you want to apply a two-table dplyr verb to multiple tables. For example, you might have a list of data frames, and you want to reduce to a single data frame by joining the elements together:
+A veces tendrás una lista compleja que quieres reducir a una lista simple aplicando repetidamente una función que reduce un par a un singleton. Esto es útl si quieres aplicar un verbo de dos tablas a múltiples tablas. Por ejemplo, si tienes una lista de data frames, y quieres reducirla a un unico data frame uniendo los elementos:
 
 ```{r}
 dfs <- list(
@@ -920,7 +919,7 @@ dfs <- list(
 dfs %>% reduce(full_join)
 ```
 
-Or maybe you have a list of vectors, and want to find the intersection:
+O puedes tener una lista de vectores y quieres encontrar la intersección:
 
 ```{r}
 vs <- list(
@@ -932,9 +931,9 @@ vs <- list(
 vs %>% reduce(intersect)
 ```
 
-The reduce function takes a "binary" function (i.e. a function with two primary inputs), and applies it repeatedly to a list until there is only a single element left.
+La función `reduce()` toma una función "binaria" (e.g. una función con dos entradas primarias) y la aplica repetidamente a una lista hasta que resulte un elemento único.
 
-Accumulate is similar but it keeps all the interim results. You could use it to implement a cumulative sum:
+`accumulate()` es similar pero mantiene todos los resultados intermedios. Podría usarse para implementar una suma acumulativa:
 
 ```{r}
 x <- sample(10)
@@ -942,15 +941,15 @@ x
 x %>% accumulate(`+`)
 ```
 
-### Exercises
+### Ejercicios
 
-1.  Implement your own version of `every()` using a for loop. Compare it with
-    `purrr::every()`. What does purrr's version do that your version doesn't?
+1.  Implementa tu propia versión de `every()` usando un loop for. Compara con
+    `purrr::every()`. ¿Qué hace la versión de purrr que la tuya no hace?
 
-1.  Create an enhanced `col_sum()` that applies a summary function to every
-    numeric column in a data frame.
+1.  Crea una mejora de `col_sum()` que aplique una función de resumen a cada
+    columna numérica en un data frame.
 
-1.  A possible base R equivalent of `col_sum()` is:
+1.  Un posible equivalente de `col_sum()` es:
 
     ```{r}
     col_sum3 <- function(df, f) {
@@ -961,8 +960,8 @@ x %>% accumulate(`+`)
     }
     ```
     
-    But it has a number of bugs as illustrated with the following inputs:
-    
+    Pero tiene una cantidad de bugs que queda ilustrada con las siguientes entradas:
+
     ```{r, eval = FALSE}
     df <- tibble(
       x = 1:3, 
@@ -977,4 +976,4 @@ x %>% accumulate(`+`)
     col_sum3(df[0], mean)
     ```
     
-    What causes the bugs?
+    ¿Cuál es la causa de esos bugs?
