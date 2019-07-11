@@ -507,71 +507,71 @@ df %>% map_dbl(sd)
 
 Existen algunas diferencias entre `map _ * ()` y `col_summary ()`:
 
-*   All purrr functions are implemented in C. This makes them a little faster
-    at the expense of readability.
-    
-*   The second argument, `.f`, the function to apply, can be a formula, a 
-    character vector, or an integer vector. You'll learn about those handy 
-    shortcuts in the next section.
-    
-*   `map_*()` uses ... ([dot dot dot]) to pass along additional arguments 
-    to `.f` each time it's called:
+* Todas las funciones de purrr están implementadas en C. Esto las hace más
+  rápidas a expensas de la legibilidad.
+  
+* El segundo argumento, `.f`, de la función a aplicar, puede ser una fórmula,
+  un vector de caracteres, o un vector de enteros. Aprenderás acerca de estos
+  atajos en la sección siguiente.
+  
+* `map_*()` usa ... ([dot dot dot]) para pasar los argumentos adicionales a `.f`
+  cada vez que se llama:
 
     ```{r}
     map_dbl(df, mean, trim = 0.5)
     ```
 
-*   The map functions also preserve names:
+* Las funciones map también preservan los nombres:
 
     ```{r}
     z <- list(x = 1:3, y = 4:5)
     map_int(z, length)
     ```
 
-### Shortcuts
+### Atajos
 
-There are a few shortcuts that you can use with `.f` in order to save a little typing. Imagine you want to fit a linear model to each group in a dataset. The following toy example splits the up the `mtcars` dataset in to three pieces (one for each value of cylinder) and fits the same linear model to each piece:  
+Existen algunos atajos que puedes usar con `.f` para ahorrar algo de escritura. Imagina que quieres ajustar un modelo lineal a cada grupo en un conjunto de datos. El siguiente ejemplo de juguete divide el dataset `mtautos` en tres partes (una para cada valor de cilindro) y ajusta el mismo modelo lineal a cada parte:
 
 ```{r}
-models <- mtcars %>% 
-  split(.$cyl) %>% 
-  map(function(df) lm(mpg ~ wt, data = df))
+models <- mtautos %>% 
+  split(.$cilindros) %>% 
+  map(function(df) lm(millas ~ peso, data = df))
 ```
 
-The syntax for creating an anonymous function in R is quite verbose so purrr provides a convenient shortcut: a one-sided formula.
+La sintaxis para crear una función anónima en R es bastante detallada, por lo que purrr provee un atajo conveniente: una fórmula unidireccional.
 
 ```{r}
-models <- mtcars %>% 
-  split(.$cyl) %>% 
-  map(~lm(mpg ~ wt, data = .))
+modelos <- mtautos %>% 
+  split(.$cilindros) %>% 
+  map(~lm(millas ~ peso, data = .))
 ```
 
-Here I've used `.` as a pronoun: it refers to the current list element (in the same way that `i` referred to the current index in the for loop). 
+Hemos usado `.` como pronombre: se refiere al elemento actual de la lista (del mismo modo que `i` se refiere al índice actual en el loop for).
 
-When you're looking at many models, you might want to extract a summary statistic like the $R^2$. To do that we need to first run `summary()` and then extract the component called `r.squared`. We could do that using the shorthand for anonymous functions:
+Cuando examinas múltiples modelos, puedes querer extraer un estadístico resumen como lo es $R^2$. Para hacer eso primero necesitas correr `summary()` y luego extraer la componente `r.squared` (R-cuadrado). Podríamos hacerlo usando un atajo para las funciones anónimas:
 
 ```{r}
-models %>% 
+modelos %>% 
   map(summary) %>% 
   map_dbl(~.$r.squared)
 ```
 
-But extracting named components is a common operation, so purrr provides an even shorter shortcut: you can use a string.
+Pero extraer las componentes con nombres es una operación común, por lo tanto purrr provee un atajo más corto: puedes usar una string.
 
 ```{r}
-models %>% 
+modelos %>% 
   map(summary) %>% 
   map_dbl("r.squared")
 ```
 
-You can also use an integer to select elements by position: 
+También puedes usar un entero para seleccionar elementos de acuerdo a su posición:
 
 ```{r}
 x <- list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9))
 x %>% map_dbl(2)
 ```
 
-### Base R
+### R Base
   
 If you're familiar with the apply family of functions in base R, you might have noticed some similarities with the purrr functions:
 
