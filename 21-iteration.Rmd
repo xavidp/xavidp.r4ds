@@ -676,7 +676,7 @@ x[!is_ok]
 y$result[is_ok] %>% flatten_dbl()
 ```
 
-Purrr provee otros dos adverbios de cantidad:
+Purrr provee otros dos adverbios utiles:
 
 *   Como `safely()`, `possibly()` siempre da éxito. Es más simple que `safely()`, 
     ya que le das un valor por defecto para devolver cuando hay un error.
@@ -696,7 +696,7 @@ Purrr provee otros dos adverbios de cantidad:
 
 ## Mapear sobre múltiples argumentos
 
-Hasta ahora hemos mapeado sobre una única entrada. Pero a menudo tienes multiples entradas relacionadas y necesitas iterar sobre ellas en paralelo. Ese es el trabajo de las funciones `map2()` and `pmap()` functions. Por ejemplo, imagina que debes simular normales aleatorias con distintas medias. Ya sabes hacerlo con `map()`:
+Hasta ahora hemos mapeado sobre una única entrada. Pero a menudo tienes multiples entradas relacionadas y necesitas iterar sobre ellas en paralelo. Ese es el trabajo de las funciones `map2()` and `pmap()`. Por ejemplo, imagina que debes simular normales aleatorias con distintas medias. Ya sabes hacerlo con `map()`:
 
 ```{r}
 mu <- list(5, 10, -3)
@@ -851,7 +851,7 @@ pwalk(list(paths, plots), ggsave, path = tempdir())
 
 ## Otros patrones para los loops for
 
-Purr entrega algunas funciones que se abstraen de los loops for. Los usarás de manera menos frecuente que las funciones mao, pero son útiles de conocer. El objetivo aquí es ilustrar brevemente cada función, afortundamente las recordarás si ves un problema similar en el futuro. Luego puedes consultar la documentación para más detalles.
+Purr entrega algunas funciones que se abstraen de los loops for. Los usarás de manera menos frecuente que las funciones map, pero son útiles de conocer. El objetivo aquí es ilustrar brevemente cada función, afortunadamente las recordarás si ves un problema similar en el futuro. Luego puedes consultar la documentación para más detalles.
 
 
 ### Funciones predicativas
@@ -907,7 +907,7 @@ x %>%
 
 ### Reduce y accumulate
 
-A veces tendrás una lista compleja que quieres reducir a una lista simple aplicando repetidamente una función que reduce un par a un singleton. Esto es útl si quieres aplicar un verbo de dos tablas a múltiples tablas. Por ejemplo, si tienes una lista de data frames, y quieres reducirla a un unico data frame uniendo los elementos:
+A veces tendrás una lista compleja que quieres reducir a una lista simple aplicando repetidamente una función que reduce un par a un singleton. Esto es útil si quieres aplicar un verbo dplyr de dos tablas a múltiples tablas. Por ejemplo, si tienes una lista de data frames, y quieres reducirla a un unico data frame uniendo los elementos:
 
 ```{r}
 dfs <- list(
@@ -943,7 +943,7 @@ x %>% accumulate(`+`)
 
 ### Ejercicios
 
-1.  Implementa tu propia versión de `every()` usando un loop for. Compara con
+1.  Implementa tu propia versión de `every()` usando un loop for. Comparala con
     `purrr::every()`. ¿Qué hace la versión de purrr que la tuya no hace?
 
 1.  Crea una mejora de `col_sum()` que aplique una función de resumen a cada

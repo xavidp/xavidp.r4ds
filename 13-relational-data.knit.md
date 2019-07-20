@@ -1,3 +1,4 @@
+
 # Datos relacionales
 
 ## Introducción
@@ -20,7 +21,8 @@ El lugar más común para encontrar datos relacionales es en un sistema _relacio
 
 Vamos a explorar datos relacionales de `datos` usando los verbos de dos tablas de dplyr.
 
-```{r setup, message = FALSE}
+
+```r
 library(tidyverse)
 library(datos)
 ```
@@ -31,33 +33,79 @@ Usaremos el paquete datos^[NdT. El texto original se refiere al paquete nycfligh
 
 * `aerolineas` permite observar el nombre completo de la aerolínea a partir de su código abreviado:
 
- ```{r}
-aerolineas
+ 
+ ```r
+ aerolineas
+ #> # A tibble: 16 x 2
+ #>   aerolinea nombre                  
+ #>   <chr>     <chr>                   
+ #> 1 9E        Endeavor Air Inc.       
+ #> 2 AA        American Airlines Inc.  
+ #> 3 AS        Alaska Airlines Inc.    
+ #> 4 B6        JetBlue Airways         
+ #> 5 DL        Delta Air Lines Inc.    
+ #> 6 EV        ExpressJet Airlines Inc.
+ #> # … with 10 more rows
  ```
 
 * `aeropuertos` entrega información de cada aeropuerto, identificado por su código de aeropuerto:
 
- ```{r}
-aeropuertos
+ 
+ ```r
+ aeropuertos
+ #> # A tibble: 1,458 x 8
+ #>   codigo_aeropuer… nombre latitud longitud altura zona_horaria
+ #>   <chr>            <chr>    <dbl>    <dbl>  <int>        <dbl>
+ #> 1 04G              Lansd…    41.1    -80.6   1044           -5
+ #> 2 06A              Moton…    32.5    -85.7    264           -6
+ #> 3 06C              Schau…    42.0    -88.1    801           -6
+ #> 4 06N              Randa…    41.4    -74.4    523           -5
+ #> 5 09J              Jekyl…    31.1    -81.4     11           -5
+ #> 6 0A9              Eliza…    36.4    -82.2   1593           -5
+ #> # … with 1,452 more rows, and 2 more variables: horario_verano <chr>,
+ #> #   zona_horaria_iana <chr>
  ```
 
 * `aviones` entrega información de cada aeropuerto, identificado por su `codigo_cola`:
 
- ```{r}
-aviones
+ 
+ ```r
+ aviones
+ #> # A tibble: 3,322 x 9
+ #>   codigo_cola  anio tipo  fabricante modelo motores asientos velocidad
+ #>   <chr>       <int> <chr> <chr>      <chr>    <int>    <int>     <int>
+ #> 1 N10156       2004 Fixe… EMBRAER    EMB-1…       2       55        NA
+ #> 2 N102UW       1998 Fixe… AIRBUS IN… A320-…       2      182        NA
+ #> 3 N103US       1999 Fixe… AIRBUS IN… A320-…       2      182        NA
+ #> 4 N104UW       1999 Fixe… AIRBUS IN… A320-…       2      182        NA
+ #> 5 N10575       2002 Fixe… EMBRAER    EMB-1…       2       55        NA
+ #> 6 N105UW       1999 Fixe… AIRBUS IN… A320-…       2      182        NA
+ #> # … with 3,316 more rows, and 1 more variable: tipo_motor <chr>
  ```
 
 * `clima` entrega información para cada hora respecto del clima en cada aeropuerto de Nueva York:
 
- ```{r}
-clima
+ 
+ ```r
+ clima
+ #> # A tibble: 26,115 x 15
+ #>   origen  anio   mes   dia  hora temperatura punto_rocio humedad
+ #>   <chr>  <dbl> <dbl> <int> <int>       <dbl>       <dbl>   <dbl>
+ #> 1 EWR     2013     1     1     1        39.0        26.1    59.4
+ #> 2 EWR     2013     1     1     2        39.0        27.0    61.6
+ #> 3 EWR     2013     1     1     3        39.0        28.0    64.4
+ #> 4 EWR     2013     1     1     4        39.9        28.0    62.2
+ #> 5 EWR     2013     1     1     5        39.0        28.0    64.4
+ #> 6 EWR     2013     1     1     6        37.9        28.0    67.2
+ #> # … with 2.611e+04 more rows, and 7 more variables:
+ #> #   direccion_viento <dbl>, velocidad_viento <dbl>,
+ #> #   velocidad_rafaga <dbl>, precipitacion <dbl>, presion <dbl>,
+ #> #   visibilidad <dbl>, fecha_hora <dttm>
  ```
 
 Una forma de mostrar las relaciones entre las diferentes tablas es mediante un diagrama:
 
-```{r, echo = FALSE}
-knitr::include_graphics("diagrams_w_text_as_path/es/relational-nycflights.svg")
-```
+<img src="diagrams_w_text_as_path/es/relational-nycflights.svg" width="70%" style="display: block; margin: auto;" />
 
 Este diagrama es un poco sobrecogedor, ¡pero es simple comparado con algunos que verás en el exterior! La clave para entender estos diagramas es recordar que cada relación siempre involucra un par de tablas. No necesitas entender todo el diagrama, necesitas entender la cadena de relaciones entre las tablas que te interesan.
 
@@ -107,26 +155,56 @@ Una variable puede ser llave primaria _y_  llave foránea a la vez. Por ejemplo,
 
 Una vez que identificas las llaves primarias en tus tablas, es una buena práctica verificar que identifican de forma única cada observación. Una forma de hacerlo es usar `count()` con las llaves primarias y buscar las entradas con `n` mayor a uno:
 
-```{r}
+
+```r
 aviones %>%
   count(codigo_cola) %>%
   filter(n > 1)
+#> # A tibble: 0 x 2
+#> # … with 2 variables: codigo_cola <chr>, n <int>
 
 clima %>%
   count(anio, mes, dia, hora, origen) %>%
   filter(n > 1)
+#> # A tibble: 3 x 6
+#>    anio   mes   dia  hora origen     n
+#>   <dbl> <dbl> <int> <int> <chr>  <int>
+#> 1  2013    11     3     1 EWR        2
+#> 2  2013    11     3     1 JFK        2
+#> 3  2013    11     3     1 LGA        2
 ```
 
 A veces una tabla puede no tener una llave primaria explícita: cada fila es una observación, pero no existe una combinación de variables que la identifique de forma confiable. Por ejemplo, ¿Cuál es la llave primaria en la tabla `vuelos`? Podrás pensar que podría ser la fecha más el vuelo o el código de cola, pero ninguna de esas variables es única:
 
-```{r}
+
+```r
 vuelos %>%
   count(anio, mes, dia, vuelo) %>%
   filter(n > 1)
+#> # A tibble: 29,768 x 5
+#>    anio   mes   dia vuelo     n
+#>   <int> <int> <int> <int> <int>
+#> 1  2013     1     1     1     2
+#> 2  2013     1     1     3     2
+#> 3  2013     1     1     4     2
+#> 4  2013     1     1    11     3
+#> 5  2013     1     1    15     2
+#> 6  2013     1     1    21     2
+#> # … with 2.976e+04 more rows
 
 vuelos %>%
   count(anio, mes, dia, codigo_cola) %>%
   filter(n > 1)
+#> # A tibble: 64,928 x 5
+#>    anio   mes   dia codigo_cola     n
+#>   <int> <int> <int> <chr>       <int>
+#> 1  2013     1     1 N0EGMQ          2
+#> 2  2013     1     1 N11189          2
+#> 3  2013     1     1 N11536          2
+#> 4  2013     1     1 N11544          3
+#> 5  2013     1     1 N11551          2
+#> 6  2013     1     1 N12540          2
+#> # … with 6.492e+04 more rows
 ```
 
 Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo se usaría una vez al día: eso haría mucho más simples los problemas de comunicación con un vuelo en específico. ¡Desafortunadamente no es el caso! Si una tabla no tiene una llave primaria, a veces es útil incluir una con `mutate()` y `row_number()`. Eso simplifica unir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama _llave sustituta_.
@@ -159,28 +237,61 @@ La primera herramienta que miraremos para combinar pares de variables es la _uni
 
 Tal como `mutate()`, las funciones de unión incluyen variables por la derecha, por lo que si tienes muchas variables inicialmente, las nuevas variables no se imprimirán. Para estos ejemplos, facilitaremos la vista de lo que ocurre con los ejemplos creando un conjunto de datos más angosto:
 
-```{r}
+
+```r
 vuelos2 <- vuelos %>%
   select(anio:dia, hora, origen, destino, codigo_cola, aerolinea)
 vuelos2
+#> # A tibble: 336,776 x 8
+#>    anio   mes   dia  hora origen destino codigo_cola aerolinea
+#>   <int> <int> <int> <dbl> <chr>  <chr>   <chr>       <chr>    
+#> 1  2013     1     1     5 EWR    IAH     N14228      UA       
+#> 2  2013     1     1     5 LGA    IAH     N24211      UA       
+#> 3  2013     1     1     5 JFK    MIA     N619AA      AA       
+#> 4  2013     1     1     5 JFK    BQN     N804JB      B6       
+#> 5  2013     1     1     6 LGA    ATL     N668DN      DL       
+#> 6  2013     1     1     5 EWR    ORD     N39463      UA       
+#> # … with 3.368e+05 more rows
 ```
 
 (Recuerda que en RStudio puedes usar `View()` para evitar este problema.)s problem.)
 
 Imagina que quieres incluir el nombre completo de la aerolínea en `vuelos2`. Puede combinar los datos de `aerolinas` y `vuelos2` mediante `left_join()`:
 
-```{r}
+
+```r
 vuelos2 %>%
   select(-origen, -destino) %>%
   left_join(aerolineas, by = "aerolinea")
+#> # A tibble: 336,776 x 7
+#>    anio   mes   dia  hora codigo_cola aerolinea nombre                
+#>   <int> <int> <int> <dbl> <chr>       <chr>     <chr>                 
+#> 1  2013     1     1     5 N14228      UA        United Air Lines Inc. 
+#> 2  2013     1     1     5 N24211      UA        United Air Lines Inc. 
+#> 3  2013     1     1     5 N619AA      AA        American Airlines Inc.
+#> 4  2013     1     1     5 N804JB      B6        JetBlue Airways       
+#> 5  2013     1     1     6 N668DN      DL        Delta Air Lines Inc.  
+#> 6  2013     1     1     5 N39463      UA        United Air Lines Inc. 
+#> # … with 3.368e+05 more rows
 ```
 
 El resultado de unir aerolíneas y vuelos2 incluye una variable adicional: `nombre`. Esto es por qué llamamos unión de transformación a este tipo de unión. En este caso, puedes obtener el mismo resultado usando `mutate()` junto a las operaciones de filtro de R base:
 
-```{r}
+
+```r
 vuelos2 %>%
   select(-origen, -destino) %>%
   mutate(nombre = aerolineas$nombre[match(aerolinea, aerolineas$aerolinea)])
+#> # A tibble: 336,776 x 7
+#>    anio   mes   dia  hora codigo_cola aerolinea nombre                
+#>   <int> <int> <int> <dbl> <chr>       <chr>     <chr>                 
+#> 1  2013     1     1     5 N14228      UA        United Air Lines Inc. 
+#> 2  2013     1     1     5 N24211      UA        United Air Lines Inc. 
+#> 3  2013     1     1     5 N619AA      AA        American Airlines Inc.
+#> 4  2013     1     1     5 N804JB      B6        JetBlue Airways       
+#> 5  2013     1     1     6 N668DN      DL        Delta Air Lines Inc.  
+#> 6  2013     1     1     5 N39463      UA        United Air Lines Inc. 
+#> # … with 3.368e+05 more rows
 ```
 
 Sin embargo, esto último es difícil de generalizar cuando necesitas unir varias variables y dificulta la lectura para entender lo que se queire hacer.
@@ -191,10 +302,9 @@ En las siguientes secciones explicaremos, en detalle, como las uniones de transf
 
 Para ayudarte a entender las uniones, usaremos representaciones gráficas:
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-setup.svg")
-```
-```{r}
+<img src="diagrams_w_text_as_path/es/join-setup.svg" style="display: block; margin: auto;" />
+
+```r
 x <- tribble(
   ~key, ~val_x,
   1, "x1",
@@ -213,33 +323,33 @@ La columna coloreada representa la variable "llave": estas se usan para unir fil
 
 Una unión es una forma de conectar cada fila en `x` con cero, una o más filas en `y`. El siguiente diagrama muestra la coincidencia potencial como la intersección de pares de líneas.
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-setup2.svg")
-```
+<img src="diagrams_w_text_as_path/es/join-setup2.svg" style="display: block; margin: auto;" />
 
 (Si observas detenidamente, te darás cuenta de que hemos cambiado el orden de las columnas llave y valor en `x`. Esto es para enfatizar que las uniones encuentran coincidencias con base en las llaves, el valor se traslada durante el proceso.)
 
 En la unión que mostramos, las coincidencias se indican con puntos. El número de puntos es igual al numero de coincidencias y al número de filas en la salida.
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-inner.svg")
-```
+<img src="diagrams_w_text_as_path/es/join-inner.svg" style="display: block; margin: auto;" />
 
 ### Unión interior {#inner-join}
 
 La forma más simple de unión es la _unión interior_ (del inglés _inner join_). Una unión interior une pares de observaciones cualquiera dado que sus llaves son iguales:
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-inner.svg")
-```
+<img src="diagrams_w_text_as_path/es/join-inner.svg" style="display: block; margin: auto;" />
 
 (Para ser precisos, esto corresponde a una _equiunión_ interior debido a que las llaves se unen usando el operador de igualdad. Dado que muchas uniones son equiuniones, por lo general omitimos esa especificación)
 
 La salida de una unión interior es un nuevo data frame que contiene la llave, los valores de x y los valores de y. Usamos `by` (significa *por*) para indicar a dplyr cual variable es la llave:
 
-```{r}
+
+```r
 x %>%
   inner_join(y, by = "key")
+#> # A tibble: 2 x 3
+#>     key val_x val_y
+#>   <dbl> <chr> <chr>
+#> 1     1 x1    y1   
+#> 2     2 x2    y2
 ```
 
 La propiedad más importante de una unión interior es que las filas no coincidentes no se incluyen en el resultado. Esto significa que generalmente las uniones interiores no son apropiadas para su uso en el análisis de datos dado que es muy fácil perder observaciones.
@@ -256,17 +366,13 @@ Estas uniones funcionan agregando una observación "virtual" adicional a cada ta
 
 Gráficamente corresponde a lo siguiente:
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-outer.svg")
-```
+<img src="diagrams_w_text_as_path/es/join-outer.svg" style="display: block; margin: auto;" />
 
 La unión que más frecuentemente se usa es la unión izquierda: úsala cuando necesites buscar datos adicionales en otra tabla, dado que preserva las observaciones originales incluso cuando no hay coincidencias. La unión izquierda debiera ser tu unión por defeecto a menos que tengas un motivo importante para preferir otro tipo.
 
 Otra forma de ilustrar diferentes tipos de uniones es mediante un diagrama de Venn:
 
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-venn.svg")
-```
+<img src="diagrams_w_text_as_path/es/join-venn.svg" style="display: block; margin: auto;" />
 
 Sin embargo, esta no es una buena representación. Puede ayudar a recordar cuales observaciones preservan las observaciones en cual tabla pero esto tiene una limitante importante: un diagrama de Venn no puede mostrar que ocurre con las llaves que no identifican de manera única una observación.
 
@@ -277,27 +383,33 @@ Hasta ahora todos los diagramas han asumido que las llaves son únicas. Pero ese
 1. Una tabla tiene llaves duplicadas. Esto es útil cuando quieres agregar información 
   adicional dado que típicamente existe una relación uno a muchos.
 
- ```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-one-to-many.svg")
- ```
+ <img src="diagrams_w_text_as_path/es/join-one-to-many.svg" style="display: block; margin: auto;" />
   
   Nota que hemos puesto la columna llave en una posición ligeramente distinta en la salida.
   Esto refleja que la llave es una llave primaria en `y` y una llave foránea en `x`.
 
- ```{r}
-x <- tribble(
+ 
+ ```r
+ x <- tribble(
   ~key, ~val_x,
   1, "x1",
   2, "x2",
   2, "x3",
   1, "x4"
-)
-y <- tribble(
+ )
+ y <- tribble(
   ~key, ~val_y,
   1, "y1",
   2, "y2"
-)
-left_join(x, y, by = "key")
+ )
+ left_join(x, y, by = "key")
+ #> # A tibble: 4 x 3
+ #>     key val_x val_y
+ #>   <dbl> <chr> <chr>
+ #> 1     1 x1    y1   
+ #> 2     2 x2    y2   
+ #> 3     2 x3    y2   
+ #> 4     1 x4    y1
  ```
 
 1. Ambas tablas tienen llaves duplicadas. Esto es usualmente un error debido a que 
@@ -305,26 +417,34 @@ left_join(x, y, by = "key")
   Cuando unes llaves duplicadas, se obtienen todas las posibles combinaciones, lo que
   corresponde al producto cartesiano:
 
- ```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-many-to-many.svg")
- ```
+ <img src="diagrams_w_text_as_path/es/join-many-to-many.svg" style="display: block; margin: auto;" />
 
- ```{r}
-x <- tribble(
+ 
+ ```r
+ x <- tribble(
   ~key, ~val_x,
   1, "x1",
   2, "x2",
   2, "x3",
   3, "x4"
-)
-y <- tribble(
+ )
+ y <- tribble(
   ~key, ~val_y,
   1, "y1",
   2, "y2",
   2, "y3",
   3, "y4"
-)
-left_join(x, y, by = "key")
+ )
+ left_join(x, y, by = "key")
+ #> # A tibble: 6 x 3
+ #>     key val_x val_y
+ #>   <dbl> <chr> <chr>
+ #> 1     1 x1    y1   
+ #> 2     2 x2    y2   
+ #> 3     2 x2    y3   
+ #> 4     2 x3    y2   
+ #> 5     2 x3    y3   
+ #> 6     3 x4    y4
  ```
 
 ### Definiendo las columnas llave {#join-by}
@@ -335,9 +455,24 @@ Hasta ahora, los pares de tablas siempre se han unido de acuerdo a una única va
     lo que se conoce como unión _natural_. Por ejemplo, las tablas vuelos y clima 
     coinciden en sus variables comunes: `anio`, `mes`, `dia`, `hora` y `origen`.
 
- ```{r}
-vuelos2 %>%
+ 
+ ```r
+ vuelos2 %>%
   left_join(clima)
+ #> Joining, by = c("anio", "mes", "dia", "hora", "origen")
+ #> # A tibble: 336,776 x 18
+ #>    anio   mes   dia  hora origen destino codigo_cola aerolinea temperatura
+ #>   <dbl> <dbl> <int> <dbl> <chr>  <chr>   <chr>       <chr>           <dbl>
+ #> 1  2013     1     1     5 EWR    IAH     N14228      UA               39.0
+ #> 2  2013     1     1     5 LGA    IAH     N24211      UA               39.9
+ #> 3  2013     1     1     5 JFK    MIA     N619AA      AA               39.0
+ #> 4  2013     1     1     5 JFK    BQN     N804JB      B6               39.0
+ #> 5  2013     1     1     6 LGA    ATL     N668DN      DL               39.9
+ #> 6  2013     1     1     5 EWR    ORD     N39463      UA               39.0
+ #> # … with 3.368e+05 more rows, and 9 more variables: punto_rocio <dbl>,
+ #> #   humedad <dbl>, direccion_viento <dbl>, velocidad_viento <dbl>,
+ #> #   velocidad_rafaga <dbl>, precipitacion <dbl>, presion <dbl>,
+ #> #   visibilidad <dbl>, fecha_hora <dttm>
  ```
 
   * Un vector de caracteres, `by = "x"`. Esto es similar a una unión natural, 
@@ -345,247 +480,30 @@ vuelos2 %>%
     tienen la variable `anio`, pero significa cosas distintas en cada tabla 
     por lo que queremos unir por `codigo_cola`.
 
- ```{r}
-vuelos2 %>%
-  left_join(planes, by = "codigo_cola")
- ```
 
-  Nota que la variable `anio` (que aparece en ambos data frames de entrada, 
-  pero que no es igual en ambos casos) se disambigua con un sufijo en la salida.
 
-  * Un vector de caracteres con nombres: `by = c("a" = "b")`. Esto va a unir la 
-    variable `a` en la tabla `x` con la variabla `b` en la tabla `y`. Las variables de 
-    `x` se usarán en la salida.
 
-  Por ejemplo, si queremos dibujar un mapa necesitamos combinar los datos de vuelos 
-  con los datos de ubicación (`latitud` y `longitud`) de cada aeropuerto. Cada vuelo 
-  tiene un `aeropuerto` de origen y destino, por lo que necesitamos especficar cual 
-  queremos unir:
 
- ```{r}
-vuelos2 %>%
-  left_join(airports, c("origen" = "codigo_aeropuerto"))
-  
-vuelos2 %>%
-  left_join(airports, c("destino" = "codigo_aeropuerto"))
- ```
 
-### Ejercicios
 
-1. Calcula el atraso promedio por destino, luego une los datos en `aeropuertos` 
-   para que puedas mostrar la distribución espacial de los atrasos. Te presentamos 
-   una forma fácil de dibujar un mapa de los Estados Unidos:
 
- ```{r, eval = FALSE}
-aeropuertos %>%
-  semi_join(vuelos, c("codigo_aeropuerto" = "destino")) %>%
-  ggplot(aes(longitud, latitud)) +
-  borders("state") +
-  geom_point() +
-  coord_quickmap()
- ```
 
-  (No te preocupes si no entiendes que significa p que hace `semi_join()`. 
-  Lo aprenderás a continuación.)
-  
-  Quizás quieras usar `size` o `colour` para editar los puntos y mostrar 
-  el atraso promedio de cada aeropuerto.
- 
-1. Agrega la ubicación de origen _y_ destino (e.g. `latitud` y `longitud`) 
-   a `vuelos`.
 
-1. ¿Existe una relación entre la antiguedad de un avión y sus atrasos?
 
-1. ¿Qué condiciones climáticas hacen más probables los atrasos?
 
-1. ¿Qué sucedió el día 13 de junio de 2013? Muestra el patrón espacial de los atrasos, 
-   luego busca referencias cruzadas con el clima.
 
- ```{r, eval = FALSE, include = FALSE}
-peores <- filter(vuelos, !is.na(horario_salida), mes == 6, dia == 13)
-peores %>%
-  group_by(destino) %>%
-  summarise(atraso = mean(atraso_llegada), n = n()) %>%
-  filter(n > 5) %>%
-  inner_join(aeropuertos, by = c("destino" = "codigo_aeropuerto")) %>%
-  ggplot(aes(longitud, latitud)) +
-  borders("state") +
-  geom_point(aes(size = n, colour = atraso)) +
-  coord_quickmap()
- ```
 
-### Otras implementaciones
 
-`base::merge()` puede realizar los cuatro tipos de uniones de transformación:
 
-dplyr | merge
--------------------|-------------------------------------------
-`inner_join(x, y)` | `merge(x, y)`
-`left_join(x, y)` | `merge(x, y, all.x = TRUE)`
-`right_join(x, y)` | `merge(x, y, all.y = TRUE)`,
-`full_join(x, y)` | `merge(x, y, all.x = TRUE, all.y = TRUE)`
 
-La ventaja de os verbos específicos de dplyr es que muestran de manera clara la intención del código: la diferencia entre las uniones es realmente importante pero se esconde en los argumentos de `merge()`. Las uniones de dplyr son considerablemente más rápidas y no generan problemas con el orden de las columnas.
 
-SQL es una inspiración para las convenciones de dplyr, por lo que su traducción es directa:
 
-dplyr | SQL
------------------------------|-------------------------------------------
-`inner_join(x, y, by = "z")` | `SELECT * FROM x INNER JOIN y USING (z)`
-`left_join(x, y, by = "z")` | `SELECT * FROM x LEFT OUTER JOIN y USING (z)`
-`right_join(x, y, by = "z")` | `SELECT * FROM x RIGHT OUTER JOIN y USING (z)`
-`full_join(x, y, by = "z")` | `SELECT * FROM x FULL OUTER JOIN y USING (z)`
 
-Nota que "INNER" y "OUTER" son opcionales, por lo que a menudo se omiten.
 
-Unir distintas variables entre tables, por ejemplo `inner_join(x, y, by = c("a" = "b"))`, usa una sintaxis ligeramente distinta en SQL: `SELECT * FROM x INNER JOIN y ON x.a = y.b`. Como la sintaxis sugiere, SQL soporta un rango más amplio de tipos de uniones que dplyr, ya que puedes conectar tablas usando restricciones distintas a las de igualdad (a veces llamadas no-equiuniones).
 
-## Uniones de filtro {#filtering-joins}
 
-Las uniones de filtro unen observaciones de la misma forma que las uniones de transformación pero afectan las observaciones, no las variables. Existen dos tipos:
 
-* `semi_join(x, y)` __mantiene__ todas las observaciones en `x` con coincidencias en `y`.
-* `anti_join(x, y)` __descarta__ todas las observaciones en `x` con coincidencias en `y`.
 
-Las semi uniones son útiles para unir tablas resumen previamente filtradas con las filas originales. Por ejemplo, imagina que encontraste los diez destinos más populares:
 
-```{r}
-destinos_populares <- vuelos %>%
-  count(destino, sort = TRUE) %>%
-  head(10)
-destinos_populares
-```
 
-Ahora quieres encontrar cada vuelo que fue a alguno de esos destinos. Puedes construir un filtro:
 
-```{r}
-vuelos %>%
-  filter(destino %in% destinos_populares$destino)
-```
-
-Pero es difícil extender este enfoque a varias variables. Por ejemplo, imagina que encontraste los diez días con los atrasos promedio más altos ¿Cómo construirías un filtro que use `anio`, `mes` y `dia` para unir de vuelta con `vuelos`? 
-
-En lugar de una semi unión, que conecta dos tablas de manera similar a una unión de transformación, pero en lugar de agregar nuevas columnas, mantiene las filas en `x` que tienen coincidencias en `y`:
-
-```{r}
-vuelos %>%
-  semi_join(destinos_populares)
-```
-
-Gráficamente, una semi unión es de la siguiente forma:
-
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-semi.svg")
-```
-
-Sólo la existencia de coincidencias es importante, no importa cuales son las observaciones que se unen. Esto significa que las uniones de filtro nunca duplican filas como lo hacen las uniones de transformación:
-
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-semi-many.svg")
-```
-
-La operación inversa de una semi unión es una anti unión. Una anti unión mantiene las filas que _no_ tienen coincidencias:
-
-```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams_w_text_as_path/es/join-anti.svg")
-```
-
-Las anti uniones son útiles para encontrar desajustes. Por ejemplo, al conectar `aviones` y `vuelos`, podría interesarte saber que existen muchos `vuelos` que no tienen coincidencias en `aviones`:
-
-```{r}
-vuelos %>%
-  anti_join(aviones, by = "tailnum") %>%
-  count(codigo_cola, sort = TRUE)
-```
-
-### Ejercicios
-
-1. ¿Qué significa que in vuelo no tenga `codigo_cola`? ¿Qué tienen en común los códigos 
-   de cola que no tienen registros coincidentes en `aviones`? (Pista: Una variable explica 
-   ~90% de los problemas.)
-
-1. Filtra los vuelos para mostrar únicamente los aviones que han realizado al menos cien
-   viajes
-
-1. Combina `vehiculos` y `fueleconomy::common` para encontrar los registros de los 
-   modelos más comunes.
-
-1. Encuentra las 48 horas (en el transcurso del año) que tengan los peores atrasos. Haz 
-   una referencia cruzada con la tabla `clima`. ¿Puedes observar patrones?
-
-1. ¿Qué te indica `anti_join(vuelos, aeropuertos, by = c("destino" = "codigo_aeropuerto"))`?
-   ¿Qué te indica `anti_join(aeropuertos, vuelos, by = c("codigo_aeropuerto" = "destino"))`?
-
-1. Puedes esperar que exista una relación implícita entre aviones y aerolíneas, dado que cada 
-   avión es operado por una única aerolínea. Confirma o descarta esta hipótesis usando las 
-   herramientas que aprendiste más arriba.
-
-## Problemas de las uniones
-
-Los datos con los que has estado trabajando en este capítulo han sido limpiados de modo que tengas el mínimo de problemas posibles. Tus propios datos difícilmente estarán tan ordenados, por lo que hay algunas consideraciones y pasos a tener en cuanta para que las uniones sobre tus propios datos funcionen adecuadamente.
-
-1. Comienza identificando las variables que forman las llaves primarias en cada tabla.
-   Usualmente debieras hacerlo basado en tus conocimientos de los datos, no observando 
-   empíriamente las combinaciones de variables que resultan en un identificador único. 
-   Si te centras en las variables sin pensar en sus significados, puedes tener la mala 
-   suerte de encontrar una combinación única en tus datos pero dicha relación no será 
-   válida en el caso general.
-
-   Por ejemplo, la altura y la longitud identifican de manera única cada aeropuerto, ¡pero 
-   no son buenos identificadores!
-
- ```{r}
-aeropuertos %>% count(altura, longitud) %>% filter(n > 1)
- ```
-
-1. Verifica que ninguna de las variables en la llave primaria esté perdida. 
-   ¡Si una valor está perdido no puede identificar una observación!
-
-1. Verifica que las llaves foráneas coinciden con las llaves primarias en 
-   otra tabla. La mejor forma de hacerlo es mediante `anti_join()`. Es común 
-   que las llaves no coincidan debido a errores en la entrada de datos. Arreglar 
-   este problema requiere mucho trabajo.
-
-   Si tienes llaves perdidas, debes ser cuidadoso respecto del uso de unión interior 
-   versus unión exterior y considerar cuidadosamente si quieres descartar las observaciones 
-   que no tienen coincidencias.
-   
-   Ten en cuenta que verificiar el número de filas antes y después de unir no es sufiente para asegurar 
-   que la unión funcionó de forma exitosa. Si tienes una unión interior con llaves duplicadas en ambas tablas, 
-   puedes tener la mala suerte de que el número de filas descartadas sea igual al número de filas duplicadas.
-
-## Operaciones de conjuntos {#set-operations}
-
-El tipo final de verbo entre dos tablas es la operación de conjuntos. Generalmente lo usamos de manera poco freuente, pero es ocasionalmente útil cuando quieres dividir un filtro complejo en partes maś simples. Todas esas operaciones funcionan con una fila completa, comparten los valores de cada variable. Esto espera que las entradas `x` e `y` tengan las mismas variables y trata las observaciones como conjuntos: 
-
-* `intersect(x, y)`: entregas las observaciones comunes en `x` e `y`.
-* `union(x, y)`: entregas las observaciones únicas en `x` e `y`.
-* `setdiff(x, y)`: entregas las observaciones en `x` pero no en `y`.
-
-Dados los siguientes datos simples:
-
-```{r}
-df1 <- tribble(
-  ~x, ~y,
-  1, 1,
-  2, 1
-)
-df2 <- tribble(
-  ~x, ~y,
-  1, 1,
-  1, 2
-)
-```
-
-Las cuatro posibilidades son:
-
-```{r}
-intersect(df1, df2)
-
-# Nota que obtenemos 3 filas, no 4
-union(df1, df2)
-
-setdiff(df1, df2)
-
-setdiff(df2, df1)
-```
