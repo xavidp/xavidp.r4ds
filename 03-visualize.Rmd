@@ -504,12 +504,12 @@ Esto funciona porque cada geom tiene una estadística predeterminada; y cada est
 
    ```{r, warning = FALSE}
    demo <- tribble(
-   ~corte, ~freq,
-   "Regular", 1610,
-   "Bueno", 4906,
-   "Muy Bueno", 12082,
-   "Premium", 13791,
-   "Ideal", 21551
+     ~corte,     ~freq,
+     "Regular",   1610,
+     "Bueno",     4906,
+     "Muy Bueno", 12082,
+     "Premium",   13791,
+     "Ideal",     21551
    )
    
    ggplot(data = demo) +
