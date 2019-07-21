@@ -561,7 +561,6 @@ En otras palabras, ¿cuál es el problema con estos dos gráficos?
 
 
    ```{r, eval = FALSE}
-   
    ggplot(data = diamantes) +
      geom_bar(mapping = aes(x = corte, y = ..prop..))
    
@@ -658,7 +657,6 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
 * `coord_flip()` cambia los ejes x e y. Esto es útil (por ejemplo), si quieres diagramas de caja horizontales. También es útil para etiquetas largas: es difícil ajustarlas sin superposición en el eje x.
 
    ```{r fig.width = 3, out.width = "50%", fig.align = "default"}
-   
    ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
      geom_boxplot()
    
