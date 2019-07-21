@@ -75,7 +75,7 @@ Para graficar `millas`, corre este código usando `motor` en el eje x y `autopis
 
 ```{r}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista))
+  geom_point(mapping = aes(x = motor, y = autopista))
 ```
 
 El gráfico muestra una relación negativa entre el tamaño del motor (`motor`) y la eficiencia del combustible (`autopista`). En otras palabras, los vehículos con motores grandes usan más combustible. Este resultado, ¿confirma o refuta tu hipótesis acerca de la relación entre la eficiencia del combustible y el tamaño del motor?
@@ -92,7 +92,7 @@ Convirtamos ahora este código en una plantilla reutilizable para hacer gráfico
 
 ```{r eval = FALSE}
 ggplot(data = <DATOS>) +
- <GEOM_FUNCION>(mapping = aes(<MAPEOS>))
+  <GEOM_FUNCION>(mapping = aes(<MAPEOS>))
 ```
 
 El resto de este capítulo te mostrará cómo utilizar y adaptar esta plantilla para crear diferentes tipos de gráficos. Comenzaremos por el componente `<MAPEOS>`
@@ -118,8 +118,8 @@ En el siguiente gráfico, un grupo de puntos (resaltados en rojo) parece quedar 
 
 ```{r, echo = FALSE}
 ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
- geom_point() +
- geom_point(data = dplyr::filter(millas, motor > 5, autopista > 20), colour = "red", size = 2.2)
+  geom_point() +
+  geom_point(data = dplyr::filter(millas, motor > 5, autopista > 20), colour = "red", size = 2.2)
 ```
 
 Supongamos que estos automóviles son híbridos. Una forma de probar esta hipótesis es observando la variable que indica la `clase` de cada automóvil. La variable `clase` del conjunto de datos de `millas` clasifica los autos en grupos como compacto, mediano y SUV. Si los puntos periféricos corresponden a automóviles híbridos, deberían estar clasificados como compactos o, tal vez, subcompactos (ten en cuenta que estos datos se recopilaron antes de que los camiones híbridos y SUV se hicieran populares).
@@ -128,20 +128,20 @@ Puedes agregar una tercera variable, como `clase`, a un diagrama de dispersión 
 
 ```{r, echo = FALSE, asp = 1/4}
 ggplot() +
- geom_point(aes(1, 1), size = 20) +
- geom_point(aes(2, 1), size = 10) +
- geom_point(aes(3, 1), size = 20, shape = 17) +
- geom_point(aes(4, 1), size = 20, colour = "blue") +
- scale_x_continuous(NULL, limits = c(0.5, 4.5), labels = NULL) +
- scale_y_continuous(NULL, limits = c(0.9, 1.1), labels = NULL) +
- theme(aspect.ratio = 1/3)
+  geom_point(aes(1, 1), size = 20) +
+  geom_point(aes(2, 1), size = 10) +
+  geom_point(aes(3, 1), size = 20, shape = 17) +
+  geom_point(aes(4, 1), size = 20, colour = "blue") +
+  scale_x_continuous(NULL, limits = c(0.5, 4.5), labels = NULL) +
+  scale_y_continuous(NULL, limits = c(0.9, 1.1), labels = NULL) +
+  theme(aspect.ratio = 1/3)
 ```
 
 El mapeo entre las propiedades estéticas del gráfico y las variables del conjunto de datos te permite comunicar información de los mismos. Por ejemplo, puedes asignar los colores de los puntos de acuerdo con la variable `clase` para indicar la clase de cada automóvil.
 
 ```{r}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista, color = clase))
+  geom_point(mapping = aes(x = motor, y = autopista, color = clase))
 ```
 
 (Si prefieres el inglés británico, como Hadley, puedes usar `colour` en lugar de `color`).
@@ -154,7 +154,7 @@ En el ejemplo anterior, asignamos la variable `clase` a la estética del color ,
 
 ```{r}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista, size = clase))
+  geom_point(mapping = aes(x = motor, y = autopista, size = clase))
 ```
 
 También podríamos haber asignado la `clase` a la estética *alpha*, que controla la transparencia de los puntos o a la estética *shape* que controla la forma (shape) de los puntos.
@@ -162,11 +162,11 @@ También podríamos haber asignado la `clase` a la estética *alpha*, que contro
 ```{r out.width = "50%", fig.align = 'default', warning = FALSE, fig.asp = 1/2, fig.cap =""}
 # Izquierda
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista, alpha = clase))
+  geom_point(mapping = aes(x = motor, y = autopista, alpha = clase))
 
 # Derecha
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista, shape = clase))
+  geom_point(mapping = aes(x = motor, y = autopista, shape = clase))
 ```
 
 ¿Qué pasó con los SUV? **ggplot2** solo puede usar seis formas a la vez. De forma predeterminada, los grupos adicionales no se grafican cuando se emplea la estética de la forma.
@@ -193,19 +193,19 @@ Aquí, el color no transmite información sobre una variable, sino que cambia la
 ```{r shapes, echo = FALSE, out.width = "75%", fig.asp = 1/3, fig.cap="R tiene 25 formas de default que están identificadas por números. Hay algunas que parecen duplicados: por ejemplo 0, 15 y 22 son todos cuadrados. La diferencia viene de la interacción entre las estéticas `color` y `fill` (*relleno*). Las formas vacías (0--14) tienen un borde determinado por `color`; las formas sólidas (15--18) están rellenas con `color`; las formas rellenas (21--24) tienen un borde de `color` y están renellas por `fill`.", warning = FALSE}
 
 shapes <- tibble(
- shape = c(0, 1, 2, 5, 3, 4, 6:19, 22, 21, 24, 23, 20),
- x = (0:24 %/% 5) / 2,
- y = (-(0:24 %% 5)) / 4
+  shape = c(0, 1, 2, 5, 3, 4, 6:19, 22, 21, 24, 23, 20),
+  x = (0:24 %/% 5) / 2,
+  y = (-(0:24 %% 5)) / 4
 )
 ggplot(shapes, aes(x, y)) +
- geom_point(aes(shape = shape), size = 5, fill = "red") +
- geom_text(aes(label = shape), hjust = 0, nudge_x = 0.15) +
- scale_shape_identity() +
- expand_limits(x = 4.1) +
- scale_x_continuous(NULL, breaks = NULL) +
- scale_y_continuous(NULL, breaks = NULL, limits = c(-1.2, 0.2)) +
- theme_minimal() +
- theme(aspect.ratio = 1/2.75)
+  geom_point(aes(shape = shape), size = 5, fill = "red") +
+  geom_text(aes(label = shape), hjust = 0, nudge_x = 0.15) +
+  scale_shape_identity() +
+  expand_limits(x = 4.1) +
+  scale_x_continuous(NULL, breaks = NULL) +
+  scale_y_continuous(NULL, breaks = NULL, limits = c(-1.2, 0.2)) +
+  theme_minimal() +
+  theme(aspect.ratio = 1/2.75)
 ```
 
 ### Ejercicios
