@@ -499,7 +499,7 @@ ggplot(data = diamantes) +
 
 Esto funciona porque cada geom tiene una estadística predeterminada; y cada estadística tiene un geom predeterminado. Esto significa que generalmente puedes usar geoms sin preocuparte por la transformación estadística subyacente. Hay tres razones por las que podrías necesitar usar una estadística explícitamente:
 
-1.	Es posible que desees anular la estadística predeterminada. En el siguiente código, cambio la estadística de `geom_bar()` de recuento (el valor predeterminado) a identidad. Esto me permite asignar la altura de las barras a los valores brutos de una variable $y$. Desafortunadamente, cuando la gente habla de gráficos de barras casualmente, podrían estar refiriéndose a este tipo de gráfico de barras, donde la altura de la barra ya está presente en los datos, o al gráfico de barras anterior, donde la altura de la barra se determina contando filas.
+1. Es posible que desees anular la estadística predeterminada. En el siguiente código, cambio la estadística de `geom_bar()` de recuento (el valor predeterminado) a identidad. Esto me permite asignar la altura de las barras a los valores brutos de una variable $y$. Desafortunadamente, cuando la gente habla de gráficos de barras casualmente, podrían estar refiriéndose a este tipo de gráfico de barras, donde la altura de la barra ya está presente en los datos, o al gráfico de barras anterior, donde la altura de la barra se determina contando filas.
 
 
    ```{r, warning = FALSE}
@@ -517,7 +517,7 @@ Esto funciona porque cada geom tiene una estadística predeterminada; y cada est
    
    ```
 
- (No te preocupes si nunca has visto `<-` o `tribble()`. Puede que seas capaz de adivinar su significado por el contexto. ¡Aprenderás lo que hacen exactamente pronto!)
+   (No te preocupes si nunca has visto `<-` o `tribble()`. Puede que seas capaz de adivinar su significado por el contexto. ¡Aprenderás lo que hacen exactamente pronto!)
 
 2. Es posible que desees anular el mapeo predeterminado de las variables transformadas a la estética.
 Por ejemplo, es posible que desees mostrar un gráfico de barras de proporciones, en lugar de un recuento:
@@ -527,7 +527,7 @@ Por ejemplo, es posible que desees mostrar un gráfico de barras de proporciones
      geom_bar(mapping = aes(x = corte, y = ..prop.., group = 1))
    ```
 
- Para encontrar las variables calculadas por la estadística, busca la sección de ayuda titulada "Variables calculadas".
+   Para encontrar las variables calculadas por la estadística, busca la sección de ayuda titulada "Variables calculadas".
 
 3. Es posible que desees resaltar la transformación estadística en tu código.
 Por ejemplo, puedes usar `stat_summary()`, que resume los valores de y para cada valor único de x, para resaltar el resumen que se está computando:
@@ -589,31 +589,31 @@ ggplot(data = diamantes) +
 
 El apilamiento se realiza automáticamente mediante el ajuste de posición especificado por el argumento `position`. Si no deseas un gráfico de barras apiladas , puedes usar una de las otras tres opciones: `"identity"`, `"dodge"` o `"fill"`, del inglés *identidad*, *esquivar* y *llenar* respectivamente.
 
-*	`position = "identity"` colocará cada objeto exactamente donde cae en el contexto del gráfico. Esto no es muy útil al momento de graficar barras, porque las superpone. Para ver esa superposición, debemos hacer que las barras sean ligeramente transparentes al configurar alfa a un valor pequeño, o completamente transparente al establecer `fill = NA`.
+* `position = "identity"` colocará cada objeto exactamente donde cae en el contexto del gráfico. Esto no es muy útil al momento de graficar barras, porque las superpone. Para ver esa superposición, debemos hacer que las barras sean ligeramente transparentes al configurar alfa a un valor pequeño, o completamente transparente al establecer `fill = NA`.
 
-```{r out.width = "50%", fig.align = "default"}
-ggplot(data = diamantes, mapping = aes(x = corte, fill = claridad)) +
-  geom_bar(alpha = 1/5, position = "identity")
-
-ggplot(data = diamantes, mapping = aes(x = corte, colour = claridad)) +
-  geom_bar(fill = NA, position = "identity")
-```
+   ```{r out.width = "50%", fig.align = "default"}
+   ggplot(data = diamantes, mapping = aes(x = corte, fill = claridad)) +
+     geom_bar(alpha = 1/5, position = "identity")
+   
+   ggplot(data = diamantes, mapping = aes(x = corte, colour = claridad)) +
+     geom_bar(fill = NA, position = "identity")
+   ```
 
 El ajuste de `position = identity` es más útil para geoms 2-D, como puntos, donde es la opción predeterminada.
 
 * `position = "fill"` funciona como el apilamiento, pero hace que cada conjunto de barras apiladas tenga la misma altura. Esto hace que sea más fácil comparar proporciones entre grupos.
 
-```{r}
-ggplot(data = diamantes) +
-  geom_bar(mapping = aes(x = corte, fill = claridad), position = "fill")
-```
+   ```{r}
+   ggplot(data = diamantes) +
+     geom_bar(mapping = aes(x = corte, fill = claridad), position = "fill")
+   ```
 
 * `position = "dodge"` coloca objetos superpuestos directamente uno al lado del otro. Esto hace que sea más fácil comparar valores individuales.
 
-```{r}
-ggplot(data = diamantes) +
-  geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
-```
+   ```{r}
+   ggplot(data = diamantes) +
+     geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
+   ```
 
 Hay otro tipo de ajuste que no es útil para gráficos de barras, pero puede ser muy útil para diagramas de dispersión. Recuerda nuestro primer diagrama de dispersión. ¿Notaste que la trama muestra solo 126 puntos, a pesar de que hay 234 observaciones en el conjunto de datos?
 
