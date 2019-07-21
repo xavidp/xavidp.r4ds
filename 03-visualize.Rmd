@@ -184,11 +184,11 @@ ggplot(data = millas) +
 
 Aquí, el color no transmite información sobre una variable, sino que cambia la apariencia del gráfico. Para establecer una estética de forma manual, debes usar el nombre de la estética como un argumento de la función geom; es decir, va *fuera* de `aes()`. Tendrás que elegir un nivel que tenga sentido para esa estética:
 
-*	El nombre de un color como una cadena de caracteres.
+* El nombre de un color como una cadena de caracteres.
 
-*	El tamaño de un punto en mm.
+* El tamaño de un punto en mm.
 
-*	La forma de un punto como un número, como se muestra en la Figura \@ref(fig:shapes).
+* La forma de un punto como un número, como se muestra en la Figura \@ref(fig:shapes).
 
 ```{r shapes, echo = FALSE, out.width = "75%", fig.asp = 1/3, fig.cap="R tiene 25 formas de default que están identificadas por números. Hay algunas que parecen duplicados: por ejemplo 0, 15 y 22 son todos cuadrados. La diferencia viene de la interacción entre las estéticas `color` y `fill` (*relleno*). Las formas vacías (0--14) tienen un borde determinado por `color`; las formas sólidas (15--18) están rellenas con `color`; las formas rellenas (21--24) tienen un borde de `color` y están renellas por `fill`.", warning = FALSE}
 
@@ -476,11 +476,11 @@ ggplot(data = diamantes) +
 
 En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje y muestra recuento, ¡pero el recuento no es una variable en `diamantes`! ¿De dónde viene el recuento? Muchos gráficos, como los diagramas de dispersión, grafican los valores brutos de su conjunto de datos. Otros gráficos, como los gráficos de barras, calculan nuevos valores para presentar:
 
-*	los gráficos de barras, los histogramas y los polígonos de frecuencia almacenan los datos y luego grafican los conteos de contenedores, sea el número de puntos que caen en cada contenedor.
+* los gráficos de barras, los histogramas y los polígonos de frecuencia almacenan los datos y luego grafican los conteos de contenedores, sea el número de puntos que caen en cada contenedor.
 
-*	los suavizadores ajustan un modelo a los datos y luego grafican las predicciones del modelo.
+* los suavizadores ajustan un modelo a los datos y luego grafican las predicciones del modelo.
 
-*	los diagramas de caja calculan un sólido resumen de la distribución y luego muestran un cuadro con formato especial.
+* los diagramas de caja calculan un sólido resumen de la distribución y luego muestran un cuadro con formato especial.
 
 El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés de transformación estadística. La siguiente figura describe cómo funciona este proceso con `geom_bar()`.
 
