@@ -214,7 +214,7 @@ ggplot(shapes, aes(x, y)) +
 
    ```{r}
    ggplot(data = millas) +
-   geom_point(mapping = aes(x = motor, y = autopista, color = "blue"))
+     geom_point(mapping = aes(x = motor, y = autopista, color = "blue"))
    ```
 
 2. ¿Qué variables en `millas` son categóricas? ¿Qué variables son continuas? (Sugerencia: escribe `?millas` para leer la documentación de ayuda para este conjunto de datos). ¿Cómo puedes ver esta información cuando ejecutas `millas`?
@@ -252,16 +252,16 @@ Para separar en facetas un gráfico según una sola variable, usa `facet_wrap()`
 
 ```{r}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista)) +
- facet_wrap(~ clase, nrow = 2)
+  geom_point(mapping = aes(x = motor, y = autopista)) +
+  facet_wrap(~ clase, nrow = 2)
 ```
 
 Para separar en facetas un gráfico según las combinaciones de dos variables, agregua `facet_grid()` a tu código del gráfico. El primer argumento de `facet_grid()` también corresponde a una fórmula. Esta vez, la fórmula debe contener dos nombres de variables separados por un `~`.
 
 ```{r}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista)) +
- facet_grid(traccion ~ cilindros)
+  geom_point(mapping = aes(x = motor, y = autopista)) +
+  facet_grid(traccion ~ cilindros)
 ```
 
 Si prefieres no separar en facetas las filas o columnas, remplaza por un `.` el nombre de alguna de las variables, por ejemplo ` + facet_grid(. ~ cyl)`.
@@ -275,27 +275,27 @@ Si prefieres no separar en facetas las filas o columnas, remplaza por un `.` el 
 
    ```{r, eval = FALSE}
    ggplot(data = millas) +
-   geom_point(mapping = aes(x = traccion, y = cilindros))
+     geom_point(mapping = aes(x = traccion, y = cilindros))
    ```
 
 3. ¿Qué gráfica el siguiente código? ¿Qué hace `.` ?
 
    ```{r eval = FALSE}
    ggplot(data = millas) +
-   geom_point(mapping = aes(x = motor, y = autopista)) +
-   facet_grid(traccion ~ .)
+     geom_point(mapping = aes(x = motor, y = autopista)) +
+     facet_grid(traccion ~ .)
    
    ggplot(data = millas) +
-   geom_point(mapping = aes(x = motor, y = autopista)) +
-   facet_grid(. ~ cilindros)
+     geom_point(mapping = aes(x = motor, y = autopista)) +
+     facet_grid(. ~ cilindros)
    ```
 
 4. Mira de nuevo el primer gráfico en facetas presentado en esta sección:
 
    ```{r, eval = FALSE}
    ggplot(data = millas) +
-   geom_point(mapping = aes(x = motor, y = autopista)) +
-   facet_wrap(~ clase, nrow = 2)
+     geom_point(mapping = aes(x = motor, y = autopista)) +
+     facet_wrap(~ clase, nrow = 2)
    ```
 
    ¿Cuáles son las ventajas de separar en facetas en lugar de aplicar una estética de color?
@@ -314,10 +314,10 @@ Si prefieres no separar en facetas las filas o columnas, remplaza por un `.` el 
 
 ```{r echo = FALSE, out.width = "50%", fig.align="default", message = FALSE}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista))
+  geom_point(mapping = aes(x = motor, y = autopista))
 
 ggplot(data = millas) +
- geom_smooth(mapping = aes(x = motor, y = autopista))
+  geom_smooth(mapping = aes(x = motor, y = autopista))
 ```
 
 Ambos gráficos contienen las mismas variables x e y, y describen los mismos datos. Pero los gráficos no son idénticos. Cada gráfico usa un objeto visual diferente para representar los datos. En la sintaxis **ggplot2**, decimos que usan diferentes __geoms__.
@@ -329,18 +329,18 @@ Para cambiar el geom de tu gráfico, modifica la función geom que acompaña a `
 ```{r eval = FALSE}
 # izquierda
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista))
+  geom_point(mapping = aes(x = motor, y = autopista))
 
 # derecha
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista))
+  geom_point(mapping = aes(x = motor, y = autopista))
 ```
 
 Cada función geom en **ggplot2** toma un argumento de `mapping`. Sin embargo, no todas las estéticas funcionan con todos los geom. Podrías establecer la forma para un punto, pero no podrías establecer la "forma" de una línea. Por otro lado, para una línea es posible elegir el *tipo* de línea (*linetype*). `geom_smooth()` dibujará una línea diferente, con un tipo de línea diferente, para cada valor único de la variable que asignes al tipo de línea.
 
 ```{r message = FALSE}
 ggplot(data = millas) +
- geom_smooth(mapping = aes(x = motor, y = autopista, linetype = traccion))
+  geom_smooth(mapping = aes(x = motor, y = autopista, linetype = traccion))
 ```
 
 Aquí `geom_smooth()` separa los automóviles en tres líneas en función de su valor de `traccion`, que describe el tipo de transmisión de un automóvil. Una línea describe todos los puntos con un valor de 4, otra línea los de valor d, y una tercera línea describe los puntos con un valor t. Aquí, `4` significa tracción en las cuatro ruedas, `d` tracción delantera y `t` tracción trasera.
@@ -349,8 +349,8 @@ Si esto suena extraño, podemos hacerlo más claro al superponer las líneas sob
 
 ```{r echo = FALSE, message = FALSE}
 ggplot(data = millas, mapping = aes(x = motor, y = autopista, color = traccion)) +
- geom_point()+
- geom_smooth(mapping = aes(linetype = traccion))
+  geom_point()+
+  geom_smooth(mapping = aes(linetype = traccion))
 ```
 
 ¡Observa que generamos un gráfico que contiene dos geoms! Si esto te emociona, abróchate el cinturón. En la siguiente sección aprenderemos cómo colocar múltiples geoms en el mismo gráfico.
@@ -361,16 +361,16 @@ Muchos geoms, tal como `geom_smooth()`, usan un único objeto geométrico para m
 
 ```{r, fig.width = 3, fig.align = 'default', out.width = "33%", message = FALSE}
 ggplot(data = millas) +
- geom_smooth(mapping = aes(x = motor, y = autopista))
+  geom_smooth(mapping = aes(x = motor, y = autopista))
 
 ggplot(data = millas) +
- geom_smooth(mapping = aes(x = motor, y = autopista, group = traccion))
+  geom_smooth(mapping = aes(x = motor, y = autopista, group = traccion))
 
 ggplot(data = millas) +
- geom_smooth(
-   mapping = aes(x = motor, y = autopista, color = traccion),
-   show.legend = FALSE
-   )
+  geom_smooth(
+    mapping = aes(x = motor, y = autopista, color = traccion),
+    show.legend = FALSE
+    )
 ```
 
 Para mostrar múltiples geoms en el mismo gráfico, agrega varias funciones geom a `ggplot()`:
@@ -385,24 +385,24 @@ Esto introduce sin embargo cierta duplicación en nuestro código. Imagina que d
 
 ```{r, eval = FALSE}
 ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
- geom_point() +
- geom_smooth()
+  geom_point() +
+  geom_smooth()
 ```
 
 Si colocas mapeos en una función geom, ggplot2 los tratará como mapeos locales para la capa. Estas asignaciones serán usadas para extender o sobrescribir los mapeos globales *de solo esa capa*. Esto permite mostrar diferentes estéticas en diferentes capas.
 
 ```{r, message = FALSE}
 ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
- geom_point(mapping = aes(color = clase)) +
- geom_smooth()
+  geom_point(mapping = aes(color = clase)) +
+  geom_smooth()
 ```
 
 La misma idea se puede emplear para especificar distintos conjuntos de datos (`data`) para cada capa. Aquí, nuestra línea suave muestra solo un subconjunto del conjunto de datos de `millas`, los autos subcompactos. El argumento de datos locales en `geom_smooth()` anula el argumento de datos globales en `ggplot()` solo para esa capa.
 
 ```{r, message = FALSE}
 ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
- geom_point(mapping = aes(color = clase)) +
- geom_smooth(data = filter(millas, clase == "subcompacto"), se = FALSE)
+  geom_point(mapping = aes(color = clase)) +
+  geom_smooth(data = filter(millas, clase == "subcompacto"), se = FALSE)
 ```
 
 (Aprenderás cómo funciona `filter()` en el próximo capítulo: por ahora, solo recuerda que este comando selecciona los automóviles subcompactos).
@@ -417,8 +417,8 @@ Luego, ejecuta el código en R y verifica tus predicciones.
 
    ```{r, eval = FALSE}
    ggplot(data = millas, mapping = aes(x = motor, y = autopista, color = traccion)) +
-   geom_point() +
-   geom_smooth(se = FALSE)
+     geom_point() +
+     geom_smooth(se = FALSE)
  ```
 3. ¿Qué muestra `show.legend = FALSE`? ¿Qué pasa si lo quitas?
  ¿Por qué crees que lo usé antes en el capítulo?
@@ -429,40 +429,40 @@ Luego, ejecuta el código en R y verifica tus predicciones.
 
    ```{r, eval = FALSE}
    ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-   geom_point() +
-   geom_smooth()
+     geom_point() +
+     geom_smooth()
    
    ggplot() +
-   geom_point(data = millas, mapping = aes(x = motor, y = autopista)) +
-   geom_smooth(data = millas, mapping = aes(x = motor, y = autopista))
+     geom_point(data = millas, mapping = aes(x = motor, y = autopista)) +
+     geom_smooth(data = millas, mapping = aes(x = motor, y = autopista))
    ```
 
 6. Recrea el código R necesario para generar los siguientes gráficos:
 
    ```{r echo = FALSE, fig.width = 3, out.width = "50%", fig.align = "default", message = FALSE}
    ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-   geom_point() +
-   geom_smooth(se = FALSE)
+     geom_point() +
+     geom_smooth(se = FALSE)
    
    ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-   geom_smooth(aes(group = traccion), se = FALSE) +
-   geom_point()
+     geom_smooth(aes(group = traccion), se = FALSE) +
+     geom_point()
    
    ggplot(data = millas, mapping = aes(x = motor, y = autopista, color = traccion)) +
-   geom_point() +
-   geom_smooth(se = FALSE)
+     geom_point() +
+     geom_smooth(se = FALSE)
 
    ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-   geom_point(aes(color = traccion)) +
-   geom_smooth(se = FALSE)
+     geom_point(aes(color = traccion)) +
+     geom_smooth(se = FALSE)
 
    ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-   geom_point(aes(color = traccion)) +
-   geom_smooth(aes(linetype = traccion), se = FALSE)
+     geom_point(aes(color = traccion)) +
+     geom_smooth(aes(linetype = traccion), se = FALSE)
    
    ggplot(data = millas, mapping = aes(x = motor, y = autopista)) +
-   geom_point(size = 4, colour = "white") +
-   geom_point(aes(colour = traccion))
+     geom_point(size = 4, colour = "white") +
+     geom_point(aes(colour = traccion))
    ```
 
 ## Transformaciones estadísticas
@@ -471,7 +471,7 @@ A continuación, echemos un vistazo a un gráfico de barras. Los gráficos de ba
 
 ```{r}
 ggplot(data = diamantes) +
- geom_bar(mapping = aes(x = corte))
+  geom_bar(mapping = aes(x = corte))
 ```
 
 En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje y muestra recuento, ¡pero el recuento no es una variable en `diamantes`! ¿De dónde viene el recuento? Muchos gráficos, como los diagramas de dispersión, grafican los valores brutos de su conjunto de datos. Otros gráficos, como los gráficos de barras, calculan nuevos valores para presentar:
@@ -494,7 +494,7 @@ Por lo general puedes usar geoms y estadísticas de forma intercambiable. Por ej
 
 ```{r}
 ggplot(data = diamantes) +
- stat_count(mapping = aes(x = corte))
+  stat_count(mapping = aes(x = corte))
 ```
 
 Esto funciona porque cada geom tiene una estadística predeterminada; y cada estadística tiene un geom predeterminado. Esto significa que generalmente puedes usar geoms sin preocuparte por la transformación estadística subyacente. Hay tres razones por las que podrías necesitar usar una estadística explícitamente:
@@ -513,7 +513,7 @@ Esto funciona porque cada geom tiene una estadística predeterminada; y cada est
    )
    
    ggplot(data = demo) +
-   geom_bar(mapping = aes(x = corte, y = freq), stat = "identity")
+     geom_bar(mapping = aes(x = corte, y = freq), stat = "identity")
    
    ```
 
@@ -524,7 +524,7 @@ Por ejemplo, es posible que desees mostrar un gráfico de barras de proporciones
 
    ```{r}
    ggplot(data = diamantes) +
-   geom_bar(mapping = aes(x = corte, y = ..prop.., group = 1))
+     geom_bar(mapping = aes(x = corte, y = ..prop.., group = 1))
    ```
 
  Para encontrar las variables calculadas por la estadística, busca la sección de ayuda titulada "Variables calculadas".
@@ -534,12 +534,12 @@ Por ejemplo, puedes usar `stat_summary()`, que resume los valores de y para cada
 
    ```{r}
    ggplot(data = diamantes) +
-   stat_summary(
-   mapping = aes(x = corte, y = profundidad),
-   fun.ymin = min,
-   fun.ymax = max,
-   fun.y = median
-   )
+     stat_summary(
+       mapping = aes(x = corte, y = profundidad),
+       fun.ymin = min,
+       fun.ymax = max,
+       fun.y = median
+     )
    ```
 
 **ggplot2** proporciona más de 20 estadísticas para que uses. Cada estadística es una función, por lo que puedes obtener ayuda de la manera habitual, por ejemplo: `?stat_bin`. Para ver una lista completa de estadísticas disponibles para **ggplot2**, consulta la hoja de referencia.
@@ -563,10 +563,10 @@ En otras palabras, ¿cuál es el problema con estos dos gráficos?
    ```{r, eval = FALSE}
    
    ggplot(data = diamantes) +
-   geom_bar(mapping = aes(x = corte, y = ..prop..))
+     geom_bar(mapping = aes(x = corte, y = ..prop..))
    
    ggplot(data = diamantes) +
-   geom_bar(mapping = aes(x = corte, fill = color, y = ..prop..))
+     geom_bar(mapping = aes(x = corte, fill = color, y = ..prop..))
    ```
 
 ## Ajustes de posición
@@ -575,17 +575,17 @@ Hay una pieza más de magia asociada con los gráficos de barras. Puede colorear
 
 ```{r out.width = "50%", fig.align = "default"}
 ggplot(data = diamantes) +
- geom_bar(mapping = aes(x = corte, colour = corte))
+  geom_bar(mapping = aes(x = corte, colour = corte))
 
 ggplot(data = diamantes) +
- geom_bar(mapping = aes(x = corte, fill = corte))
+  geom_bar(mapping = aes(x = corte, fill = corte))
 ```
 
 Mira lo que sucede si asigna la estética de relleno a otra variable, como `claridad`: las barras se apilan automáticamente. Cada rectángulo de color representa una combinación de `corte` y `claridad`.
 
 ```{r}
 ggplot(data = diamantes) +
- geom_bar(mapping = aes(x = corte, fill = claridad))
+  geom_bar(mapping = aes(x = corte, fill = claridad))
 ```
 
 El apilamiento se realiza automáticamente mediante el ajuste de posición especificado por el argumento `position`. Si no deseas un gráfico de barras apiladas , puedes usar una de las otras tres opciones: `"identity"`, `"dodge"` o `"fill"`, del inglés *identidad*, *esquivar* y *llenar* respectivamente.
@@ -594,10 +594,10 @@ El apilamiento se realiza automáticamente mediante el ajuste de posición espec
 
 ```{r out.width = "50%", fig.align = "default"}
 ggplot(data = diamantes, mapping = aes(x = corte, fill = claridad)) +
- geom_bar(alpha = 1/5, position = "identity")
+  geom_bar(alpha = 1/5, position = "identity")
 
 ggplot(data = diamantes, mapping = aes(x = corte, colour = claridad)) +
- geom_bar(fill = NA, position = "identity")
+  geom_bar(fill = NA, position = "identity")
 ```
 
 El ajuste de `position = identity` es más útil para geoms 2-D, como puntos, donde es la opción predeterminada.
@@ -606,21 +606,21 @@ El ajuste de `position = identity` es más útil para geoms 2-D, como puntos, do
 
 ```{r}
 ggplot(data = diamantes) +
- geom_bar(mapping = aes(x = corte, fill = claridad), position = "fill")
+  geom_bar(mapping = aes(x = corte, fill = claridad), position = "fill")
 ```
 
 * `position = "dodge"` coloca objetos superpuestos directamente uno al lado del otro. Esto hace que sea más fácil comparar valores individuales.
 
 ```{r}
 ggplot(data = diamantes) +
- geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
+  geom_bar(mapping = aes(x = corte, fill = claridad), position = "dodge")
 ```
 
 Hay otro tipo de ajuste que no es útil para gráficos de barras, pero puede ser muy útil para diagramas de dispersión. Recuerda nuestro primer diagrama de dispersión. ¿Notaste que la trama muestra solo 126 puntos, a pesar de que hay 234 observaciones en el conjunto de datos?
 
 ```{r echo = FALSE}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista))
+  geom_point(mapping = aes(x = motor, y = autopista))
 ```
 
 Los valores de las variables `autopista` y `motor` se redondean de modo que los puntos aparecen en una cuadrícula y muchos se superponen entre sí. Este problema se conoce como __sobregraficado__ (*overplotting*). Esta disposición hace que sea difícil ver dónde está la masa de datos. ¿Los puntos de datos se distribuyen equitativamente a lo largo de la gráfica, o hay una combinación especial de `autopista` y `motor` que contiene 109 valores?
@@ -629,7 +629,7 @@ Puedes evitar esta grilla estableciendo el ajuste de posición en "jitter". `pos
 
 ```{r}
 ggplot(data = millas) +
- geom_point(mapping = aes(x = motor, y = autopista), position = "jitter")
+  geom_point(mapping = aes(x = motor, y = autopista), position = "jitter")
 ```
 
 Si bien agregar aleatoriedad a los puntos puede parecer una forma extraña de mejorar tu gráfico ya que hace que sea menos preciso a escalas pequeñas, lo hace ser más revelador a gran escala. Como esta es una operación tan útil, ggplot2 viene con una abreviatura de `geom_point(position = "jitter")`: `geom_jitter()`.
@@ -642,7 +642,7 @@ Para obtener más información sobre ajustes de posición, busca la página de a
 
    ```{r}
    ggplot(data = millas, mapping = aes(x = ciudad, y = autopista)) +
-    geom_point()
+     geom_point()
    ```
 
 2. ¿Qué parámetros de `geom_jitter()` controlan la cantidad de ruido?
@@ -660,11 +660,11 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
    ```{r fig.width = 3, out.width = "50%", fig.align = "default"}
    
    ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
-   geom_boxplot()
+     geom_boxplot()
    
    ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
-   geom_boxplot() +
-   coord_flip()
+     geom_boxplot() +
+     coord_flip()
    ```
 
 * `coord_quickmap()` establece la relación de aspecto correctamente para los mapas. Esto es muy importante si graficas datos espaciales con ggplot2 (tema que desafortunadamente no contamos con espacio para desarrollar en este libro).
@@ -673,24 +673,24 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
    nz <- map_data("nz")
    
    ggplot(nz, aes(long, lat, group = group)) +
-   geom_polygon(fill = "white", colour = "black")
+     geom_polygon(fill = "white", colour = "black")
    
    ggplot(nz, aes(long, lat, group = group)) +
-   geom_polygon(fill = "white", colour = "black") +
-   coord_quickmap()
+     geom_polygon(fill = "white", colour = "black") +
+     coord_quickmap()
    ```
 
 * `coord_polar()` usa coordenadas polares. Las coordenadas polares revelan una conexión interesante entre un gráfico de barras y un gráfico de Coxcomb.
 
    ```{r fig.width = 3, out.width = "50%", fig.align = "default", fig.asp = 1}
    bar <- ggplot(data = diamantes) +
-   geom_bar(
-   mapping = aes(x = corte, fill = corte),
-   show.legend = FALSE,
-   width = 1
-   ) +
-   theme(aspect.ratio = 1) +
-   labs(x = NULL, y = NULL)
+     geom_bar(
+       mapping = aes(x = corte, fill = corte),
+       show.legend = FALSE,
+       width = 1
+     ) +
+     theme(aspect.ratio = 1) +
+     labs(x = NULL, y = NULL)
    
    bar + coord_flip()
    bar + coord_polar()
@@ -708,9 +708,9 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
 
    ```{r, fig.asp = 1, out.width = "50%"}
    ggplot(data = millas, mapping = aes(x = ciudad, y = autopista)) +
-   geom_point() +
-   geom_abline() +
-   coord_fixed()
+     geom_point() +
+     geom_abline() +
+     coord_fixed()
    ```
 
 ## La gramática de gráficos en capas
@@ -720,9 +720,9 @@ En las secciones anteriores, aprendiste mucho más que cómo hacer diagramas de 
 ```
 ggplot(data = <DATOS>) +
  <GEOM_FUNCION>(
- mapping = aes(<MAPEOS>),
- stat = <ESTADISTICA>,
- position = <POSICION>
+   mapping = aes(<MAPEOS>),
+   stat = <ESTADISTICA>,
+   position = <POSICION>
  ) +
  <FUNCION_COORDENADAS> +
  <FUNCION_FACETAS>
