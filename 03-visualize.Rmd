@@ -40,7 +40,6 @@ Si ejecutas este código y recibes el mensaje de error "no hay ningún paquete l
 
 ```{r eval = FALSE}
 install.packages("tidyverse")
-
 library(tidyverse)
 ```
 
