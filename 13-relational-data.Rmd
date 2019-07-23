@@ -347,7 +347,7 @@ vuelos2 %>%
 
  ```{r}
 vuelos2 %>%
-  left_join(planes, by = "codigo_cola")
+  left_join(aviones, by = "codigo_cola")
  ```
 
   Nota que la variable `anio` (que aparece en ambos data frames de entrada, 
@@ -364,10 +364,10 @@ vuelos2 %>%
 
  ```{r}
 vuelos2 %>%
-  left_join(airports, c("origen" = "codigo_aeropuerto"))
+  left_join(aeropuertos, c("origen" = "codigo_aeropuerto"))
   
 vuelos2 %>%
-  left_join(airports, c("destino" = "codigo_aeropuerto"))
+  left_join(aeropuertos, c("destino" = "codigo_aeropuerto"))
  ```
 
 ### Ejercicios
@@ -494,7 +494,7 @@ Las anti uniones son útiles para encontrar desajustes. Por ejemplo, al conectar
 
 ```{r}
 vuelos %>%
-  anti_join(aviones, by = "tailnum") %>%
+  anti_join(aviones, by = "codigo_cola") %>%
   count(codigo_cola, sort = TRUE)
 ```
 
