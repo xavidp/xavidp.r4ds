@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Es raro que un análisis de datos involucre una única tabla de datos. Típicamente tienes muchas tablas de datos y debes combinarlas para responder las preguntas de tu interés. Colectivamente, múltiples tablas de datos se llaman _datos relacionales_ debido a que sus relacionales, no sólo los conjuntos de datos individuales, son importantes.
+Es raro que un análisis de datos involucre una única tabla de datos. Típicamente tienes muchas tablas de datos y debes combinarlas para responder las preguntas de tu interés. Colectivamente, múltiples tablas de datos se llaman _datos relacionales_ debido a que sus relaciones, no sólo los conjuntos de datos individuales, son importantes.
 
 Las relaciones siempre se definen sobre un par de tablas. Todas las otras relaciones se construyen sobre esta idea simple: las relaciones entre tres o más tablas son siempre una propiedad de las relaciones entre cada par. ¡A veces ambos elementos de un par pueden ser la misma tabla! Esto se necesita si, por ejemplo, tienes una tabla de personas y cada persona tiene una referencia a sus padres.
 
@@ -12,7 +12,7 @@ Para trabajar con datos relacionales necesitas verbos para trabajar con pares de
 
 * __Uniones de filtro__ (del inglés _filtering join_), que filtran observaciones en un *data frame* con base en si coinciden con las observaciones en otra tabla.
 
-* __Operaciones de conjuntos__ (del inglés _set operations_), que tratan las observaciones como eleentos de un conjunto.
+* __Operaciones de conjuntos__ (del inglés _set operations_), que tratan las observaciones como elementos de un conjunto.
 
 El lugar más común para encontrar datos relacionales es en un sistema _relacional_ de administración de bases de datos (*Relational Data Base Management System* en inglés), un concepto que abarca casi todas las bases de datos modernas. Si has usado una base de datos con anterioridad, casi seguramente usaste SQL. Si es así, los conceptos de este capítulo debiesen ser familiares, aunque su expresión en dplyr es ligeramente distinta. Generalmente, dplyr es un poco más fácil de usar que SQL ya que dplyr se especializa en el análisis de datos: facilita las operaciones habituales de análisis de datos, a expensas de dificultar otras operaciones que no se requieren a menudo para el análisis.
 
@@ -41,13 +41,13 @@ aerolineas
 aeropuertos
  ```
 
-* `aviones` entrega información de cada aeropuerto, identificado por su `codigo_cola`:
+* `aviones` entrega información de cada avión, identificado por su `codigo_cola`:
 
  ```{r}
 aviones
  ```
 
-* `clima` entrega información para cada hora respecto del clima en cada aeropuerto de Nueva York:
+* `clima` entrega información del clima en cada aeropuerto de Nueva York para cada hora:
 
  ```{r}
 clima
@@ -75,7 +75,7 @@ Para datos:
 
 ### Ejercicios
 
-1. Imagina que necesitas dibujas (aproximadamente) la ruta que cada avión vuela desde su origen
+1. Imagina que necesitas dibujar (aproximadamente) la ruta que cada avión vuela desde su origen
    hasta el destino. ¿Qué variables necesitas? ¿Qué tablas necesitas combinar?
 
 1. Olvidamos incluir la relación entre `clima` y `aeropuertos`. ¿Cuál es la relación y cómo debe
@@ -507,7 +507,7 @@ vuelos %>%
 1. Filtra los vuelos para mostrar únicamente los aviones que han realizado al menos cien
    viajes
 
-1. Combina `vehiculos` y `fueleconomy::common` para encontrar los registros de los 
+1. Combina `vehiculos` y `comunes` para encontrar los registros de los 
    modelos más comunes.
 
 1. Encuentra las 48 horas (en el transcurso del año) que tengan los peores atrasos. Haz 
