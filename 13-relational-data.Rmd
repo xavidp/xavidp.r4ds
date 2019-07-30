@@ -129,7 +129,7 @@ vuelos %>%
   filter(n > 1)
 ```
 
-Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo se usaría una vez al día: eso haría mucho más simples los problemas de comunicación con un vuelo en específico. ¡Desafortunadamente no es el caso! Si una tabla no tiene una llave primaria, a veces es útil incluir una con `mutate()` y `row_number()`. Eso simplifica unir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama _llave sustituta_.
+Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo se usaría una vez al día: eso haría mucho más simple comunicar problemas con un vuelo específico. ¡Desafortunadamente no es el caso! Si una tabla no tiene una llave primaria, a veces es útil incluir una con `mutate()` y `row_number()`. Eso simplifica unir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama _llave sustituta_.
 
 Una llave primaria y su correspondiente llave foránea en otra tabla forman una _relación_. Las relaciones son típicamente uno a muchos. Por ejemplo, cada vuelo tiene un avión, pero cada avión tiene muchos vuelos. En otros datos, ocasionalmente verás relaciones uno a uno. Puedes pensar esto como un caso especial de uno a muchos. Puedes modelar relaciones muchos a muchos como relaciones de la forma muchos a uno y uno a muchos. Por ejemplo, en estos datos existe una relación muchos a muchos entre aeroplíneas y aeropuertos: cada aerolínea vuela a muchos aeropuertos, cada aeropuerto recibe a muchas aerolíneas.
 
@@ -183,7 +183,7 @@ vuelos2 %>%
   mutate(nombre = aerolineas$nombre[match(aerolinea, aerolineas$aerolinea)])
 ```
 
-Sin embargo, esto último es difícil de generalizar cuando necesitas unir varias variables y dificulta la lectura para entender lo que se queire hacer.
+Sin embargo, esto último es difícil de generalizar cuando necesitas unir varias variables y dificulta la lectura para entender lo que se quiere hacer.
 
 En las siguientes secciones explicaremos, en detalle, como las uniones de transformación funcionan. Comenzarás aprendiendo una representación visual útil de las uniones. Luego usaremos eso para explicar las cuatro uniones de transformación: unión interior y tres uniones exteriores. Cuando trabajes con datos reales, las llaves no siempre identifican a las observaciones de forma única, por lo que a continuación hablaremos de lo que ocurre cuando no existe una coincidencia única. Finalmente, aprenderás como instruir a dplyr cuales variables son las llaves para una unión dada.
 
@@ -227,7 +227,7 @@ knitr::include_graphics("diagrams_w_text_as_path/es/join-inner.svg")
 
 ### Unión interior {#inner-join}
 
-La forma más simple de unión es la _unión interior_ (del inglés _inner join_). Una unión interior une pares de observaciones cualquiera dado que sus llaves son iguales:
+La forma más simple de unión es la _unión interior_ (del inglés _inner join_). Una unión interior une pares de observaciones siempre que sus llaves sean iguales:
 
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("diagrams_w_text_as_path/es/join-inner.svg")
@@ -260,7 +260,7 @@ Gráficamente corresponde a lo siguiente:
 knitr::include_graphics("diagrams_w_text_as_path/es/join-outer.svg")
 ```
 
-La unión que más frecuentemente se usa es la unión izquierda: úsala cuando necesites buscar datos adicionales en otra tabla, dado que preserva las observaciones originales incluso cuando no hay coincidencias. La unión izquierda debiera ser tu unión por defeecto a menos que tengas un motivo importante para preferir otro tipo.
+La unión que más frecuentemente se usa es la unión izquierda: úsala cuando necesites buscar datos adicionales en otra tabla, dado que preserva las observaciones originales incluso cuando no hay coincidencias. La unión izquierda debiera ser tu unión por defecto a menos que tengas un motivo importante para preferir otro tipo.
 
 Otra forma de ilustrar diferentes tipos de uniones es mediante un diagrama de Venn:
 
@@ -268,7 +268,7 @@ Otra forma de ilustrar diferentes tipos de uniones es mediante un diagrama de Ve
 knitr::include_graphics("diagrams_w_text_as_path/es/join-venn.svg")
 ```
 
-Sin embargo, esta no es una buena representación. Puede ayudar a recordar cuales observaciones preservan las observaciones en cual tabla pero esto tiene una limitante importante: un diagrama de Venn no puede mostrar que ocurre con las llaves que no identifican de manera única una observación.
+Sin embargo, esta no es una buena representación. Puede ayudar a recordar cuales uniones preservan las observaciones en cual tabla pero esto tiene una limitante importante: un diagrama de Venn no puede mostrar que ocurre con las llaves que no identifican de manera única una observación.
 
 ### Llaves duplicadas {#join-matches}
 
@@ -357,10 +357,7 @@ vuelos2 %>%
     variable `a` en la tabla `x` con la variabla `b` en la tabla `y`. Las variables de 
     `x` se usarán en la salida.
 
-  Por ejemplo, si queremos dibujar un mapa necesitamos combinar los datos de vuelos 
-  con los datos de ubicación (`latitud` y `longitud`) de cada aeropuerto. Cada vuelo 
-  tiene un `aeropuerto` de origen y destino, por lo que necesitamos especficar cual 
-  queremos unir:
+  Por ejemplo, si queremos dibujar un mapa necesitamos combinar los datos de vuelos con los datos de aeropuertos, que contienen la ubicación (`latitud` y `longitud`). Cada vuelo tiene un `aeropuerto` de origen y destino, por lo que necesitamos especficar cual queremos unir:
 
  ```{r}
 vuelos2 %>%
