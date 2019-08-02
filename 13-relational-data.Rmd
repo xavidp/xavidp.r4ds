@@ -149,9 +149,9 @@ Una llave primaria y su correspondiente llave foránea en otra tabla forman una 
 
 1. Dibuja un diagrama que ilustre las conexiones entre las tablas `bateadores`,
   `personas` y `salarios` en el paquete datos. Dibuja otro diagrama que muestre la
-  relación entre `personas`, `capitanes` y `premios_capitanes`.
+  relación entre `personas`, `dirigentes` y `premios_dirigentes`.
 
-  ¿Cómo caracterizarías las relación entre `bateadores`, `lanzadores` y `jardineros`?
+  ¿Cómo caracterizarías las relación entre `bateadores`, `lanzadores` y `fildeo`?
 
 ## Uniones de transformación {#mutating-joins}
 
