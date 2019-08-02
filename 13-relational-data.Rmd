@@ -129,7 +129,7 @@ vuelos %>%
   filter(n > 1)
 ```
 
-Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo se usaría una vez al día: eso haría mucho más simples los problemas de comunicación con un vuelo en específico. ¡Desafortunadamente no es el caso! Si una tabla no tiene una llave primaria, a veces es útil incluir una con `mutate()` y `row_number()`. Eso simplifica unir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama _llave sustituta_.
+Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo se usaría una vez al día: eso haría mucho más simple comunicar problemas con un vuelo específico. ¡Desafortunadamente no es el caso! Si una tabla no tiene una llave primaria, a veces es útil incluir una con `mutate()` y `row_number()`. Eso simplifica unir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama _llave sustituta_.
 
 Una llave primaria y su correspondiente llave foránea en otra tabla forman una _relación_. Las relaciones son típicamente uno a muchos. Por ejemplo, cada vuelo tiene un avión, pero cada avión tiene muchos vuelos. En otros datos, ocasionalmente verás relaciones uno a uno. Puedes pensar esto como un caso especial de uno a muchos. Puedes modelar relaciones muchos a muchos como relaciones de la forma muchos a uno y uno a muchos. Por ejemplo, en estos datos existe una relación muchos a muchos entre aeroplíneas y aeropuertos: cada aerolínea vuela a muchos aeropuertos, cada aeropuerto recibe a muchas aerolíneas.
 
@@ -149,9 +149,9 @@ Una llave primaria y su correspondiente llave foránea en otra tabla forman una 
 
 1. Dibuja un diagrama que ilustre las conexiones entre las tablas `bateadores`,
   `personas` y `salarios` en el paquete datos. Dibuja otro diagrama que muestre la
-  relación entre `personas`, `capitanes` y `premios_capitanes`.
+  relación entre `personas`, `dirigentes` y `premios_dirigentes`.
 
-  ¿Cómo caracterizarías las relación entre `bateadores`, `lanzadores` y `jardineros`?
+  ¿Cómo caracterizarías las relación entre `bateadores`, `lanzadores` y `fildeo`?
 
 ## Uniones de transformación {#mutating-joins}
 
@@ -165,7 +165,7 @@ vuelos2 <- vuelos %>%
 vuelos2
 ```
 
-(Recuerda que en RStudio puedes usar `View()` para evitar este problema.)s problem.)
+(Recuerda que en RStudio puedes usar `View()` para evitar este problema.)
 
 Imagina que quieres incluir el nombre completo de la aerolínea en `vuelos2`. Puede combinar los datos de `aerolinas` y `vuelos2` mediante `left_join()`:
 
@@ -183,7 +183,7 @@ vuelos2 %>%
   mutate(nombre = aerolineas$nombre[match(aerolinea, aerolineas$aerolinea)])
 ```
 
-Sin embargo, esto último es difícil de generalizar cuando necesitas unir varias variables y dificulta la lectura para entender lo que se queire hacer.
+Sin embargo, esto último es difícil de generalizar cuando necesitas unir varias variables y dificulta la lectura para entender lo que se quiere hacer.
 
 En las siguientes secciones explicaremos, en detalle, como las uniones de transformación funcionan. Comenzarás aprendiendo una representación visual útil de las uniones. Luego usaremos eso para explicar las cuatro uniones de transformación: unión interior y tres uniones exteriores. Cuando trabajes con datos reales, las llaves no siempre identifican a las observaciones de forma única, por lo que a continuación hablaremos de lo que ocurre cuando no existe una coincidencia única. Finalmente, aprenderás como instruir a dplyr cuales variables son las llaves para una unión dada.
 
@@ -227,7 +227,7 @@ knitr::include_graphics("diagrams_w_text_as_path/es/join-inner.svg")
 
 ### Unión interior {#inner-join}
 
-La forma más simple de unión es la _unión interior_ (del inglés _inner join_). Una unión interior une pares de observaciones cualquiera dado que sus llaves son iguales:
+La forma más simple de unión es la _unión interior_ (del inglés _inner join_). Una unión interior une pares de observaciones siempre que sus llaves sean iguales:
 
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("diagrams_w_text_as_path/es/join-inner.svg")
@@ -260,7 +260,7 @@ Gráficamente corresponde a lo siguiente:
 knitr::include_graphics("diagrams_w_text_as_path/es/join-outer.svg")
 ```
 
-La unión que más frecuentemente se usa es la unión izquierda: úsala cuando necesites buscar datos adicionales en otra tabla, dado que preserva las observaciones originales incluso cuando no hay coincidencias. La unión izquierda debiera ser tu unión por defeecto a menos que tengas un motivo importante para preferir otro tipo.
+La unión que más frecuentemente se usa es la unión izquierda: úsala cuando necesites buscar datos adicionales en otra tabla, dado que preserva las observaciones originales incluso cuando no hay coincidencias. La unión izquierda debiera ser tu unión por defecto a menos que tengas un motivo importante para preferir otro tipo.
 
 Otra forma de ilustrar diferentes tipos de uniones es mediante un diagrama de Venn:
 
@@ -268,7 +268,7 @@ Otra forma de ilustrar diferentes tipos de uniones es mediante un diagrama de Ve
 knitr::include_graphics("diagrams_w_text_as_path/es/join-venn.svg")
 ```
 
-Sin embargo, esta no es una buena representación. Puede ayudar a recordar cuales observaciones preservan las observaciones en cual tabla pero esto tiene una limitante importante: un diagrama de Venn no puede mostrar que ocurre con las llaves que no identifican de manera única una observación.
+Sin embargo, esta no es una buena representación. Puede ayudar a recordar cuales uniones preservan las observaciones en cual tabla pero esto tiene una limitante importante: un diagrama de Venn no puede mostrar que ocurre con las llaves que no identifican de manera única una observación.
 
 ### Llaves duplicadas {#join-matches}
 
@@ -351,16 +351,13 @@ vuelos2 %>%
  ```
 
   Nota que la variable `anio` (que aparece en ambos data frames de entrada, 
-  pero que no es igual en ambos casos) se disambigua con un sufijo en la salida.
+  pero que no es igual en ambos casos) se desambigua con un sufijo en la salida.
 
   * Un vector de caracteres con nombres: `by = c("a" = "b")`. Esto va a unir la 
     variable `a` en la tabla `x` con la variabla `b` en la tabla `y`. Las variables de 
     `x` se usarán en la salida.
 
-  Por ejemplo, si queremos dibujar un mapa necesitamos combinar los datos de vuelos 
-  con los datos de ubicación (`latitud` y `longitud`) de cada aeropuerto. Cada vuelo 
-  tiene un `aeropuerto` de origen y destino, por lo que necesitamos especficar cual 
-  queremos unir:
+  Por ejemplo, si queremos dibujar un mapa necesitamos combinar los datos de vuelos con los datos de aeropuertos, que contienen la ubicación (`latitud` y `longitud`). Cada vuelo tiene un `aeropuerto` de origen y destino, por lo que necesitamos especficar cual queremos unir:
 
  ```{r}
 vuelos2 %>%
@@ -385,7 +382,7 @@ aeropuertos %>%
   coord_quickmap()
  ```
 
-  (No te preocupes si no entiendes que significa p que hace `semi_join()`. 
+  (No te preocupes si no entiendes que hace `semi_join()`. 
   Lo aprenderás a continuación.)
   
   Quizás quieras usar `size` o `colour` para editar los puntos y mostrar 
@@ -399,7 +396,7 @@ aeropuertos %>%
 1. ¿Qué condiciones climáticas hacen más probables los atrasos?
 
 1. ¿Qué sucedió el día 13 de junio de 2013? Muestra el patrón espacial de los atrasos, 
-   luego busca referencias cruzadas con el clima.
+   luego usa un buscador para encontrar referencias cruzadas con el clima.
 
  ```{r, eval = FALSE, include = FALSE}
 peores <- filter(vuelos, !is.na(horario_salida), mes == 6, dia == 13)
@@ -425,7 +422,7 @@ dplyr | merge
 `right_join(x, y)` | `merge(x, y, all.y = TRUE)`,
 `full_join(x, y)` | `merge(x, y, all.x = TRUE, all.y = TRUE)`
 
-La ventaja de os verbos específicos de dplyr es que muestran de manera clara la intención del código: la diferencia entre las uniones es realmente importante pero se esconde en los argumentos de `merge()`. Las uniones de dplyr son considerablemente más rápidas y no generan problemas con el orden de las columnas.
+La ventaja de os verbos específicos de dplyr es que muestran de manera clara la intención del código: la diferencia entre las uniones es realmente importante pero se esconde en los argumentos de `merge()`. Las uniones de dplyr son considerablemente más rápidas y no generan problemas con el orden de las filas
 
 SQL es una inspiración para las convenciones de dplyr, por lo que su traducción es directa:
 
@@ -465,14 +462,14 @@ vuelos %>%
 
 Pero es difícil extender este enfoque a varias variables. Por ejemplo, imagina que encontraste los diez días con los atrasos promedio más altos ¿Cómo construirías un filtro que use `anio`, `mes` y `dia` para unir de vuelta con `vuelos`? 
 
-En lugar de una semi unión, que conecta dos tablas de manera similar a una unión de transformación, pero en lugar de agregar nuevas columnas, mantiene las filas en `x` que tienen coincidencias en `y`:
+En lugar de `semi_join()`, que conecta dos tablas de manera similar a una unión de transformación, pero en lugar de agregar nuevas columnas, mantiene las filas en `x` que tienen coincidencias en `y`:
 
 ```{r}
 vuelos %>%
   semi_join(destinos_populares)
 ```
 
-Gráficamente, una semi unión es de la siguiente forma:
+Gráficamente, `semi_join()` es de la siguiente forma:
 
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("diagrams_w_text_as_path/es/join-semi.svg")
@@ -484,7 +481,7 @@ Sólo la existencia de coincidencias es importante, no importa cuales son las ob
 knitr::include_graphics("diagrams_w_text_as_path/es/join-semi-many.svg")
 ```
 
-La operación inversa de una semi unión es una anti unión. Una anti unión mantiene las filas que _no_ tienen coincidencias:
+La operación inversa de `semi_join()` es `anti_join()`. `anti_join()` mantiene las filas que _no_ tienen coincidencias:
 
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("diagrams_w_text_as_path/es/join-anti.svg")
@@ -522,14 +519,13 @@ vuelos %>%
 
 ## Problemas de las uniones
 
-Los datos con los que has estado trabajando en este capítulo han sido limpiados de modo que tengas el mínimo de problemas posibles. Tus propios datos difícilmente estarán tan ordenados, por lo que hay algunas consideraciones y pasos a tener en cuanta para que las uniones sobre tus propios datos funcionen adecuadamente.
+Los datos con los que has estado trabajando en este capítulo han sido limpiados de modo que tengas el mínimo de problemas posibles. Tus propios datos difícilmente estarán tan ordenados, por lo que hay algunas consideraciones y pasos a tener en cuenta para que las uniones sobre tus propios datos funcionen adecuadamente.
 
 1. Comienza identificando las variables que forman las llaves primarias en cada tabla.
    Usualmente debieras hacerlo basado en tus conocimientos de los datos, no observando 
-   empíriamente las combinaciones de variables que resultan en un identificador único. 
+   empíricamente las combinaciones de variables que resultan en un identificador único. 
    Si te centras en las variables sin pensar en sus significados, puedes tener la mala 
-   suerte de encontrar una combinación única en tus datos pero dicha relación no será 
-   válida en el caso general.
+   suerte de encontrar una combinación única en tus datos pero dicha relación puede no ser válida en general.
 
    Por ejemplo, la altura y la longitud identifican de manera única cada aeropuerto, ¡pero 
    no son buenos identificadores!
@@ -539,7 +535,7 @@ aeropuertos %>% count(altura, longitud) %>% filter(n > 1)
  ```
 
 1. Verifica que ninguna de las variables en la llave primaria esté perdida. 
-   ¡Si una valor está perdido no puede identificar una observación!
+   ¡Si un valor está perdido no puede identificar una observación!
 
 1. Verifica que las llaves foráneas coinciden con las llaves primarias en 
    otra tabla. La mejor forma de hacerlo es mediante `anti_join()`. Es común 
@@ -550,13 +546,13 @@ aeropuertos %>% count(altura, longitud) %>% filter(n > 1)
    versus unión exterior y considerar cuidadosamente si quieres descartar las observaciones 
    que no tienen coincidencias.
    
-   Ten en cuenta que verificiar el número de filas antes y después de unir no es sufiente para asegurar 
+   Ten en cuenta que verificiar el número de filas antes y después de unir no es suficiente para asegurar 
    que la unión funcionó de forma exitosa. Si tienes una unión interior con llaves duplicadas en ambas tablas, 
    puedes tener la mala suerte de que el número de filas descartadas sea igual al número de filas duplicadas.
 
 ## Operaciones de conjuntos {#set-operations}
 
-El tipo final de verbo entre dos tablas es la operación de conjuntos. Generalmente lo usamos de manera poco freuente, pero es ocasionalmente útil cuando quieres dividir un filtro complejo en partes maś simples. Todas esas operaciones funcionan con una fila completa, comparten los valores de cada variable. Esto espera que las entradas `x` e `y` tengan las mismas variables y trata las observaciones como conjuntos: 
+El tipo final de verbo entre dos tablas es la operación de conjuntos. Generalmente lo usamos de manera poco frecuente, pero es ocasionalmente útil cuando quieres dividir un filtro complejo en partes maś simples. Todas esas operaciones funcionan con una fila completa, comparando los valores de cada variable. Esto espera que las entradas `x` e `y` tengan las mismas variables y trata las observaciones como conjuntos: 
 
 * `intersect(x, y)`: entregas las observaciones comunes en `x` e `y`.
 * `union(x, y)`: entregas las observaciones únicas en `x` e `y`.

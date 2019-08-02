@@ -587,7 +587,7 @@ Cuando graficas la habilidad del bateador (medido por el promedio de bateo, `ba`
 bateo <- as_tibble(datos::bateadores)
 
 rendimiento_bateadores <- bateo %>% 
-  group_by(ID_jugador) %>% 
+  group_by(id_jugador) %>% 
   summarise(
     ba = sum(golpes, na.rm = TRUE) / sum(al_bate, na.rm = TRUE),
     ab = sum(al_bate, na.rm = TRUE)
