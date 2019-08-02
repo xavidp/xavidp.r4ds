@@ -546,7 +546,7 @@ aeropuertos %>% count(altura, longitud) %>% filter(n > 1)
    versus unión exterior y considerar cuidadosamente si quieres descartar las observaciones 
    que no tienen coincidencias.
    
-   Ten en cuenta que verificiar el número de filas antes y después de unir no es sufiente para asegurar 
+   Ten en cuenta que verificiar el número de filas antes y después de unir no es suficiente para asegurar 
    que la unión funcionó de forma exitosa. Si tienes una unión interior con llaves duplicadas en ambas tablas, 
    puedes tener la mala suerte de que el número de filas descartadas sea igual al número de filas duplicadas.
 
