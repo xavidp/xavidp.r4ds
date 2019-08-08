@@ -54,13 +54,13 @@ Contiene tres tipos importantes de contenido:
 Cuando abres un archivo `.Rmd`, obtienes una interfaz de *notebook* donde el código y el *output* están intercalados. Puedes ejecutar cada bloque de código haciendo clic el ícono ejecutar ( se parece a un botón de reproducir en la parte superior del bloque de código), o presionando Cmd/Ctrl + Shift + Enter. RStudio ejecuta el código y muestra los resultados incustrados en el código:
 
 ```{r, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("rmarkdown/diamond-sizes-notebook.png")
+knitr::include_graphics("rmarkdown/tamanio-diamantes-cuadernillo.png")
 ```
 
 Para producir un reporte completo que contenga todo el texto, código y resultados, hacer clic en "Knit" o presionar Cmd/Ctrl + Shift + K. Puede hacerse también de manera programática con `rmarkdown::render("1-example.Rmd")`. Esto mostrará el reporte en el panel *viewer* y crea un archivo HTML independiente que puedes compartir con otros.
 
 ```{r, echo = FALSE, out.width = "75%"}
-knitr::include_graphics("rmarkdown/diamond-sizes-report.png")
+knitr::include_graphics("rmarkdown/tamanio-diamantes-reporte.png")
 ```
 
 Cuando haces *knit* el documento (knit en español significa tejer), R Markdown envía el .Rmd a _knitr_, http://yihui.name/knitr/, que ejecuta todos los bloques de código y crea un nuevo documento markdown (.md) que incluye el código y su output. El archivo markdown generado por _knitr_ es procesado entonces por pandoc, http://pandoc.org/, que es el responsable de crear el archivo terminado. La ventaja de este flujo de trabajo en dos pasos es que puedes crear un muy amplio rango de formatos de salida, como aprenderás en [Formatos de R markdown ].
