@@ -28,7 +28,7 @@ Listas
 
 1.  Elemento 1 en lista enumerada
 
-1.  Elemento 2. La numeración es automática y creciente en la salida.
+1.  Elemento 2. La numeración se incrementa automáticamente en el output.
 
 Enlaces e imágenes
 ------------------------------------------------------------
