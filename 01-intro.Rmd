@@ -87,23 +87,23 @@ organizada aproximadamente de acuerdo al orden en que usualmente se usan en el
 análisis (aunque, por supuesto, tendrás que iterar entre ellas múltiples veces).
 Sin embargo, en nuestra experiencia esa no es la mejor manera de aprenderlas:
 
-* Partir con la ingesta y orden de los datos no es lo óptimo porque el 80%  del
-  tiempo es unproceso rutinario y aburrido y el 20% restante extraño y
-  frustrante.  ¡No es un buen lugar para aprender un tema nuevo! En cambio,
-  partiremos  con la visualización y transformación de datos que ya han sido
-  importados y ordenados. De esta manera, cuando tengas que hacer importar y
-  ordenar tus propios datos, tu motivación se mantendrá alta porque sabrás que
-  ese sufrimiento vale la pena.
+* Partir con la ingesta y orden de los datos no es lo óptimo porque el 80% del
+ tiempo es unproceso rutinario y aburrido y el 20% restante extraño y
+ frustrante. ¡No es un buen lugar para aprender un tema nuevo! En cambio,
+ partiremos con la visualización y transformación de datos que ya han sido
+ importados y ordenados. De esta manera, cuando tengas que hacer importar y
+ ordenar tus propios datos, tu motivación se mantendrá alta porque sabrás que
+ ese sufrimiento vale la pena.
 
 * Algunos temas se explican mejor con otras herraminetas. Por ejemplo, creemos
-  que es más fácil entender qué es un modelo si ya sabes sobre visualización,
-  datos ordenados y programación.
+ que es más fácil entender qué es un modelo si ya sabes sobre visualización,
+ datos ordenados y programación.
 
 * Las herramientas de programación no son necesariamente interesantes en sí
-  mismas; sin embargo, te permiten enfrentar problemas desafiantes. Te
-  entregaremos una  selección de herramientas de programación en la mitad del
-  libro y luego verás  cómo se pueden combinar con las herramientas propias de
-  la ciencia de datos  para enfrentar problemas de modelado interesantes.
+ mismas; sin embargo, te permiten enfrentar problemas desafiantes. Te
+ entregaremos una selección de herramientas de programación en la mitad del
+ libro y luego verás cómo se pueden combinar con las herramientas propias de
+ la ciencia de datos para enfrentar problemas de modelado interesantes.
 
 En cada capítulo hemos tratado de mantener un patrón similar: partir con algunos
 ejemplos motivantes que te permitan ver el panorama completo y luego sumergirnos
@@ -132,7 +132,7 @@ bueno que aprendieras sobre
 `data.table`, ya que su interfaz concisa hace que sea difícil de aprender por
 las pocas pistas lingüisticas que entrega. Sin embargo, si trabajas con datos
 grandes, la ventaja en términos de rendimiento hace que valga la pena el
-esfuerzo extra que requiere aprenderlo.  Si tus datos son más grandes que eso,
+esfuerzo extra que requiere aprenderlo. Si tus datos son más grandes que eso,
 es importante que consideres cuidadosamente si tu problema de _big data_ no es,
 en realidad, un problema de datos pequeños oculto. Si bien los datos completos
 pueden ser grandes, muchas veces los necesarios para responder una pregunta
@@ -203,22 +203,22 @@ El complemento de la generación de hipótesis es la confirmación de hipótesis
 Esta última es difícil por dos razones:
 
 
-1.  Necesitas un modelo matemático con el fin de generar predicciones
-    falseables.  Esto usualmente requiere considerable sofisticación
-    estadística.
+1. Necesitas un modelo matemático con el fin de generar predicciones
+ falseables. Esto usualmente requiere considerable sofisticación
+ estadística.
 
-1.  Cada observación puede ser utilizada una sola vez para confirmar una
-    hipótesis.  En el momento en que la usas más de una vez ya estás de vuelta
-    haciendo análisis exploratorio. Esto quiere decir que para hacer
-    confirmación de hipótesis tienes que haber "pre-registrado" (es decir, haber
-    escrito con anticipación) tu plan de análisis y no desviarte de él incluso
-    cuando hayas visto tus datos. Hablaremos un poco acerca de estrategias que
-    puedes utilizar para hacer esto más fácil en el capítulo sobre
-    [modelos](#model-intro).
+1. Cada observación puede ser utilizada una sola vez para confirmar una
+ hipótesis. En el momento en que la usas más de una vez ya estás de vuelta
+ haciendo análisis exploratorio. Esto quiere decir que para hacer
+ confirmación de hipótesis tienes que haber "pre-registrado" (es decir, haber
+ escrito con anticipación) tu plan de análisis y no desviarte de él incluso
+ cuando hayas visto tus datos. Hablaremos un poco acerca de estrategias que
+ puedes utilizar para hacer esto más fácil en el capítulo sobre
+ [modelos](#model-intro).
 
 Es habitual pensar en el modelado como una herramienta para la confirmación de
 hipótesis y a la visualización como una herramienta para la generación de
-hipótesis. Sin embargo, esa es una falsa dicotomía: los modelos son  utilizados
+hipótesis. Sin embargo, esa es una falsa dicotomía: los modelos son utilizados
 usualmente para la exploración y, con un poco de cuidado, puedes usar la
 visualización para confirmar una hipótesis. La diferencia clave es qué tan
 seguido mires cada observación: si la miras solo una vez es confirmación; si la
@@ -260,7 +260,7 @@ tener al menos la versión 3.5.
 
 RStudio es un ambiente de desarrollo integrado (o IDE, por su sigla en inglés:
 Integrated Development Environment) para programar en R. Puedes descargarlo e
-instalarlo desde  <http://www.rstudio.com/download>. RStudio se actualiza un par
+instalarlo desde <http://www.rstudio.com/download>. RStudio se actualiza un par
 de veces al año. Cuando haya una nueva versión disponible, el mismo programa te
 lo hará saber. Es una buena idea mantenerlo actualizado para que puedas
 aprovechar las mejores y más recientes características. Para este libro,
@@ -296,7 +296,7 @@ install.packages("tidyverse")
 Escribe en tu computadora esa línea de código en la consola y luego presiona
 Enter para ejecutarla. R descargará los paquetes de CRAN y los instalará en tu
 computadora. Si tienes problmas durante la instalación, asegúrate que tienes
-conexión a Internet y que  <https://cloud.r-project.org/> no está bloqueado por
+conexión a Internet y que <https://cloud.r-project.org/> no está bloqueado por
 tu firewall o proxy.
 
 No podrás usar las funciones, objetos y archivos de ayuda de un paquete hasta
@@ -381,15 +381,15 @@ A lo largo del libro usaremos una serie consistente de convenciones para
 referirnos al código:
 
 * Las funciones están escritas en una fuente para código y seguidas de
-  paréntesis.  La primera vez que son mencionadas ofreceremos una traducción al
-  español: `sum()` (del inglés _suma_) o `mean()` (del inglés _media_).
+ paréntesis. La primera vez que son mencionadas ofreceremos una traducción al
+ español: `sum()` (del inglés _suma_) o `mean()` (del inglés _media_).
 
 * Otros tipos de objetos de R (como datos o argumentos de funciones) estarán en
-  fuente para código, pero sin paréntesis: `vuelos` o `x`.
+ fuente para código, pero sin paréntesis: `vuelos` o `x`.
 
 * Si queremos dejar claro de qué paquete viene un objeto, usaremos el nombre del
-  paquete seguido de doble dos puntos: `dplyr::mutate()` o `datos::paises`.
-  Esto también es válido para el código de R.
+ paquete seguido de doble dos puntos: `dplyr::mutate()` o `datos::paises`.
+ Esto también es válido para el código de R.
 
 ## Pedir ayuda y aprender más
 
@@ -414,41 +414,41 @@ Si Google no ayuda, prueba con la versión en español de
 [stackoverflow](https://es.stackoverflow.com/). Parte dedicando un tiempo a
 buscar si existe ya una respuesta a tu pregunta agregando `[R]` a tu búsqueda
 para restringir los resultados a preguntas y respuestas que usen R. Si no
-encuentras nada útil, prepara un ejemplo reproducible o __reprex__.  Un buen
+encuentras nada útil, prepara un ejemplo reproducible o __reprex__. Un buen
 _reprex_ hace más fácil que otras personas te puedan ayudar y, al prepararlo,
 probablemente resuelvas el problema por tu cuenta.
 
 Hay tres cosas que debes incluir para hacer que tu ejemplo sea reproducible: los
 paquetes necesarios, datos y código.
 
-1.  Los **paquetes** deben ser cargados al inicio del _script_ (que es como se
-    le llama a la secuencia de comandos) para que sea fácil ver cuáles se
-    necesitan para el ejemplo. Es una buena oportunidad para chequear que estás
-    utilizando la última versión de cada paquete. Es posible que hayas
-    descubierto un error (o _bug_, en inglés) que ya fue resuelto desde que
-    instalaste el paquete. Para los paquetes del __tidyverse__, la manera más
-    fácil de hacerlo es ejecutando `tidyverse_update()`.
+1. Los **paquetes** deben ser cargados al inicio del _script_ (que es como se
+ le llama a la secuencia de comandos) para que sea fácil ver cuáles se
+ necesitan para el ejemplo. Es una buena oportunidad para chequear que estás
+ utilizando la última versión de cada paquete. Es posible que hayas
+ descubierto un error (o _bug_, en inglés) que ya fue resuelto desde que
+ instalaste el paquete. Para los paquetes del __tidyverse__, la manera más
+ fácil de hacerlo es ejecutando `tidyverse_update()`.
 
-1.  La manera más simple de incluir **datos** en una pregunta es usar `dput()`
-    para generar el código de R que los recree. Por ejemmplo, para recrear el
-    conjunto de datos `mtautos` en R, tendríamos que realizar los siguientes
-    pasos.
+1. La manera más simple de incluir **datos** en una pregunta es usar `dput()`
+ para generar el código de R que los recree. Por ejemmplo, para recrear el
+ conjunto de datos `mtautos` en R, tendríamos que realizar los siguientes
+ pasos.
 
-  1. Cargar el paquete que contiene los datos: `library(datos`)
-  2. Ejecutar `dput(mtautos)` en R
-  3. Copiar el output
-  4. En tu script reproducible, escribir `mtautos <- ` y luego pegar lo copiado.
+ 1. Cargar el paquete que contiene los datos: `library(datos`)
+ 2. Ejecutar `dput(mtautos)` en R
+ 3. Copiar el output
+ 4. En tu script reproducible, escribir `mtautos <- ` y luego pegar lo copiado.
 
  Trata de buscar el subconjunto más pequeño de tus datos que te permita mostrar
  tu problema.
 
-1.  Dedica tiempo a asegurarte que tu **código** puede ser fácilmente leído por
-    otras personas:
+1. Dedica tiempo a asegurarte que tu **código** puede ser fácilmente leído por
+ otras personas:
 
  * Asegúrate de haber utilizado espacios y que los nombre de tus variables son a
  la vez consisos e informativos.
 
-  * Realiza comentarios que indiquen dónde se encuentra el problema.
+ * Realiza comentarios que indiquen dónde se encuentra el problema.
 
  * Haz lo posible por remover todo lo que no esté relacionado con el problema.
  Mientras más breve tu código, más fácil de entender y más fácil de arreglar.
@@ -484,28 +484,28 @@ particular, ya que han invertido muchas horas respondiendo nuestras preguntas
 tontas y ayudándonos a pensar mejor acerca de la ciencia de datos:
 
 * Jenny Bryan y Lionel Henry, por las muchas conversaciones útiles en torno al
-  trabajo con listas y listas-columnas.
+ trabajo con listas y listas-columnas.
 
 * Los tres capítulos sobre flujo de trabajo fueron adaptados (con permiso) de
-  <http://stat545.com/block002_hello-r-workspace-wd-project.html> de Jenny
-  Bryan.
+ <http://stat545.com/block002_hello-r-workspace-wd-project.html> de Jenny
+ Bryan.
 
 * Genevera Allen por las dicusiones acerca de modelos, modelado, la perspectiva
-  sobre de aprendizaje estadístico, y la diferencia entre generación de
-  hipótesis y confirmación de hipótesis.
+ sobre de aprendizaje estadístico, y la diferencia entre generación de
+ hipótesis y confirmación de hipótesis.
 
 * Yihui Xie por su trabajo en el paquete
-  [bookdown](https://github.com/rstudio/bookdown), y por responder
-  incansablemente las peticiones de nuevas características.
+ [bookdown](https://github.com/rstudio/bookdown), y por responder
+ incansablemente las peticiones de nuevas características.
 
 * Bill Behrman por la lectura atenta del libro completo y por probarlo en su
-  curso de Ciencia de Datos en Stanford.
+ curso de Ciencia de Datos en Stanford.
 
 * A la comunidad en Twitter de \#rstats que revisó todos los borradores de los
-  capítulos y ofreció un montón de retroalimentación útil.
+ capítulos y ofreció un montón de retroalimentación útil.
 
 * Tal Galili, por aumentar su paquete __dendextend__ para soportar una sección
-  sobre _clustering_ que no llegó al borrador final.
+ sobre _clustering_ que no llegó al borrador final.
 
 Este libro fue escrito de manera abierta y muchas personas contribuyeron con
 _pull requests_ para resolver problemas pequeños. Especiales agradecimientos
@@ -517,10 +517,10 @@ library(dplyr)
 contribs <- readr::read_tsv("contribs.txt", col_names = c("n", "name"))
 
 contribs <- contribs %>%
-  filter(!name %in% c("hadley", "Garrett", "Hadley Wickham",
-                      "Garrett Grolemund")) %>%
-  arrange(name) %>%
-  mutate(uname = ifelse(!grepl(" ", name), paste0("@", name), name))
+ filter(!name %in% c("hadley", "Garrett", "Hadley Wickham",
+ "Garrett Grolemund")) %>%
+ arrange(name) %>%
+ mutate(uname = ifelse(!grepl(" ", name), paste0("@", name), name))
 
 cat("Thanks go to all contributers in alphabetical order: ")
 cat(paste0(contribs$uname, collapse = ", "))
