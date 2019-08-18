@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Una de las mejores maneras de lograr tener mayor alcance como científica de
+Una de las mejores maneras de lograr tener mayor alcance como cientista de
 datos es escribir funciones. Las funciones te permitirán automatizar algunas
 tareas comunes en una manera poderosa y general que copiar-y-pegar. Escribir
 funciones tiene 3 grandes ventajas sobre copiar-y-pegar:
