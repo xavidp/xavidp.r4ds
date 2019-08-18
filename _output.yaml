@@ -5,9 +5,9 @@ bookdown::gitbook:
       before: |
         <li><strong><a href="./">R para Ciencia de Datos</a></strong></li>
     edit:
-      link: https://github.com/cienciadedatos/r4ds/edit/traduccion/%s
+      link: https://github.com/cienciadedatos/r4ds/edit/master/%s
       text: "Edit"
-    sharing: yes
+    sharing: no
   css: r4ds.min.css
 
 bookdown::pdf_book:
