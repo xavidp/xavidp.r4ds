@@ -55,7 +55,7 @@ Usar una cadena de caracteres (o _string_, en inglés) para guardar esta variabl
 tiene dos problemas:
 
 1. Sólo hay doce meses posibles, y no hay nada que te resguarde de errores de
-   tipeo:
+ tipeo:
 
  ```{r}
  x2 <- c("Dic", "Abr", "Eme", "Mar")
@@ -72,8 +72,8 @@ armando una lista de los __niveles__ válidos:
 
 ```{r}
 niveles_meses <- c(
-  "Ene", "Feb", "Mar", "Abr", "May", "Jun",
-  "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+ "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+ "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
 )
 ```
 
@@ -150,14 +150,14 @@ inglés _contar_):
 
 ```{r}
 encuesta %>%
-  count(raza)
+ count(raza)
 ```
 
 O con un gráfico de barras:
 
 ```{r}
 ggplot(encuesta, aes(raza)) +
-  geom_bar()
+ geom_bar()
 ```
 
 Por defecto, __ggplot2__ retira los niveles que no tienen valores. Puedes
@@ -165,8 +165,8 @@ forzarlos para que se visualicen con:
 
 ```{r}
 ggplot(encuesta, aes(raza)) +
-  geom_bar() +
-  scale_x_discrete(drop = FALSE)
+ geom_bar() +
+ scale_x_discrete(drop = FALSE)
 ```
 
 Estos niveles representan valores válidos que simplemente no ocurren en este
@@ -180,13 +180,13 @@ describen en las siguientes secciones.
 ### Ejercicios
 
 1. Explora la distribución de `ingreso`. ¿Qué hace que el gráfico de barras por
-   defecto sea tan difícil de comprender? ¿Cómo podrías mejorarlo?
+ defecto sea tan difícil de comprender? ¿Cómo podrías mejorarlo?
 
 1. ¿Cuál es la `religion` más común de la encuesta? ¿Cuál es el `partido` más
-   común?
+ común?
 
 1. ¿A qué `religion` se aplica cada `denominacion`? ¿Cómo puedes encontrarlo con
-   una tabla? ¿Cómo lo puedes descubrir con una visualización?
+ una tabla? ¿Cómo lo puedes descubrir con una visualización?
 
 ## Modificar el orden de los factores
 
@@ -196,12 +196,12 @@ horas consumidas mirando televisión por día, para cada religión:
 
 ```{r}
 resumen_religion <- encuesta %>%
-  group_by(religion) %>%
-  summarise(
-    edad = mean(edad, na.rm = TRUE),
-    horas_tv = mean(horas_tv, na.rm = TRUE),
-    n = n()
-  )
+ group_by(religion) %>%
+ summarise(
+ edad = mean(edad, na.rm = TRUE),
+ horas_tv = mean(horas_tv, na.rm = TRUE),
+ n = n()
+ )
 
 ggplot(resumen_religion, aes(horas_tv, religion)) + geom_point()
 ```
@@ -218,7 +218,7 @@ _mediana_).
 
 ```{r}
 ggplot(resumen_religion, aes(horas_tv, fct_reorder(religion, horas_tv))) +
-  geom_point()
+ geom_point()
 ```
 
 Reordenar la columna religión (`religion`) hace que sea más sencillo ver que las
@@ -232,9 +232,9 @@ ese gráfico de la siguiente forma:
 
 ```{r, eval = FALSE}
 resumen_religion %>%
-  mutate(religion = fct_reorder(religion, horas_tv)) %>%
-  ggplot(aes(horas_tv, religion)) +
-  geom_point()
+ mutate(religion = fct_reorder(religion, horas_tv)) %>%
+ ggplot(aes(horas_tv, religion)) +
+ geom_point()
 ```
 
 ¿Qué sucede si creamos un gráfico para observar cómo varía la edad promedio para
@@ -242,12 +242,12 @@ cada ingreso reportado?
 
 ```{r}
 resumen_ingreso <- encuesta %>%
-  group_by(ingreso) %>%
-  summarise(
-    edad = mean(edad, na.rm = TRUE),
-    horas_tv = mean(horas_tv, na.rm = TRUE),
-    n = n()
-  )
+ group_by(ingreso) %>%
+ summarise(
+ edad = mean(edad, na.rm = TRUE),
+ horas_tv = mean(horas_tv, na.rm = TRUE),
+ n = n()
+ )
 
 ggplot(resumen_ingreso, aes(edad, fct_reorder(ingreso, edad))) + geom_point()
 ```
@@ -264,7 +264,7 @@ niveles que quieres mover al principio de la línea.
 
 ```{r}
 ggplot(resumen_ingreso, aes(edad, fct_relevel(ingreso, "No aplica"))) +
-  geom_point()
+ geom_point()
 ```
 
 ¿Por qué crees que la edad promedio para "No aplica" es tan alta?
@@ -277,18 +277,18 @@ de líneas se ajustan con la leyenda.
 
 ```{r, fig.align = "default", out.width = "50%", fig.width = 4}
 por_edad <- encuesta %>%
-  filter(!is.na(edad)) %>%
-  count(edad, estado_civil) %>%
-  group_by(edad) %>%
-  mutate(prop = n / sum(n))
+ filter(!is.na(edad)) %>%
+ count(edad, estado_civil) %>%
+ group_by(edad) %>%
+ mutate(prop = n / sum(n))
 
 ggplot(por_edad, aes(edad, prop, colour = estado_civil)) +
-  geom_line(na.rm = TRUE)
+ geom_line(na.rm = TRUE)
 
 ggplot(por_edad, aes(edad, prop, colour = fct_reorder2(estado_civil, edad,
-  prop))) +
-  geom_line() +
-  labs(colour = "estado_civil")
+ prop))) +
+ geom_line() +
+ labs(colour = "estado_civil")
 ```
 
 Finalmente, para los gráficos de barra, puedes usar `fct_infreq()` (del inglés,
@@ -299,21 +299,21 @@ _revisar factores_).
 
 ```{r}
 encuesta %>%
-  mutate(estado_civil = estado_civil %>% fct_infreq() %>% fct_rev()) %>%
-  ggplot(aes(estado_civil)) +
-  geom_bar()
+ mutate(estado_civil = estado_civil %>% fct_infreq() %>% fct_rev()) %>%
+ ggplot(aes(estado_civil)) +
+ geom_bar()
 ```
 
 ### Ejercicios
 
 1. Hay algunos números sospechosamente grandes en `horas_tv`. ¿Es la media un
-   buen resumen?
+ buen resumen?
 
 1. Identifica, para cada factor en `encuesta`, si el orden de los niveles es
-   arbitrario o responde a algún principio.
+ arbitrario o responde a algún principio.
 
 1. ¿Por qué mover "No aplica" al inicio de los niveles lo llevó al final del
-   gráfico?
+ gráfico?
 
 ## Modificar los niveles de los factores
 
@@ -333,15 +333,15 @@ sean más largos, y poder usar una construcción paralela.
 
 ```{r}
 encuesta %>%
-  mutate(partido = fct_recode(partido,
-    "Republicano duro" = "Republicano Acérrimo",
-    "Republicano moderado" = "Republicado No Acérrimo",
-    "Independiente pro republicano" = "Independiente, pro-Rep",
-    "Independiente pro demócrata" = "Independiente, pro-Dem",
-    "Demócrata moderado" = "Demócrata No Acérrimo",
-    "Demócrata duro" = "Demócrata Acérrimo"
-  )) %>%
-  count(partido)
+ mutate(partido = fct_recode(partido,
+ "Republicano duro" = "Republicano Acérrimo",
+ "Republicano moderado" = "Republicado No Acérrimo",
+ "Independiente pro republicano" = "Independiente, pro-Rep",
+ "Independiente pro demócrata" = "Independiente, pro-Dem",
+ "Demócrata moderado" = "Demócrata No Acérrimo",
+ "Demócrata duro" = "Demócrata Acérrimo"
+ )) %>%
+ count(partido)
 ```
 
 `fct_recode()` no modificará los niveles que no han sido mencionados
@@ -353,18 +353,18 @@ nuevo:
 
 ```{r}
 encuesta %>%
-  mutate(partido = fct_recode(partido,
-    "Republicano duro" = "Republicano Acérrimo",
-    "Republicano moderado" = "Republicado No Acérrimo",
-    "Independiente pro republicano" = "Independiente, pro-Rep",
-    "Independiente pro demócrata" = "Independiente, pro-Dem",
-    "Demócrata moderado" = "Demócrata No Acérrimo",
-    "Demócrata duro" = "Demócrata Acérrimo",
-    "Otro" = "Sin respuesta",
-    "Otro" = "No sabe",
-    "Otro" = "Otro partido"
-  )) %>%
-  count(partido)
+ mutate(partido = fct_recode(partido,
+ "Republicano duro" = "Republicano Acérrimo",
+ "Republicano moderado" = "Republicado No Acérrimo",
+ "Independiente pro republicano" = "Independiente, pro-Rep",
+ "Independiente pro demócrata" = "Independiente, pro-Dem",
+ "Demócrata moderado" = "Demócrata No Acérrimo",
+ "Demócrata duro" = "Demócrata Acérrimo",
+ "Otro" = "Sin respuesta",
+ "Otro" = "No sabe",
+ "Otro" = "Otro partido"
+ )) %>%
+ count(partido)
 ```
 
 Debes usar esta técnica con cuidado: si agrupas categorías que son realmente
@@ -376,14 +376,14 @@ puedes proveer un vector de niveles viejos:
 
 ```{r}
 encuesta %>%
-  mutate(partido = fct_collapse(partido,
-    otro = c("Sin respuesta", "No sabe", "Otro partido"),
-    republicano = c("Republicano duro", "Republicado moderado"),
-    independiente = c("Independiente pro republicano", "Independiente",
-    "Independiente pro demócrata"),
-    democrata = c("Demócrata moderado", "Demócrata duro")
-  )) %>%
-  count(partido)
+ mutate(partido = fct_collapse(partido,
+ otro = c("Sin respuesta", "No sabe", "Otro partido"),
+ republicano = c("Republicano duro", "Republicado moderado"),
+ independiente = c("Independiente pro republicano", "Independiente",
+ "Independiente pro demócrata"),
+ democrata = c("Demócrata moderado", "Demócrata duro")
+ )) %>%
+ count(partido)
 ```
 
 A veces, simplemente quieres agrupar todos los grupos pequeños para simplificar
@@ -392,8 +392,8 @@ factores_):
 
 ```{r}
 encuesta %>%
-  mutate(religion = fct_lump(religion, other_level = "Otra")) %>%
-  count(religion)
+ mutate(religion = fct_lump(religion, other_level = "Otra")) %>%
+ count(religion)
 ```
 
 El comportamiento por defecto es agrupar los grupos pequeños de forma
@@ -407,14 +407,14 @@ En cambio, podemos usar el parámetro `n` para especificar cuántos grupos
 
 ```{r}
 encuesta %>%
-  mutate(religion = fct_lump(religion, n = 10, other_level = "Otra")) %>%
-  count(religion, sort = TRUE) %>%
-  print(n = Inf)
+ mutate(religion = fct_lump(religion, n = 10, other_level = "Otra")) %>%
+ count(religion, sort = TRUE) %>%
+ print(n = Inf)
 ```
 
 ### Ejercicios
 
 1. ¿Cómo han cambiado en el tiempo las proporciones de personas que se
-   identifican como Demócratas, Republicanas e Independientes?
+ identifican como Demócratas, Republicanas e Independientes?
 
 1. ¿Cómo podrías colapsar `ingreso` en un grupo más pequeño de categorías?
