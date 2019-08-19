@@ -30,6 +30,7 @@ options(na.action = na.warn)
 
 library(nycflights13)
 library(lubridate)
+library(datos)
 ```
 
 ## ¿Por qué los diamantes de baja calidad son más caros? {#diamond-prices}
