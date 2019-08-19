@@ -50,7 +50,7 @@ Ten en cuenta que el peor diamante es J (amarillo claro), y la peor claridad es 
 Pareciera que los diamantes de menor calidad tiene precios más altos porque hay una importante variable de confusión: el peso (`carat`) del diamante. El peso del diamante es el factor individual más importante para determinar el precio del diamante, y los diamantes de menor calidad tienden a ser más grandes.
 
 ```{r}
-ggplot(diamantes, aes(quilates, precio)) + 
+ggplot(diamantes, aes(quilate, precio)) + 
   geom_hex(bins = 50)
 ```
 
@@ -60,9 +60,9 @@ Podemos hacer que sea más fácil ver cómo los otros atributos de un diamante a
 2. Haz una transformación logarítmica de las variables quilates y precio
 
 ```{r}
-diamonds2 <- diamantes %>% 
-  filter(quilates <= 2.5) %>% 
-  mutate(lprice = log2(precio), lcarat = log2(quilates))
+diamonds2 <- diamantes %>%
+  filter(quilate <= 2.5) %>% 
+  mutate(lprice = log2(precio), lcarat = log2(quilate))
 ```
 
 Juntos, esos cambios hacen más fácil ver la relación entre `quilates` y `precio`:
@@ -82,12 +82,12 @@ Luego observamos lo que el modelo nos dice. Ten en cuenta que vuelvo atrás la t
 
 ```{r}
 grid <- diamonds2 %>% 
-  data_grid(quilates = seq_range(quilates, 20)) %>% 
-  mutate(lcarat = log2(quilates)) %>% 
+  data_grid(quilate = seq_range(quilate, 20)) %>% 
+  mutate(lcarat = log2(quilate)) %>% 
   add_predictions(mod_diamond, "lprice") %>% 
   mutate(precio = 2 ^ lprice)
 
-ggplot(diamonds2, aes(quilates, precio)) + 
+ggplot(diamonds2, aes(quilate, precio)) + 
   geom_hex(bins = 50) + 
   geom_line(data = grid, colour = "red", size = 1)
 ```
@@ -151,7 +151,7 @@ diamonds2 %>%
   filter(abs(lresid2) > 1) %>% 
   add_predictions(mod_diamond2) %>% 
   mutate(pred = round(2 ^ pred)) %>% 
-  select(precio, pred, carat:table, x:z) %>% 
+  select(precio, pred, quilate:tabla, x:z) %>% 
   arrange(precio)
 ```
 
