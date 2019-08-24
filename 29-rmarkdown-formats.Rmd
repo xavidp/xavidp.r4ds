@@ -21,6 +21,7 @@ Hasta ahora has visto usar R Markdown para producir documentos HTML. Este capít
 
 El botón knit de RStudio genera un archivo con el primer tipo de formato listado en su campo de salida `output`. Puedes generar archivos en formatos adicionales haciendo clic en el menú de selección al lado del botón knit.
 
+
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("screenshots/rmarkdown-knit.png")
 ```
@@ -198,7 +199,6 @@ Luego puedes usar las funciones de "input" (entrada en español) para agregar co
 
 ```{r, eval = FALSE}
 library(shiny)
-
 textInput("nombre", "Cuál es tu nombre?")
 numericInput("edad", "Cuántos años tienes?", NA, min = 0, max = 150)
 ```

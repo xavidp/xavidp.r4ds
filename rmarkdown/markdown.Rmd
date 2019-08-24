@@ -1,48 +1,48 @@
-Text formatting 
+Formato de texto
 ------------------------------------------------------------
 
-*italic*  or _italic_
-**bold**   __bold__
+*cursiva*   ó _cursiva_
+**negrita**   __negrita__
 `code`
-superscript^2^ and subscript~2~
+superscript^2^ y subscript~2~
 
-Headings
+Encabezados
 ------------------------------------------------------------
 
-# 1st Level Header
+# Encabezado de primer nivel
 
-## 2nd Level Header
+## Encabezado de segundo nivel
 
-### 3rd Level Header
+### Encabezado de tercer nivel
 
-Lists
+Listas
 ------------------------------------------------------------
 
-*   Bulleted list item 1
+*   Elemento 1 en lista no enumerada
 
-*   Item 2
+*   Elemento 2
 
-    * Item 2a
+    * Elemento 2a
 
-    * Item 2b
+    * Elemento 2b
 
-1.  Numbered list item 1
+1.  Elemento 1 en lista enumerada
 
-1.  Item 2. The numbers are incremented automatically in the output.
+1.  Elemento 2. La numeración se incrementa automáticamente en el output.
 
-Links and images
+Enlaces e imágenes
 ------------------------------------------------------------
 
-<http://example.com>
+<http://ejemplo.com>
 
-[linked phrase](http://example.com)
+[texto del enlace](http://ejemplo.com)
 
-![optional caption text](path/to/img.png)
+![pie de página opcional](ruta/de/la/imagen.png)
 
-Tables 
+Tablas 
 ------------------------------------------------------------
 
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
+Primer encabezado     | Segundo encabezado
+--------------------- | ---------------------
+Contenido de la celda | Contenido de la celda
+Contenido de la celda | Contenido de la celda

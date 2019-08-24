@@ -1,21 +1,21 @@
 ---
 output: html_document
 params:
-  my_class: "suv"
+  mi_clase: "suv"
 ---
 
 ```{r setup, include = FALSE}
+library(datos)
 library(ggplot2)
 library(dplyr)
 
-class <- mpg %>% filter(class == params$my_class)
+clase <- millas %>% filter(clase == params$mi_clase)
 ```
 
-# Fuel economy for `r params$my_class`s
+# Economía de combustible en vehículos `r params$mi_clase`
 
 ```{r, message = FALSE}
-ggplot(class, aes(displ, hwy)) + 
-  geom_point() + 
+ggplot(clase, aes(motor, autopista)) +
+  geom_point() +
   geom_smooth(se = FALSE)
 ```
-

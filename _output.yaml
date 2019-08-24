@@ -3,13 +3,12 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><strong><a href="./">R for Data Science</a></strong></li>
+        <li><strong><a href="./">R para Ciencia de Datos</a></strong></li>
     edit:
-      link: https://github.com/hadley/r4ds/edit/master/%s
+      link: https://github.com/cienciadedatos/r4ds/edit/master/%s
       text: "Edit"
     sharing: no
-  css: r4ds.css
+  css: r4ds.min.css
 
 bookdown::pdf_book:
   latex_engine: "xelatex"
-

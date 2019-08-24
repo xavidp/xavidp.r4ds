@@ -1,24 +1,24 @@
 ---
-title: "Diamond sizes"
+title: "Tamaño de los diamantes"
 date: 2016-08-25
 output: html_document
 ---
 
 ```{r setup, include = FALSE}
+library(datos)
 library(ggplot2)
 library(dplyr)
 
-smaller <- diamonds %>% 
-  filter(carat <= 2.5)
+pequenios <- diamantes %>%
+  filter(quilate <= 2.5)
 ```
 
-We have data about `r nrow(diamonds)` diamonds. Only 
-`r nrow(diamonds) - nrow(smaller)` are larger than
-2.5 carats. The distribution of the remainder is shown
-below:
+Tenemos datos respecto de `r nrow(diamantes)` diamantes. Únicamente 
+`r nrow(diamantes) - nrow(pequenios)` son mayores a 2,5 quilates. 
+La distribución de los diamantes pequeños se muestra a continuación:
 
 ```{r, echo = FALSE}
-smaller %>% 
-  ggplot(aes(carat)) + 
+pequenios %>%
+  ggplot(aes(quilate)) +
   geom_freqpoly(binwidth = 0.01)
 ```
