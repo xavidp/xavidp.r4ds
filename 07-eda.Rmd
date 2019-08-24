@@ -528,6 +528,8 @@ Los patrones en tus datos te dan una idea acerca de las relaciones entre variabl
 + ¿Cambia esta relación si examinas de manera individual distintos subgrupos de datos?
 
 Un diagrama de dispersión de la duración de las erupciones del géiser Viejo Fiel contra el tiempo de espera entre erupciones muestra un patrón: tiempos de espera más largos están asociados con erupciones más largas. El diagrama de dispersión también muestra los dos grupos que identificamos antes.
+```
+
 
 ```{r fig.height = 2}
 ggplot(data = faithful) +
@@ -537,6 +539,8 @@ ggplot(data = faithful) +
 Los patrones son una de las herramientas más útiles para las científicas de datos pues revelan covariación. Si piensas en la variación como un fenómeno que crea incertidumbre, la covariación es un fenómeno que la reduce. Si dos variables varían de manera conjunta, puedes usar los valores de una variable para hacer mejores predicciones sobre valores de la segunda variable. Si la covariación es producto de una relación causal (un caso especial), entonces puedes usar el valor de una variable para controlar el valor de la segunda. 
 
 Los modelos son una herramienta para extraer los patrones que existen en los datos. Por ejemplo, considera los datos sobre los diamentes. Resulta difícil entender la relación entre corte y precio, pues corte y quilate, así como quilate y precio están estrechamente relacionadas. Es posible usar un modelo para remover la fuerte relación entre precio y quilate de manera que podamos explorar las sutilezas que quedan en los datos. El código mostrado a continuación crea un modelo que predice el `precio` a partir de la variable `quilate` y después calcula los residuales (la diferencia entre la variable predecida y el valor real). Los residuales nos informan acerca del precio de un diamante, una vez que el efecto que el quilataje tiene sobre esta variable ha sido removido.
+```
+
 
 ```{r, dev = "png"}
 library(modelr)

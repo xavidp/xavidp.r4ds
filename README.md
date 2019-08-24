@@ -20,4 +20,5 @@ install.packages("bookdown")
 devtools::install_github("hadley/r4ds")
 devtools::install_github("cienciadedatos/datos")
 ```
+
 Revisa el código de conducta en el siguiente enlace: https://github.com/cienciadedatos/descripcion-y-orientaciones/issues/1

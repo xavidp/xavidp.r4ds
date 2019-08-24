@@ -1,15 +1,17 @@
-.book .book-header h1 {
-  opacity: 1;
-  text-align: left;
+@import url('https://code.cdn.mozilla.net/fonts/fira.css');
+
+body, h1, h2, h3, h4, h5, p {
+  font-family: 'Fira Sans', sans-serif;
 }
 
-#header .title {
-  margin-bottom: 0em;
+code, kbd, pre, samp {
+  font-family: 'Fira Mono', monospace;
 }
-#header h4.author {
-  margin: 0;
-  color: #666;
+
+button, input, select, textarea {
+  font-family: 'Fira Sans', sans-serif;
 }
-#header h4.author em {
-  font-style: normal;
+
+.book .book-header, .book .book-summary {
+  font-family: 'Fira Sans', sans-serif;
 }

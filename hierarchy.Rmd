@@ -4,17 +4,17 @@
 
 This chapter belongs in [wrangle](#wrangle-intro): it will give you a set of tools for working with hierarchical data, such as the deeply nested lists you often get when working with JSON. However, you can only learn it now because working with hierarchical structures requires some programming skills, particularly an understanding of data structures, functions, and iteration. Now you have those tools under your belt, you can learn how to work with hierarchical data.
 
-The 
+The
 
 As well as tools to simplify iteration, purrr provides tools for handling deeply nested lists. There are three common sources of such data:
 
 * JSON and XML
-* 
+*
 
 The map functions apply a function to every element in a list. They are the most commonly used part of purrr, but not the only part. Since lists are often used to represent complex hierarchies, purrr also provides tools to work with hierarchy:
 
 * You can extract deeply nested elements in a single call by supplying
-  a character vector to the map functions.
+ a character vector to the map functions.
 
 * You can remove a level of the hierarchy with the flatten functions.
 
@@ -50,15 +50,15 @@ str(issues[[1]])
 
 ```{r}
 tibble::tibble(
-  i = seq_along(issues),
-  names = issues %>% map(names) 
-) %>% 
-  tidyr::unnest(names) %>% 
-  table() %>% 
-  t()
+ i = seq_along(issues),
+ names = issues %>% map(names)
+) %>%
+ tidyr::unnest(names) %>%
+ table() %>%
+ t()
 ```
 
-Another alternative is the __listviewer__ package, <https://github.com/timelyportfolio/listviewer>. 
+Another alternative is the __listviewer__ package, <https://github.com/timelyportfolio/listviewer>.
 
 ## Extracting deeply nested elements
 
@@ -121,7 +121,7 @@ As well as indexing deeply into hierarchy, it's sometimes useful to flatten it. 
 x <- list(list(a = 1, b = 2), list(c = 3, d = 4))
 str(x)
 
-y <- flatten(x) 
+y <- flatten(x)
 str(y)
 flatten_dbl(y)
 ```
@@ -129,7 +129,7 @@ flatten_dbl(y)
 Graphically, that sequence of operations looks like:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-flatten.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-flatten.svg")
 ```
 
 Whenever I get confused about a sequence of flattening operations, I'll often draw a diagram like this to help me understand what's going on.
@@ -138,12 +138,12 @@ Base R has `unlist()`, but I recommend avoiding it for the same reason I recomme
 
 ## Switching levels in the hierarchy {#transpose}
 
-Other times the hierarchy feels "inside out". You can use `transpose()` to flip the first and second levels of a list: 
+Other times the hierarchy feels "inside out". You can use `transpose()` to flip the first and second levels of a list:
 
 ```{r}
 x <- list(
-  x = list(a = 1, b = 3, c = 5),
-  y = list(a = 2, b = 4, c = 6)
+ x = list(a = 1, b = 3, c = 5),
+ y = list(a = 2, b = 4, c = 6)
 )
 x %>% str()
 x %>% transpose() %>% str()
@@ -152,7 +152,7 @@ x %>% transpose() %>% str()
 Graphically, this looks like:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-transpose.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-transpose.svg")
 ```
 
 You'll see an example of this in the next section, as `transpose()` is particularly useful in conjunction with adverbs like `safely()` and `quietly()`.
@@ -176,13 +176,12 @@ df %>% transpose() %>% str()
 
 ### Exercises
 
-1.  Challenge: read all the CSV files in a directory. Which ones failed
-    and why? 
+1. Challenge: read all the CSV files in a directory. Which ones failed
+ and why?
 
-    ```{r, eval = FALSE}
-    files <- dir("data", pattern = "\\.csv$")
-    files %>%
-      set_names(., basename(.)) %>%
-      map_df(safely(readr::read_csv), .id = "filename") %>%
-    ```
-
+ ```{r, eval = FALSE}
+ files <- dir("data", pattern = "\\.csv$")
+ files %>%
+ set_names(., basename(.)) %>%
+ map_df(safely(readr::read_csv), .id = "filename") %>%
+ ```
