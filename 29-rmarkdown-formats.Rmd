@@ -110,7 +110,7 @@ output:
 
 ## Presentaciones
 
-También puedes usar R Markdown para generar presentaciones. Obtienes menos control visual que con herramientas como Keynote y PowerPoint, pero ahorrarás mucho tiempo insertando automáticamente los resultados de tu código R en una presentación. Las Presentaciones funcionan dividiendo tu contenido en diapositivas, con una nueva diapositiva que comienza en cada encabezado de primer nivel (`#`) o de segundo nivel (`##`). También puedes insertar una regla horizontal (`***`) para crear una nueva diapositiva sin encabezado. 
+También puedes usar R Markdown para crear presentaciones. Obtienes menos control visual que con herramientas como Keynote y PowerPoint, pero ahorrarás mucho tiempo insertando automáticamente los resultados de tu código R en una presentación. Las Presentaciones funcionan dividiendo tu contenido en diapositivas, con una nueva diapositiva que comienza en cada encabezado de primer nivel (`#`) o de segundo nivel (`##`). También puedes insertar una regla horizontal (`***`) para crear una nueva diapositiva sin encabezado. 
 
 R Markdown viene con tres formatos de presentación integrados:
 
@@ -184,7 +184,7 @@ Para obtener más información sobre los htmlwidgets y ver una lista más comple
 
 ### Shiny
 
-Los htmlwidgets proporciona interactividad del lado del cliente, es decir que toda la interactividad ocurre en el navegador, independientemente de R. Por un lado esto es bueno porque puedes distribuir el archivo HTML sin ninguna conexión con R. Sin embargo, también limita fundamentalmente lo que puedes hacer a las cosas que han sido implementadas en HTML y JavaScript. Una alternativa es usar __shiny__, un paquete que te permite crear interactividad usando código R, no JavaScript.
+Los htmlwidgets proporcionan interactividad del lado del cliente, es decir que toda la interactividad ocurre en el navegador, independientemente de R. Por un lado, esto es bueno porque puedes distribuir el archivo HTML sin ninguna conexión con R. Sin embargo, también limita fundamentalmente lo que puedes hacer a las cosas que han sido implementadas en HTML y JavaScript. Una alternativa es usar __shiny__, un paquete que te permite crear interactividad usando código R, no JavaScript.
 
 Para llamar código Shiny desde un documento R Markdown, agrega `runtime: shiny` al encabezado:
 
@@ -219,7 +219,7 @@ Con un poco más de infraestructura puedes usar R Markdown para crear un sitio w
 *   Coloca todos tus archivos `.Rmd` en un mismo directorio. `index.Rmd` será tu 
     página de inicio.
 
-*   Agrega un archivo YAML llamado `_site.yml` que proporcionará la navegabilidad para el sitio.
+*   Agrega un archivo YAML llamado `_site.yml` que proporcionará la navegación para el sitio.
     Por ejemplo:
 
     ```{r echo = FALSE, comment = ""}
@@ -257,7 +257,7 @@ Para obtener más información sobre comunicación efectiva con estos diferentes
 * Para mejorar tus habilidades de presentación, recomiendo: Patrones de Presentación,
   [_Presentation Patterns_](https://amzn.com/0321820800), por Neal Ford,
   Matthew McCollough y Nathaniel Schutta. Proporciona un conjunto de patrones 
-  efectivo de alto y bajo nivel que puedes usar para mejorar tus presentaciones.
+  efectivo (de alto y bajo nivel) que puedes usar para mejorar tus presentaciones.
 
 * Si das charlas académicas, recomiendo que leas La guía para dar charlas del grupo Leek:
   [_Leek group guide to giving talks_](https://github.com/jtleek/talkguide).
