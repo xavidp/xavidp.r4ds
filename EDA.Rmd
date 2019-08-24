@@ -2,17 +2,17 @@
 
 ## Introducción
 
-Este capítulo te mostrará cómo usar herramientas de visualización y transformación para explorar tus datos sistemáticamente, una tarea que las personas expertas en estadística suelen llamar análisis exploratorio de datos, o _EDA_ (del inglés _exploratory data analysis_). El _EDA_ es un ciclo iterativo, pues tú:
+Este capítulo te mostrará cómo usar la visualización y la transformación para explorar tus datos sistemáticamente, una tarea que las personas expertas en estadística suelen llamar análisis exploratorio de datos, o _EDA_ (del inglés _exploratory data analysis_). El _EDA_ es un ciclo iterativo en el que:
 
-1. Generarás preguntas acerca de tus datos.
+1. Generas preguntas acerca de tus datos.
 
-2. Buscarás respuestas mediante visualizaciones, transformaciones y modelado de tus datos.
+2. Buscas respuestas mediante visualizaciones, transformaciones y modelado de tus datos.
 
-3. Usarás lo que has aprendido para refinar tus preguntas y/o generar nuevas interrogantes. 
+3. Usas lo que has aprendido para refinar tus preguntas y/o generar nuevas interrogantes. 
 
-El análisis exploratorio de datos no es un proceso formal regido por un conjunto estricto de reglas. El _EDA_ se parece más a un estado mental. Durante las fases iniciales del _EDA_ eres libre de investigar todas las ideas que se te ocurran. Algunas de estas ideas saldrán bien, mientras que otras serán como callejones sin salida. A medida que tu exploración continúa, te concentrarás en ciertas áreas particularmente productivas sobre las que eventualmente escribirás y comunicarás a otras personas.
+El análisis exploratorio de datos no es un proceso formal regido por un conjunto estricto de reglas. El _EDA_ más que nada es un estado mental. Durante las fases iniciales del _EDA_ deberías ser libre de investigar todas las ideas que se te ocurran. Algunas de estas ideas prosperarán, mientras que otras serán como callejones sin salida. A medida que tu exploración continúa, te concentrarás en ciertas áreas particularmente productivas sobre las que eventualmente escribirás y comunicarás a otras personas.
 
-El _EDA_ es una parte importante de cualquier análisis de datos, aún si las interrogantes son claras y las preguntas están puestas sobre la mesa, pues siempre tendrás que examinar la calidad de tus datos. La limpieza de datos es una aplicación del _EDA_: en este proceso haces preguntas acerca de si tus datos cumplen con tus expectativas o no. Para limpiar tus datos tendrás que desplegar todas las herramientas del _EDA_: visualización, transformación y modelado.
+El _EDA_ es una parte importante de cualquier análisis de datos, aun si las preguntas son servidas en bandeja, pues siempre tendrás que examinar la calidad de tus datos. La limpieza de datos es una aplicación del _EDA_: haces preguntas acerca de si tus datos cumplen con tus expectativas o no. Para limpiar tus datos tendrás que desplegar todas las herramientas del _EDA_: visualización, transformación y modelado.
 
 ### Requisitos indispensables
 
