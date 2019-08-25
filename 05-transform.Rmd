@@ -2,11 +2,11 @@
 
 ## Introducción
 
-La visualización es una herramienta importante para para la generación de conocimiento, sin embargo es raro que obtengas los datos exactamente en la forma correcta que necesitas.  A menudo necesitarás crear algunas variables nuevas o resúmenes, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete **dplyr** y el uso de un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
+La visualización es una herramienta importante para para la generación de conocimiento; sin embargo, es raro que obtengas los datos exactamente en la forma correcta que los necesitas. A menudo tendrás que crear algunas variables nuevas o resúmenes, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete **dplyr** y el uso de un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
 
 ### Prerequisitos
 
-En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central de tidyverse. Ilustraremos las ideas clave con el conjunto de datos *vuelos* que aparecen originalmente en el paquete **nycflights13**, pero para este caso utilizaremos la versión traducida incluida en el paquete **datos** y usaremos **ggplot2** para ayudarnos a comprender los datos. 
+En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central del tidyverse. Ilustraremos las ideas clave con el _dataset_ *vuelos* que está contenido en el paquete **datos**.  Utilizaremos **ggplot2** para ayudarnos a comprender los datos. 
 
 ```{r setup, message = FALSE, cache = FALSE}
 #remotes::install_github("cienciadedatos/datos")
@@ -14,7 +14,7 @@ library(datos)
 library(tidyverse)
 ```
 
-Toma nota acerca del mensaje de conflictos que se imprime cuando carga el paquete **tidyverse**. Te dice que **dplyr** sobrescribe algunas funciones en R base. Si deseas usar la versión base de estas funciones después de cargar **dplyr**, necesitarás usar sus nombres completos: `stats::filter()` y `stats::lag()`.
+Toma nota acerca del mensaje de conflictos que se imprime cuando cargas el paquete **tidyverse**. Te indica que **dplyr** sobrescribe algunas funciones de R base. Si deseas usar la versión base de estas funciones después de cargar **dplyr**, necesitarás usar sus nombres completos: `stats::filter()` y `stats::lag()`.
 
 ### vuelos
 
@@ -24,7 +24,7 @@ Para explorar los verbos básicos de manipulación de datos de **dplyr**, usarem
 vuelos
 ```
 
-Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un __tibble__. Los *tibbles* son marcos de datos, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; hablaremos en más detalle de los *tibbles* en [wrangle](#wrangle-intro).
+Es posible que observes que este conjunto de datos se imprime de una forma un poco diferente a otros que podrías haber utilizado en el pasado: solo muestra las primeras filas y todas las columnas que caben en tu pantalla. Para ver todo el conjunto de datos, puedes ejecutar `View(vuelos)` que abrirá el conjunto de datos en el visor de RStudio. En este caso se imprime de manera diferente porque es un __tibble__. Los *tibbles* son _data frames_, pero ligeramente ajustados para que funcionen mejor en el tidyverse. Por ahora, no necesitas preocuparte por las diferencias; hablaremos en más detalle de los *tibbles* en [Manejar o domar datos](#wrangle-intro).
 
 También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras debajo de los nombres de las columnas. Estos describen el tipo de cada variable:
 
@@ -36,7 +36,7 @@ También podrás haber notado la fila de tres (o cuatro) abreviaturas de letras 
 
 * `dttm` significa fechas y horas (una fecha + una hora).
 
-Hay otros tres tipos comunes de variables que no se usan en este conjunto de datos, pero que encontrará más adelante en el libro:
+Hay otros tres tipos comunes de variables que no se usan en este conjunto de datos, pero que encontrarás más adelante en el libro:
 
 * `lgl` significa lógico, vectores que solo contienen ` TRUE` (verdadero) o `FALSE` (falso).
 
@@ -54,7 +54,7 @@ En este capítulo, aprenderás las cinco funciones clave de **dplyr** que te per
 * Crear nuevas variables con transformaciones de variables existentes (`mutate()` — del inglés mutar o transformar).
 * Contraer muchos valores en un solo resumen (`summarise()` — del inglés resumir).
 
-Todas estas funciones se pueden usar junto con `group_by()` (del inglés agrupar por), que cambia el alcance de cada función para que actúe ya no sobre todo el conjunto de datos sino grupo por grupo. Estas seis funciones proporcionan los verbos para un lenguaje de manipulación de datos.
+Todas estas funciones se pueden usar junto con `group_by()` (del inglés _agrupar por_), que cambia el alcance de cada función para que actúe ya no sobre todo el conjunto de datos sino de grupo en grupo. Estas seis funciones proporcionan los verbos para este lenguaje de manipulación de datos.
 
 Todos los verbos funcionan de manera similar:
 
@@ -64,23 +64,23 @@ Todos los verbos funcionan de manera similar:
 
 3. El resultado es un nuevo *data frame*.
 
-En conjunto, estas propiedades hacen que sea fácil encadenar varios pasos simples para lograr un resultado complejo. Vamos a sumergirnos y ver cómo funcionan estos verbos.
+En conjunto, estas propiedades hacen que sea fácil encadenar varios pasos simples para lograr un resultado complejo. Sumerjámosnos y veamos cómo funcionan estos verbos.
 
 ## Filtrar filas con `filter()`
 
-`filter()` te permite filtrar un subconjunto de observaciones basadas en sus valores. El primer argumento es el nombre del *data frame*. El segundo y los siguientes argumentos son las expresiones que filtran el *data frame*. Por ejemplo, podemos seleccionar todos los vuelos del 1 de enero con:
+`filter()` te permite filtrar un subconjunto de observaciones según sus valores. El primer argumento es el nombre del *data frame*. El segundo y los siguientes argumentos son las expresiones que lo filtran. Por ejemplo, podemos seleccionar todos los vuelos del 1 de enero con:
 
 ```{r}
 filter(vuelos, mes == 1, dia == 1)
 ```
 
-Cuando ejecutas esa línea de código, **dplyr** ejecuta la operación de filtrado y devuelve un nuevo *data frame*. Las funciones **dplyr** nunca modifican sus entradas, por lo que si deseas guardar el resultado, necesitarás usar el operador de asignación, `<-`:
+Cuando ejecutas esa línea de código, **dplyr** ejecuta la operación de filtrado y devuelve un nuevo *data frame*. Las funciones de **dplyr** nunca modifican su _input_, por lo que si deseas guardar el resultado, necesitarás usar el operador de asignación, `<-`:
 
 ```{r}
 ene1 <- filter(vuelos, mes == 1, dia == 1)
 ```
 
-R imprime los resultados o los guarda en una variable. Si deseas hacer ambas cosas, puedes escribir toda la línea entre paréntesis:
+R imprime los resultados o los guarda en una variable. Si deseas hacer ambas cosas puedes escribir toda la línea entre paréntesis:
 
 ```{r}
 (dic25 <- filter(vuelos, mes == 12, dia == 25))
@@ -90,20 +90,20 @@ R imprime los resultados o los guarda en una variable. Si deseas hacer ambas cos
 
 Para usar el filtrado de manera efectiva, debes saber cómo seleccionar las observaciones que deseas utilizando los operadores de comparación. R proporciona el conjunto estándar: `>`, `>=`, `<`, `<=`, `!=` (no igual) y `==` (igual).
 
-Cuando comienzas con R, el error más fácil de cometer es usar `=` en lugar de `==` cuando se prueba la igualdad. Cuando esto sucede, obtendrás un error informativo:
+Cuando comienzas con R, el error más fácil de cometer es usar `=` en lugar de `==` cuando se busca igualdad. Cuando esto suceda, obtendrás un error informativo:
 
 ```{r, error = TRUE}
 filter(vuelos, mes = 1)
 ```
 
-Hay otro problema común que puedes encontrar al usar `==`: números de coma flotante. ¡Estos resultados pueden sorprenderte!
+Hay otro problema común que puedes encontrar al usar `==`: los números de coma flotante. ¡Estos resultados pueden sorprenderte!
 
 ```{r}
 sqrt(2)^2 == 2
 1 / 49 * 49 == 1
 ```
 
-Las computadoras usan aritmética de precisión finita (obviamente no pueden almacenar una cantidad infinita de dígitos), así que recuerda que cada número que ves es una aproximación. En lugar de confiar en `==`, usa `near()` (cercano, en inglés):
+Las computadoras usan aritmética de precisión finita (obviamente, no pueden almacenar una cantidad infinita de dígitos), así que recuerda que cada número que ves es una aproximación. En lugar de confiar en `==`, usa `near()` (cercano, en inglés):
 
 ```{r}
 near(sqrt(2)^2, 2)
@@ -112,13 +112,13 @@ near(1 / 49 * 49, 1)
 
 ### Operadores lógicos
 
-Múltiples argumentos para `filter()` se combinan con "y": cada expresión debe ser verdadera para que una fila se incluya en el *output*. Para otros tipos de combinaciones, necesitarás usar operadores Booleanos: `&` es "y", `|` es "o", y `!` es "no". La figura @ref(fig:bool-ops) muestra el conjunto completo de operaciones Booleanas.
+Si tienes múltiples argumentos para `filter()` estos se combinan con "y": cada expresión debe ser verdadera para que una fila se incluya en el *output*. Para otros tipos de combinaciones necesitarás usar operadores Booleanos: `&` es "y", `|` es "o", y `!` es "no". La figura @ref(fig:bool-ops) muestra el conjunto completo de operaciones Booleanas.
 
 ```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."}
 knitr::include_graphics("diagrams_w_text_as_path/es/transform-logical.svg")
 ```
 
-El siguiente código encuentra todos los vuelos que partieron en noviembre o diciembre:
+El siguiente código sirve para encontrar todos los vuelos que partieron en noviembre o diciembre:
 
 ```{r, eval = FALSE}
 filter(vuelos, mes == 11 | mes == 12)
@@ -126,7 +126,7 @@ filter(vuelos, mes == 11 | mes == 12)
 
 El orden de las operaciones no funciona como en español. No puedes escribir `filter(vuelos, mes == 11 | 12)`, que literalmente puede traducirse como "encuentra todos los vuelos que partieron en noviembre o diciembre". En cambio, encontrará todos los meses que son iguales a `11 | 12`, una expresión que resulta en 'TRUE' (verdadero). En un contexto numérico (como aquí), 'TRUE' se convierte en uno, por lo que encuentra todos los vuelos en enero, no en noviembre o diciembre. ¡Esto es bastante confuso!
 
-Una manera rápida y útil para resolver este problema es `x %in% y` (del inglés x en y). Esto seleccionará cada fila donde `x` es uno de los valores en` y`. Podríamos usarlo para reescribir el código de arriba:
+Una manera rápida y útil para resolver este problema es `x %in% y` (es decir, x _en_ y). Esto seleccionará cada fila donde `x` es uno de los valores en` y`. Podríamos usarlo para reescribir el código de arriba:
 
 ```{r, eval = FALSE}
 nov_dic <- filter(vuelos, mes %in% c(11, 12))
@@ -139,13 +139,13 @@ filter(vuelos, !(atraso_llegada > 120 | atraso_salida > 120))
 filter(vuelos  , atraso_llegada <= 120, atraso_salida <= 120)
 ```
 
-Además de `&` y `|`, R también tiene `&&` y `||`. ¡No los uses aquí! Aprenderás cuándo deberías usarlos en [conditional execution].
+Además de `&` y `|`, R también tiene `&&` y `||`. ¡No los uses aquí! Aprenderás cuándo deberías usarlos en [Ejecución condicional].
 
-Siempre que empieces a usar expresiones complejas de varias partes en `filter()`, considera convertirlas en variables explícitas. Eso hace que sea mucho más fácil verificar tu trabajo. Aprenderás cómo crear nuevas variables en breve.
+Siempre que empieces a usar en `filter()` expresiones complejas que tengan varias partes, considera convertirlas en variables explícitas. Eso hace que sea mucho más fácil verificar tu trabajo. Aprenderás cómo crear nuevas variables en breve.
 
 ### Valores faltantes
 
-Una característica importante de R que puede hacer que la comparación sea difícil son los valores faltantes, o `NA`s (del inglés "no disponibles"). `NA` representa un valor desconocido por lo que los valores perdidos son "contagiosos": casi cualquier operación que involucre un valor desconocido también será desconocida.
+Una característica importante de R que puede hacer que la comparación sea difícil son los valores faltantes, o `NA`s (del inglés "no disponibles"). `NA` representa un valor desconocido, lo que hace que los valores perdidos sean "contagiosos": casi cualquier operación que involucre un valor desconocido también será desconocida.
 
 ```{r}
 NA > 5
@@ -180,7 +180,7 @@ Si deseas determinar si falta un valor, usa `is.na()`:
 is.na(x)
 ```
 
-`filter()` solo incluye filas donde la condición es `TRUE`; excluye ambos valores `FALSE` y `NA`. Si deseas conservar valores perdidos, solicítalos explícitamente:
+`filter()` solo incluye filas donde la condición es `TRUE`; excluye tanto los valores `FALSE` como `NA`. Si deseas conservar valores perdidos, solicítalos explícitamente:
 
 ```{r}
 df <- tibble(x = c(1, NA, 3))
@@ -192,29 +192,29 @@ filter(df, is.na(x) | x > 1)
 
 1.  Encuentra todos los vuelos que:
 
-   1.   Tuvieron un retraso de llegada de dos o más horas
+   1. Tuvieron un retraso de llegada de dos o más horas
   
-   2.  Volaron a Houston (`IAH` o` HOU`)
+   2. Volaron a Houston (`IAH` o` HOU`)
    
    3. Fueron operados por United, American o Delta
    
-   4.  Partieron en verano (julio, agosto y septiembre)
+   4. Partieron en invierno (julio, agosto y septiembre)
    
-   5.   Llegaron más de dos horas tarde, pero no salieron tarde
+   5. Llegaron más de dos horas tarde, pero no salieron tarde
    
-   6.  Se retrasaron por lo menos una hora, pero repusieron más de 30 minutos en vuelo
+   6. Se retrasaron por lo menos una hora, pero repusieron más de 30 minutos en vuelo
    
    7. Partieron entre la medianoche y las 6 a.m. (incluyente)
 
-2.  Otra función de **dplyr** útil para usar filtros es `between()`. ¿Qué hace? ¿Puedes usarlo para simplificar el código necesario para responder a los desafíos anteriores?
+2.  Otra función de **dplyr** que es útil para usar filtros es `between()`. ¿Qué hace? ¿Puedes usarla para simplificar el código necesario para responder a los desafíos anteriores?
 
-3. ¿Cuántos vuelos tienen datos faltantes de `horario_salida`? ¿Qué otras variables tienen valores faltantes? ¿Qué representan estas filas?
+3. ¿Cuántos vuelos tienen datos faltantes en `horario_salida`? ¿Qué otras variables tienen valores faltantes? ¿Qué representan estas filas?
 
 4. ¿Por qué `NA ^ 0` no es faltante? ¿Por qué `NA | TRUE` no es faltante? ¿Por qué `FALSE & NA` no es faltante? ¿Puedes descubrir la regla general? (¡`NA * 0` es un contraejemplo complicado!)
 
 ## Reordenar las filas con `arrange()`
 
-`arrange()` funciona de manera similar a `filter()` excepto que en lugar de seleccionar filas, cambia su orden. La función toma un *data frame* y un conjunto de nombres de columnas (o expresiones más complicadas) para ordenar acorde. Si proporcionas más de un nombre de columna, cada columna adicional se utilizará para romper empates en los valores de las columnas anteriores:
+`arrange()` funciona de manera similar a `filter()` excepto que en lugar de seleccionar filas, cambia su orden. La función toma un *data frame* y un conjunto de nombres de columnas (o expresiones más complicadas) para ordenar según ellas. Si proporcionas más de un nombre de columna, cada columna adicional se utilizará para romper empates en los valores de las columnas anteriores:
 
 ```{r}
 arrange(vuelos, anio, mes, dia)
@@ -248,7 +248,7 @@ arrange(df, desc(x))
 
 No es raro obtener conjuntos de datos con cientos o incluso miles de variables. En este caso, el primer desafío a menudo se reduce a las variables que realmente te interesan. `select()` te permite seleccionar rápidamente un subconjunto útil utilizando operaciones basadas en los nombres de las variables.
 
-`select()` no es muy útil con los datos de los vuelos porque solo tenemos 19 variables, pero aún podemos describir la idea general:
+`select()` no es muy útil con los datos de los vuelos porque solo tenemos 19 variables, pero de todos modos se entiende la idea general:
 
 ```{r}
 # Seleccionar columnas por nombre
@@ -267,7 +267,7 @@ Hay una serie de funciones auxiliares que puedes usar dentro de `select()`:
 
 * `contains("ijk")`: coincide con los nombres que contienen "ijk".
 
-* `matches("(.)\\1")`: selecciona variables que coinciden con una expresión regular. Éste coincide con cualquier variable que contenga caracteres repetidos. Aprenderás más sobre expresiones regulares en [strings].
+* `matches("(.)\\1")`: selecciona variables que coinciden con una expresión regular. Esta en particular coincide con cualquier variable que contenga caracteres repetidos. Aprenderás más sobre expresiones regulares en [Cadenas de caracteres].
 
 * `num_range("x", 1:3)`: coincide con `x1`,` x2` y `x3`.
 
@@ -279,7 +279,7 @@ Consulta `?select` para ver más detalles.
 rename(vuelos, cola_num = codigo_cola)
 ```
 
-Otra opción es usar `select()` junto con el auxiliar `everything()` (todo, en inglés). Esto es útil si tienes un grupo de variables que te gustaría mover al comienzo del *data frame*.
+Otra opción es usar `select()` junto con el auxiliar `everything()` (_todo_, en inglés). Esto es útil si tienes un grupo de variables que te gustaría mover al comienzo del *data frame*.
 
 ```{r}
 select(vuelos, fecha_hora, tiempo_vuelo, everything())
@@ -287,11 +287,11 @@ select(vuelos, fecha_hora, tiempo_vuelo, everything())
 
 ### Ejercicios
 
-1. Haz una lluvia de ideas de tantas maneras como sea posible para seleccionar `horario_salida`,` atraso_salida`,`horario_llegada`, y` atraso_llegada` de `vuelos`.
+1. Haz una lluvia de ideas sobre tantas maneras como sea posible para seleccionar `horario_salida`,` atraso_salida`,`horario_llegada`, y` atraso_llegada` de `vuelos`.
 
-2. ¿Qué sucede si incluyes el nombre de una variable varias veces en una llamada `select()`?
+2. ¿Qué sucede si incluyes el nombre de una variable varias veces en una llamada a `select()`?
 
-3. ¿Qué hace la función `one_of()`? Por qué podría ser útil en conjunto con este vector?
+3. ¿Qué hace la función `one_of()`? ¡¿Por qué podría ser útil en conjunto con este vector?
 
 ```{r}
 vars <- c ("anio", "mes", "dia", "atraso_salida", "atraso_llegada")
@@ -305,7 +305,7 @@ select(vuelos, contains("SALIDA"))
 
 ## Añadir nuevas variables con `mutate()`
 
-Además de seleccionar conjuntos de columnas existentes, a menudo es útil crear nuevas columnas en función de columnas existentes. Ese es el trabajo de `mutate()` (del inglés mutar o transformar).
+Además de seleccionar conjuntos de columnas existentes, a menudo es útil crear nuevas columnas en función de columnas existentes. Ese es el trabajo de `mutate()` (del inglés _mutar_ o _transformar_).
 
 `mutate()` siempre agrega nuevas columnas al final de un conjunto de datos, así que comenzaremos creando un conjunto de datos más pequeño para que podamos ver las nuevas variables. Recuerda que cuando usas RStudio, la manera más fácil de ver todas las columnas es `View()`.
 
@@ -322,7 +322,7 @@ mutate(vuelos_sml,
 )
 ```
 
-Ten en cuenta que puedes consultar las columnas que acabas de crear:
+Ten en cuenta que puedes hacer referencia a las columnas que acabas de crear:
 
 ```{r}
 mutate(vuelos_sml,
@@ -344,9 +344,9 @@ transmute(vuelos,
 
 ### Funciones de creación útiles {#mutate-funs}
 
-Hay muchas funciones para crear nuevas variables que puedes usar con `mutate()`. La propiedad clave es que la función debe ser vectorizada: debe tomar un vector de valores como *input*, y devolver un vector con el mismo número de valores como *output*. No hay forma de enumerar todas las posibles funciones que podrías usar, pero aquí hay una selección de funciones que son útiles frecuentemente:
+Hay muchas funciones para crear nuevas variables que puedes usar con `mutate()`. La propiedad clave es que la función debe ser vectorizada: debe tomar un vector de valores como *input*, y devolver un vector con el mismo número de valores como *output*. No hay forma de enumerar todas las posibles funciones que podrías usar, pero aquí hay una selección de funciones que frecuentemente son útiles:
 
-*   Operadores aritméticos: `+`, `-`,`*`,`/`,`^`. Todos están vectorizados, usando las llamadas "reglas de reciclaje". Si un parámetro es más corto que el otro, se extenderá automáticamente para tener la misma longitud. Esto es muy útil cuando uno de los argumentos es un solo número: `tiempo_vuelo / 60`, `horas * 60 + minuto`, etc. 
+*   Operadores aritméticos: `+`, `-`,`*`,`/`,`^`. Todos están vectorizados usando las llamadas "reglas de reciclaje". Si un parámetro es más corto que el otro, se extenderá automáticamente para tener la misma longitud. Esto es muy útil cuando uno de los argumentos es un solo número: `tiempo_vuelo / 60`, `horas * 60 + minuto`, etc. 
     
     Los operadores aritméticos también son útiles junto con las funciones de agregar que aprenderás más adelante. Por ejemplo, `x / sum(x)` calcula la proporción de un total, y `y - mean(y)` calcula la diferencia de la media.
     
@@ -360,12 +360,12 @@ transmute(vuelos,
 )
 ```
 
-*   Logaritmos: `log()`, `log2()`, `log10()`. Los logaritmos son increíblemente útiles como transformación para trabajar con datos con múltiples órdenes de magnitud. También convierten las relaciones multiplicativas en aditivas, una característica que retomaremos en modelamiento. 
+*   Logaritmos: `log()`, `log2()`, `log10()`. Los logaritmos son increíblemente útiles como transformación para trabajar con datos con múltiples órdenes de magnitud. También convierten las relaciones multiplicativas en aditivas, una característica que retomaremos en los capítulos sobre modelos.
     
     En igualdad de condiciones, recomendamos usar `log2()` porque es más fácil de interpretar: una diferencia de 1 en la escala de registro corresponde a la duplicación de la escala original y una diferencia de -1 corresponde a dividir a la mitad.
 
 
-* Rezagos: `lead()` y `lag()` te permiten referirte a un valor adelante o un valor atrás (con rezago). Esto te permite calcular las diferencias móviles (por ejemplo, `x - lag(x)`) o encontrar cuándo cambian los valores (`x! = lag (x)`). Estos comandos son más útiles cuando se utilizan junto con `group_by()`, que lo aprenderás en breve.
+* Rezagos: `lead()` y `lag()` te permiten referirte a un valor adelante o un valor atrás (con rezago). Esto te permite calcular as diferencias móviles (por ejemplo, `x - lag(x)`) o encontrar cuándo cambian los valores (`x! = lag (x)`). Estos comandos son más útiles cuando se utilizan junto con `group_by()`, algo que aprenderás en breve.
 
 ```{r}
 (x <- 1:10)
@@ -373,7 +373,7 @@ lag(x)
 lead(x)
 ```
 
-* Agregados acumulativos y móviles: R proporciona funciones para ejecutar sumas, productos, mínimos y máximos: `cumsum()`, `cumprod()`, `cummin()`, `cummax()`; y **dplyr** proporciona `cummean()` para las medias acumuladas. Si necesitas calcular agregados móviles (es decir, una suma calculada en una ventana móvil), prueba el paquete **RcppRoll**.
+* Agregados acumulativos y móviles: R proporciona funciones para ejecutar sumas, productos, mínimos y máximos: `cumsum()`, `cumprod()`, `cummin()`, `cummax()`; **dplyr**, por su parte, proporciona `cummean()` para las medias acumuladas. Si necesitas calcular agregados móviles (es decir, una suma calculada en una ventana móvil), prueba el paquete **RcppRoll**.
 
 ```{r}
 x
@@ -383,7 +383,7 @@ cummean(x)
 
 * Comparaciones lógicas: `<`, `<=`, `>`, `>=`, `!=` sobre las cuales aprendiste antes. Si estás haciendo una secuencia compleja de operaciones lógicas, es a menudo una buena idea almacenar los valores provisionales en nuevas variables para que puedas comprobar que cada paso funciona como se espera.
 
-* Ordenamiento: hay una serie de funciones de ordenamiento, pero deberías comenzar con `min_rank()`. Esta función realiza el tipo más común de ordenamiento (por ejemplo, primero, segundo, tercero, etc.). El valor predeterminado otorga la menor posición a los valores más pequeños; usa `desc(x)` para dar la menor posición a los valores más grandes.
+* Ordenamiento: hay una serie de funciones de ordenamiento (ranking), pero deberías comenzar con `min_rank()`. Esta función realiza el tipo más común de ordenamiento (por ejemplo, primero, segundo, tercero, etc.). El valor predeterminado otorga la menor posición a los valores más pequeños; usa `desc(x)` para dar la menor posición a los valores más grandes.
 
 ```{r}
 y <- c (1, 2, 2, NA, 3, 4)
@@ -391,7 +391,7 @@ min_rank(y)
 min_rank(desc(y))
 ```
 
-Si `min_rank()` no hace lo que necesitas, consulta las variantes `row_number()`, `dense_rank()`, `percent_rank()`, `cume_dist()`,`quantile()`. Mira sus páginas de ayuda para más detalles.
+Si `min_rank()` no hace lo que necesitas, consulta las variantes `row_number()`, `dense_rank()`, `percent_rank()`, `cume_dist()`,`quantile()`. Revisa sus páginas de ayuda para más detalles.
 
 ```{r}
 row_number(y)
@@ -429,7 +429,7 @@ ggplot(vuelos, aes(tiempo_vuelo - tiempo_vuelo2)) + geom_histogram()
 
 ## Resúmenes agrupados con `summarise()`
 
-El último verbo clave es `summarise()` (de resumir en inglés). Se encarga de colapsar un *data frame* en una sola fila:
+El último verbo clave es `summarise()` (_resumir_, en inglés). Se encarga de colapsar un *data frame* en una sola fila:
 
 ```{r}
 summarise(vuelos, atraso = mean(atraso_salida, na.rm = TRUE))
@@ -437,18 +437,18 @@ summarise(vuelos, atraso = mean(atraso_salida, na.rm = TRUE))
 
 (Volveremos a lo que significa `na.rm = TRUE` en muy poco tiempo).
 
-`summarise()` no es muy útil a menos que lo enlacemos con `group_by()`. Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Luego, cuando uses los verbos **dplyr** en un *data frame* agrupado, estos se aplicaran automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un *data frame* agrupado por fecha, obtenemos el retraso promedio por fecha:
+`summarise()` no es muy útil a menos que lo enlacemos con `group_by()`. Esto cambia la unidad de análisis del conjunto de datos completo a grupos individuales. Luego, cuando uses los verbos **dplyr** en un *data frame* agrupado, estos se aplicarán automáticamente "por grupo". Por ejemplo, si aplicamos exactamente el mismo código a un *data frame* agrupado por fecha, obtenemos el retraso promedio por fecha:
 
 ```{r}
 por_dia <- group_by(vuelos, anio, mes, dia)
 summarise(por_dia, atraso = mean(atraso_salida, na.rm = TRUE))
 ```
 
-Juntos `group_by()` y `summarise()` proporcionan una de las herramientas que más comúnmente usarás cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (/paip/) (del inglés tubo o conducto).
+Juntos `group_by()` y `summarise()` proporcionan una de las herramientas que más comúnmente usarás cuando trabajes con **dplyr**: resúmenes agrupados. Pero antes de ir más allá con esto, tenemos que introducir una idea nueva y poderosa: el *pipe* (pronunciado /paip/, que en inglés significa ducto o tubería).
   
 ### Combinación de múltiples operaciones con el *pipe*
 
-Imagina que queremos explorar la relación entre la distancia y la demora promedio para cada ubicación. Usando lo que sabes acerca de **dplyr**, podrías escribir un código como este:
+Imagina que queremos explorar la relación entre la distancia y el atraso promedio para cada ubicación. Usando lo que sabes acerca de **dplyr**, podrías escribir un código como este:
 
 ```{r, fig.width = 6}
 por_destino <- group_by(vuelos, destino)
@@ -459,8 +459,8 @@ atraso <- summarise(por_destino,
 )
 atraso <- filter(atraso, conteo > 20, destino != "HNL")
 
-# Parece que las demoras aumentan con una distancia de hasta ~ 750 millas
-# y luego disminuyen. Tal vez a medida que los vuelos se hacen más 
+# Parece que las demoras aumentan con las distancias hasta ~ 750 millas
+# y luego disminuyen. ¿Tal vez a medida que los vuelos se hacen más 
 # largos, hay más habilidad para compensar las demoras en el aire?
 
 ggplot(data = atraso, mapping = aes(x = distancia, y = atraso)) +
@@ -470,15 +470,15 @@ ggplot(data = atraso, mapping = aes(x = distancia, y = atraso)) +
 
 Hay tres pasos para preparar esta información:
 
-1. Agrupa los vuelos por destino.
+1. Agrupar los vuelos por destino.
 
-2. Resume en cada grupo para calcular la distancia, la demora promedio y el número de vuelos.
+2. Resumir para calcular la distancia, la demora promedio y el número de vuelos en cada grupo.
 
-3. Filtra para eliminar puntos ruidosos y el aeropuerto de Honolulu, que está casi dos veces más lejos que el próximo aeropuerto más cercano.
+3. Filtrar para eliminar puntos ruidosos y el aeropuerto de Honolulu, que está casi dos veces más lejos que el próximo aeropuerto más cercano.
 
-Nombrar cosas es difícil y enlentece nuestro análisis. Es entonces un poco frustrante escribir este código porque tenemos que dar un nombre a cada *data frame* intermedio, incluso si el *data frame* en sí mismo no nos importa.
+Es un poco frustrante escribir este código porque tenemos que dar un nombre a cada *data frame* intermedio, incluso si el *data frame* en sí mismo no nos importa. Nombrar cosas es difícil y enlentece nuestro análisis. 
 
-Hay otra forma de abordar el mismo problema con el *pipe*, %>%:
+Hay otra forma de abordar el mismo problema con el *pipe*, `%>%`:
 
 ```{r}
 atrasos <- vuelos %>% 
@@ -491,11 +491,11 @@ atrasos <- vuelos %>%
   filter(conteo > 20, destino != "HNL")
 ```
 
-Esto se enfoca en las transformaciones, no en lo que se está transformando, lo que hace que el código sea más fácil de leer. Puedes leerlo como una serie de declaraciones imperativas: agrupa, luego resume y por último filtra. Como sugiere esta lectura, una buena forma de pronunciar `%>%` cuando se lee el código es "y luego".  
+Este código se enfoca en las transformaciones, no en lo que se está transformando, lo que hace que sea más fácil de leer. Puedes leerlo como una serie de declaraciones imperativas: agrupa, luego resume y luego filtra. Como sugiere esta lectura, una buena forma de pronunciar `%>%` cuando se lee el código es "luego".  
 
-Lo que encuentras detrás del código, es que `x %>% f(y)` se convierte en `f(x, y)`, y `x %>% f(y) %>% g(z)` se convierte en `g(f(x, y), z)` y así sucesivamente. Puedes usar el *pipe* para reescribir múltiples operaciones de forma que puedas leer de izquierda a derecha, de arriba hacia abajo. Usaremos *pipes* con frecuencia a partir de ahora porque mejora considerablemente la legibilidad del código, y volveremos al tema con más detalle en [pipes].
+Lo que ocurre detrás del código, es que `x %>% f(y)` se convierte en `f(x, y)`, y `x %>% f(y) %>% g(z)` se convierte en `g(f(x, y), z)` y así sucesivamente. Puedes usar el *pipe* para reescribir múltiples operaciones de forma que puedas leer de izquierda a derecha, de arriba hacia abajo. Usaremos *pipes* con frecuencia a partir de ahora porque mejora considerablemente la legibilidad del código. Volveremos a este tema con más detalles en [pipes].
 
-Trabajar con el *pipe* es uno de los criterios clave para pertenecer al tidyverse. La única excepción es **ggplot2**: se escribió antes de que se descubriera el *pipe*. Lamentablemente, la siguiente iteración de **ggplot2**, ggvis, que sí utiliza el *pipe*, aún no está lista para la audiencia general.  
+Trabajar con el *pipe* es uno de los criterios clave para pertenecer al tidyverse. La única excepción es **ggplot2**: se escribió antes de que se descubriera el *pipe*. Lamentablemente, la siguiente iteración de **ggplot2**, ggvis, que sí utiliza el *pipe*, aún no está lista para el horario estelar.  
 
 ### Valores faltantes
 
@@ -507,7 +507,7 @@ vuelos %>%
   summarise(mean = mean(atraso_salida))
 ```
 
-¡Obtenemos muchos valores faltantes! Esto se debe a que las funciones de agregación obedecen la regla habitual de valores faltantes: si hay algún valor faltante en el *input*, el *output* será un valor faltante. Afortunadamente, todas las funciones de agregación tienen un argumento `na.rm` que elimina los valores faltantes antes del cálculo:
+¡Obtenemos muchos valores faltantes! Esto se debe a que las funciones de agregación obedecen la regla habitual de valores faltantes: si hay uno en el *input*, el *output* también será un valor faltante. Afortunadamente, todas las funciones de agregación tienen un argumento `na.rm` que elimina los valores faltantes antes del cálculo:
 
 ```{r}
 vuelos %>% 
@@ -515,7 +515,7 @@ vuelos %>%
   summarise(mean = mean(atraso_salida, na.rm = TRUE))
 ```
 
-En este caso, donde los valores faltantes representan vuelos cancelados, también podríamos abordar el problema eliminando primero los vuelos cancelados. Guardaremos este conjunto de datos para poder reutilizarlo en los siguientes ejemplos.
+En este caso, en el que los valores faltantes representan vuelos cancelados, también podríamos abordar el problema eliminando primero este tipo de vuelos. Guardaremos este conjunto de datos para poder reutilizarlo en los siguientes ejemplos.
 
 ```{r}
 no_cancelados <- vuelos %>% 
@@ -559,7 +559,7 @@ ggplot(data = atrasos, mapping = aes(x = n, y = atraso)) +
 
 No es sorprendente que haya una mayor variación en el promedio de retraso cuando hay pocos vuelos. La forma de este gráfico es muy característica: cuando trazas un promedio (o cualquier otra medida de resumen) contra el tamaño del grupo, verás que la variación decrece a medida que el tamaño de muestra aumenta.
 
-Cuando se observa este tipo de gráficos, resulta útil eliminar los grupos con menor número de observaciones, ya que puedes ver más del patrón y menos de la variación extrema de los grupos pequeños. Esto es lo que te muestra cómo hacer el código siguiente, así como también te ofrece una manera muy útil para integrar **ggplot2** en el flujo de trabajo de **dplyr**. Es un poco incómodo tener que cambiar de `%>%` a `+`, pero una vez que entiendas el código, verás que es bastante conveniente.
+Cuando se observa este tipo de gráficos, resulta útil eliminar los grupos con menor número de observaciones, ya que puedes ver más del patrón y menos de la variación extrema de los grupos pequeños. Esto es lo que hace el siguiente bloque de código. También te ofrece una manera muy útil para integrar **ggplot2** en el flujo de trabajo de **dplyr**. Es un poco incómodo tener que cambiar de `%>%` a `+`, pero una vez que entiendas el código, verás que es bastante conveniente.
 
 ```{r}
 atrasos %>% 
@@ -574,37 +574,37 @@ RStudio tip: un atajo en tu teclado que puede ser muy útil es Cmd/Ctrl + Shift 
 
 --------------------------------------------------------------------------------
 
-Hay otra variación común de este tipo de patrón. Veamos cómo el rendimiento promedio de los bateadores en el béisbol está relacionado con el número de veces que están bateando. Aquí utilizas el conjunto de datos de bateadores para calcular el promedio de bateo (número de bateos / número de intentos) de cada jugador de béisbol de Grandes Ligas.
+Hay otra variación común de este tipo de patrón. Veamos cómo el rendimiento promedio de los bateadores en el béisbol está relacionado con el número de veces que les toca batear Aquí utilizaremos el conjunto de datos de `bateadores` para calcular el promedio de bateo (número de bateos / número de intentos) de cada jugador de béisbol de Grandes Ligas.
 
-Cuando graficas la habilidad del bateador (medido por el promedio de bateo, `ba`) contra el número de oportunidades para golpear la pelota (medido por al bate,`ab`), verás dos patrones:
+Cuando graficamos la habilidad del bateador (medido por el promedio de bateo, `pb`) contra el número de oportunidades para golpear la pelota (medido por al bate,`ab`), verás dos patrones:
 
 1. Como en el ejemplo anterior, la variación en nuestro estadístico de resumen disminuye a medida que obtenemos más observaciones.
 
-2. Existe una correlación positiva entre la habilidad (`ba`) y las oportunidades para golpear la pelota (`ab`). Esto se debe a que los equipos controlan quién puede jugar, y obviamente elegirán a sus mejores jugadores.
+2. Existe una correlación positiva entre la habilidad (`pb`) y las oportunidades para golpear la pelota (`ab`). Esto se debe a que los equipos controlan quién puede jugar, y obviamente elegirán a sus mejores jugadores.
 
 ```{r}
 # Convierte a tibble para puedas imprimirlo de una manera legible
 bateo <- as_tibble(datos::bateadores)
 
 rendimiento_bateadores <- bateo %>% 
-  group_by(id_jugador) %>% 
+  group_by(ID_jugador) %>% 
   summarise(
-    ba = sum(golpes, na.rm = TRUE) / sum(al_bate, na.rm = TRUE),
+    pb = sum(golpes, na.rm = TRUE) / sum(al_bate, na.rm = TRUE),
     ab = sum(al_bate, na.rm = TRUE)
   )
 
 rendimiento_bateadores %>% 
   filter(ab > 100) %>% 
-  ggplot(mapping = aes(x = ab, y = ba)) +
+  ggplot(mapping = aes(x = ab, y = pb)) +
   geom_point() +
   geom_smooth(se = FALSE)
 ```
 
-Esto también tiene implicaciones importantes para la clasificación. Si ingenuamente ordenas `desc(ba)`, verás que las personas con los mejores promedios de bateo tienen claramente mucha suerte, pero no son necesariamente habilidosos:
+Esto también tiene implicaciones importantes para la clasificación. Si ingenuamente ordenas `desc(pb)`, verás que las personas con los mejores promedios de bateo tienen claramente mucha suerte, pero no son necesariamente hábiles:
 
 ```{r}
 rendimiento_bateadores %>% 
-  arrange(desc(ba))
+  arrange(desc(pb))
 ```
 
 Puedes encontrar una buena explicación de este problema en <http://varianceexplained.org/r/empirical_bayes_baseball/> y <http://www.evanmiller.org/how-not-to-sort-by-average-rating.html>.
@@ -613,7 +613,8 @@ Puedes encontrar una buena explicación de este problema en <http://varianceexpl
 
 Solo el uso de medias, conteos y sumas puede llevarte muy lejos, pero R proporciona muchas otras funciones de resumen útiles:
 
-*  Medidas de centralidad: hemos usado `mean(x)`, pero `median(x)` también resulta muy útil. La media es la suma dividida por el número de observaciones; la mediana es un valor donde el 50% de `x` está por encima de él, y el 50% está por debajo. A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [subsetting].
+*  Medidas de centralidad: hemos usado `mean(x)`, pero `median(x)` también resulta muy útil. La media es la suma dividida por el número de observaciones; la mediana es un valor donde el 50% de `x` está por encima de él y el 50% está por debajo. 
+A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [subsetting].
     
 ```{r}
 no_cancelados %>% 
@@ -624,7 +625,7 @@ no_cancelados %>%
   )
 ```
 
-* Medidas de dispersión: `sd(x)`, `IQR(x)`, `mad(x)`. La raíz de la desviación media al cuadrado o desviación estándar o SD para abreviar, es una medida estándar de dispersión. El rango intercuartil `IQR()` y la desviación media absoluta `mad(x)` son medidas robustas equivalentes que pueden ser más útiles si tienes valores atípicos.
+* Medidas de dispersión: `sd(x)`, `IQR(x)`, `mad(x)`. La raíz de la desviación media al cuadrado o desviación estándar `sd(x)` es una medida estándar de dispersión. El rango intercuartil `IQR()` y la desviación media absoluta `mad(x)` son medidas robustas equivalentes que pueden ser más útiles si tienes valores atípicos.
 
 ```{r}
 # ¿Por qué la distancia a algunos destinos es más variable que la de otros?
@@ -646,7 +647,7 @@ no_cancelados %>%
   )
 ```
   
-* Medidas de posición: `first(x)`, `nth(x, 2)`, `last(x)`. Estas trabajan de forma similar a `x[1]`, `x[2]` y `x[length (x)]`, pero te permiten establecer un valor predeterminado en el caso de que esa posición no exista (es decir, si estás tratando de obtener el tercer elemento de un grupo que solo tiene dos elementos). Por ejemplo, podemos encontrar la primera y última salida para cada día:
+* Medidas de posición: `first(x)`, `nth(x, 2)`, `last(x)`. Estas trabajan de forma similar a `x[1]`, `x[2]` y `x[length (x)]`, pero te permiten establecer un valor predeterminado en el caso de que esa posición no exista (es decir, si estás tratando de obtener el tercer elemento de un grupo que solo tiene dos elementos). Por ejemplo, podemos encontrar la primera (_first_) y última (_last_) salida para cada día:
     
 ```{r}
 no_cancelados %>% 
@@ -657,7 +658,7 @@ no_cancelados %>%
   )
 ```
     
-Estas funciones son complementarias al filtrado en rangos. El filtrado te proporciona todas las variables, con cada observación en una fila separada:
+Estas funciones son complementarias al filtrado en rangos. El filtrado te proporciona todas las variables, con cada observación en una fila distinta:
     
 ```{r}
 no_cancelados %>% 
@@ -666,7 +667,7 @@ no_cancelados %>%
   filter(r %in% range(r))
 ```
 
-* Conteos: has visto `n()`, que no toma argumentos, y devuelve el tamaño del grupo actual. Para contar la cantidad de valores no faltantes, usa `sum(!is.na (x))`. Para contar la cantidad de valores distintos (únicos), usa `n_distinct(x)`.
+* Conteos: has visto `n()`, que no toma argumentos y que devuelve el tamaño del grupo actual. Para contar la cantidad de valores no faltantes, usa `sum(!is.na (x))`. Para contar la cantidad de valores distintos (únicos), usa `n_distinct(x)`.
 
 ```{r}
 # ¿Qué destinos tienen la mayoría de las aerolíneas?
@@ -683,19 +684,17 @@ no_cancelados %>%
   count(destino)
 ```
     
-Opcionalmente puedes proporcionar una variable de ponderación. Por ejemplo, podrías usar esto para "contar" (sumar) el número total de millas que un avión voló:
+Opcionalmente puedes proporcionar una variable de ponderación. Por ejemplo, podrías usar esto para "contar" (sumar) el número total de millas que voló un avión:
 
 ```{r}
 no_cancelados %>% 
   count(codigo_cola, wt = distancia)
 ```
   
-* Conteos y proporciones de valores lógicos: `sum(x > 10)`, `mean(y == 0)`. 
-    
-   Cuando se usan con funciones numéricas, `TRUE` se convierte en 1 y `FALSE` en 0. Esto hace que `sum()` y `mean()` sean muy útiles: `sum(x)` te da la cantidad de `TRUE`s en `x`, y `mean(x)` te da la proporción.
+* Conteos y proporciones de valores lógicos: `sum(x > 10)`, `mean(y == 0)`. Cuando se usan con funciones numéricas, `TRUE` se convierte en 1 y `FALSE` en 0. Esto hace que `sum()` y `mean()` sean muy útiles: `sum(x)` te da la cantidad de `TRUE` en `x`, y `mean(x)` te da la proporción.
    
 ```{r}
-# ¿Cuántos vuelos salieron antes de las 5 a.m.? 
+# ¿Cuántos vuelos salieron antes de las 5 am? 
 # (estos generalmente son vuelos demorados del día anterior)
 no_cancelados %>% 
   group_by(anio, mes, dia) %>% 
@@ -744,7 +743,7 @@ diario %>%
     
     ¿Qué es más importante: retraso de la llegada o demora de salida?
 
-2.  Sugiere un nuevo enfoque que te de el mismo *output* que `no_cancelados %>% count(destino)` y
+2.  Sugiere un nuevo enfoque que te dé el mismo *output* que `no_cancelados %>% count(destino)` y
 `no_cancelado %>% count(codigo_cola, wt = distancia)` (sin usar `count()`).
 
 3.  Nuestra definición de vuelos cancelados (`is.na(atraso_salida) | is.na (atraso_llegada)`) es un poco subóptima. ¿Por qué? ¿Cuál es la columna más importante?
@@ -767,7 +766,7 @@ vuelos_sml %>%
   filter(rank(desc(atraso_llegada)) < 10)
 ```
 
-*   Encuentra todos los grupos más grandes que un umbral:
+*   Encuentra todos los grupos más grandes que un determinado umbral:
 
 ```{r}
 popular_destinos <- vuelos %>% 
@@ -785,9 +784,9 @@ popular_destinos %>%
   select(anio:dia, destino, atraso_llegada, prop_atraso)
 ```
 
-Un filtro agrupado es una transformación agrupada seguida de un filtro desagrupado. En general, los evito, excepto para las manipulaciones rápidas y sucias: de lo contrario, es difícil comprobar que has hecho la manipulación correctamente.
+Un filtro agrupado es una transformación agrupada seguida de un filtro desagrupado. En general, preferimos evitarlos, excepto para las manipulaciones rápidas y sucias: de lo contrario, es difícil comprobar que has hecho la manipulación correctamente.
 
-Las funciones que trabajan de forma más natural en transformaciones agrupadas y filtros se conocen como funciones de ventana (frente a las funciones de resumen utilizadas para los resúmenes). Puedes obtener más información sobre las funciones de ventana útiles en la viñeta correspondiente: `vignette("window-functions")`.
+Las funciones que trabajan de forma más natural en transformaciones agrupadas y filtros se conocen como funciones de ventana o _window functions_ (frente a las funciones de resumen utilizadas para los resúmenes). Puedes obtener más información sobre las funciones de ventana útiles en la viñeta correspondiente: `vignette("window-functions")`.
 
 ### Ejercicios
 
@@ -795,7 +794,7 @@ Las funciones que trabajan de forma más natural en transformaciones agrupadas y
 
 2. ¿Qué avión (`codigo_cola`) tiene el peor registro de tiempo?
 
-3. ¿A qué hora del día deberías volar si quieres evitar los retrasos lo más posible?
+3. ¿A qué hora del día deberías volar si quieres evitar lo más posible los retrasos?
 
 4. Para cada destino, calcula los minutos totales de demora. Para cada vuelo, calcula la proporción de la demora total para su destino.
 
