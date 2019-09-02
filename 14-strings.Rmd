@@ -43,7 +43,7 @@ comilla_simple <- '\'' # o "'"
 
 Esto quiere decir que si quieres incluir una barra invertida, necesitas duplicarla: `"\\"`.
 
-Ten cuidado con que la representación impresa de una cadena no es equivalente a la cadena misma, ya que la representación  muestra las barras utilizadas para "escapar" caracteres, es decir, para sean interpretados en su sentido literal, no como caracteres especiales. Para ver el contenido crudo de una cadena utiliza `writeLines()`:
+Ten cuidado con el hecho de que la representación impresa de una cadena no es equivalente a la cadena misma, ya que la representación muestra las barras utilizadas para "escapar" caracteres, es decir, para sean interpretados en su sentido literal, no como caracteres especiales. Para ver el contenido en bruto de una cadena utiliza `writeLines()`:
 
 ```{r}
 x <- c("\"", "\\")
@@ -51,7 +51,7 @@ x
 writeLines(x)
 ```
 
-Existe una serie de otros caracteres especiales. Los más comunes son `"\n"`, para salto de línea, y `"\t"`, para tabulador. Puedes ver la lista completa pidiendo ayuda acerca de `"`: `?'"'` o `?"'"`. A veces también verás cadenas del tipo `"\u00b5"`, que es la manera de escribir caracteres que no están en inglés para que funcionen en todas las plataformas:
+Existe una serie de otros caracteres especiales. Los más comunes son `"\n"`, para salto de línea, y `"\t"`, para tabulación. Puedes ver la lista completa pidiendo ayuda acerca de `"`: `?'"'` o `?"'"`. A veces también verás cadenas del tipo `"\u00b5"`, que es la manera de escribir caracteres que no están en inglés para que funcionen en todas las plataformas:
 
 ```{r}
 x <- "\u00b5"
@@ -66,7 +66,7 @@ c("uno", "dos", "tres")
 
 ### Largo de cadena
 
-R Base tiene muchas funciones para trabajar con cadenas de caracteres, pero las evitaremos porque pueden ser incosistentes, lo que hace que sean difíciles de recordar. En su lugar, utilizaremos funciones del paquete __stringr__. Estas tienen nombres más intuitivos y todas empienzan con `str_`. Por ejemplo, `str_length()` te dice el número de caracteres de una cadena (_length_ en inglés es _largo_): 
+R base tiene muchas funciones para trabajar con cadenas de caracteres, pero las evitaremos porque pueden ser incosistentes, lo que hace que sean difíciles de recordar. En su lugar, utilizaremos funciones del paquete __stringr__. Estas tienen nombres más intuitivos y todas empienzan con `str_`. Por ejemplo, `str_length()` te dice el número de caracteres de una cadena (_length_ en inglés es _largo_): 
 
 ```{r}
 str_length(c("a", "R para Ciencia de Datos", NA))
@@ -93,7 +93,7 @@ Usa el argumento `sep` para controlar cómo separlas:
 str_c("x", "y", sep = ", ")
 ```
 
-Al igual que en muchas otras funciones de R, los valores perdidos son contagiosos. Si quieres que se impriman como `"NA"`, utiliza `str_replace_na()` (_replace_ = remplazar):
+Al igual que en muchas otras funciones de R, los valores faltantes son contagiosos. Si quieres que se impriman como `"NA"`, utiliza `str_replace_na()` (_replace_ = remplazar):
 
 ```{r}
 x <- c("abc", NA)
@@ -165,7 +165,8 @@ str_to_upper(c("i", "ı"), locale = "tr")
 
 El entorno local o _locale_ se especifica con un código de idioma ISO 639, que es una abreviación de dos letras. Si todavía no conoces el código para tu idioma, en [Wikipedia](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) puedes encontrar una buena lista. Si dejas el _locale_ en blanco, se aplicará el que estés utilizando actualmente, que es provisto por tu sistema operativo. 
 
-Otra operación importante que es afectada por el _locale_ es ordenar. Las funciones `order()` y `sort()` de R Base ordenan las cadenas usando el _locale_ actual. Si quieres un comportamiento consistente a través de diferentes computadoras, sería preferible usar `str_sort()` y `str_order()`, que aceptan un argumento adicional para definir el `locale`:
+Otra operación importante que es afectada por el _locale_ es ordenar. Las funciones `order()` y `sort()` de R B
+base ordenan las cadenas usando el _locale_ actual. Si quieres un comportamiento consistente a través de diferentes computadoras, sería preferible usar `str_sort()` y `str_order()`, que aceptan un argumento adicional para definir el `locale`:
 
 ```{r}
 x <- c("arándano", "espinaca", "banana")
@@ -285,7 +286,7 @@ También puedes coincidir el límite entre palabras con `\b`. No utilizamos frec
     1. Tengan una extensión de exactamente tres letras. (¡No hagas trampa usando `str_length()`!)
     1. Tengan siete letras o más. 
 
-    Dado que esta será una lista larga, podrías quere usar el argumento `match` en
+    Dado que esta será una lista larga, podrías querer usar el argumento `match` en
     `str_view()` para mostrar solo las palabras que coincidan o no coincidan. 
 
 ### Clases de caracteres y alternativas
@@ -294,10 +295,10 @@ Existe una serie de patrones especiales que coinciden con más de un caracter. Y
 
 * `\d`: coindice con cualquier dígito.
 * `\s`: coincide con cualquier espacio en blanco (e.g. espacio simple, tabulador, salto de línea).
-* `[abc]`: coincide con a, b, o c.
-* `[^abc]`: coincide con todo menos con a, b, o c.
+* `[abc]`: coincide con a, b o c.
+* `[^abc]`: coincide con todo menos con a, b o c.
 
-Recuerda que para crear una expresión regular que contenga `\d` o `\s`, necesitas escapar la `\` en la cadena, por lo que debes escribir `"\\d"` o `"\\s"`.
+Recuerda que para crear una expresión regular que contenga `\d` o `\s` necesitas escapar la `\` en la cadena, por lo que debes escribir `"\\d"` o `"\\s"`.
 
 Utilizar una clase de caracter que contenga en su interior un solo caracter puede ser una buena alternativa a la barra invertida cuando quieres incluir un solo metacaracter en la expresión regular. Muchas personas encuentran que así es más fácil de leer. 
 
@@ -343,7 +344,7 @@ str_view(c("cómo", "como"), "c(ó|o)mo")
 
 ### Repetición
 
-El siguiente paso en poder implica controlar cuántas veces queremos que se encuentre un patrón:
+El siguiente paso en términos de poder implica controlar cuántas veces queremos que se encuentre un patrón:
 
 * `?`: 0 o 1
 * `+`: 1 o más
@@ -399,7 +400,7 @@ str_view(x, 'C[LX]+?')
 
 ### Agrupamiento y referencias previas
 
-Anteriormente aprendiste sobre el uso de paréntesis para desambiguar expresiones complejas. Los paréntesis también sirven para crear un grupo de captura _numerado_ (número 1, 2 etc.). Un grupo de captura guarda _la parte de la cadena_ que coincide con la parte de la expresión regular entre paréntesis. Puedes referirte al mismo texto tal como fue guardado en un grupo de captura utilizando _referencias previas_, como `\1`, `\2` etc. Por ejemplo, la siguiente expresión regular busca todas las frutas que tengan un par de letras repetido. 
+Anteriormente aprendiste sobre el uso de paréntesis para desambiguar expresiones complejas. Los paréntesis también sirven para crear un grupo de captura _numerado_ (número 1, 2, etc.). Un grupo de captura guarda _la parte de la cadena_ que coincide con la parte de la expresión regular entre paréntesis. Puedes referirte al mismo texto tal como fue guardado en un grupo de captura utilizando _referencias previas_, como `\1`, `\2` etc. Por ejemplo, la siguiente expresión regular busca todas las frutas que tengan un par de letras repetido. 
 
 ```{r}
 str_view(frutas, "(..)\\1", match = TRUE)
@@ -422,7 +423,7 @@ str_view(frutas, "(..)\\1", match = TRUE)
     1. Empiecen y terminen con el mismo caracter. 
     
     1. Contengan un par de letras repetido
-       (p. ej. "nacional" tiene "na" repetidos dos veces.)
+       (p. ej. "nacional" tiene "na" repetido dos veces.)
     
     1. Contengan una letra repetida en al menos tres lugares
        (p. ej. "característica" tiene tres "a".)
@@ -531,7 +532,7 @@ r\\]|\\.)*\](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\".\[\]
 
 En cierto sentido, este es un ejemplo "patológico" (porque las direcciones de correo electrónico son de verdad sorpresivamente complejas), pero se usa en código real. Mira esta discusión (en inglés) en stackoverflow <http://stackoverflow.com/a/201378> para más detalles. 
 
-No olvides que estás trabajando en un lenguaje de programación y que tienes otras herramientas a tu disposición. En vez de crear una sola expresión regular compleja, usualmente es más fácil crear una serie de expresiones regulares más simples. Si atascaste tratando de crear una sola expresión regular que resuelva tu problema, da un paso atrás y piensa cómo podrías dividir el problema en partes más pequeñas. Esto te permitirá ir resolviendo cada desafío antes de moverte al siguiente. 
+No olvides que estás trabajando en un lenguaje de programación y que tienes otras herramientas a tu disposición. En vez de crear una sola expresión regular compleja, usualmente es más fácil crear una serie de expresiones regulares más simples. Si te atascaste tratando de crear una sola expresión regular que resuelva tu problema, da un paso atrás y piensa cómo podrías dividir el problema en partes más pequeñas. Esto te permitirá ir resolviendo cada desafío antes de moverte al siguiente. 
 
 ### Detectar coincidencias
 
@@ -552,7 +553,7 @@ mean(str_detect(palabras, "[aáeéiéoéuú]$"))
 ```
 
 
-Cuando tienes condiciones lógicas complejas, (p. ej. encontrar _a_ o _b_ pero no _c_, salvo que _d_) suele ser más fácil combinar múltiples llamadas a `str_detect()` con operadores lógicos, que tratar de crear una sola expresión regular. Por ejemplo, hay dos maneras de buscar todas las palabras que no contengan ninguna vocal: 
+Cuando tienes condiciones lógicas complejas, (p. ej., encontrar _a_ o _b_ pero no _c_, salvo que _d_) suele ser más fácil combinar múltiples llamadas a `str_detect()` con operadores lógicos, que tratar de crear una sola expresión regular. Por ejemplo, hay dos maneras de buscar todas las palabras que no contengan ninguna vocal: 
 
 ```{r}
 # Encuentra todas las palabras que contengan al menos una vocal, y luego niégalo
@@ -628,14 +629,14 @@ Toma nota sobre el uso de `str_view_all()`. Como aprenderás dentro de poco, muc
 
 ### Extraer coincidencias
 
-Para extraer el texto de una coincidencia utiliza `str_extract()`. Para mostrar cómo funciona, necesitaremos un ejemplo más complicado. Para ello, usaremos una selección y adaptación al español de las oraciones disponibles originalmente en `stringr::sentences`, y que puedes encontrar en `datos::oraciones`:
+Para extraer el texto de una coincidencia utiliza `str_extract()`. Para mostrar cómo funciona, necesitaremos un ejemplo más complicado. Para ello, usaremos una selección y adaptación al español de las oraciones disponibles originalmente en `stringr::sentences` y que puedes encontrar en `datos::oraciones`:
 
 ```{r}
 length(oraciones)
 head(oraciones)
 ```
 
-Imagina que quieres encontrar todas las oraciones que tengan el nombre de un color. Primero, creamos un vector con los nombres de los colores y luego lo convertimos en una sola expresión regular:
+Imagina que quieres encontrar todas las oraciones que tengan el nombre de un color. Primero, creamos un vector con nombres de colores y luego lo convertimos en una sola expresión regular:
 
 ```{r}
 colores <- c("rojo", "amarillo", "verde", "azul", "marrón")
@@ -666,9 +667,9 @@ Este es un patrón de coincidencia común para las funciones de __stringr__, ya 
 str_extract_all(mas, coincidencia_color)
 ```
 
-Aprenderás más sobre listas en el capítulo [Listas](#lists) y en [Iteración](#iteration).
+Aprenderás más sobre listas en el capítulo sobre [vectores] y en el sobre [iteración].
 
-Si utilizas `simplify = TRUE` (es decir, _simplificar_ = VERDADERO), `str_extract_all()` devolverá una matriz con las coincidencias más cortas  expandidas hasta el largo de las más extensas:
+Si utilizas `simplify = TRUE` (es decir, _simplificar_ = VERDADERO), `str_extract_all()` devolverá una matriz con las coincidencias más cortas expandidas hasta el largo de las más extensas:
 
 ```{r}
 str_extract_all(mas, coincidencia_color, simplify = TRUE)
@@ -731,11 +732,11 @@ Al igual que con `str_extract()`, si quieres todas las coincidencias para cada c
 1. Busca en `datos::oraciones` todas las palabras que vengan después de un "número", como "un(o|a)", "dos", "tres", etc.
    Extrae tanto el número como la palabra.
 
-1. En español a veces se utiliza el guión para unir adjetivos, establecer relaciones entre conceptos o para unir gentilicios (p. ej., _teórico-práctico_, _precio-calidad_, _franco-porteño_). ¿Cómo podrías encontrar esas palabras y separar lo que viene antes y después del guión?
+1. En español a veces se utiliza el guión para unir adjetivos, establecer relaciones entre conceptos o para unir gentilicios (p. ej., _teórico-práctico_, _precio-calidad_, _franco-porteña_). ¿Cómo podrías encontrar esas palabras y separar lo que viene antes y después del guión?
 
 ### Remplazar coincidencias
 
-`str_replace()` y `str_replace_all()` te permiten remplazar coincidencias en una nueva cadena. Su uso más simple es para remplazar un un patrón con una cadena fija: 
+`str_replace()` y `str_replace_all()` te permiten remplazar coincidencias en una nueva cadena. Su uso más simple es para remplazar un patrón con una cadena fija: 
 
 ```{r}
 x <- c("manzana", "pera", "banana")
@@ -800,7 +801,7 @@ campos <- c("Nombre: Hadley", "País: NZ", "Edad: 35")
 campos %>% str_split(": ", n = 2, simplify = TRUE)
 ```
 
-En vez de dividir una cadena según patrones, puedes hacerlo definiendo límites: caracter, línea, oración o palabra. Para ello, puedes utilizar la función `boundary()` (_límite_). En el siguiente ejemplo la división se hace por palabra (_word_):
+En vez de dividir una cadena según patrones, puedes hacerlo según caracter, línea, oración o palabra. Para ello, puedes utilizar la función `boundary()` (_límite_). En el siguiente ejemplo la división se hace por palabra (_word_):
 
 ```{r}
 x <- "Esta es una oración. Esta es otra oración."
@@ -822,7 +823,7 @@ str_split(x, boundary("word"))[[1]]
 
 ### Buscar coincidencias
 
-`str_locate()` y `str_locate_all()` te indican la posición inicial y final de una coincidencia. Son particularmente útiles cuando ninguna otra función hace exactamente lo que quieres. Puedes utilizzar `str_locate()` para encontrar los patrones de coincidencia y `str_sub()` para extraerlos y/o modificarlos.
+`str_locate()` y `str_locate_all()` te indican la posición inicial y final de una coincidencia. Son particularmente útiles cuando ninguna otra función hace exactamente lo que quieres. Puedes utilizar `str_locate()` para encontrar los patrones de coincidencia y `str_sub()` para extraerlos y/o modificarlos.
 
 ## Otro tipo de patrones
 
@@ -905,7 +906,7 @@ Existen otras tres funciones que puedes utilizar en vez de `regex()`:
     a1 == a2
     ```
 
-    Se _renderean_ de manera idéntica, pero como están definidas de manera distinta, 
+    Ambas se _renderean_ de manera idéntica, pero como están definidas de manera distinta, 
     `fixed()` no encuentra una coincidencia. En su lugar, puedes utilizar `coll()`, que definiremos a continuación, ya que respeta las reglas humanas de comparación de caracteres:
 
     ```{r}
@@ -974,7 +975,7 @@ Existen dos funciones útiles en R base que también utilizan expresiones regula
 *   `dir()` entrega una lista con todos los archivos en un directorio. El argumento
     `pattern` recibe una expresión regular y retorna solo los 
     nombres de archivos que coinciden con ese patrón. 
-    Por ejemplo, puedes encontrar todos los archivo de R Markdown en el 
+    Por ejemplo, puedes encontrar todos los archivos de R Markdown en el 
     directorio actual con: 
     
     ```{r}
