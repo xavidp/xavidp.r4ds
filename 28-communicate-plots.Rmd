@@ -2,7 +2,7 @@
 
 ## Introducción
 
-En [análisis de datos exploratorios] aprendistes a usar gráficos como herramientas de *exploración*. Cuando haces gráficos exploratorios, sabes incluso antes de mirar, qué variables mostrará el gráfico. Hicistes cada gráfico con un propósito, lo miraste rápidamente y luego pasaste al siguiente. En el transcurso de la mayoría de los análisis, producirás decenas o cientos de gráficos, muchos de los cuales se desecharán inmediatamente.
+En [análisis de datos exploratorios] aprendiste a usar gráficos como herramientas de *exploración*. Cuando haces gráficos exploratorios, sabes incluso antes de mirar, qué variables mostrará el gráfico. Hiciste cada gráfico con un propósito, lo miraste rápidamente y luego pasaste al siguiente. En el transcurso de la mayoría de los análisis, producirás decenas o cientos de gráficos, muchos de los cuales se desecharán inmediatamente.
 
 Ahora que comprendes tus datos, debes *comunicar* tu conocimiento a los demás. Es probable que tu audiencia no comparta tus conocimientos previos y no esté profundamente involucrada en los datos. Para ayudar a otros a construir rápidamente un buen modelo mental de los datos, deberás invertir un esfuerzo considerable para que tus gráficos se expliquen por sí solos . En este capítulo, aprenderás algunas de las herramientas que proporciona **ggplot2** para hacerlo.
 
@@ -359,7 +359,7 @@ ggplot(millas, aes(motor, autopista)) +
 
 Las escalas de ColorBrewer están documentadas en línea en <http://colorbrewer2.org/> y están disponibles en R en el paquete __RColorBrewer__ de Erich Neuwirth. La figura \@ref(fig:brewer) muestra la lista completa de paletas de colores disponibles. Las paletas secuenciales (arriba) y divergentes (abajo) son particularmente útiles si sus valores categóricos están ordenados o tienen un "centro". Esto a menudo ocurre si has utilizado `cut()` para convertir una variable continua en una variable categórica.
 
-```{r brewer, fig.asp = 2.5, echo = FALSE, fig.cap = "All ColourBrewer scales."}
+```{r brewer, fig.asp = 2.5, echo = FALSE, fig.cap = "Todas las escalas ColorBrewer."}
 par(mar = c(0, 3, 0, 0))
 RColorBrewer::display.brewer.all()
 ```
