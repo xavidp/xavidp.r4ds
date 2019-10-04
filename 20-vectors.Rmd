@@ -8,7 +8,7 @@ Los vectores son particularmente importantes, al igual que la mayoría de las fu
 
 ### Pre-requisitos
 
-Este capítulo se enfoca en las estructuras de datos de R base, por lo que no es esencial cargar ningún paquete. Sin embargo, usaremos un conjunto de funciones del paquete purrr para evitar algunas insonsistencias en R Base.
+Este capítulo se enfoca en las estructuras de datos de R base, por lo que no es esencial cargar ningún paquete. Sin embargo, usaremos un conjunto de funciones del paquete purrr para evitar algunas inconsistencias en R Base.
 
 ```{r setup, message = FALSE}
 library(tidyverse)
@@ -19,10 +19,10 @@ library(tidyverse)
 There are two types of vectors:
 
 1. _Hay dos tipos de vectores:
-1.	Vectores atómicos, de los cuales existen seis tipos: lógico o booleano, entero, doble o real, caracter, complejo y raw (que consisten en datos sin procesar). Los vectores de tipo entero y doble son ampliamente conocidos como vectores númericos.
+1.	Vectores atómicos, de los cuales existen seis tipos: lógico o booleano, entero, doble o real, caracter, complejo y raw (que consisten en datos sin procesar). Los vectores de tipo entero y doble son ampliamente conocidos como vectores numéricos.
 2.	Las listas, las cuales son denominadas en ciertas ocasiones como vectores recursivos debido a que pueden contener otras listas..
 
-La diferencia principal entre vectores atómicos y listas es que los vectores atomicos son homogéneos, mientras las listas pueden ser heterogéneas. Existe, otro objeto relacionado: Null (nulo). El nulo es a menudo usado para representar la ausencia de un vector (como el opuesto a NA el cual es usado para representar la ausencia de un valor en un vector.) Null típicamente se comporta como un vector de longitud cero 0. Figura @ref (fig:datatypes) resume las interrelaciones.
+La diferencia principal entre vectores atómicos y listas es que los vectores atómicos son homogéneos, mientras las listas pueden ser heterogéneas. Existe, otro objeto relacionado: Null (nulo). El nulo es a menudo usado para representar la ausencia de un vector (como el opuesto a NA el cual es usado para representar la ausencia de un valor en un vector.) Null típicamente se comporta como un vector de longitud cero 0. Figura @ref (fig:datatypes) resume las interrelaciones.
 
 
 ```{r datatypes, echo = FALSE, out.width = "50%", fig.cap = "The hierarchy of R's vector types"}
@@ -38,7 +38,7 @@ Cada vector tiene dos propiedades claves:
  typeof(1:10)
  ```
 
-1. Su longitud (__length__), la cual puedes determinarla con la sentencia length() (del ingés longitud).
+1. Su longitud (__length__), la cual puedes determinarla con la sentencia length() (del inglés longitud).
 
  ```{r}
  x <- list("a", "b", 1:10)
@@ -84,7 +84,7 @@ La distinción entre enteros y reales no es realmente importante aunque existen 
  x - 2
  ```
 
-Este compartamiento es común cuando trabajas con números de punto flotante: la mayoría de los cálculos incluyen algunos errores de aproximación. En lugar de comparar números de punto flotante usando `==`, debes usar ´dplyr::near()`, el cual provee tolerancia numérica.
+Este comportamiento es común cuando trabajas con números de punto flotante: la mayoría de los cálculos incluyen algunos errores de aproximación. En lugar de comparar números de punto flotante usando `==`, debes usar ´dplyr::near()`, el cual provee tolerancia numérica.
 
 1. Los números reales tienen cuatro tipos de valores posibles: NA, NaN, Inf and –Inf. Estos tres valores especiales NaN, Inf and -Inf pueden surgir a partir de la división de
 c(-1, 0, 1) / 0
@@ -119,7 +119,7 @@ y no utiliza más de 1000x ni tanta memoria como x, porque cada elemento de y es
 Nota que cada tipo de vector atómico tiene su propio valor perdido (o missing value):
 
 ```{r}
-NA # logico
+NA # lógico
 NA_integer_ # entero
 NA_real_ # real
 NA_character_ # caracter
@@ -158,10 +158,10 @@ Anteriormente vimos el tipo más importante de coerción implicita: usando un ve
 x <- sample(20, 100, replace = TRUE)
 y <- x > 10
 sum(y) # ¿cuántos valores son más grandes que 10?
-mean(y) # ¿cuál es la porporción de valores que son mayores que 10?
+mean(y) # ¿cuál es la proporción de valores que son mayores que 10?
 ```
 
-Quizás veas algún código (tipicamente más antiguo) basado en la coerción implicita pero en la dirección opuesta, es decir, de un valor entero a uno lógico
+Quizás veas algún código (típicamente más antiguo) basado en la coerción implicita pero en la dirección opuesta, es decir, de un valor entero a uno lógico
 
 ```{r, eval = FALSE}
 if (length(x)) {
@@ -169,7 +169,7 @@ if (length(x)) {
 }
 ```
 
-En este caso, 0 es convertido a `FALSO` y todo lo demás es convertido a `VERDADERO`. Pienso que esto hace más dificil entender el código, por lo que no lo recomiendo. En su lugar, de ser explicito, sugiero utilizar: `length(x) > 0`.
+En este caso, 0 es convertido a `FALSO` y todo lo demás es convertido a `VERDADERO`. Pienso que esto hace más difícil entender el código, por lo que no lo recomiendo. En su lugar, de ser explicito, sugiero utilizar: `length(x) > 0`.
 
 Es también importante entender que pasa cuando creas un vector que contiene múltiples tipos con `c()`: los tipos más complejos siempre ganan.
 
@@ -200,14 +200,14 @@ Cada predicado además viene con una version para "escalares", donde la función
 
 ### Escalares y reglas de reciclado
 
-Así como implicitamente se coercionan los tipos de vectores que son compatibles, R también implicitamente coerciona la longitud de los vectores. Esto se denomina vector __recycling__, o reciclado de vectores, debido a que el vector de menor longitud se repite, o recicla, hasta igualar la longitud del vector de mayor longitud.
-Esto es generalmente lo más útil cuando estás trabajando con vectores y "escalares". Los escalares están puestos en notas porque R en realidad no tiene definido los escalares: en su lugar, un solo número conforma un vector de longitud 1. Debido a que no existen los escalares, la mayoría de las funciones están construidas como vectorizadas, esto significa que operan sobre un vector del tipo númerico. Esto es así porque, por ejemplo, este código funciona:
+Así como implícitamente se coercionan los tipos de vectores que son compatibles, R también implicitamente coerciona la longitud de los vectores. Esto se denomina vector __recycling__, o reciclado de vectores, debido a que el vector de menor longitud se repite, o recicla, hasta igualar la longitud del vector de mayor longitud.
+Esto es generalmente lo más útil cuando estás trabajando con vectores y "escalares". Los escalares están puestos en notas porque R en realidad no tiene definido los escalares: en su lugar, un solo número conforma un vector de longitud 1. Debido a que no existen los escalares, la mayoría de las funciones están construidas como vectorizadas, esto significa que operan sobre un vector del tipo numérico. Esto es así porque, por ejemplo, este código funciona:
 
 ```{r}
 sample(10) + 100 # (del inglés muestreo)
 runif(10) > 0.5
 ```
-En R, las operaciones matemáticas básicas funcionan con vectores. Lo que significa que no necesitarás la ejecución de una interación explicita cuando realices cálculos matemáticos sencillos.
+En R, las operaciones matemáticas básicas funcionan con vectores. Lo que significa que no necesitarás la ejecución de una interacción explicita cuando realices cálculos matemáticos sencillos.
 Es intuitivo lo que debería pasar si agregas dos vectores de la misma longitud, o un vector y un "escalar", pero ¿qué sucede si agregas dos vectores de diferentes longitudes?
 
 ```{r}
@@ -218,7 +218,7 @@ Aquí, R expandirá el vector de menor longitud a la misma longitud del vector d
 ```{r}
 1:10 + 1:3
 ```
-Mientras el vector reciclado puede ser usado para crear código claro y conciso, también puede ocultar problemas de manera silenciosa. Por esta razón, las funciones vectorizadas en tidyverse mostrarán errores cuando recicles cualquier otra cosa que no sea un escalar. Si quieres reutilzar, necesitarás hacerlo tu mismo con la sentencia `rep()`:
+Mientras el vector reciclado puede ser usado para crear código claro y conciso, también puede ocultar problemas de manera silenciosa. Por esta razón, las funciones vectorizadas en tidyverse mostrarán errores cuando recicles cualquier otra cosa que no sea un escalar. Si quieres reutilizar, necesitarás hacerlo tu mismo con la sentencia `rep()`:
 
 ```{r, error = TRUE}
 tibble(x = 1:4, y = 1:2)
@@ -273,7 +273,7 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una TIBBLE. La s
  x[c(1, -1)]
  ```
 
- El mensaje menciona subdivisiones utilizando cero, lo cual no returna valores.
+ El mensaje menciona subdivisiones utilizando cero, lo cual no retorna valores.
 
  ```{r}
  x[0]
@@ -324,7 +324,7 @@ Hasta ahora hemos usado `dplyr::filter()` para filtrar filas en una TIBBLE. La s
 	1. ¿Qué sucede cuando realizas un subset (subdivisión) con un entero positivo que es mayor que la longitud del vector? ¿Qué sucede cuando realizas un subset (subdivisión) con un nombre que no existe?
 
 ## Vectores Recursivos (listas)
-Las listas son un escalon más en complejidad partiendo de los vectores atómicos, debido a que las listas pueden contener otras listas. Lo cual las hace adecuadas para representar una estructura jerárquica o de tipo árbol. Puedes crear una lista con ´list()´:
+Las listas son un escalón más en complejidad partiendo de los vectores atómicos, debido a que las listas pueden contener otras listas. Lo cual las hace adecuadas para representar una estructura jerárquica o de tipo árbol. Puedes crear una lista con ´list()´:
 
 ```{r}
 x <- list(1, 2, 3) 
@@ -351,7 +351,7 @@ str(z)
 ```
 
 ### Visualizando listas
-Para explicar funciones de manipulacion de listas más complicadas, es útil tener una representacion visual de las mismas. Por ejemplo, defino estas tres listas:
+Para explicar funciones de manipulación de listas más complicadas, es útil tener una representacion visual de las mismas. Por ejemplo, defino estas tres listas:
 ```{r}
 x1 <- list(c(1, 2), c(3, 4))
 x2 <- list(list(1, 2), list(3, 4))
@@ -366,7 +366,7 @@ knitr::include_graphics("diagrams_w_text_as_path/es/lists-structure.png")
 Existen tres principios, al momento de observer el gráfico anterior:
 1.	Las listas tienen esquinas redondeadas, en cambio, los vectores atómicos tienen esquinas cuadradas.
 2.	Los hijos son representados dentro de sus listas padres, y tienen un fondo ligeramente más oscuro para facilitar la visualización de la jerarquía.
-3.	No es importante la orientación de los hijos (p.ej. las filas o columnas), entonces utilizaré la orientacion de una fila o columna para almacenar espacio o incluso para ilustrar una propiedad importante en el ejemplo.
+3.	No es importante la orientación de los hijos (p.ej. las filas o columnas), entonces utilizaré la orientación de una fila o columna para almacenar espacio o incluso para ilustrar una propiedad importante en el ejemplo.
 
 Subdivisión (Subsetting)
 Existen tres maneras de subdividir una lista, lo cual ilustraré con una lista denominada ´a´:
@@ -386,13 +386,13 @@ El doble corchete ´[[´ extrae un solo componente de una lista. Y remueve un ni
 str(a[[1]])
 str(a[[4]])
 ```
-El símbolo $ es un atajo para extraer elementos con nombres de una lista. Este funciona de modo similar al doble corchete´[[´ excepto que en el primer caso no es necesario el uso de comillas dobles.
+El símbolo $ es un atajo para extraer elementos con nombres de una lista. Este funciona de modo similar al doble corchete ´[[´ excepto que en el primer caso no es necesario el uso de comillas dobles.
 
 ```{r}
 a$a
 a[["a"]]
 ```
-La diferencia entre el corchete simple `[` y el doble `[[` es realmente importante para las listas, porque el doble `[[` profundiza en una lista mientras que el simple `[` retorna una nueva, lista más pequeña. Compara el código y el output de arriba con la representacion visual de la Figura @ref(fig:lists-subsetting).
+La diferencia entre el corchete simple `[` y el doble `[[` es realmente importante para las listas, porque el doble `[[` profundiza en una lista mientras que el simple `[` retorna una nueva, lista más pequeña. Compara el código y el output de arriba con la representación visual de la Figura @ref(fig:lists-subsetting).
 
 ```{r
 lists-subsetting, echo = FALSE, out.width = "75%", fig.cap = "Subdividir una lista, de manera visual."}
@@ -400,7 +400,7 @@ knitr::include_graphics("diagrams_w_text_as_path/es/lists-subsetting.png")
 ```
 
 ### Listas de Condimentos
-La diferencia entre ambos `[` y `[[` es muy importante, pero es muy fácil confundirlos. Para ayudarte a recordar, permiteme mostrarte un pimientero inusual
+La diferencia entre ambos `[` y `[[` es muy importante, pero es muy fácil confundirlos. Para ayudarte a recordar, permíteme mostrarte un pimentero inusual
 ```{r, echo = FALSE, out.width = "25%"}
 knitr::include_graphics("images/pepper.jpg")
 ```
@@ -410,7 +410,7 @@ Si este pimientero es tu lista `x`, entonces, `x[1] es un pimientero que contien
 knitr::include_graphics("images/pepper-1.jpg")
 ```
 
-La expresión `x[2]` luciría del mismo modo, pero podría contener el segundo paquete. La expresión `x[1:2]` sería un pimientero que contiente dos paquetes de pimienta.
+La expresión `x[2]` luciría del mismo modo, pero podría contener el segundo paquete. La expresión `x[1:2]` sería un pimientero que contiene dos paquetes de pimienta.
 
 La expresión `x[[1]]` es:
 ```{r, echo = FALSE, out.width = "25%"}
@@ -446,12 +446,12 @@ Existen tres atributos muy importantes que son utilizados para implementar parte
 1.	Los __Nombres__ son utilizados para nombrar los elementos de un vector.
 2.	Las __Dimensiones__ (o dims, denominación más corta) hacen que un vector se comporte como una matriz o arreglo.
 3.	Una __Clase__ es utilizada para implementar el sistema S3 orientado a objetos.
-A los atributos nombres los vimos arriba, y no cubriremos las dimensiones porque no se usan matrices en este libro. Resta describir el atributo clase, el cual controla como las funciones genéricas funcionan. Las funciones genéricas son clave para la programacion orientada a objetos en R, porque ellas hacen que las funciones se comporten de manera diferente de acuerdo a las diferentes clases de inputs. Una discusión más profunda sobre programacion orientada a objetos no está contemplada en el ámbito de este libro, pero puedes leer más al respecto en el documento R Avanzado en: http://adv-r.had.co.nz/OO-essentials.html#s3.
+A los atributos nombres los vimos arriba, y no cubriremos las dimensiones porque no se usan matrices en este libro. Resta describir el atributo clase, el cual controla como las funciones genéricas funcionan. Las funciones genéricas son clave para la programación orientada a objetos en R, porque ellas hacen que las funciones se comporten de manera diferente de acuerdo a las diferentes clases de inputs. Una discusión más profunda sobre programacion orientada a objetos no está contemplada en el ámbito de este libro, pero puedes leer más al respecto en el documento R Avanzado en: http://adv-r.had.co.nz/OO-essentials.html#s3.
 Así es como una función genérica típica luce:
 ```{r}
 as.Date
 ```
-La llamada al método "UseMethod" significa que esta es una función genérica, y llamará a un metódo específico, una función, basada en la clase del primer argumento. (Todos los métodos son funciones; no todas las funciones son métodos). Puedes listar todos los métodos existentes para una función genérica utilizando la función: `methods()`:
+La llamada al método "UseMethod" significa que esta es una función genérica, y llamará a un método específico, una función, basada en la clase del primer argumento. (Todos los métodos son funciones; no todas las funciones son métodos). Puedes listar todos los métodos existentes para una función genérica utilizando la función: `methods()`:
 
 ```{r}
 methods("as.Date")
@@ -467,14 +467,14 @@ getS3method("as.Date", "numeric")
 Lo mas importante del S3 genérico; sistema OO, es decir, orientado a objetos; es la función `print()`: el cual controla como el objeto es impreso cuando tipeas su nombre en la consola. Otras funciones genéricas importantes son las funciones de subdivisión `[`, `[[`, and `$`.
 
 ## Vectores Aumentados
-Los vectores atómicos y las listas son los bloques sobre los que se construyen otros tipos importantes de vectores como los tipos factores y fechas (dates). A estos vectores , los llamo __ vectores aumentados __, porque son vectores con __attributos__ adicionales, incluyendo la clase. Los vectores aumentados tienen una clase, por ello se comportan de manera diferente a los vectores atómicos sobre los cuales son construidos. En este libro, hacemos uso de cuatro importantes vectores aumentados:
+Los vectores atómicos y las listas son los bloques sobre los que se construyen otros tipos importantes de vectores como los tipos factores y fechas (dates). A estos vectores, los llamo __vectores aumentados__, porque son vectores con __atributos__ adicionales, incluyendo la clase. Los vectores aumentados tienen una clase, por ello se comportan de manera diferente a los vectores atómicos sobre los cuales son construidos. En este libro, hacemos uso de cuatro importantes vectores aumentados:
 •	Los Factores
 •	Las Dates (Fechas)
 •	Los Date-times (Fecha-tiempo)
 •	Los Tibbles
 Estos son descriptos a continuación:
 Factores
-Los factores son diseñados para representar datos categoricos que pueden tomar un set fijo de valores posibles, son construidos sobre los enteros, y tienen
+Los factores son diseñados para representar datos categóricos que pueden tomar un set fijo de valores posibles, son construidos sobre los enteros, y tienen
 ```{r}
 x <- factor(c("ab", "cd", "ab"), levels = c("ab", "cd", "ef"))
 typeof(x)
@@ -531,7 +531,7 @@ typeof(df)
 attributes(df)
 ```
 Se puede decir, que la diferencia principal entre ambos es la clase. Debido a que un tibble incluye el tipo "data.frame" lo que significa que los tibbles heredan el comportamiento regular de un data frame por defecto.
-Ejecicios:
+Ejercicios:
 1.	¿Qué valor retorna la siguiente expresión hms::hms(3600)? ¿Cómo se muestra? ¿Cuál es la tipo primario sobre el cual se basa el vector aumentado? ¿Qué atributos utiliza el mismo?
 2.	Intenta y crea un tibble que tenga columnas con diferentes longitudes ¿Qué es lo que ocurre?
 3.	Teniendo en cuenta
