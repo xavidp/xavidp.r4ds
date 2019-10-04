@@ -1,56 +1,10 @@
-chequear_traduccion <- function(x = "wrangle.Rmd") {
-  library(tidyverse)
-  library(hunspell)
-  library(tidytext)
+# paquetes ----------------------------------------------------------------
+library(tidyverse)
+library(hunspell)
+library(tidytext)
 
-  data <- obtener_data(x)
 
-  chequear_knitr(x)
-
-  data <- limpiar_data(data)
-
-  data_palabras <- chequear_palabras(data)
-
-  data_titulos <- chequear_titulos(data)
-
-  list(
-    data_palabras,
-    data_titulos
-  )
-}
-
-chequear_knitr <- function(x = "wrangle.Rmd") {
-  message("chequear_knitr...")
-
-  archivo_temp <- x
-  knitr::knit(input = archivo_temp, quiet = TRUE, envir = new.env())
-}
-
-obtener_data <- function(x = "wrangle.Rmd") {
-  message("obtener_data...")
-
-  message("\tleyendo líneas")
-  lineas <- read_lines(x)
-
-  message("\tconstruyendo data_frame")
-  data <- data_frame(
-    linea = 1:length(lineas),
-    texto = lineas
-  )
-
-  data
-}
-
-obtener_stopwords <- function() {
-  message("obtener_stopwords...")
-
-  data_stopwords <- data_frame(
-    palabra = read_lines("https://raw.githubusercontent.com/stopwords-iso/stopwords-es/master/stopwords-es.txt")
-  )
-
-  data_stopwords
-}
-
+# fix fun -----------------------------------------------------------------
 obtener_diccionario <- function() {
   message("obtener_diccionario...")
 
@@ -70,10 +24,23 @@ obtener_diccionario <- function() {
   dict
 }
 
+obtener_stopwords <- function() {
+
+  message("obtener_stopwords...")
+
+  data_stopwords <- data_frame(
+    palabra = read_lines("https://raw.githubusercontent.com/stopwords-iso/stopwords-es/master/stopwords-es.txt")
+  )
+
+  data_stopwords
+
+}
+
 obtener_funciones <- function() {
   message("obtener_funciones...")
 
   paquetes <- tidyverse:::tidyverse_packages()
+  paquetes <- c(paquetes, "base", "stats")
 
   data_funciones <- paquetes %>%
     map(~ try(ls(paste0("package:", .x)))) %>%
@@ -86,84 +53,191 @@ obtener_funciones <- function() {
   data_funciones
 }
 
-limpiar_data <- function(data) {
-  message("limpiar data")
+dict_eng <- dictionary(lang = "en_US")
+
+dict_esp <- obtener_diccionario()
+
+stop_words_df <- obtener_stopwords()
+
+palabras_reservadas_df <- data_frame(
+  palabra = c("r4ds",
+              # nombres
+              "hadley", "wickham",
+              "garrett", "grolemund",
+              "yihui", "xie",
+              "colin", "fay",
+              "nathaniel", "venn",
+              "jeroen", "ooms",
+              "trevor", "hastie",
+              "robert", "tibshirani",
+              "leeper",
+              # paises/ciudasdes
+              "detroid", "auckland", "america", "copenhagen", "michigan", "bogota", "paris",
+              # empresas/instituciones
+              "amzn", "github", "rstudio", "cran", "stata", "sas", "reddit", "linux",
+              # variables
+              "key", "val", "x1", "x2", "x3", "x4", "y1", "y2", "y3", "nycflights", "vuelos2",
+              "df1", "df2", "df3", "t1", "t2", "na", "d1", "d2", "d3", "d4", "d5",
+              "mod1", "mod2", "mod3",
+              # extensiones
+              "s3", "svg", "xml", "fwf", "csv", "tsv", "rds", "html", "json", "htm", "pdf",
+              # parametros/funciones
+              "delim", "colour", "datetime", "utc", "str", "eval", "chartoraw", "utf",
+              "latin1", "latin2", "ascii", "boxplot", "dev", "log", "log2", "lm", "util",
+              "diamantes2", "sep", "grey50", "resid", "ymd", "yintercept", "wday", "ns",
+              "rlm", "pred", "mdy", "tz", "posixct", "dttm", "difftimes", "setwd", "getwd", "gmt",
+              "ctrl", "cmd", "shift", "hjust", "vjust"
+              # programas
+              "sql", "sqlite", "rpostgresql",
+              # sin cat
+              "tibbles", "#>", "<-", "", "anio", "eeuu", "backend", "iso8601", "iso",
+              "nz", "http", "https", "www", "nyc")
+)
+
+# espacios, coma espacio, punto y coma espacio , dos puntos espacio, rmd links, y/o
+separadores <- c(
+  " ",
+  ",",
+  ";",
+  "-",
+  "\\*",
+  ":",
+  "/",
+  "\"",
+  "\\(",
+  "\\)",
+  "\\[",
+  "\\]",
+  "\\{",
+  "\\}",
+  "\\.",
+  "\\¿",
+  "\\?",
+  "¡",
+  "!",
+  ":",
+  "-",
+  "—",
+  "_",
+  "\\#",
+  "<",
+  ">",
+  "%",
+  "\\^",
+  "\\$",
+  "~",
+  "=",
+  "\\|",
+  "\\+",
+  "'",
+  "\n"
+)
+
+
+palabras_funciones_df <- obtener_funciones()
+
+# others fun --------------------------------------------------------------
+chequear_traduccion <- function(x = "09-wrangle.Rmd") {
+
+  message(toupper(x))
+
+  chequear_knitr(x)
+
+  data <- obtener_data(x)
+
+  # data <- limpiar_data(data)
+
+  data_palabras <- chequear_palabras(data)
+
+  data_titulos <- chequear_titulos(data)
+
+  list(
+    data_palabras,
+    data_titulos
+  )
+}
+
+chequear_knitr <- function(x = "09-wrangle.Rmd") {
+
+  message("chequear_knitr...")
+
+  archivo_temp <- x
+
+  knitr::knit(input = archivo_temp, quiet = TRUE, envir = new.env())
+
+  try(x %>%
+        str_replace("Rmd$", "md") %>%
+        fs::file_create())
+
+  TRUE
+
+}
+
+obtener_data <- function(x = "09-wrangle.Rmd") {
+
+  message("obtener_data...")
+
+  message("\tleyendo líneas")
+
+  lineas <- read_lines(x)
+
+  message("\tconstruyendo data_frame")
+
+  data <- tibble(
+    linea = 1:length(lineas),
+    texto = lineas
+  )
+
+  data
+}
+
+chequear_palabras <- function(data) {
+
+  message("chequear_palabras...")
 
   message("\tremoviendo líneas vacías")
   data <- filter(data, !str_detect(texto, "^\\s*$"))
 
-  message("\tremoviendo bloques de códigos")
-  data <- data %>%
-    mutate(
-      comienza_bloque = str_detect(texto, "^\\s*```\\{r"),
-      termina_bloque = str_detect(texto, "^\\s*```\\s*$"),
-      bloque = cumsum(comienza_bloque + termina_bloque) + 1
-    ) %>%
-    filter(bloque %% 2 != 0) %>%
-    filter(!termina_bloque) %>%
-    select(-comienza_bloque, -termina_bloque, -bloque)
-}
-
-chequear_palabras <- function(data) {
-  message("chequear_palabras...")
-
   message("\tunnest_tokens")
+  separadoresc <- paste0(separadores, collapse = "|")
 
-  # data_palabras <- unnest_tokens(data, palabra, texto, token = "words")
-  # espacios, coma espacio, punto y coma espacio , dos puntos espacio, rmd links, y/o
-  separadores <- c(
-    "\\s+",
-    "\\,\\s+",
-    ";\\s+",
-    "\\:\\s+",
-    "\\]\\(",
-    "/"
-  )
-  separadores <- paste0(separadores, collapse = "|")
+  data_palabras <- unnest_tokens(data, palabra, texto, token = stringr::str_split, pattern = separadoresc, to_lower = FALSE)
 
-  data_palabras <- unnest_tokens(data, palabra, texto, token = stringr::str_split, pattern = separadores, to_lower = FALSE)
-
-  data_palabras <- data_palabras %>% filter(!str_detect(palabra, "^#*$"))
   data_palabras <- data_palabras %>% mutate(palabra2 = tolower(palabra))
 
-  caracteres_inicales_finales <- c(
-    "^\\(",
-    "\\)$",
-    "^_",
-    "_$",
-    "^\\[",
-    "\\]$",
-    "\\.$",
-    "^\\¿",
-    "\\?$",
-    "^¡",
-    "!$",
-    ":$",
-    "^\"",
-    "\"$"
-  )
-  caracteres_inicales_finales <- paste0(caracteres_inicales_finales, collapse = "|")
+  # data_palabras <- data_palabras %>% mutate(palabra2 = str_remove_all(palabra2, caracteres_inicales_finales))
 
-  data_palabras <- data_palabras %>% mutate(palabra2 = str_remove_all(palabra2, caracteres_inicales_finales))
-  data_palabras <- data_palabras %>% mutate(palabra2 = str_remove_all(palabra2, caracteres_inicales_finales))
-  data_palabras <- data_palabras %>% mutate(palabra2 = str_remove_all(palabra2, caracteres_inicales_finales))
+  data_palabras <- data_palabras %>%
+    filter(palabra2 != "")
 
   message("\tremoviendo stopwords")
-  data_palabras <- data_palabras %>%
-    anti_join(obtener_stopwords(), by = c("palabra2" = "palabra"))
+  data_palabras <- anti_join(
+    data_palabras,
+    stop_words_df,
+    by = c("palabra2" = "palabra")
+    )
 
   message("\tremoviendo funciones tidyverse")
   data_palabras <- data_palabras %>%
-    anti_join(obtener_funciones(), by = c("palabra2" = "palabra"))
+    anti_join(palabras_funciones_df, by = c("palabra2" = "palabra"))
+
+  message("\tremoviendo palabras reservadas")
+  data_palabras <- data_palabras %>%
+      anti_join(palabras_reservadas_df, by = c("palabra2" = "palabra"))
+
+  message("\tremoviendo nombre paquetes")
+  data_palabras <- data_palabras %>%
+    filter(!palabra2 %in% rownames(installed.packages()))
+
+  message("\tremoviendo url simples")
+  data_palabras <- data_palabras %>%
+    filter(!str_detect(palabra2, "^.*\\.com$"))
 
   message("\tremoviendo `codigo`, algunos elementos md, urls")
   data_palabras <- data_palabras %>%
     filter(!str_detect(palabra2, "^`") & !str_detect(palabra2, "`$")) %>%
     filter(!palabra2 %in% c("*", "=")) %>%
-    filter(!str_detect(palabra2, "^https?"))
-
-  dict_esp <- obtener_diccionario()
-  dict_eng <- dictionary(lang = "en_US")
+    filter(!str_detect(palabra2, "^https:|^http:"))
 
   data_palabras <- data_palabras %>%
     mutate(
@@ -179,10 +253,11 @@ chequear_palabras <- function(data) {
   data_palabras <- data_palabras %>%
     filter(!check_eng)
 
-  data_palabras <- data_palabras %>%
-    select(-check_esp, -check_eng)
+  # data_palabras <- data_palabras %>%
+  #   select(-check_esp, -check_eng)
 
   data_palabras
+
 }
 
 chequear_titulos <- function(data) {
@@ -214,4 +289,23 @@ chequear_titulos <- function(data) {
   data_titulos
 }
 
-# chequear_traduccion(x)
+# CHECK -------------------------------------------------------------------
+fs <- dir(pattern = "[0-9]{2}.*\\.Rmd$")
+fs <- str_subset(fs, "01", negate = TRUE)
+# fs <- sample(fs, size = 4)
+
+res <- map(
+  fs,
+  chequear_traduccion
+)
+
+names(res) <- fs
+
+res
+
+res %>%
+  map(1) %>%
+  enframe() %>%
+  unnest() %>%
+  # filter(palabra palabra2) %>%
+  View()
