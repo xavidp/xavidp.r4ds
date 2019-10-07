@@ -162,7 +162,7 @@ x
 
 Otras funciones con este problema incluyen `get()` y `load()`.
 
-1. Funciones que usan _lazy evaluation_ (evaluación "perezosa"). En R, los argumentos de las funciones son solamente computados cuando la función los usa, no antes de llamar a la función. El pipe computa cada elemento por turno, por lo que no puedes confiar en este comportamiento.
+1. Funciones que usan _lazy evaluation_ (evaluación diferida o "perezosa"). En R, los argumentos de las funciones son solamente computados cuando la función los usa, no antes de llamar a la función. El pipe computa cada elemento por turno, por lo que no puedes confiar en este comportamiento.
 
 Un caso en el cual esto es un problema es el de `tryCatch()`, que te permite capturar y manejar errores:
 
