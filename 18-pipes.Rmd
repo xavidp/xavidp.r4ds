@@ -162,7 +162,7 @@ x
 
 Otras funciones con este problema incluyen `get()` y `load()`.
 
-1. Funciones que usan _lazy evaluation_ (evaluación "perezosa"). En R, los argumentos de las funciones son solamente computados cuando la función los usa, no antes de llamar a la función. El pipe computa cada elemento por turno, por lo que no puedes confiar en este comportamiento.
+1. Funciones que usan _lazy evaluation_ (evaluación diferida o "perezosa"). En R, los argumentos de las funciones son solamente computados cuando la función los usa, no antes de llamar a la función. El pipe computa cada elemento por turno, por lo que no puedes confiar en este comportamiento.
 
 Un caso en el cual esto es un problema es el de `tryCatch()`, que te permite capturar y manejar errores:
 
@@ -185,7 +185,7 @@ El pipe es una herramienta poderosa, pero no es la única herramienta a tu dispo
 
 ## Otras herramientas de magrittr
 
-Todos los paquetes del tidyverse automáticamente harán que `%>%` esté disponible, por lo que normalmente no será necesario cargar magrittr explícitamente. De todas formas, hay otras herramientas útiles dentro de magrittr que podrías querer utilizar:
+Todos los paquetes del tidyverse automáticamente harán que `%>%` esté disponible, por lo que normalmente no será necesario cargar __magrittr__ explícitamente. De todas formas, hay otras herramientas útiles dentro de magrittr que podrías querer utilizar:
 
 * Cuando se trabaja en un pipe más complejo, a veces es útil llamar a una función por sus efectos secundarios. Tal vez quieras imprimir el objeto actual, o graficarlo, o guardarlo en el disco. Muchas veces, estas funciones no devuelven nada, efectivamente terminando el pipe.
 
@@ -203,7 +203,7 @@ rnorm(100) %>%
   str()
 ```
 
-* Si estas trabajando con funciones que no tienen una API basada en data frames (esto es, pasas vectores individuales, no un data frame o expresiones que serán evaluadas en el contexto de un data frame), puedes encontrar `%$%` útil. Este operador "explota" las variables en un dataframe para que te puedas referir a ellas de manera explícita. Esto es útil cuando se trabaja con muchas funciones en R base:
+* Si estás trabajando con funciones que no tienen una API basada en data frames (esto es, pasas vectores individuales, no un data frame o expresiones que serán evaluadas en el contexto de un data frame), puedes encontrar `%$%` útil. Este operador "explota" las variables en un dataframe para que te puedas referir a ellas de manera explícita. Esto es útil cuando se trabaja con muchas funciones en R base:
 
 ```{r}
 mtautos %$%
@@ -223,5 +223,5 @@ con
 mtautos %<>% transform(cilindros = cilindros * 2)
 ```
 
-No soy partidario de este operador porque pienso que una asignación es una operación especial que siempre debe ser clara cuando sucede.
-En mi opinión, un poco de duplicación (esto es, repetir el nombre de un objeto dos veces) está bien para lograr hacer la asignación más explícita.
+No somos partidarios de este operador porque creemos que una asignación es una operación especial que siempre debe ser clara cuando sucede.
+En nuestra opinión, un poco de duplicación (esto es, repetir el nombre de un objeto dos veces) está bien para lograr hacer la asignación más explícita.
