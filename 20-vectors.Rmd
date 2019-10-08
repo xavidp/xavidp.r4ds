@@ -24,7 +24,7 @@ La diferencia principal entre vectores atómicos y listas es que los vectores at
 
 
 ```{r datatypes, echo = FALSE, out.width = "50%", fig.cap = "La jerarquía de los tipos de vectores en R"}
-knitr::include_graphics("diagrams_w_text_as_path/es/data-structures-overview.png")
+knitr::include_graphics("diagrams_w_text_as_path/es/data-structures-overview.svg")
 ```
 
 Cada vector tiene dos propiedades clave:
@@ -253,37 +253,37 @@ Hasta ahora hemos utilizado `dplyr::filter()` para filtrar filas en una tibble. 
 
 1. Un vector numérico que contenga solo enteros. Los enteros deben ser todos positivos, todos negativos, o cero.
 
-        Crear subconjuntos con enteros positivos mantiene los elementos en aquellas posiciones:
+Crear subconjuntos con enteros positivos mantiene los elementos en aquellas posiciones:
         
         ```{r}
         x <- c("uno", "dos", "tres", "cuatro", "cinco")
         x[c(3, 2, 5)]
         ```
         
-        Repitiendo una posición, puedes en realidad generar un output de mayor longitud que el input:
+Repitiendo una posición, puedes en realidad generar un output de mayor longitud que el input:
         
         ```{r}
         x[c(1, 1, 5, 5, 5, 2)]
         ```
-        Los valores negativos eliminan elementos en las posiciones especificadas:
+Los valores negativos eliminan elementos en las posiciones especificadas:
         
         ```{r}
         x[c(-1, -3, -5)]
         ```
-        Es un error mezclar valores positivos y negativos:
+Es un error mezclar valores positivos y negativos:
         
         
         ```{r, error = TRUE}
         x[c(1, -1)]
         ```
         
-        El mensaje menciona crear subsets utilizando cero, lo que no retorna valores.
+El mensaje menciona crear subsets utilizando cero, lo que no retorna valores.
         
         ```{r}
         x[0]
         ```
         
-        Esto a menudo no es útil, pero puede ser de ayuda si quieres crear estructuras de datos inusuales con las que testear tus funciones.
+Esto a menudo no es útil, pero puede ser de ayuda si quieres crear estructuras de datos inusuales con las que testear tus funciones.
         
 
 2. Crear subsets con un vector lógico mantiene todos los valores que  correspondan al valor `TRUE`. Esto es usualmente útil en conjunto con las funciones de comparación.
@@ -408,8 +408,7 @@ a <- list(a = 1:3, b = "una cadena", c = pi, d = list(-1, -5))
 
 La diferencia entre `[` y `[[` es muy importante para las listas, ya que `[[` se adentra en una lista mientras que `[` retorna una lista nueva, más pequeña. Compara el código y el output de arriba con la representación visual de la Figura \@ref(fig:lists-subsetting).
 
-```{r
-lists-subsetting, echo = FALSE, out.width = "75%", fig.cap = "Subdividir una lista, de manera visual."}
+```{r lists-subsetting, echo = FALSE, out.width = "75%", fig.cap = "Subdividir una lista, de manera visual."}
 knitr::include_graphics("diagrams_w_text_as_path/es/lists-subsetting.svg")
 ```
 
