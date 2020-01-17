@@ -768,7 +768,7 @@ args2 %>%
 Esto genera llamadas más largas, pero más seguras:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/es/lists-pmap-named.png")
+knitr::include_graphics("diagrams/es/lists-pmap-named.svg")
 ```
 
 Dado que los argumentos son todos del mismo largo, tiene sentido almacenarlos en un data frame:
@@ -806,7 +806,7 @@ invoke_map(f, param, n = 5) %>% str()
 ```
 
 ```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams/es/lists-invoke.png")
+knitr::include_graphics("diagrams/es/lists-invoke.svg")
 ```
 
 El primer argumento es una lista de funciones o vectores de caracteres de nombres de funciones. El segundo argumento es una lista de listas que entrega los argumentos que cambian en cada función. Los argumentos subsecuentes pasan a cada función.
