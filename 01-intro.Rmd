@@ -147,7 +147,7 @@ Con el fin de que este libro sea más accesible para el público hispanoparlante
 
 El paquete `datos` se encuentra disponible en CRAN y puedes instalarlo ejecutando el siguiente código:
 
-```{r}
+```{r, eval = FALSE}
 install.packages("datos")
 
 ```
