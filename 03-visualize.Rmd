@@ -43,7 +43,7 @@ install.packages("tidyverse")
 library(tidyverse)
 ```
 
-Solo es necesario que instales los paquetes una una única vez; sin embargo, tendrás que cargarlos siempre que inicies una nueva sesión.
+Solo es necesario que instales los paquetes una única vez; sin embargo, tendrás que cargarlos siempre que inicies una nueva sesión.
 
 Cuando necesitemos especificar la procedencia de una función (o un conjunto de datos), usaremos el formato especial `paquete::funcion()`. Por ejemplo, `ggplot2::ggplot()` dice explícitamente que estamos usando la función `ggplot()` del paquete ggplot2.
 
