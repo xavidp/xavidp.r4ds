@@ -723,7 +723,7 @@ map2(mu, sigma, rnorm, n = 5) %>% str()
 `map2()` genera esta serie de llamadas a funciones:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams_w_text_as_path/lists-map2.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-map2.svg")
 ```
 
 Observa que los argumentos que varían para cada llamada van _antes_ de la función; argumentos que son los mismos para cada llamada van _después_.
