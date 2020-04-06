@@ -97,7 +97,7 @@ Es habitual pensar en el modelado como una herramienta para la confirmación de 
 
 ## Prerrequisitos
 
-Hemos asumido algunas cosas respecto de lo que ya sabes con el fin de poder sacar mayor provecho de este libro. Tienes que tener conocimientos numéricos generales y sería útil que tuvieses algo de experiencia programando. Si nunca has programado antes y puedes leer en inglés, [Hands on Programming with R](https://rstudio-education.github.io/hopr/) escrito por Garrett podría ser un buen acompañamiento para este libro.
+Hemos asumido algunas cosas respecto de lo que ya sabes con el fin de poder sacar mayor provecho de este libro. Tienes que tener una _literacidad_ numérica general y sería útil que tuvieses algo de experiencia programando. Si nunca has programado antes y puedes leer en inglés, [Hands on Programming with R](https://rstudio-education.github.io/hopr/) escrito por Garrett podría ser un buen acompañamiento para este libro.
 
 Hay cinco cosas que necesitas para poder ejecutar el código incluido en este libro: R, RStudio, una colección de paquetes llamada __tidyverse__, el paquete __datos__ (que incluye los datos en español se se utilizan en los ejemplos y ejercicios) y una serie de otros paquetes. Los paquetes son la unidad fundamental de código reproducible de R. Incluyen funciones reutilizables, la documentación que describe cómo usarlas y datos de muestra.
 
