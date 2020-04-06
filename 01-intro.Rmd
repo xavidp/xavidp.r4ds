@@ -157,14 +157,6 @@ remotes::install_github("cienciadedatos/datos")
 
 Existen muchas otros paquetes excelentes que no son parte del __tidyverse__ porque resuelven problemas de otros ámbitos o porque los principios en los que se basa su diseño son distintos. Esto no los hace mejores o peores, solo diferentes. En otras palabras, el complemento del __tidyverse__ no es el _messyverse_ (del inglés _messy_, desordenado), sino muchos otros universos de paquetes interrelacionados. A medida que te enfrentes a más proyectos de ciencia de datos con R, aprenderás sobre nuevos paquetes y nuevas formas de pensar los datos.
 
-Existen otros seis paquetes que debes instalar, además del __tidyverse__ y __datos__. Si bien no los utilizarás directamente, es necesario que estén instalados para que el paquete __datos__ pueda traducir al español los _datasets_ que estos contienen.
-
-
-```{r, eval = FALSE}
-install.packages(c("nycflights13", "gapminder", "Lahman", "nasaweather", "babynames", "fueleconomy"))
-
-```
-
 
 ## Ejecutar código en R
 
