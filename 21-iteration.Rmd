@@ -474,7 +474,7 @@ Esta estructura facilita la resolución de nuevos problemas. También hace que s
 2. Adapta `col_summary ()` para que solo se aplique a las columnas numéricas. 
 	Es posible que desees comenzar con la función `is_numeric ()` que devuelve un vector lógico que tenga un _TRUE_ por cada columna numérica.
 	
-## Las funciones _map_ (mapa en inglés)
+## Las funciones _map_ 
 
 El patrón de iterar sobre un vector, hacer algo con cada elemento y guardar los resultados es tan común que el paquete __purrr__ proporciona una familia de funciones para que lo hagan por nosotros. Hay una función para cada tipo de _output_:
 
@@ -484,7 +484,7 @@ El patrón de iterar sobre un vector, hacer algo con cada elemento y guardar los
 * `map_dbl ()` crea un vector doble.
 * `map_chr ()` crea un vector de caracteres.
 
-Cada función toma un vector como entrada, aplica una función a cada elemento y luego devuelve un nuevo vector que tiene la misma longitud (y tiene los mismos nombres) que la entrada. El tipo de vector está determinado por el sufijo de la función _map_.
+Cada función `map` (_mapa_, en español) toma un vector como entrada, aplica una función a cada elemento y luego devuelve un nuevo vector que tiene la misma longitud (y tiene los mismos nombres) que la entrada. El tipo de vector está determinado por el sufijo de la función _map_.
 
 Una vez que domines estas funciones, descubrirás que lleva mucho menos tiempo resolver los problemas de iteración. Pero nunca debes sentirse mal por usar un bucle for en lugar de una función de mapeo. Las funciones de mapeo son un nivel superior de abstracción, y puede llevar mucho tiempo entender cómo funcionan. Lo importante es que resuelvas el problema en el que estás trabajando, no que escribas el código más conciso y elegante (¡aunque eso es definitivamente algo hacia lo que quieres llegar!).
 
@@ -753,7 +753,7 @@ args1 %>%
 Esto se ve así:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams_w_text_as_path/lists-pmap-unnamed.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-pmap-unnamed.svg")
 ```
 
 Si no quieres nombrar todos los elementos de la lista, `pmap()` usará una coincidencia posicional al llamar a la función. Esto es un poco frágil y hace el código más difícil de entender, por lo que es mejor nombrar los argumentos:
@@ -768,7 +768,7 @@ args2 %>%
 Esto genera llamadas más largas, pero más seguras:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/lists-pmap-named.png")
+knitr::include_graphics("diagrams/es/lists-pmap-named.svg")
 ```
 
 Dado que los argumentos son todos del mismo largo, tiene sentido almacenarlos en un data frame:
@@ -806,7 +806,7 @@ invoke_map(f, param, n = 5) %>% str()
 ```
 
 ```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams/lists-invoke.png")
+knitr::include_graphics("diagrams/es/lists-invoke.svg")
 ```
 
 El primer argumento es una lista de funciones o vectores de caracteres de nombres de funciones. El segundo argumento es una lista de listas que entrega los argumentos que cambian en cada función. Los argumentos subsecuentes pasan a cada función.

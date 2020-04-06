@@ -12,3 +12,5 @@ bookdown::gitbook:
 
 bookdown::pdf_book:
   latex_engine: "xelatex"
+
+bookdown::epub_book: default

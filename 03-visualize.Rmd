@@ -43,11 +43,11 @@ install.packages("tidyverse")
 library(tidyverse)
 ```
 
-Solo es necesario que instales los paquetes una una única vez; sin embargo, tendrás que cargarlos siempre que inicies una nueva sesión.
+Solo es necesario que instales los paquetes una única vez; sin embargo, tendrás que cargarlos siempre que inicies una nueva sesión.
 
 Cuando necesitemos especificar la procedencia de una función (o un conjunto de datos), usaremos el formato especial `paquete::funcion()`. Por ejemplo, `ggplot2::ggplot()` dice explícitamente que estamos usando la función `ggplot()` del paquete ggplot2.
 
-Además del Tidyverse, es necesario que cargue el paquete `datos`, ya que en él están contenidas las versiones en español de los datos que utlizaremos en este capítulo:
+Además del Tidyverse, es necesario que cargue el paquete `datos`, ya que en él están contenidas las versiones en español de los datos que utilizaremos en este capítulo:
 
 ```{r}
 # install.packages("datos")
@@ -71,7 +71,7 @@ Entre las variables de `millas` se encuentran:
 
 1. `motor`: tamaño del motor del automóvil, en litros.
 
-2. `autopista`: eficiencia del uso de combustible de un automóvil encarretera, en millas por galón. Al recorrer la misma distancia, un automóvil de baja eficiencia consume más combustible que un automóvil de alta eficiencia.
+2. `autopista`: eficiencia del uso de combustible de un automóvil en carretera, en millas por galón. Al recorrer la misma distancia, un automóvil de baja eficiencia consume más combustible que un automóvil de alta eficiencia.
 
 Para obtener más información sobre el _data frame_ `millas`, abre su página de ayuda ejecutando `?millas`.
 
@@ -118,7 +118,7 @@ El resto de este capítulo te mostrará cómo utilizar y adaptar esta plantilla 
 ## Mapeos estéticos
 
 > "El mayor valor de una imagen es cuando nos obliga a observar
-> lo que no esperabamos ver". --- John Tukey
+> lo que no esperábamos ver". --- John Tukey
 
 En el siguiente gráfico, un grupo de puntos (resaltados en rojo) parece quedar fuera de la tendencia lineal. Estos automóviles tienen un kilometraje mayor de lo que esperaríamos. ¿Cómo puedes explicar estos vehículos?
 
@@ -235,7 +235,7 @@ ggplot(shapes, aes(x, y)) +
 
 ## Problemas comunes
 
-A medida que empieces a escribir código en R, lo mśa probable es que te encuentres con problemas. No te preocupes, es lo más común. Hemos estado escribiendo código en R durante años, ¡y todos los días seguimos escribiendo código que no funciona!
+A medida que empieces a escribir código en R, lo más probable es que te encuentres con problemas. No te preocupes, es lo más común. Hemos estado escribiendo código en R durante años, ¡y todos los días seguimos escribiendo código que no funciona!
 
 Comienza comparando cuidadosamente el código que estás ejecutando con el código en este libro. R es extremadamente exigente y un carácter fuera de lugar puede marcar la diferencia. Asegúrate de que cada `(` coincida con un `)` y cada `" ` esté emparejado con otro` "`. Algunas veces ejecutarás el código y no pasará nada. Comprueba la parte izquierda de tu consola: si es un `+`, significa que R no cree que hayas escrito una expresión completa y está esperando que la termines. En este caso, normalmente es más fácil comenzar de nuevo desde cero presionando ESCAPE para cancelar el procesamiento del comando actual.
 
@@ -262,7 +262,7 @@ ggplot(data = millas) +
   facet_wrap(~ clase, nrow = 2)
 ```
 
-Para separar en facetas un gráfico según las combinaciones de dos variables, agregua `facet_grid()` a tu código del gráfico (_grid_ quiere decir cuadrícula en inglés). El primer argumento de `facet_grid()` también corresponde a una fórmula. Esta vez, la fórmula debe contener dos nombres de variables separados por un `~`.
+Para separar en facetas un gráfico según las combinaciones de dos variables, agrega `facet_grid()` a tu código del gráfico (_grid_ quiere decir cuadrícula en inglés). El primer argumento de `facet_grid()` también corresponde a una fórmula. Esta vez, la fórmula debe contener dos nombres de variables separados por un `~`.
 
 ```{r}
 ggplot(data = millas) +
@@ -557,7 +557,7 @@ Por ejemplo, puedes usar `stat_summary()`, que resume los valores de y para cada
 
 2. ¿Qué hace `geom_col()`? ¿En qué se diferencia de `geom_bar()`?
 
-3. La mayoría de los geoms y las trasnformaciones estadísticas vienen en pares que casi siempre se usan en conjunto.
+3. La mayoría de los geoms y las transformaciones estadísticas vienen en pares que casi siempre se usan en conjunto.
 Lee la documentación y haz una lista de todos los pares. ¿Qué tienen en común?
 
 4. ¿Qué variables calcula `stat_smooth()`? ¿Qué parámetros controlan su comportamiento?
@@ -671,7 +671,7 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
      coord_flip()
    ```
 
-* `coord_quickmap()` establece correctamente la relación de aspecto para los mapas. Esto es muy importante si graficas datos espaciales con ggplot2 (tema para el que, desafortunadamente, no contamos con espacio para desarrollar en este libro).
+* `coord_quickmap()` establece correctamente la relación de aspecto para los mapas. Esto es muy importante si gráficas datos espaciales con ggplot2 (tema para el que, desafortunadamente, no contamos con espacio para desarrollar en este libro).
 
    ```{r fig.width = 3, out.width = "50%", fig.align = "default", message = FALSE}
    nz <- map_data("nz")
@@ -719,7 +719,7 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
 
 ## La gramática de gráficos en capas
 
-En las secciones anteriores, aprendiste mucho más que cómo hacer diagramas de dispersión, gráficos de barras y diagramas de caja. Aprendiste una base que se puede usar para hacer cualquier tipo de gráfico con **ggplot2**. Para ver esto, agreguemos ajustes de posición, transformaciones estadísticas, sistemas de coordenadas y facetas a nuestra plantilla de código:
+En las secciones anteriores, aprendiste mucho más que solo hacer diagramas de dispersión, gráficos de barras y diagramas de caja. Aprendiste una base que se puede usar para hacer cualquier tipo de gráfico con **ggplot2**. Para ver esto, agreguemos ajustes de posición, transformaciones estadísticas, sistemas de coordenadas y facetas a nuestra plantilla de código:
 
 ```
 ggplot(data = <DATOS>) +
