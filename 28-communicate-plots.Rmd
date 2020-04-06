@@ -23,7 +23,7 @@ El punto de inicio más sencillo para convertir un gráfico exploratorio en un g
 
 
 ```{r, message = FALSE}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(color = clase)) +
   geom_smooth(se = FALSE) +
   labs(title = "La eficiencia del combustible generalmente disminuye con el tamaño del motor")
@@ -39,7 +39,7 @@ Si necesitas agregar más texto, hay otras dos etiquetas útiles que puedes usar
 
 
 ```{r, message = FALSE}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(color = clase)) +
   geom_smooth(se = FALSE) +
   labs(
@@ -52,11 +52,11 @@ ggplot(millas, aes(motor, autopista)) +
 También puedes usar `labs()` para reemplazar los títulos de ejes y leyendas. Por lo general, es una buena idea reemplazar los nombres cortos de las variables con descripciones más detalladas e incluir las unidades.
 
 ```{r, message = FALSE}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase)) +
   geom_smooth(se = FALSE) +
   labs(
-    x = "Desplazamiento del motor (L)",
+    x = "Tamaño del motor (litros)",
     y = "Economía de combustible de carretera (millas)",
     colour = "Tipo de automóvil"
   )
@@ -96,7 +96,7 @@ mejor_de_su_clase <- millas %>%
   group_by(clase) %>%
   filter(row_number(desc(autopista)) == 1)
 
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase)) +
   geom_text(aes(label = modelo), data = mejor_de_su_clase)
 ```
@@ -104,7 +104,7 @@ ggplot(millas, aes(motor, autopista)) +
 Esto es difícil de leer porque las etiquetas se superponen entre sí y con los puntos. Podemos mejorar ligeramente las cosas cambiando por `geom_label()`, que dibuja un rectángulo detrás del texto. También usamos el parámetro `nudge_y` para mover las etiquetas ligeramente por encima de los puntos correspondientes:
 
 ```{r}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase)) +
   geom_label(aes(label = modelo), data = mejor_de_su_clase, nudge_y = 2, alpha = 0.5)
 ```
@@ -112,7 +112,7 @@ ggplot(millas, aes(motor, autopista)) +
 Esto ayuda un poco, pero si te fijas bien en la esquina superior izquierda verás que hay dos etiquetas prácticamente una encima de la otra. Esto sucede porque el kilometraje y el desplazamiento para los mejores automóviles en las categorías de compactos y subcompactos son exactamente los mismos. No hay forma de que podamos solucionar esto aplicando la misma transformación para cada etiqueta. En cambio, podemos usar el paquete **ggrepel** de Kamil Slowikowski. Este paquete es muy útil ya que ajusta automáticamente las etiquetas para que no se superpongan:
 
 ```{r}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase)) +
   geom_point(size = 3, shape = 1, data = mejor_de_su_clase) +
   ggrepel::geom_label_repel(aes(label = modelo), data = mejor_de_su_clase)
@@ -126,11 +126,11 @@ A veces puedes usar la misma idea para reemplazar la leyenda con etiquetas coloc
 clase_promedio <- millas %>%
   group_by(clase) %>%
   summarise(
-    motor = median(motor),
+    cilindrada = median(cilindrada),
     autopista = median(autopista)
   )
 
-ggplot(millas, aes(motor, autopista, colour = clase)) +
+ggplot(millas, aes(cilindrada, autopista, colour = clase)) +
   ggrepel::geom_label_repel(aes(label = clase),
     data = clase_promedio,
     size = 6,
@@ -146,12 +146,12 @@ Alternativamente puede que quieras agregar una única etiqueta al gráfico, pero
 ```{r}
 etiqueta <- millas %>%
   summarise(
-    motor = max(motor),
+    cilindrada = max(cilindrada),
     autopista = max(autopista),
     etiqueta = "El aumento del tamaño del motor está \nrelacionado con la disminución en el gasto de combustible."
   )
 
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point() +
   geom_text(aes(label = etiqueta), data = etiqueta, vjust = "top", hjust = "right")
 ```
@@ -161,12 +161,12 @@ Si deseas colocar el texto exactamente en los bordes del gráfico puedes usar `+
 ```{r}
 etiqueta <- millas %>%
   summarise(
-    motor = Inf,
+    cilindrada = Inf,
     autopista = Inf,
     etiqueta = "El aumento del tamaño del motor está \nrelacionado con la disminución en el gasto de combustible."
   )
 
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point() +
   geom_text(aes(label = etiqueta), data = etiqueta, vjust = "top", hjust = "right")
 ```
@@ -227,14 +227,14 @@ Recuerda que además de `geom_text()`, en ggplot2 tienes muchos otros geoms disp
 La tercera forma en que puedes mejorar tu gráfico para comunicar es ajustar las escalas. Las escalas controla el mapeo de los valores de los datos a cosas que puedes percibir. Normalmente, **ggplot2** agrega escalas automáticamente. Por ejemplo, cuando tipeas:
 
 ```{r default-scales, fig.show = "hide"}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase))
 ```
 
 **ggplot2** agrega automáticamente escalas predeterminadas detrás de escena:
 
 ```{r, fig.show = "hide"}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase)) +
   scale_x_continuous() +
   scale_y_continuous() +
@@ -254,7 +254,7 @@ Las escalas predeterminadas se han elegido cuidadosamente para ser adecuadas par
 Hay dos argumentos principales que afectan la apariencia de las marcas, del inglés *ticks*, en los ejes y las leyendas:`breaks` y `labels`, del inglés *quiebre* y *etiqueta* respectivamente. Los `breaks` controlan la posición de las marcas en los ejes o los valores asociados con las leyendas. Las `labels` controlan la etiqueta de texto asociada con cada marca/leyenda. El uso más común de los `breaks` es redefinir la opción predeterminada:
 
 ```{r}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point() +
   scale_y_continuous(breaks = seq(15, 40, by = 5))
 ```
@@ -262,7 +262,7 @@ ggplot(millas, aes(motor, autopista)) +
 Puedes usar `labels` de la misma manera (un vector de caracteres de la misma longitud que `breaks`), o puedes establecerlas como `NULL` del inglés *nulo*, para suprimir las etiquetas por completo. Esto es útil para mapas, o para publicar gráficos donde no puedes compartir los números absolutos.
 
 ```{r}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point() +
   scale_x_continuous(labels = NULL) +
   scale_y_continuous(labels = NULL)
@@ -294,7 +294,7 @@ Con mayor frecuencia utilizarás `breaks` y `labels` para ajustar los ejes. Aunq
 Para controlar la posición general de la leyenda, debes usar una configuración de `theme()` del inglés *tema*. Volveremos a los *temas* al final del capítulo, pero en resumen, controlan las partes del gráfico que no son de datos. La configuración del tema `legend.position` del inglés *posición de la leyenda*, controla dónde se dibuja la leyenda:
 
 ```{r fig.asp = 1, fig.align = "default", out.width = "50%", fig.width = 4}
-base <- ggplot(millas, aes(motor, autopista)) +
+base <- ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase))
 
 base + theme(legend.position = "left")
@@ -308,7 +308,7 @@ También puedes usar `legend.position = "none"` para suprimir por completo la vi
 Para controlar la visualización de leyendas individuales, usa `guides()` junto con `guide_legend()` o `guide_colourbar()`. El siguiente ejemplo muestra dos configuraciones importantes: controlar el número de filas que usa la leyenda con `nrow`, y redefinir una de las estéticas para agrandar los puntos. Esto es particularmente útil si has usado un valor de `alfa` bajo para mostrar muchos puntos en un diagrama.
 
 ```{r}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(colour = clase)) +
   geom_smooth(se = FALSE) +
   theme(legend.position = "bottom") +
@@ -341,10 +341,10 @@ ggplot(diamantes, aes(quilate, precio)) +
 Otra escala que se personaliza con frecuencia es el color. La escala categórica predeterminada selecciona los colores que están espaciados uniformemente alrededor del círculo cromático. Otras alternativas útiles son las escalas de ColorBrewer que han sido ajustadas manualmente para que funcionen mejor para personas con tipos comunes de daltonismo. Los dos gráficos de abajo se ven similares, sin embargo hay suficiente diferencia en los tonos rojo y verde tal que los puntos de la derecha pueden distinguirse incluso por personas con daltonismo rojo-verde.
 
 ```{r, fig.align = "default", out.width = "50%"}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(color = traccion))
 
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(color = traccion)) +
   scale_colour_brewer(palette = "Set1")
 ```
@@ -352,7 +352,7 @@ ggplot(millas, aes(motor, autopista)) +
 No olvides las técnicas más simples. Si solo hay unos pocos colores, puedes agregar un mapeo de forma redundante. Esto también ayudará a asegurar que tu gráfico sea interpretable en blanco y negro.
 
 ```{r}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(color = traccion, shape = traccion)) +
   scale_colour_brewer(palette = "Set1")
 ```
@@ -435,14 +435,14 @@ Hay tres formas de controlar los límites de un gráfico:
 Para ampliar una región del gráfico, generalmente es mejor usar `coord_cartesian()`.Compara los siguientes dos gráficos:
 
 ```{r out.width = "50%", fig.align = "default", message = FALSE}
-ggplot(millas, mapping = aes(motor, autopista)) +
+ggplot(millas, mapping = aes(cilindrada, autopista)) +
   geom_point(aes(color = clase)) +
   geom_smooth() +
   coord_cartesian(xlim = c(5, 7), ylim = c(10, 30))
 
 millas %>%
-  filter(motor >= 5, motor <= 7, autopista >= 10, autopista <= 30) %>%
-  ggplot(aes(motor, autopista)) +
+  filter(cilindrada >= 5, cilindrada <= 7, autopista >= 10, autopista <= 30) %>%
+  ggplot(aes(cilindrada, autopista)) +
   geom_point(aes(color = clase)) +
   geom_smooth()
 ```
@@ -453,26 +453,26 @@ También puedes establecer `limits` del inglés *límites* en escalas individual
 suv <- millas %>% filter(clase == "suv")
 compacto <- millas %>% filter(clase == "compacto")
 
-ggplot(suv, aes(motor, autopista, colour = traccion)) +
+ggplot(suv, aes(cilindrada, autopista, colour = traccion)) +
   geom_point()
 
-ggplot(compacto, aes(motor, autopista, colour = traccion)) +
+ggplot(compacto, aes(cilindrada, autopista, colour = traccion)) +
   geom_point()
 ```
 Una forma de superar este problema es compartir la escala entre varios gráficos, estableciendo una escala única a partir de los límites del conjunto de datos completo.
 
 ```{r out.width = "50%", fig.align = "default", fig.width = 4}
-x_scale <- scale_x_continuous(limits = range(millas$motor))
+x_scale <- scale_x_continuous(limits = range(millas$cilindrada))
 y_scale <- scale_y_continuous(limits = range(millas$autopista))
 col_scale <- scale_colour_discrete(limits = unique(millas$traccion))
 
-ggplot(suv, aes(motor, autopista, colour = traccion)) +
+ggplot(suv, aes(cilindrada, autopista, colour = traccion)) +
   geom_point() +
   x_scale +
   y_scale +
   col_scale
 
-ggplot(compacto, aes(motor, autopista, colour = traccion)) +
+ggplot(compacto, aes(cilindrada, autopista, colour = traccion)) +
   geom_point() +
   x_scale +
   y_scale +
@@ -486,7 +486,7 @@ En este caso particular podrías haber simplemente empleado la separación en fa
 Finalmente, puedes personalizar los elementos de tu gráfico que no son datos aplicando un tema:
 
 ```{r, message = FALSE}
-ggplot(millas, aes(motor, autopista)) +
+ggplot(millas, aes(cilindrada, autopista)) +
   geom_point(aes(color = clase)) +
   geom_smooth(se = FALSE) +
   theme_bw()
@@ -507,7 +507,7 @@ También es posible controlar componentes individuales de cada tema, como el tam
 Hay dos formas principales de obtener tus gráficos desde R: `ggsave()` y `knitr. ggsave()` guardarán el gráfico más reciente en el disco.
 
 ```{r, fig.show = "none"}
-ggplot(millas, aes(motor, autopista)) + geom_point()
+ggplot(millas, aes(cilindrada, autopista)) + geom_point()
 ggsave("mi_grafico.pdf")
 ```
 ```{r, include = FALSE}
@@ -533,7 +533,7 @@ Solo uso tres de las cinco opciones:
 Si observas que tienes que entrecerrar los ojos para leer el texto de tu gráfico, debes ajustar `fig.width`. Si `fig.width` es mayor que el tamaño de la figura en el documento final, el texto será demasiado pequeño; si `fig.width` es más pequeño, el texto será demasiado grande. A menudo necesitarás experimentar un poco para calcular la proporción correcta entre `fig.width` y el ancho asociado en tu documento. Para ilustrar el principio, los siguientes tres gráficos tienen `fig.width` de 4, 6 y 8, respectivamente:
 
 ```{r, include = FALSE}
-plot <- ggplot(millas, aes(motor, autopista)) + geom_point()
+plot <- ggplot(millas, aes(cilindrada, autopista)) + geom_point()
 ```
 ```{r, fig.width = 4, echo = FALSE}
 plot
