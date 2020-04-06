@@ -719,7 +719,7 @@ Los sistemas de coordenadas son probablemente la parte más complicada de ggplot
 
 ## La gramática de gráficos en capas
 
-En las secciones anteriores, aprendiste mucho más sobre cómo hacer diagramas de dispersión, gráficos de barras y diagramas de caja. Aprendiste una base que se puede usar para hacer cualquier tipo de gráfico con **ggplot2**. Para ver esto, agreguemos ajustes de posición, transformaciones estadísticas, sistemas de coordenadas y facetas a nuestra plantilla de código:
+En las secciones anteriores, aprendiste mucho más que solo hacer diagramas de dispersión, gráficos de barras y diagramas de caja. Aprendiste una base que se puede usar para hacer cualquier tipo de gráfico con **ggplot2**. Para ver esto, agreguemos ajustes de posición, transformaciones estadísticas, sistemas de coordenadas y facetas a nuestra plantilla de código:
 
 ```
 ggplot(data = <DATOS>) +
