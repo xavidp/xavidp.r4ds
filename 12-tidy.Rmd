@@ -135,7 +135,7 @@ tabla4a %>%
 
 Las columnas a girar quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay solo dos columnas, por lo que las listamos individualmente. Ten en consideración que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los rodeamos con acentos graves (o_backticks_). Para refrescar tu memoria respecto de la selección de columnas, consulta la sección sobre [select](#select). Las variables `anio` y `casos` no existen todavpia en la `tabla4a`, por lo que tenemos que poner sus nombres entre comillas.
 
-```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Pivotar la `tabla4` para un formato "largo" y ordenado."}
+```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Pivotar la `tabla4` para un formato 'largo' y ordenado."}
 knitr::include_graphics("diagrams_w_text_as_path/es/tidy-9.svg")
 ```
 
@@ -180,7 +180,7 @@ tabla2 %>%
   pivot_wider(names_from = tipo, values_from = cuenta)
 ```
 
-```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Pivotar la `tabla2` para un formato "ancho" y ordenado"}
+```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Pivotar la `tabla2` para un formato 'ancho' y ordenado"}
 knitr::include_graphics("diagrams_w_text_as_path/es/tidy-8.svg")
 ```
 
