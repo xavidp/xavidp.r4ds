@@ -94,7 +94,7 @@ ggplot(tabla1, aes(anio, casos)) +
 
 1. Recrea el gráfico que muestra el cambio en el número de casos usando la `tabla2` en lugar de la `tabla1`. ¿Qué necesitas hacer en primero?
 
-## Esparcir y reunir
+## Pivotar
 
 Los principios sobre datos ordenados parecen tan obvios que te podrías preguntar si alguna vez encontrarás un dataset que no esté ordenado. Desafortunadamente, gran parte de los datos que vas a encontrar están desordenados. Existen dos principales razones para esto:
 
@@ -110,85 +110,85 @@ Esto significa que para la mayoría de los análisis necesitarás hacer algún t
 
 Típicamente, un set de datos tiene uno de estos problemas. Si contiene ambos ¡significa que tienes muy mala suerte! Para solucionar estos problemas necesitarás las dos funciones más importantes de tidyr: `gather()` (reunir) y `spread()` (esparcir/extender).
 
-### Gather
+### Datos "largos"
 
-Un problema común es cuando en un dataset los nombres de las columnas no representan nombres de variables, sino que representan los _valores_ de una variable. Tomando el caso de la `tabla4a`: los nombres de las columnas `1999` y `2000` representan los valores de la variable `año` y cada fila representa dos observaciones en lugar de una.
+Un problema común es cuando en un dataset los nombres de las columnas no representan nombres de variables, sino que representan los _valores_ de una variable. Tomando el caso de la `tabla4a`: los nombres de las columnas `1999` y `2000` representan los valores de la variable `año`, los valores en las columnas `1999` y `2000` representan valores de la variable `casos` y cada fila representa dos observaciones en lugar de una.
 
 ```{r}
 tabla4a
 ```
 
-Para ordenar un dataset como este necesitamos reunir (__gather__) esas columnas en un nuevo par de variables. Para describir dicha operación necesitamos tres parámetros:
+Para ordenar un dataset como este necesitamos __pivotar__ las columnas que no cumplen en un nuevo par de variables. Para describir dicha operación necesitamos tres parámetros:
 
-* El conjunto de columnas que representan valores y no variables. En este ejemplo son las columnas `1999` y `2000`.
+* El conjunto de columnas cuyos nombres son valores y no variables. En este ejemplo son las columnas `1999` y `2000`.
 
 * El nombre de la variable cuyos valores forman los nombres de las columnas. Llamaremos a esto `key` (clave) y en este caso corresponde a `anio`.
 
 * El nombre de la variable cuyos valores están repartidos por las celdas. Llamaremos a esto `value` (valor) y en este caso corresponde al número de `casos`.
 
-Juntando estos parámetros se puede realizar una llamada a `gather()`:
+Con estos parámetros podemos utilizar la función `pivot_longer()` (_pivotar a lo largo_):
 
 ```{r}
 tabla4a %>%
-  gather(`1999`, `2000`, key = "anio", value = "casos")
+  pivot_longer(cols = c(`1999`, `2000`), names_to = "anio", values_to = "casos")
 ```
 
-Las columnas a reunir quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay solo dos columnas, por lo que las listamos individualmente. Nota que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los rodeamos con acentos graves (o _backticks_, en inglés). Para refrescar tu memoria respecto de la selección de columnas, consulta la sección sobre [select](#select).
+Las columnas a girar quedan seleccionadas siguiendo el estilo de notación de `dplyr::select()`. En este caso hay solo dos columnas, por lo que las listamos individualmente. Ten en consideración que "1999" y "2000" son nombres no-sintáxicos (debido a que no comienzan con una letra) por lo que los rodeamos con acentos graves (o_backticks_). Para refrescar tu memoria respecto de la selección de columnas, consulta la sección sobre [select](#select). Las variables `anio` y `casos` no existen todavpia en la `tabla4a`, por lo que tenemos que poner sus nombres entre comillas.
 
-```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Reuniendo `tabla4` en un formato ordenado."}
+```{r tidy-gather, echo = FALSE, out.width = "100%", fig.cap = "Pivotar la `tabla4` para un formato "largo" y ordenado."}
 knitr::include_graphics("diagrams_w_text_as_path/es/tidy-9.svg")
 ```
 
-En el resultado final, las columnas reunidas se eliminan y obtenemos la nuevas variables `key` y `value`. De otro modo, la relación entre las variables originales se mantiene. Visualmente, esto se observa en la Figura \@ref(fig:tidy-gather). Podemos usar `gather()` para ordenar `tabla4b` de modo similar. La única diferencia es la variable almacenada en los valores de las celdas:
+En el resultado final, las columnas pivotadas se eliminan y obtenemos la nuevas columnas `anio` y `casos`. La relación entre las variables originales se mantiene, tal como se puede observar en la Figura \@ref(fig:tidy-gather). Podemos usar `pivot_longer()` para ordenar `tabla4b` de modo similar. La única diferencia es la variable almacenada en los valores de las celdas:
 
 ```{r}
 tabla4b %>%
-  gather(`1999`, `2000`, key = "anio", value = "poblacion")
+  pivot_longer(cols = c(`1999`, `2000`), names_to = "anio", values_to = "poblacion")
 ```
 
 Para combinar las versiones ordenadas de `tabla4a` y `tabla4b` en un único tibble, necesitamos usar `dplyr::left_join()`, función que aprenderás en el capítulo sobre [datos relacionales].
 
 ```{r}
 tidy4a <- tabla4a %>%
-  gather(`1999`, `2000`, key = "anio", value = "casos")
+  pivot_longer(cols = c(`1999`, `2000`), names_to = "anio", values_to = "casos")
 
 tidy4b <- tabla4b %>%
-  gather(`1999`, `2000`, key = "anio", value = "poblacion")
+  pivot_longer(cols = c(`1999`, `2000`), names_to = "anio", values_to = "poblacion")
 
 left_join(tidy4a, tidy4b)
 ```
 
-### Spread
+### Datos "anchos"
 
-Extender (__spread__) es lo opuesto de __gather__. Lo usas cuando una observación aparece en múltiples filas. Por ejemplo, toma la tabla `tabla2`: una observación es un país en un año, pero cada observación aparece en dos filas.
+`pivot_wider()` (_pivotar a lo ancho_) es lo opuesto de `pivot_longer()`. Se usa cuando una observación aparece en múltiples filas. Por ejemplo, considera la `tabla2`: una observación es un país en un año, pero cada observación aparece en dos filas.
 
 ```{r}
 tabla2
 ```
 
-Para ordenar esto, primero analizamos la representación de un modo similar a cómo se haría con `gather()`. Esta vez, sin embargo, necesitamos únicamente dos parámetros:
+Para ordenar esto, primero analizamos la representación de un modo similar a cómo se haría con `pivot_longer()`. Esta vez, sin embargo, necesitamos únicamente dos parámetros:
 
 
-* La columna que contiene los nombres de las variables (la columna `key`). En este caso corresponde a `tipo`.
+* La columna desde la que obtener los nombres de las variables. En este caso corresponde a `tipo`.
 
-* La columna que contiene valores de múltiples variables (la columna `value`). En este caso corresponde a `cuenta`.
+* La columna desde la que obtener los valores. En este caso corresponde a `cuenta`.
 
-Una vez resuelto esto, podemos usar `spread()`, como se muestra programáticamente abajo y visualmente en la Figura \@ref(fig:tidy-spread).
+Una vez resuelto esto, podemos usar `pivot_wider()`, como se muestra programáticamente abajo y visualmente en la Figura \@ref(fig:tidy-spread).
 
 ```{r}
 tabla2 %>%
-  spread(key = tipo, value = cuenta)
+  pivot_wider(names_from = tipo, values_from = cuenta)
 ```
 
-```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Extender la `tabla2` la vuelve ordenada"}
+```{r tidy-spread, echo = FALSE, out.width = "100%", fig.cap = "Pivotar la `tabla2` para un formato "ancho" y ordenado"}
 knitr::include_graphics("diagrams_w_text_as_path/es/tidy-8.svg")
 ```
 
-Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, las funciones `gather()` y `spread()` son complementarias. `gather()` genera tablas estrechas y largas, `spread()` genera tablas anchas y cortas.
+Como te habrás dado cuenta a partir de sus nombres, las funciones `pivot_longer()` y `pivot_wider()` son complementarias. `pivot_longer()` genera tablas angostas y largas, `pivot_wider()` genera tablas anchas y cortas.
 
 ### Ejercicios
 
-1. ¿Por qué `gather()` y `spread()` no son perfectamente simétricas?
+1. ¿Por qué `pivot_longer()` y `pivot_wider()` no son perfectamente simétricas?
  Observa cuidadosamente el siguiente ejemplo:
 
   ```{r, eval = FALSE}
@@ -198,26 +198,26 @@ Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, 
     retorno = c(1.88, 0.59, 0.92, 0.17)
   )
   acciones %>%
-    spread(anio, retorno) %>%
-    gather("anio", "retorno", `2015`:`2016`)
+    pivot_wider(names_from = anio, values_from = retorno) %>% 
+    pivot_longer(`2015`:`2016`, names_to = "anio", values_to = "retorno")
   ```
 
  (Sugerencia: observa los tipos de variables y piensa en los nombres de las columnas)
 
-    Tanto `spread()` como `gather()` tienen el argumento `convert` (convertir). ¿Qué   hace dicho argumento?
+    `pivot_longer()` tiene el argumento `names_ptype`: por ejemplo: `names_ptype = list(year = double())`. ¿Qué es lo que hace dicho argumento?
 
 1. ¿Por qué falla el siguiente código?
 
   ```{r, error = TRUE}
   tabla4a %>%
-    gather(`1999`, `2000`, key = "anio", value = "casos")
+    pivot_longer(c(1999, 2000), names_to = "anio", values_to = "casos")
   ```
 
-1. ¿Por qué no se puede extender la siguiente tabla? ¿Cómo agregarías una nueva columna para resolver el problema?
+1. ¿Qué pasaría si trataras de pivotar esta tabla a lo ancho? ¿Por qué? ¿Cómo podrías agregar una nueva columna que identifique de manera única cada valor?
 
   ```{r}
   personas <- tribble(
-    ~nombre, ~clave, ~valor,
+    ~nombre, ~nombres, ~valores,
     #-----------------|--------|------
     "Phillip Woods", "edad", 45,
     "Phillip Woods", "estatura", 186,
@@ -227,7 +227,7 @@ Como te habrás dado cuenta a partir de los argumentos comunes `key` y `value`, 
   )
   ```
 
-1. Ordena la siguiente tabla. ¿Necesitas extenderla o contraerla? ¿Cuáles son las variables?
+1. Ordena la siguiente tabla. ¿Necesitas alargarla o ensancharla? ¿Cuáles son las variables?
 
   ```{r}
   embarazo <- tribble(
@@ -363,8 +363,13 @@ Debido a que estos valores faltantes explícitos pueden no ser tan importantes e
 
 ```{r}
 acciones %>%
-  spread(anio, retorno) %>%
-  gather(anio, retorno, `2015`:`2016`, na.rm = TRUE)
+  pivot_wider(names_from = anio, values_from = retorno) %>% 
+  pivot_longer(
+    cols = c(`2015`, `2016`), 
+    names_to = "anio", 
+    values_to = "retorno", 
+    values_drop_na = TRUE
+  )
 ```
 
 Otra herramienta importante para hacer explícitos los valores faltantes en datos ordenados es `complete()`:
@@ -397,7 +402,7 @@ tratamiento %>%
 
 ### Ejercicios
 
-1. Compara y contrasta el argumento `fill` que se usa en `spread()` con `complete()`.
+1. Compara y contrasta el argumento `fill` que se usa en `pivot_wider()` con `complete()`.
 
 1. ¿Qué hace el argumento de dirección en `fill()`?
 
@@ -427,7 +432,12 @@ Existen múltiples valores faltantes en la representación actual, por lo que de
 
 ```{r}
 oms1 <- oms %>%
-  gather(nuevos_fpp_h014:nuevosrecaida_m65, key = "clave", value = "casos", na.rm = TRUE)
+  pivot_longer(
+    cols = nuevos_fpp_h014:nuevosrecaida_m65, 
+    names_to = "clave", 
+    values_to = "casos", 
+    values_drop_na = TRUE
+  )
 oms1
 ```
 
@@ -501,7 +511,11 @@ Hemos mostrado el código parte por parte, asignando los resultados intermedios 
 
 ```{r, results = "hide"}
 oms %>%
-  gather(clave, valor, nuevos_fpp_h014:nuevosrecaida_m65, na.rm = TRUE) %>%
+  pivot_longer(
+    cols = nuevos_fpp_h014:nuevosrecaida_m65,
+    names_to = "clave", 
+    values_to = "valor", 
+    values_drop_na = TRUE) %>%
   mutate(clave = stringr::str_replace(clave, "nuevosrecaida", "nuevos_recaida")) %>%
   separate(clave, c("nuevos", "tipo", "sexo_edad")) %>%
   select(-nuevos, -iso2, -iso3) %>%
@@ -510,7 +524,7 @@ oms %>%
 
 ### Ejercicios
 
-1. En este caso de estudio fijamos `na.rm = TRUE` para hacer más simple el verificar que tenemos los valores correctos. ¿Es esto razonable? Piensa en cómo los valores faltantes están representados en este dataset. ¿Existen valores faltantes implícitos? ¿Cuál es la diferencia entre `NA` y cero?
+1. En este caso de estudio fijamos `values_drop_na = TRUE` para hacer más simple el verificar que tenemos los valores correctos. ¿Es esto razonable? Piensa en cómo los valores faltantes están representados en este dataset. ¿Existen valores faltantes implícitos? ¿Cuál es la diferencia entre `NA` y cero?
 
 1. ¿Qué ocurre si omites la aplicación de `mutate()`?
  (`mutate(clave = stringr::str_replace(clave, "nuevosrecaida", "nuevos_recaida"))`)
