@@ -251,12 +251,12 @@ Los niveles son concisos e inconsistentes. Hay que correjirlos un poco para que 
 ```{r}
 encuesta %>%
   mutate(partido = fct_recode(partido,
-    "Republicano duro" = "Republicano Acérrimo",
-    "Republicano moderado" = "Republicado No Acérrimo",
-    "Independiente pro republicano" = "Independiente, pro-Rep",
-    "Independiente pro demócrata" = "Independiente, pro-Dem",
-    "Demócrata moderado" = "Demócrata No Acérrimo",
-    "Demócrata duro" = "Demócrata Acérrimo"
+    "Republicano duro" = "Fuertemente republicano",
+    "Republicano moderado" = "No fuertemente republicano",
+    "Independiente pro republicano" = "Ind, pro rep",
+    "Independiente pro demócrata" = "Ind, pro dem",
+    "Demócrata moderado" = "No fuertemente demócrata",
+    "Demócrata duro" = "Fuertemente demócrata"
   )) %>%
   count(partido)
 ```
@@ -268,12 +268,12 @@ Para combinar grupos, puedes asignar múltiples niveles viejos al mismo nivel nu
 ```{r}
 encuesta %>%
   mutate(partido = fct_recode(partido,
-    "Republicano duro" = "Republicano Acérrimo",
-    "Republicano moderado" = "Republicado No Acérrimo",
-    "Independiente pro republicano" = "Independiente, pro-Rep",
-    "Independiente pro demócrata" = "Independiente, pro-Dem",
-    "Demócrata moderado" = "Demócrata No Acérrimo",
-    "Demócrata duro" = "Demócrata Acérrimo",
+    "Republicano duro" = "Fuertemente republicano",
+    "Republicano moderado" = "No fuertemente republicano",
+    "Independiente pro republicano" = "Ind, pro rep",
+    "Independiente pro demócrata" = "Ind, pro dem",
+    "Demócrata moderado" = "No fuertemente demócrata",
+    "Demócrata duro" = "Fuertemente demócrata",
     "Otro" = "Sin respuesta",
     "Otro" = "No sabe",
     "Otro" = "Otro partido"
@@ -289,9 +289,9 @@ Si quieres colapsar muchos niveles, `fct_collapse()` (del inglés, _colapsar fac
 encuesta %>%
   mutate(partido = fct_collapse(partido,
     otro = c("Sin respuesta", "No sabe", "Otro partido"),
-    republicano = c("Republicano duro", "Republicano moderado"),
-    independiente = c("Independiente pro republicano", "Independiente", "Independiente pro demócrata"),
-    democrata = c("Demócrata moderado", "Demócrata duro")
+    republicano = c("Fuertemente republicano", "No fuertemente republicano"),
+    independiente = c("Ind, pro rep", "Independiente", "Ind, pro dem"),
+    demócrata = c("No fuertemente demócrata", "Fuertemente demócrata")
   )) %>%
   count(partido)
 ```
