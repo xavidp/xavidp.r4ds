@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Trabajar con datos incluidos en paquetes de R es una muy buena forma de empezar a conocer las herramientas de la ciencia de datos. Sin embargo, en algún punto debes parar de aprender y comenzar a trabajar con tus propios datos. En este capítulo aprenderás cómo leer en R archivos rectangulares de texto plano. Si bien solo tocaremos superficialmente el tema de importación de datos, muchos de los principios que veremos son aplicables al trabajo con otras formas de datos. Finalizaremos sugiriendo algunos paquetes que son útiles para otros tipos de datos. 
+Trabajar con datos incluidos en paquetes de R es una muy buena forma de empezar a conocer las herramientas de la ciencia de datos. Sin embargo, en algún punto deberás parar de aprender y comenzar a trabajar con tus propios datos. En este capítulo aprenderás cómo leer en R archivos rectangulares de texto plano. Si bien solo tocaremos superficialmente el tema de importación, muchos de los principios que veremos son aplicables al trabajo con otras formas de datos. Finalizaremos sugiriendo algunos paquetes que son útiles para otros formatos.
 
 
 ### Prerrequisitos
@@ -23,9 +23,9 @@ La mayoría de las funciones de **readr** se enfocan en transformar archivos pla
   
 * `read_fwf()` lee archivos de ancho fijo. Puedes especificar los campos ya sea por su ancho, con `fwf_widths()`, o por su ubicación, con `fwf_positions()`. `read_table()` lee una variación común de estos archivos de ancho fijo en los que las columnas se encuentran separadas por espacios.
 
-* `read_log()` lee archivos de registro estilo Apache (revisa también [webreadr](https://github.com/Ironholds/webreadr) que está construido sobre `read_log()` y proporciona muchas otras herramientas útiles).
+* `read_log()` lee archivos de registro estilo Apache. (Revisa también [webreadr](https://github.com/Ironholds/webreadr), que está construido sobre `read_log()` y proporciona muchas otras herramientas útiles).
 
-Todas estas funciones tienen sintaxis similares, por lo que una vez que dominas una, puedes utilizar todas las demás con facilidad. En el resto del capítulo nos enfocaremos en `read_csv()`. Los archivos csv no solo son una de las formas de almacenamiento más comunes, sino que una vez que comprendas `read_csv()` podrás aplicar fácilmente tus conocimientos a todas las otras funciones de __readr__.
+Todas estas funciones tienen una sintaxis similar, por lo que una vez que dominas una, puedes utilizar todas las demás con facilidad. En el resto del capítulo nos enfocaremos en `read_csv()`. Los archivos csv no solo son una de las formas de almacenamiento más comunes, sino que una vez que comprendas `read_csv()` podrás aplicar fácilmente tus conocimientos a todas las otras funciones de __readr__.
 
 El primer argumento de `read_csv()` es el más importante: es la ruta al archivo a leer.
 
@@ -89,7 +89,7 @@ Si has utilizado R anteriormente, tal vez te preguntas por qué no usamos `read.
 
 * Producen tibbles, no convierten los vectores de caracteres a factores, no usan nombres de filas ni distorsionan los nombres de columnas. Estas son fuentes comunes de frustración al utilizar las funciones de R base.
 
-* Son más reprobase heredan ciertos comportamientos de tu sistema operativo y de las variables del ambiente, de modo que importar código que funciona bien en tu computadora puede no funcionar en la de otros. 
+* Son más reproducibles. Las funciones de R base heredan ciertos comportamientos de tu sistema operativo y de las variables del ambiente, de modo que importar código que funciona bien en tu computadora puede no funcionar en la de otros. 
 
 ### Ejercicios
 
