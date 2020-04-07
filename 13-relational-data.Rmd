@@ -2,19 +2,19 @@
 
 ## Introducción
 
-Es raro que un análisis de datos involucre una única tabla de datos. Lo típico es que tengas muchas tablas de datos que debes combinar para responder a tus preguntas de interés. De manera colectiva, se le llama _datos relacionales_ a esas múltiples tablas de datos, ya que sus relaciones, y no sólo los conjuntos de datos individuales, son importantes.
+Es raro que un análisis de datos involucre una única tabla de datos. Lo típico es que tengas muchas tablas que debes combinar para responder a tus preguntas de interés. De manera colectiva, se le llama _datos relacionales_ a esas múltiples tablas de datos, ya que sus relaciones, y no solo los conjuntos de datos individuales, son importantes.
 
 Las relaciones siempre se definen sobre un par de tablas. Todas las otras relaciones se construyen sobre esta idea simple: las relaciones entre tres o más tablas son siempre una propiedad de las relaciones entre cada par. ¡A veces ambos elementos de un par pueden ser la misma tabla! Esto se necesita si, por ejemplo, tienes una tabla de personas y cada persona tiene una referencia a sus padres.
 
-Para trabajar con datos relacionales necesitas verbos para funcionen con pares de tablas. Existen tres familias de verbos diseñadas para trabajar con datos relacionales:
+Para trabajar con datos relacionales necesitas verbos que funcionen con pares de tablas. Existen tres familias de verbos diseñadas para trabajar con datos relacionales:
 
 * __Uniones de transformación__ (del inglés _mutating joins_), que agregan nuevas variables a un *data frame* a partir de las observaciones coincidentes en otra tabla.
 
-* __Uniones de filtro__ (del inglés _filtering joins_), que filtran observaciones en un *data frame* con base en si coinciden con las observaciones en otra tabla.
+* __Uniones de filtro__ (del inglés _filtering joins_), que filtran observaciones en un *data frame* con base en si coinciden o no con una observación de otra tabla.
 
 * __Operaciones de conjuntos__ (del inglés _set operations_), que tratan las observaciones como elementos de un conjunto.
 
-El lugar más común para encontrar datos relacionales es en un sistema _relacional_ de administración de bases de datos (*Relational Data Base Management System* en inglés), un concepto que abarca casi todas las bases de datos modernas. Si has usado una base de datos con anterioridad, casi seguramente fue SQL. Si es así, los conceptos de este capítulo debiesen ser familiares, aunque su expresión en **dplyr** es un poco distinta. En términos generales, **dplyr** es un poco más fácil de usar que SQL ya que dplyr se especializa en el análisis de datos: facilita las operaciones habituales, a expensas de dificultar otras que no se requieren a menudo para el análisis de datos.
+El lugar más común para encontrar datos relacionales es en un sistema _relacional_ de administración de bases de datos (*Relational Data Base Management System* en inglés), un concepto que abarca casi todas las bases de datos modernas. Si has usado una base de datos con anterioridad, casi seguramente fue SQL. Si es así, los conceptos de este capítulo debiesen ser familiares, aunque su expresión en **dplyr** es un poco distinta. En términos generales, **dplyr** es un poco más fácil de usar que SQLes, ya que dplyr se especializa en el análisis de datos: facilita las operaciones habituales, a expensas de dificultar otras que no se requieren a menudo para el análisis de datos.
 
 ### Prerrequisitos
 
@@ -25,7 +25,7 @@ library(tidyverse)
 library(datos)
 ```
 
-## datos sobre vuelos {#nycflights13-relational}
+## Datos sobre vuelos {#nycflights13-relational}
 
 Usaremos datos sobre vuelos desde y hacia Nueva York para aprender sobre datos relacionales^[NdT. El texto original se refiere al paquete nycflights13 cuya traducción se incluye en el paquete **datos**.]. El paquete **datos** contiene cuatro tablas que se relacionan con la tabla `vuelos` que se usó en el capítulo sobre [transformación de datos]:
 
@@ -128,9 +128,9 @@ vuelos %>%
   filter(n > 1)
 ```
 
-Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo sería usado solo una vez al día: eso haría mucho más simple comunicar problemas con un vuelo específico. ¡Desafortunadamente este no es el caso! Si una tabla no tiene una clave primaria, a veces es útil incluir una con `mutate()` y `row_number()` (_número de fila_). Eso simplifica hacer coincidir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama _llave subrogada_.
+Al comenzar a trabajar con estos datos, ingenuamente asumimos que cada número de vuelo sería usado solo una vez al día: eso haría mucho más simple comunicar problemas con un vuelo específico. ¡Desafortunadamente este no es el caso! Si una tabla no tiene una clave primaria, a veces es útil incluir una con `mutate()` y `row_number()` (_número de fila_). Eso simplifica hacer coincidir observaciones una vez que haz hecho algunos filtros y quieres volver a verificar con los datos originales. Esto se llama __clave subrogada__.
 
-Una clave primaria y su correspondiente clave foránea en otra tabla forman una __relación__. Las relaciones son típicamente uno a muchos. Por ejemplo, cada vuelo tiene un avión, pero cada avión tiene muchos vuelos. En otros datos, ocasionalmente verás relaciones uno a uno. Puedes pensar esto como un caso especial de uno a muchos. Puedes modelar relaciones muchos a muchos como relaciones de la forma muchos a uno y uno a muchos. Por ejemplo, en estos datos existe una relación muchos a muchos entre aerolíneas y aeropuertos: cada aerolínea vuela a muchos aeropuertos, cada aeropuerto recibe a muchas aerolíneas.
+Una clave primaria y su correspondiente clave foránea en otra tabla forman una __relación__. Las relaciones son típicamente uno-a-muchos. Por ejemplo, cada vuelo tiene un avión, pero cada avión tiene muchos vuelos. En otros datos, ocasionalmente verás relaciones uno-a-uno. Puedes pensar esto como un caso especial de uno-a-muchos. Puedes modelar relaciones muchos-a-muchos como relaciones de la forma muchos-a-uno y uno-a-muchos. Por ejemplo, en estos datos existe una relación muchos-a-muchos entre aerolíneas y aeropuertos: cada aerolínea vuela a muchos aeropuertos, cada aeropuerto recibe a muchas aerolíneas.
 
 ### Ejercicios
 
@@ -174,7 +174,7 @@ vuelos2 %>%
   left_join(aerolineas, by = "aerolinea")
 ```
 
-El resultado de unir aerolíneas y vuelos2 es la inclusión de una variable adicional: `nombre`. Esto es la razón de que llamemos unión de transformación a este tipo de unión. En este caso, podrías obtener el mismo resultado usando `mutate()` junto a las operaciones de filtro de R base:
+El resultado de unir `aerolineas` y `vuelos2` es la inclusión de una variable adicional: `nombre`. Esta es la razón de que llamemos unión de transformación a este tipo de unión. En este caso, podrías obtener el mismo resultado usando `mutate()` junto a las operaciones de filtro de R base:
 
 ```{r}
 vuelos2 %>%
@@ -218,7 +218,7 @@ knitr::include_graphics("diagrams_w_text_as_path/es/join-setup2.svg")
 
 (Si observas detenidamente, te darás cuenta de que hemos cambiado el orden de las columnas clave y valor en `x`. Esto es para enfatizar que las uniones encuentran coincidencias basadas en las claves; el valor simplemente se traslada durante el proceso.)
 
-En la unión que mostramos, las coincidencias se indican con puntos. El número de puntos es igual al numero de coincidencias y al número de filas en la salida.
+En la unión que mostramos, las coincidencias se indican con puntos. El número de puntos es igual al número de coincidencias y al número de filas en la salida.
 
 ```{r, echo = FALSE, out.width = NULL}
 knitr::include_graphics("diagrams_w_text_as_path/es/join-inner.svg")
@@ -247,9 +247,9 @@ La propiedad más importante de una unión interior es que las filas no coincide
 
 Una unión interior mantiene las observaciones que aparecen en ambas tablas.  Una __unión exterior__ mantiene las observaciones que aparecen en al menos una de las tablas. Existen tres tipos de uniones exteriores:
 
-* Una __unión izquierda__ (del inglés _left join_) mantiene todas las observaciones en `x`.
-* Una __unión derecha__ (del inglés _right join_) mantiene todas las observaciones en `y`.
-* Una __unión completa__ (del inglés _full join_) mantiene todas las observaciones en `x` e `y`.
+* Una __unión izquierda__ (_left join_) mantiene todas las observaciones en `x`.
+* Una __unión derecha__ (_right join_) mantiene todas las observaciones en `y`.
+* Una __unión completa__ (_full join_) mantiene todas las observaciones en `x` e `y`.
 
 Estas uniones funcionan agregando una observación "virtual" adicional a cada tabla. Esta observación tiene una clave que siempre coincide (de no haber otras claves coincidentes) y un valor que se llena con `NA`.
 
@@ -280,8 +280,8 @@ Hasta ahora todos los diagramas han asumido que las claves son únicas. Pero ese
 knitr::include_graphics("diagrams_w_text_as_path/es/join-one-to-many.svg")
  ```
   
-    Nota que hemos puesto la columna   clave en una posición ligeramente distinta en la salida.
-    Esto refleja que la clave es una clave primaria en `y` y una clave foránea en `x`.
+  Nota que hemos puesto la columna   clave en una posición ligeramente distinta en el output.
+  Esto refleja que la clave es una clave primaria en `y` y una clave foránea en `x`.
 
  ```{r}
 x <- tribble(
@@ -340,7 +340,7 @@ vuelos2 %>%
 
   * Un vector de caracteres, `by = "x"`. Esto es similar a una unión natural, 
     pero usa algunas de las variables comunes. Por ejemplo, `vuelos` y `aviones` 
-    tienen la variable `anio`, pero significa cosas distintas en cada tabla 
+    tienen la variable `anio`, pero esta significa cosas distintas en cada tabla 
     por lo que queremos unir por `codigo_cola`.
 
  ```{r}
@@ -379,19 +379,19 @@ vuelos2 %>%
    coord_quickmap()
    ```
 
-  (No te preocupes si no entiendes que hace `semi_join()`; lo aprenderás a continuación.)
+  (No te preocupes si no entiendes quá hace `semi_join()`; lo aprenderás a continuación.)
   
-    Quizás quieras usar `size` o `colour` para editar los puntos y mostrar 
-    el atraso promedio de cada aeropuerto.
+  Quizás quieras usar `size` o `colour` para editar los puntos y mostrar 
+  el atraso promedio de cada aeropuerto.
   
-1. Agrega la ubicación de origen _y_ destino (por ejemplo, `latitud` y `longitud`) 
+2. Agrega la ubicación de origen _y_ destino (por ejemplo, `latitud` y `longitud`) 
    a `vuelos`.
 
-1. ¿Existe una relación entre la antiguedad de un avión y sus atrasos?
+3. ¿Existe una relación entre la antiguedad de un avión y sus atrasos?
 
-1. ¿Qué condiciones climáticas hacen más probables los atrasos?
+4. ¿Qué condiciones climáticas hacen más probables los atrasos?
 
-1. ¿Qué sucedió el día 13 de junio de 2013? Muestra el patrón espacial de los atrasos. Luego, usa un buscador para encontrar referencias cruzadas con el clima.
+5. ¿Qué sucedió el día 13 de junio de 2013? Muestra el patrón espacial de los atrasos. Luego, usa un buscador para encontrar referencias cruzadas con el clima.
 
  ```{r, eval = FALSE, include = FALSE}
 peores <- filter(vuelos, !is.na(horario_salida), mes == 6, dia == 13)
@@ -492,8 +492,8 @@ vuelos %>%
 
 ### Ejercicios
 
-1. ¿Qué significa que un vuelo le falte `codigo_cola`? ¿Qué tienen en común los códigos 
-   de cola que no tienen registros coincidentes en `aviones`? (Pista: Una variable explica 
+1. ¿Qué significa que a un vuelo le falte `codigo_cola`? ¿Qué tienen en común los códigos 
+   de cola que no tienen registros coincidentes en `aviones`? (Pista: una variable explica 
    ~90% de los problemas.)
 
 1. Filtra los vuelos para mostrar únicamente los aviones que han realizado al menos cien
@@ -514,7 +514,7 @@ vuelos %>%
 
 ## Problemas con las uniones
 
-Los datos con los que has estado trabajando en este capítulo han sido limpiados de modo que tengas la menor cantidad de problemas posibles. Tus datos difícilmente estarán tan ordenados, por lo que hay algunas consideraciones y pasos a tener en cuenta para que las uniones sobre tus propios datos funcionen adecuadamente.
+Los datos con los que has estado trabajando en este capítulo han sido limpiados de modo que tengas la menor cantidad de problemas posibles. Tus datos difícilmente estarán tan ordenados, por lo que hay algunas consideraciones y pasos a tener en cuenta para que las uniones funcionen adecuadamente sobre tus propios datos.
 
 1. Comienza identificando las variables que forman las claves primarias en cada tabla.
    Usualmente debieras hacerlo considerando tus conocimientos de los datos, no observando 
@@ -533,7 +533,7 @@ Los datos con los que has estado trabajando en este capítulo han sido limpiados
    ¡Si hay un valor faltante no podrá identificar una observación!
 
 1. Verifica que las claves foráneas coincidan con las claves primarias en 
-   otra tabla. La mejor forma de hacerlo es mediante `anti_join()`. Es común 
+   otra tabla. La mejor forma de hacerlo es mediante un `anti_join()`. Es común 
    que las claves no coincidan debido a errores en la entrada de datos. Arreglar 
    este problema requiere mucho trabajo.
 
@@ -547,11 +547,11 @@ Ten en cuenta que verificar el número de filas antes y después de unir no es s
 
 ## Operaciones de conjuntos {#set-operations}
 
-El tipo final de verbo para dos tablas son las operaciones de conjunto. Si bien lo usamos de manera poco frecuente, en ocasiones es útil cuando quieres dividir un filtro complejo en partes maś simples. Todas estas operaciones funcionan con una fila completa, comparando los valores de cada variable. Esto espera que los imput `x` e `y` tengan las mismas variables y trata las observaciones como conjuntos: 
+El tipo final de verbo para dos tablas son las operaciones de conjunto. Si bien lo usamos de manera poco frecuente, en ocasiones es útil cuando quieres dividir un filtro complejo en partes maś simples. Todas estas operaciones funcionan con una fila completa, comparando los valores de cada variable. Esto espera que los input `x` e `y` tengan las mismas variables y trata las observaciones como conjuntos: 
 
-* `intersect(x, y)`: entregas las observaciones comunes en `x` e `y`.
-* `union(x, y)`: entregas las observaciones únicas en `x` e `y`.
-* `setdiff(x, y)`: entregas las observaciones en `x` pero no en `y`.
+* `intersect(x, y)`: devuelve las observaciones comunes en `x` e `y`.
+* `union(x, y)`: devuelve las observaciones únicas en `x` e `y`.
+* `setdiff(x, y)`: devuelve las observaciones en `x` pero no en `y`.
 
 Dados los siguientes datos simples:
 
