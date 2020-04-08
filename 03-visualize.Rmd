@@ -530,7 +530,7 @@ Por ejemplo, es posible que desees mostrar un gráfico de barras de proporciones
 
    ```{r}
    ggplot(data = diamantes) +
-     geom_bar(mapping = aes(x = corte, y = stats(prop), group = 1))
+     geom_bar(mapping = aes(x = corte, y = stat(prop), group = 1))
    ```
 
    Para encontrar las variables calculadas por _stat_, busca la sección de ayuda titulada "Compute Variables".
