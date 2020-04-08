@@ -18,7 +18,6 @@ Este capítulo se centra en el paquete __lubridate__, que simplifica el trabajo 
 
 ```{r setup, message = FALSE}
 library(tidyverse)
-
 library(lubridate)
 library(datos)
 ```
@@ -31,11 +30,11 @@ Hay tres tipos de datos de fechas/horas que se refieren a un instante en el tiem
 
 * Una hora o `time` dentro de un día. Los _tibbles_ lo imprimen como `<time>`.
 
-* Una fecha-hora o `date-time` es una fecha con una hora adjunta: identifica de forma única como un instante en el tiempo (típicamente al segundo más cercano). Los _tibbles_ imprimen esto como `<dttm>`. En otras partes de R, estos se llaman POSIXct, pero no creemos que sea un nombre muy útil.
+* Una fecha-hora o `date-time` es una fecha con una hora adjunta: identifica de forma única un instante en el tiempo (típicamente al segundo más cercano). Los _tibbles_ imprimen esto como `<dttm>`. En otras partes de R se les llama POSIXct, pero no creemos que sea un nombre muy útil.
 
-En este capítulo solo nos concentraremos en fechas (_dates_) y fechas con horas (_date-times_) ya que R no tiene una clase nativa para almacenar horas. Si necesitas una, puedes usar el paquete __hms__.
+En este capítulo solo nos concentraremos en fechas (_dates_) y fechas-horas (_date-times_), ya que R no tiene una clase nativa para almacenar horas. Si necesitas una, puedes usar el paquete __hms__.
 
-Siempre deberías usar el tipo de datos más sencillo que se ajusta a tus necesidades. Esto significa que si puedes usar `date` en lugar de `date-time`, deberías hacerlo. Las fechas-horas son sustancialmente más complicadas porque necesitas gestionar los husos horarios, a los que volveremos al final del capítulo.
+Siempre deberías usar el tipo de datos más sencillo que se ajuste a tus necesidades. Esto significa que si puedes usar `date` en lugar de `date-time`, deberías hacerlo. Las fechas-horas son sustancialmente más complicadas porque necesitas gestionar los husos horarios, a los que volveremos al final del capítulo.
 
 Para obtener la fecha o fecha-hora actual, puedes usar `today()` (_hoy_) o `now()` (_ahora_):
 
@@ -63,20 +62,20 @@ mdy("Enero 31, 2017")
 dmy("31-Ene-2017")
 ```
 
-Estas funciones también reciben números sin comillas. Esta es la forma más concisa de crear un solo objeto fecha-hora, ya que puedes necesitarla cuando filtres datos temporales. `ymd()` (del inglés _año-mes-día_) es corto y no ambigüo:
+Estas funciones también reciben números sin comillas. Esta es la forma más concisa de crear un único objeto fecha-hora, tal como podrías necesitarla cuando filtras datos temporales. `ymd()` (_año-mes-día_) es corta y no ambigüa:
 
 ```{r}
 ymd(20170131)
 ```
 
-`ymd()` y sus funciones amigas crean fechas (`date`). Para generar una fecha-hora, agrega un guión bajo y uno o más de "h", "m" y "s" al nombre de la función de segmentación:
+`ymd()` y sus funciones amigas crean fechas (`date`). Para generar una fecha-hora, agrega un guión bajo y al menos un "h", "m" y "s" al nombre de la función de segmentación:
 
 ```{r}
 ymd_hms("2017-01-31 20:11:59")
 mdy_hm("01/31/2017 08:01")
 ```
 
-También puedes forzar la creación de una fecha hora desde una fecha, al proveer un huso horario:
+También puedes forzar la creación de una fecha-hora desde una fecha, al proveer un huso horario:
 
 ```{r}
 ymd(20170131, tz = "UTC")
@@ -99,7 +98,7 @@ vuelos %>%
   mutate(salida = make_datetime(anio, mes, dia, hora, minuto))
 ```
 
-Hagamos esto mismo para cada una de las cuatro columnas de tiempo en `vuelos`. Las horas están representadas en un formato ligeramente más extraño, así que usamos el módulo aritmético para extraer los componentes de horas y minutos. Una vez que hayamos creado las variables fecha-hora, nos centraremos en las variables que usaremos por el resto del capítulo.
+Hagamos esto mismo para cada una de las cuatro columnas de tiempo en `vuelos`. Las horas están representadas en un formato ligeramente más extraño, así que usaremos el módulo aritmético para extraer los componentes de horas y minutos. Una vez que hayamos creado las variables fecha-hora, nos centraremos en las variables que usaremos por el resto del capítulo.
 
 ```{r}
 hacer_fechahora_100 <- function(anio, mes, dia, tiempo) {
@@ -136,7 +135,7 @@ vuelos_dt %>%
   geom_freqpoly(binwidth = 600) # 600 segundos = 10 minutos
 ```
 
-Mira con detenimiento, ya que cuando usas fechas-hora en un contexto numérico (como en un histograma), 1 significa un segundo, entonces un `binwidth` (_ancho del contenedor_) de 86400 significa un día. Para las fechas, 1 significa un día.
+Ten en cuenta que cuando usas fechas-hora en un contexto numérico (como en un histograma), 1 significa un segundo, por lo tanto, un `binwidth` (_ancho del contenedor_) de 86400 significa un día. Para las fechas, 1 significa un día.
 
 ### Desde otros tipos
 
@@ -147,7 +146,7 @@ as_datetime(today())
 as_date(now())
 ```
 
-A veces tendrás fechas/horas como desfasajes numéricos de la "Época Unix" similares a 1970-01-01. Si el desfasaje es un segundos, usa `as_datetime()`; si es en días, usa `as_date()`.
+A veces tendrás fechas/horas como desfases numéricos de la "Época Unix" similares a 1970-01-01. Si el desfase es en segundos, usa `as_datetime()`; si es en días, usa `as_date()`.
 
 ```{r}
 as_datetime(60 * 60 * 10)
@@ -176,7 +175,7 @@ d5 <- "12/30/14" # Diciembre 30, 2014
 
 ## Componentes de fecha-hora
 
-Ahora que ya conoces cómo tener datos de fechas y horas en las estructuras de datos de R, vamos a explorar qué puedes hacer con ellos. Esta sección se concentrará en las funciones de acceso (_accessor functions_) que te permiten obtener y configurar componentes individuales. La siguiente sección mirará el trabajo aritmético con fechas-horas.
+Ahora que ya conoces cómo tener datos de fechas y horas en las estructuras de datos de R, vamos a explorar qué puedes hacer con ellos. Esta sección se concentrará en las funciones de acceso (_accessor functions_) que te permiten obtener y configurar componentes individuales. La siguiente sección se centrará en cómo funciona el trabajo con fechas-horas.
 
 ### Obteniendo los componentes
 
@@ -200,7 +199,7 @@ month(fechahora, label = TRUE)
 wday(fechahora, label = TRUE, abbr = FALSE)
 ```
 
-Podemos usar `wday()` para ver que más vuelos salen durante la semana que durante el fin de semana:
+Podemos usar `wday()` para ver que son más los vuelos que salen durante la semana que durante el fin de semana:
 
 ```{r}
 vuelos_dt %>%
@@ -238,7 +237,7 @@ ggplot(salida_programada, aes(minuto, atraso_promedio)) +
   geom_line()
 ```
 
-Entonces, ¿por qué vemos ese patrón con los horarios reales de salida? Bueno, como muchos datos recolectados por los humanos, hay un sesgo importante hacia los vuelos que salen en horas "agradables". ¡Mantente siempre alerta respecto a este tipo de patrón cada vez que trabajes con datos que involucran al juicio humano!
+Entonces, ¿por qué vemos ese patrón con los horarios reales de salida? Bueno, como muchos datos recolectados por los humanos, hay un sesgo importante hacia los vuelos que salen en horas "agradables". ¡Mantente siempre alerta respecto a este tipo de patrón cada vez que trabajes con datos que involucran juicio humano!
 
 
 ```{r}
@@ -248,7 +247,7 @@ ggplot(salida_programada, aes(minuto, n)) +
 
 ### Redondeo
 
-Un método alternativo para graficar los componentes individuales es redondear la fecha a una unidad de tiempo cercana, con `floor_date()` (_fecha hacia abajo_), `round_date()` (_redondear fecha_), y `ceiling_date()` (_fecha hacia arriba_). Cada función toma un vector de fechas a ajustar y luego el nombre de la unidad redondeada hacia abajo (con _floor_), hacia arriba (con _ceiling_) o al maar el número de vuelos por semana:
+Un método alternativo para graficar los componentes individuales es redondear la fecha a una unidad de tiempo cercana, con `floor_date()` (_fecha hacia abajo_), `round_date()` (_redondear fecha_), y `ceiling_date()` (_fecha hacia arriba_). Cada función toma un vector de fechas a ajustar y luego el nombre de la unidad redondeada (con _round_), redondeada hacia abajo (con _floor_) o hacia arriba (con _ceiling_). Esto, por ejemplo, nos permite graficar el número de vuelos por semana:
 
 ```{r}
 vuelos_dt %>%
@@ -303,7 +302,7 @@ Fijar los componentes más grandes de una fecha con una constante es una técnic
 
 1. ¿Cómo cambia la distribución de las horas de los vuelos dentro de un día a lo largo del año?
 
-1. Compara `horario_salida`, `salida_programada` and `atraso_salida`. ¿Son consistentes? Explica tus hallazgos.
+1. Compara `horario_salida`, `salida_programada` y `atraso_salida`. ¿Son consistentes? Explica tus hallazgos.
 
 1. Compara `tiempo_vuelo` con la duración entre la salida y la llegada. Explica tus hallazgos. (Pista: considera la ubicación del aeropuerto).
 
@@ -311,7 +310,7 @@ Fijar los componentes más grandes de una fecha con una constante es una técnic
 
 1. ¿En qué día de la semana deberías salir si quieres minimizar las posibilidades de una demora?
 
-1. ¿Qué hace que la distribución de `diamantes$carat` y `vuelos$salida_programada` sea similar?
+1. ¿Qué hace que la distribución de `diamantes$quilate` y `vuelos$salida_programada` sea similar?
 
 1. Confirma nuestra hipótesis de que las salidas programadas en los minutos 20-30 y 50-60 están casuadas por los vuelos programados que salen más temprano. Pista: crea una variable binaria que te diga si un vuelo tuvo o no demora.
 
@@ -320,13 +319,13 @@ Fijar los componentes más grandes de una fecha con una constante es una técnic
 
 Ahora, aprenderás cómo trabaja la aritmética con fechas, incluyendo la sustracción, adición y división. En el camino, aprenderás sobre tres importantes clases que representan períodos de tiempo:
 
-* __durations__ (del inglés, _duraciones_), que representa un número exacto de segundos.
+* __durations__ (_duraciones_), que representa un número exacto de segundos.
 * __periods__ (_períodos_), que representan unidades humanas como semanas o meses.
 * __intervals__ (_intervalos_), que representan un punto de inicio y uno de finalización.
 
 ### Duraciones
 
-En R, cuando restas dos fechas obtienes un objeto de diferencia temporal (en inglés, _difftimes_):
+Cuando restas dos fechas en R obtienes un objeto de diferencia temporal (en inglés, _difftimes_):
 
 ```{r}
 # ¿Qué edad tiene Hadley?
@@ -376,7 +375,7 @@ una_pm
 una_pm + ddays(1)
 ```
 
-¡¿Por qué un día después de la 1 pm del 12 de marzo son las 2 pm del 13 de marzo!? Si miras con cuidado a la fecha, te darás cuenta de que los husos horarios han cambiado. Debido al horario de verano (EDT es el horario de verano de la Costa Este), el 12 de marzo solo tiene 23 horas, por lo que si agregamos un día entero de segundos terminamos con una hora diferente.
+¡¿Por qué un día después de la 1 pm del 12 de marzo son las 2 pm del 13 de marzo!? Si miras con cuidado la fecha, te darás cuenta de que los husos horarios han cambiado. Debido al horario de verano (EDT es el horario de verano de la Costa Este de EE. UU.), el 12 de marzo solo tiene 23 horas, por lo que si agregamos un día entero de segundos terminamos con una hora diferente.
 
 
 ### Períodos
@@ -388,7 +387,7 @@ una_pm
 una_pm + days(1)
 ```
 
-Como las duraciones, los períodos pueden ser creados mediante un número de funciones constructoras amigables.
+Al igual que las duraciones, los períodos pueden ser creados mediante un número de funciones constructoras amigables.
 
 ```{r}
 seconds(15)
@@ -407,7 +406,7 @@ Puedes sumar y multiplicar períodos:
 days(50) + hours(25) + minutes(2)
 ```
 
-Y, por supuesto, puedes sumarlos a las fechas. Comparados a las duraciones, los períodos son más propensos a hacer lo que esperas que hagan:
+Y, por supuesto, puedes sumarlos a las fechas. Comparados con las duraciones, los períodos son más propensos a hacer lo que esperas que hagan:
 
 
 ```{r}
@@ -447,9 +446,9 @@ vuelos_dt %>%
 
 ### Intervalos
 
-Resulta obvio lo que `dyears(1) / ddays(365)` debería retornar: uno, porque las duraciones siempre se representan por un número de segundos, y la duración de un año se define como 365 días convertidos a segundos.
+Resulta obvio lo que `dyears(1) / ddays(365)` debería retornar: uno, porque las duraciones siempre se representan por un número de segundos y la duración de un año se define como 365 días convertidos a segundos.
 
-¿Qué debería devolver `years(1) / days(1)`? Bueno, si el año fuera 2015 debería retornar 365, ¡pero si fuera 2016 debería retornar 366! No hay suficiente información para que __lubridate__ nos de una sola respuesta sencilla. Entonces, lo que hace es darnos una estimación con una advertencia:
+¿Qué debería devolver `years(1) / days(1)`? Bueno, si el año fuera 2015 debería retornar 365, ¡pero si fuera 2016 debería retornar 366! No hay suficiente información para que __lubridate__ nos dé una sola respuesta sencilla. Por ello, lo que hace es darnos una estimación con una advertencia:
 
 ```{r}
 years(1) / days(1)
@@ -484,9 +483,9 @@ knitr::include_graphics("diagrams_w_text_as_path/es/datetimes-arithmetic.svg")
 
 1. Explica `days(nocturno * 1)` a alguien que apenas comienza a aprender R. ¿Cómo funciona?
 
-1. Crea un vector de fechas dando el primer día de cada mes en 2015. Crea un vector de fechas dando el primer día de cada mes del año _actual_.
+1. Crea un vector de fechas dando el primer día de cada mes de 2015. Crea un vector de fechas dando el primer día de cada mes del año _actual_.
 
-1. Crea una función en la cual, dado tu cumpleaños (como una fecha), retorne qué edad tienes en años.
+1. Crea una función en la que, dado tu cumpleaños (como una fecha), retorne qué edad tienes en años.
 
 1. ¿Por qué no funciona `(today() %--% (today() + years(1)) / months(1)` ?
 
@@ -494,9 +493,9 @@ knitr::include_graphics("diagrams_w_text_as_path/es/datetimes-arithmetic.svg")
 
 Los husos horarios son un tema enormemente complicado debido a su interacción con entidades geopolíticas. Afortunadamente, no necesitamos escarbar en todos los detalles, ya que no todos son necesarios para el análisis de datos. Sin embargo, hay algunos desafíos que tendremos que enfrentar.
 
-El primer desafío es que los nombres comunes de los husos horarios tienden a ser ambiguos. Por ejemplo, si eres estadounidense, probablemente te sea familiar la sigla EST, (del inglés de _Tiempo Este Estándar_). Sin embargo, ¡Canadá y Australia también tienen EST! Para evitar la confusión, R usa el estándar internacional IANA para husos horarios. Estos tienen un esquema de nombres que sigue el formato "<área>/<ubicación>", típicamente escrito como "\<continente\>/\<ciudad\>", en idioma inglés (hay algunas pocas excepciones porque no todos los países están ubicados en un continente). Algunos ejemplos: "America/New_York", "Europe/Paris", "Pacific/Auckland", "America/Bogota".
+El primer desafío es que los nombres comunes de los husos horarios tienden a ser ambiguos. Por ejemplo, si eres estadounidense, probablemente te sea familiar la sigla EST, (del inglés de _Tiempo Este Estándar_). Sin embargo, ¡Canadá y Australia también tienen EST! Para evitar la confusión, R usa el estándar internacional IANA para husos horarios. Estos tienen un esquema de nombres que sigue el formato "<área>/<ubicación>", típicamente escrito como "\<continente\>/\<ciudad\>", en idioma inglés (hay algunas pocas excepciones porque no todos los países están sobre un continente). Algunos ejemplos: "America/New_York", "Europe/Paris", "Pacific/Auckland", "America/Bogota".
 
-Puedes que te preguntes por qué un huso horario usa una ciudad, cuando típicamente piensas en ellos como asociados a un país o a una región dentro de un país. Esto se debe a que la base de datos de IANA tiene que registrar décadas de reglamentos sobre husos horarios. En el curso de las décadas, los países cambian nombres (o desaparecen) de forma bastante frecuente, pero los nombres de las ciudades tienden a mantenerse igual. Otro problema es que los nombres tienen que reflejar no solo el comportamiento actual, sino también la historia completa. Por ejemplo, hay husos horarios tanto para "America/New_York" como para "America/Detroit". Actualmente, ambas ciudades usan el EST, pero entre 1969 y 1972, Michigan (el estado en el que está ubicado Detroit), no empleaba el horario de verano, así que necesita un nombre diferente. ¡Vale la pena leer la base de datos sobre husos horarios (disponible en <http://www.iana.org/time-zones>) solo para enterarse de algunas de estas historias!
+Puede que te preguntes por qué un huso horario usa una ciudad, cuando típicamente piensas en ellos como asociados a un país o a una región dentro de un país. Esto se debe a que la base de datos de IANA tiene que registrar décadas de reglamentos sobre husos horarios. En el curso de las décadas, los países cambian nombres (o desaparecen) de forma bastante frecuente, pero los nombres de las ciudades tienden a mantenerse igual. Otro problema es que los nombres tienen que reflejar no solo el comportamiento actual, sino también la historia completa. Por ejemplo, hay husos horarios tanto para "America/New_York" como para "America/Detroit". Actualmente, ambas ciudades usan el EST, pero entre 1969 y 1972, Michigan (el estado en el que está ubicado Detroit), no empleaba el horario de verano, así que necesita un nombre diferente. ¡Vale la pena leer la base de datos sobre husos horarios (disponible en <http://www.iana.org/time-zones>) solo para enterarse de algunas de estas historias!
 
 Puedes encontrar cuál es tu huso horario actual para R, usando `Sys.timezone()`:
 
