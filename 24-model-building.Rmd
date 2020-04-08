@@ -462,7 +462,7 @@ Solo hemos dado una pincelada sobre el tema de modelos, pero es de esperar que h
 Estos capítulos de modelos son aún más dogmáticos que el resto del libro. Yo enfoco el modelamiento desde una perspectiva diferente a la mayoría, y hay relativamente poco espacio dedicado a ello. El modelamiento realmente requiere un libro completo, así que recomiendo que leas alguno de estos 3 libros:
 
 * *Statistical Modeling: A Fresh Approach* by Danny Kaplan,
-  <http://www.mosaic-web.org/go/StatisticalModeling/>. Este libro provee
+  <http://project-mosaic-books.com/?page_id=13>. Este libro provee
   una introducción suave al modelado, donde desarrollas tu intuición,
   herramientas matemáticas, y habilidades de R en paralelo. El libro reemplaza 
   al curso tradicional de "Introducción a la Estadística", proporcionando un plan de estudios 

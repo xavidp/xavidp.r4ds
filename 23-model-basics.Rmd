@@ -361,7 +361,7 @@ df <- tribble(
 model_matrix(df, respuesta ~ genero)
 ```
 
-Quizá te preguntes por qué R no crea la columna `sexo_mujer`. El problema es que eso crearía una columna perfectamente predecible a partir de las otras columnas (es decir, `sexo_mujer = 1 - sexo_hombre`). Desafortunadamete los detalles exactos de por qué esto es un problema van más allá del alcance del libro, pero básicamente crea una familia de modelos que es muy flexible y genera infinitos modelos igualmente cercanos a los datos.
+Quizá te preguntes por qué R no crea la columna `generofemenino`. El problema es que eso crearía una columna perfectamente predecible a partir de las otras columnas (es decir, `generofemenino = 1 - generomasculino`). Desafortunadamete los detalles exactos de por qué esto es un problema van más allá del alcance del libro, pero básicamente crea una familia de modelos que es muy flexible y genera infinitos modelos igualmente cercanos a los datos.
 
 Afortunadamente, sin embargo, si te enfocas en visualizar las predicciones no necesitas preocuparte de la parametrización exacta. Veamos algunos datos y modelos para hacer algo concreto. Aquí está el dataset `sim2` de modelr:
 
