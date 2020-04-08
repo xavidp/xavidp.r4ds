@@ -64,12 +64,12 @@ Todos los datos que has visto hasta ahora han estado ordenados. En la vida real,
 
 ## Variación
 
-La **variación** es la tendencia de los valores de una variable a cambiar de una medición a otra. Es fácil observar dicha variación en la vida real; si mides cualquier variable continua dos veces obtendrás diferentes resultados. Esto es verdad aun si mides cantidades que son constantes, como la velocidad de la luz. Cada una de tus mediciones incluirá una cantidad pequeña de error que variará de medición a medición. Las variables discretas o categóricas también pueden variar si realizas mediciones con diferentes sujetos (p. ej., el color de ojos de diferentes personas) o en momentos diferentes (p.ej., los niveles de energía que un electrón posee en momentos distintos). 
+La **variación** es la tendencia de los valores de una variable a cambiar de una medición a otra. Es fácil observar dicha variación en la vida real; si mides cualquier variable continua dos veces obtendrás diferentes resultados. Esto es verdad aun si mides cantidades que son constantes, como la velocidad de la luz. Cada una de tus mediciones incluirá una cantidad pequeña de error que variará de medición a medición. Las variables categóricas también pueden variar si realizas mediciones con diferentes sujetos (p. ej., el color de ojos de diferentes personas) o en momentos diferentes (p.ej., los niveles de energía que un electrón posee en momentos distintos). 
 La variación de cada variable sigue un patrón específico y este puede revelar información interesante. La mejor manera de entender dicho patrón es visualizando la distribución de los valores de la variable. 
 
 ### Visualizando distribuciones
 
-Cómo visualizar la distribución de una variable dependerá de si la variable es discreta o continua. Una variable es **discreta o categórica** si únicamente puede adoptar un valor correspondiente a un grupo limitado de valores. En R las variables discretas usualmente son guardadas como vectores de factores o de caracteres. Para examinar la distribución de una variable discreta, usa un gráfico de barras:
+Cómo visualizar la distribución de una variable dependerá de si la variable es categórica o continua. Una variable es **categórica** si únicamente puede adoptar un valor correspondiente a un grupo limitado de valores. En R las variables categóricas usualmente son guardadas como vectores de factores o de caracteres. Para examinar la distribución de una variable categórica, usa un gráfico de barras:
 
 ```{r}
 ggplot(data = diamantes) +
@@ -116,7 +116,7 @@ ggplot(data = pequenos, mapping = aes(x = quilate, colour = corte)) +
   geom_freqpoly(binwidth = 0.1)
 ```
 
-Hay ciertas limitantes con este tipo de gráfico, pero volveremos a ellas en la sección [visualizando una variable discreta y una variable continua](#cat-cont).
+Hay ciertas limitantes con este tipo de gráfico, pero volveremos a ellas en la sección sobre visualizar [una variable categórica y una variable continua](#cat-cont).
 
 Ahora que puedes visualizar la variación en los datos, ¿qué deberías buscar en tus gráficos? ¿Y qué tipo de preguntas de seguimiento deberías hacerte? Hemos generado una lista de los tipos más útiles de información que puedes encontrar en tus gráficos, además de algunas preguntas de seguimiento para cada tipo de información. La clave para hacer buenas preguntas será confiar en tu curiosidad (¿sobre qué quieres aprender más?), así como en tu escepticismo (¿de qué manera podría ser esto engañoso?).
 
@@ -291,9 +291,9 @@ Sin embargo, este gráfico no es tan bueno porque hay muchos más vuelos no canc
 
 Si la variación describe el comportamiento _dentro_ de una variable, la covariación describe el comportamiento _entre_ variables. La **covariación** es la tendencia de los valores de dos o más variables a variar simultáneamente de una manera relacionada La mejor manera de reconocer que existe covariación en tus datos es visualizar la relación entre dos o más variables. Cómo hacerlo dependerá de los tipos de variables involucradas.
 
-### Una variable discreta y una variable continua {#cat-cont}
+### Una variable categórica y una variable continua {#cat-cont}
 
-Es común querer explorar la distribución de una variable continua agrupada por una variable discreta, como lo hicimos en el polígono de frecuencia anterior. La apariencia automática de `geom_freqpoly()` no es tan útil para este tipo de comparación, pues la altura está dada por la cuenta total. Eso significa que si uno de los grupos es mucho más pequeño que los demás, será difícil ver las diferencias en altura. Por ejemplo, exploremos cómo varía el precio dependiendo de la calidad de un diamante:
+Es común querer explorar la distribución de una variable continua agrupada por una variable categórica, como lo hicimos en el polígono de frecuencia anterior. La apariencia automática de `geom_freqpoly()` no es tan útil para este tipo de comparación, pues la altura está dada por la cuenta total. Eso significa que si uno de los grupos es mucho más pequeño que los demás, será difícil ver las diferencias en altura. Por ejemplo, exploremos cómo varía el precio dependiendo de la calidad de un diamante:
 
 ```{r}
 ggplot(data = diamantes, mapping = aes(x = precio)) + 
@@ -316,7 +316,7 @@ ggplot(data = diamantes, mapping = aes(x = precio, y = ..density..)) +
 
 En este gráfico hay algo un tanto sorprendente: ¡parece que los diamantes regulares (la calidad más baja) tienen, en promedio, el precio más alto! Pero quizá eso sea porque los polígonos de frecuencia son difíciles de interpretar; hay mucho que decir sobre lo que este gráfico muestra.
 
-Otra alternativa para mostrar la distribución de una variable continua agrupada en relación con otra variable discreta es el diagrama de caja (_boxplot_ en inglés). Un **diagrama de caja** es un tipo de representación visual para la distribución de valores que es popular entre las personas que se dedican a la estadística. Cada diagrama de caja está integrado por:
+Otra alternativa para mostrar la distribución de una variable continua agrupada en relación con otra variable categórica es el diagrama de caja (_boxplot_ en inglés). Un **diagrama de caja** es un tipo de representación visual para la distribución de valores que es popular entre las personas que se dedican a la estadística. Cada diagrama de caja está integrado por:
 
 * Una caja que comprende desde el percentil 25 de la distribución hasta el percentil 75, 
   distancia que se conoce como rango intercuartil ( _interquartile range_ o _IQR_ en inglés). 
@@ -345,7 +345,7 @@ ggplot(data = diamantes, mapping = aes(x = corte, y = precio)) +
 
 Si bien vemos mucha menos información sobre la distribución, los diagramas de caja son más compactos, lo que hace que sea más fácil compararlos (y presentar más en un mismo gráfico). Esto respalda el contradictorio resultado al que llegamos antes sobre que los diamantes de mayor calidad son en promedio más baratos. En los ejercicios tendrás que descubrir por qué.
 
-`corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables discretas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (del inglés _reordenar_).
+`corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables categóricas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (del inglés _reordenar_).
 
 Por ejemplo, el caso de la variable `clase` del set de datos `millas`. Podría interesarte saber cómo varía el rendimiento en autopista según la clase del vehículo:
 
@@ -394,13 +394,13 @@ ggplot(data = millas) +
     cada método?
 
 1.  Si tu set de datos es pequeño, a veces resulta útil usar `geom_jitter()`
-    para ver la relación entre una variable continua y una discreta.
+    para ver la relación entre una variable continua y una categórica
     El paquete **ggbeeswarm** provee de un número de métodos similares a 
     `geom_jitter()`. Enlístalos y describe brevemente qué hace cada uno.
 
-### Dos variables discretas
+### Dos variables categóricas
 
-Para visualizar la variación entre variables discretas, deberás contar el número de observaciones de cada combinación. Una manera de hacerlo es empleando la función integrada `geom_count()` (del inglés _contar_):
+Para visualizar la variación entre variables categóricas, deberás contar el número de observaciones de cada combinación. Una manera de hacerlo es empleando la función integrada `geom_count()` (del inglés _contar_):
 
 ```{r}
 ggplot(data = diamantes) +
@@ -425,7 +425,7 @@ diamantes %>%
     geom_tile(mapping = aes(fill = n))
 ```
 
-Si las variables discretas no siguen un orden particular, podrías usar el paquete **seriation** para reordenar las filas y columnas simultáneamente, de manera que sea más fácil detectar patrones interesantes. En el caso de gráficos más grandes, intenta usar los paquetes **d3heatmap** o **heatmaply**, que crean gráficos interactivos.
+Si las variables categóricas no siguen un orden particular, podrías usar el paquete **seriation** para reordenar las filas y columnas simultáneamente, de manera que sea más fácil detectar patrones interesantes. En el caso de gráficos más grandes, intenta usar los paquetes **d3heatmap** o **heatmaply**, que crean gráficos interactivos.
 
 #### Ejercicios
 
@@ -469,7 +469,7 @@ ggplot(data = pequenos) +
   geom_hex(mapping = aes(x = quilate, y = precio))
 ```
 
-Otra opción es crear contenedores o intervalos con una de las variables continuas de manera de que pueda ser tratada como una variable discreta. Luego, puedes usar alguna de las técnicas de visualización empleadas para representar la combinación de una variable discreta con una variable continua. Por ejemplo, podrías segmentar la variable `quilate` y definir unidades o intervalos, para después graficar una diagrama de cajas para cada grupo:
+Otra opción es crear contenedores o intervalos con una de las variables continuas de manera de que pueda ser tratada como una variable categórica. Luego, puedes usar alguna de las técnicas de visualización empleadas para representar la combinación de una variable categórica con una variable continua. Por ejemplo, podrías segmentar la variable `quilate` y definir unidades o intervalos, para después graficar una diagrama de cajas para cada grupo:
 
 ```{r}
 ggplot(data = pequenos, mapping = aes(x = quilate, y = precio)) + 
