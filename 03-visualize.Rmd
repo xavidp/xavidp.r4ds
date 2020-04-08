@@ -361,7 +361,7 @@ ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista, color = tracc
 
 ¡Observa que generamos un gráfico que contiene dos geoms! Si esto te emociona, abróchate el cinturón. En la siguiente sección aprenderemos cómo colocar múltiples geoms en el mismo gráfico.
 
-**ggplot2** proporciona más de 30 geoms y los paquetes de extensión proporcionan aún más (consulta <https://www.ggplot2-exts.org> para obtener una muestra). La mejor forma de obtener un panorama completo sobre las posibilidades que brinda **ggplot2** es consultando la hoja de referencia (o *cheatsheet*), que puedes encontrar en <http://rstudio.com/cheatsheets>. Para obtener más información sobre un tipo dado de geoms, usa la ayuda: `?geom_smooth`.
+**ggplot2** proporciona más de 40 geoms y los paquetes de extensión proporcionan aún más (consulta <https://www.ggplot2-exts.org> para obtener una muestra). La mejor forma de obtener un panorama completo sobre las posibilidades que brinda **ggplot2** es consultando la hoja de referencia (o *cheatsheet*), que puedes encontrar en <https://rstudio.com/resources/cheatsheets/>. Para obtener más información sobre un tipo dado de geoms, usa la ayuda: `?geom_smooth`.
 
 Muchos geoms, como `geom_smooth()`, usan un único objeto geométrico para mostrar múltiples filas de datos. Con estos geoms, puedes asignar la estética de `group` (__grupo__) a una variable categórica para graficar múltiples objetos. **ggplot2** representará un objeto distinto por cada valor único de la variable de agrupamiento. En la práctica, **ggplot2** agrupará automáticamente los datos para estos geoms siempre que se asigne una estética a una variable discreta (como en el ejemplo del tipo de línea o `linetype`). Es conveniente confiar en esta característica porque la estética del grupo en sí misma no agrega una leyenda o características distintivas a los geoms.
 
@@ -530,7 +530,7 @@ Por ejemplo, es posible que desees mostrar un gráfico de barras de proporciones
 
    ```{r}
    ggplot(data = diamantes) +
-     geom_bar(mapping = aes(x = corte, y = ..prop.., group = 1))
+     geom_bar(mapping = aes(x = corte, y = stats(prop), group = 1))
    ```
 
    Para encontrar las variables calculadas por _stat_, busca la sección de ayuda titulada "Compute Variables".

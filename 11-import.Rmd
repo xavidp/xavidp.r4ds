@@ -99,7 +99,7 @@ Si has utilizado R anteriormente, tal vez te preguntas por qué no usamos `read.
 
 1. ¿Cuáles son los argumentos más importantes de `read_fwf()`?
 
-1. Algunas veces las cadenas de caracteres en un archivo csv contienen comas. Para evitar que causen problemas, deben estar rodeadas por comillas, como `"` o `'`. Por convención, `read_csv()` asume que el caracter de separación será `"`, y si quieres cambiarlo necesitarás usar `read_delim()` en su lugar.¿Qué argumentos debes especificar para leer el siguiente texto en un _data frame_? 
+1. Algunas veces las cadenas de caracteres en un archivo csv contienen comas. Para evitar que causen problemas, deben estar rodeadas por comillas, como `"` o `'`. Por convención, `read_csv()` asume que el caracter de separación será `"`.¿Qué argumentos debes especificar para leer el siguiente texto en un _data frame_? 
   
     
     ```{r, eval = FALSE}
@@ -391,7 +391,7 @@ Si ninguna de esas reglas se aplica, entonces la columna quedará como un vector
 Esos valores por defecto no siempre funcionan para archivos de gran tamaño. Hay dos problemas básicos:
 
 1.  Las primeras mil filas podrían ser un caso especial y **readr** estaría deduciendo un formato que no es suficientemente general. Por ejemplo, podrías tener una columna de dobles que solo contiene enteros en las primeras 1000 filas.
-1.  La columna podría contener muchos valores faltantes. Si las primeras 1000 filas contienen solo `NA`, **readr** deducirá que es un vector de caracteres, mientras que tú probablemente quieras analizarlo como algo más específico.
+1.  La columna podría contener muchos valores faltantes. Si las primeras 1000 filas contienen solo `NA`, **readr** deducirá que es un vector lógico, mientras que tú probablemente quieras analizarlo como algo más específico.
 
 **readr** contiene un archivo csv desafiante que ilustra ambos problemas:
 
@@ -404,39 +404,25 @@ Hay dos outputs impresos en la consola: la especificación de columna generada a
 ```{r}
 problems(desafio)
 ```
-Una buena estrategia es trabajar columna por columna hasta que no queden problemas. Aquí podemos ver que hubo muchos problemas de análisis con la columna `x` - hay caracteres adicionales luego del valor entero. Esto sugiere que necesitamos utilizar un segmentador de dobles en su lugar.
-
-Para solucionar el problema, comienza copiando y pegando la especificación de columna del output de tu código original:
-
-```{r, eval = FALSE}
-desafio <- read_csv(
-  readr_example("challenge.csv"), 
-  col_types = cols(
-    x = col_integer(),
-    y = col_character()
-  )
-)
-```
-
-Luego puedes ajustar el tipo de la columna `x`:
-
-```{r}
-desafio <- read_csv(
-  readr_example("challenge.csv"), 
-  col_types = cols(
-    x = col_double(),
-    y = col_character()
-  )
-)
-```
-
-Esto corrige el primer problema. Sin embargo, si miras las últimas filas, verás que son fechas almacenadas en un vector de caracteres:
+Una buena estrategia es trabajar columna por columna hasta que no queden problemas. Aquí podemos ver que hubo muchos problemas de análisis con la columna `y`. Si miramos la últimas líneas, verás que hay fechas almacenadas en un vector de caracteres. 
 
 ```{r}
 tail(desafio)
 ```
 
-Puedes corregir esto especificando que `y` es una columna de fechas: 
+Esto sugiere que mejor sería utilizar un segmentador de fechas. Para arreglar este problema, copia y pega la especificación de las columnas que habías obtenido inicialmente y agrégalas a tu código:
+
+```{r, eval = FALSE}
+desafio <- read_csv(
+  readr_example("challenge.csv"), 
+  col_types = cols(
+    x = col_double(),
+    y = col_logical()
+  )
+)
+```
+
+Y luego ajusta el tipo de la columna `y` especificando que se trata de una fecha:
 
 ```{r}
 desafio <- read_csv(

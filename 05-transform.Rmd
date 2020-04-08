@@ -124,7 +124,7 @@ El siguiente código sirve para encontrar todos los vuelos que partieron en novi
 filter(vuelos, mes == 11 | mes == 12)
 ```
 
-El orden de las operaciones no funciona como en español. No puedes escribir `filter(vuelos, mes == 11 | 12)`, que literalmente puede traducirse como "encuentra todos los vuelos que partieron en noviembre o diciembre". En cambio, encontrará todos los meses que son iguales a `11 | 12`, una expresión que resulta en 'TRUE' (verdadero). En un contexto numérico (como aquí), 'TRUE' se convierte en uno, por lo que encuentra todos los vuelos en enero, no en noviembre o diciembre. ¡Esto es bastante confuso!
+El orden de las operaciones no funciona como en español. No puedes escribir `filter(vuelos, mes == (11 | 12))`, que literalmente puede traducirse como "encuentra todos los vuelos que partieron en noviembre o diciembre". En cambio, encontrará todos los meses que son iguales a `11 | 12`, una expresión que resulta en 'TRUE' (verdadero). En un contexto numérico (como aquí), 'TRUE' se convierte en uno, por lo que encuentra todos los vuelos en enero, no en noviembre o diciembre. ¡Esto es bastante confuso!
 
 Una manera rápida y útil para resolver este problema es `x %in% y` (es decir, x _en_ y). Esto seleccionará cada fila donde `x` es uno de los valores en` y`. Podríamos usarlo para reescribir el código de arriba:
 
@@ -240,9 +240,9 @@ arrange(df, desc(x))
     
 2. Ordena `vuelos` para encontrar los vuelos más retrasados. Encuentra los vuelos que salieron más temprano.
 
-3. Ordena `vuelos` para encontrar los vuelos más rápidos.
+3. Ordena `vuelos` para encontrar los vuelos más rápidos (que viajaron a mayor velocidad).
 
-4. ¿Cuáles vuelos viajaron más tiempo? ¿Cuál viajó menos tiempo?
+4. ¿Cuáles vuelos viajaron más lejos? ¿Cuál viajó más cerca?
 
 ## Seleccionar columnas con `select()` {#select}
 
@@ -703,7 +703,7 @@ no_cancelados %>%
 # ¿Qué proporción de vuelos se retrasan más de una hora?
 no_cancelados %>% 
   group_by(anio, mes, dia) %>% 
-  summarise(hora_perc = mean(atraso_llegada > 60))
+  summarise(hora_prop = mean(atraso_llegada > 60))
 ```
 
 ### Agrupación por múltiples variables

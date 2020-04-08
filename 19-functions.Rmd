@@ -126,7 +126,7 @@ rescale01(x)
 
 Esta es una importante parte del principio de "no repetirse a uno mismo" (conocido como DRY: del inglés "**D**o not **R**epeat **Y**ourself"). Cuanta más repetición tengas en tu código, más lugares tendrás que recordar de actualizar cuando las cosas cambien (¡y eso siempre sucede!), y es más probable que crees errores (_bugs_) a lo largo del tiempo.
 
-### Práctica
+### Ejercicios
 
 1. ¿Por qué `TRUE` no es un parámetro para `rescale01()`? ¿Qué pasaría si `x` está contenido en un valor único perdido y `na.rm` fuese `FALSE`?
 
@@ -142,8 +142,16 @@ Esta es una importante parte del principio de "no repetirse a uno mismo" (conoci
          sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
          ```
 
-4. Revisa <http://nicercode.github.io/intro/writing-functions.html>
-para escribir tus propias funciones para computar la varianza y la inclinación de un vector numérico.
+4. Escribe tus propias funciones para computar la varianza y la inclinación de un vector numérico. La varianza se define como
+    $$
+    \mathrm{Var}(x) = \frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x}) ^2 \text{,}
+    $$
+    donde $\bar{x} = (\sum_i^n x_i) / n$ es la media de la muestra.
+    La inclinación se define como
+    $$
+    \mathrm{Skew}(x) = \frac{\frac{1}{n-2}\left(\sum_{i=1}^n(x_i - \bar x)^3\right)}{\mathrm{Var}(x)^{3/2}} \text{.}
+    $$
+
 
 5. Escribe `both_na()` (*ambos_na()*), una función que toma dos vectores de la misma longitud y retorna el número de posiciones que tienen `NA` en ambos vectores.
 

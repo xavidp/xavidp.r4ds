@@ -103,7 +103,7 @@ Cada bucle tiene tres componentes:
     1. Calcular la media de cada columna en `datos::mtautos`.
     2. Determinar el tipo de cada columna en `datos::vuelos`.
     3. Calcular el número de valores únicos en cada columna de `datos::flores`.
-    4. Genera 10 normales aleatorias para cada valor de $\mu = -10$, $0$, $10$ y $100$.
+    4. Generar diez normales aleatorias de distribuciones con medias -10, 0, 10 y 100.
     
     Piensa en el resultado, la secuencia y el cuerpo __antes__ de empezar a escribir
     el bucle.

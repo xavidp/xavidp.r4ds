@@ -127,7 +127,7 @@ knitr::include_graphics("screenshots/rstudio-env.png")
 
 Allí puedes ver todos los objetos que creaste.
 
-## Práctica
+## Ejercicios
 
 1.  ¿Por qué no funciona este código?
 
