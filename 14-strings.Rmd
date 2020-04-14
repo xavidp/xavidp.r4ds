@@ -6,11 +6,10 @@ Este capítulo te introduce en la manipulación de cadenas de caracteres en R. S
 
 ### Prerequisitos
 
-Este capítulo se enfocará en el paquete para manipulación de cadenas llamado __stringr__ (del inglés _string_, cadena). __stringr__ no es parte central del Tidyverse porque no siempre tienes que trabajar con datos textuales. Es por eso que necesitamos cargarlo explícitamente. 
+Este capítulo se enfocará en el paquete para manipulación de cadenas llamado __stringr__ (del inglés _string_, cadena), que es parte del Tidyverse.
 
 ```{r setup, message = FALSE}
 library(tidyverse)
-library(stringr)
 library(datos)
 ```
 
@@ -165,8 +164,7 @@ str_to_upper(c("i", "ı"), locale = "tr")
 
 El entorno local o _locale_ se especifica con un código de idioma ISO 639, que es una abreviación de dos letras. Si todavía no conoces el código para tu idioma, en [Wikipedia](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) puedes encontrar una buena lista. Si dejas el _locale_ en blanco, se aplicará el que estés utilizando actualmente, que es provisto por tu sistema operativo. 
 
-Otra operación importante que es afectada por el _locale_ es ordenar. Las funciones `order()` y `sort()` de R B
-base ordenan las cadenas usando el _locale_ actual. Si quieres un comportamiento consistente a través de diferentes computadoras, sería preferible usar `str_sort()` y `str_order()`, que aceptan un argumento adicional para definir el `locale`:
+Otra operación importante que es afectada por el _locale_ es ordenar. Las funciones `order()` y `sort()` de R base ordenan las cadenas usando el _locale_ actual. Si quieres un comportamiento consistente a través de diferentes computadoras, sería preferible usar `str_sort()` y `str_order()`, que aceptan un argumento adicional para definir el `locale`:
 
 ```{r}
 x <- c("arándano", "espinaca", "banana")
@@ -192,8 +190,8 @@ str_sort(x, locale = "haw") # Hawaiano
 1.  ¿Qué hace `str_trim()`? (_trim_ = recortar) ¿Cuál es el opuesto de `str_trim()`?
 
 1.  Escribe una función que convierta, por ejemplo, el vector `c("a", "b", "c")` en
-    la cadena `a, b, y c`. Piensa con detención qué debería hacer 
-    dado un vector de largo 0, 1, o 2.
+    la cadena `a, b y c`. Piensa con detención qué debería hacer 
+    dado un vector de largo 0, 1 o 2.
 
 ### Buscar coincidencia de patrones con expresiones regulares
 
@@ -282,9 +280,9 @@ También puedes coincidir el límite entre palabras con `\b`. No utilizamos frec
     regular que busque palabras que:
     
     1. Empiecen con "y".
-    1. Terminen con "x"
+    1. Terminen con "z"
     1. Tengan una extensión de exactamente tres letras. (¡No hagas trampa usando `str_length()`!)
-    1. Tengan siete letras o más. 
+    1. Tengan ocho letras o más. 
 
     Dado que esta será una lista larga, podrías querer usar el argumento `match` en
     `str_view()` para mostrar solo las palabras que coincidan o no coincidan. 
@@ -293,8 +291,8 @@ También puedes coincidir el límite entre palabras con `\b`. No utilizamos frec
 
 Existe una serie de patrones especiales que coinciden con más de un caracter. Ya has visto `.`, que coincide con cualquier caracter excepto un salto de línea. Hay otras cuatro herramientas que son de utilidad: 
 
-* `\d`: coindice con cualquier dígito.
-* `\s`: coincide con cualquier espacio en blanco (e.g. espacio simple, tabulador, salto de línea).
+* `\d`: coincide con cualquier dígito.
+* `\s`: coincide con cualquier espacio en blanco (por ejemplo, espacio simple, tabulador, salto de línea).
 * `[abc]`: coincide con a, b o c.
 * `[^abc]`: coincide con todo menos con a, b o c.
 
@@ -328,7 +326,7 @@ str_view(c("cómo", "como"), "c(ó|o)mo")
 
     1. Terminen en `ón`, pero no en `ión`.
     
-    1. Terminen con `ndo` or `ado`.
+    1. Terminen con `ndo` o `ado`.
     
 
 1.  ¿Siempre a una "q" la sigue una "u"?
@@ -572,7 +570,7 @@ palabras[str_detect(palabras, "x$")]
 str_subset(palabras, "x$")
 ```
 
-En todo caso, lo más habitual es que tus cadenas de caracteres sean una columna de un _dataframe_ y que prefieras utilizar la función `filter()` (_filtrar_):
+En todo caso, lo más habitual es que tus cadenas de caracteres sean una columna de un _data frame_ y que prefieras utilizar la función `filter()` (_filtrar_):
 
 ```{r}
 df <- tibble(
@@ -713,7 +711,7 @@ tiene_sustantivo %>%
   str_match(sustantivo)
 ```
 
-(Como era de esperarse, nuestra heurística para detectar sustantivos es pobre, ya que también selecciona adjetivos como "mejor" y preposiciones como "de".)
+(Como era de esperarse, nuestra heurística para detectar sustantivos es pobre, ya que también selecciona adjetivos como "mejor" y preposiciones como "de").
 
 Si tus datos están en un tibble, suele ser más fácil utilizar `tidyr::extract()`. Funciona como `str_match()` pero requiere ponerle un nombre a las coincidencias, las que luego son puestas en columnas nuevas:
 
@@ -932,7 +930,7 @@ Existen otras tres funciones que puedes utilizar en vez de `regex()`:
     Tanto `fixed()` como `regex()` tienen argumentos para ignorar la
     diferencia entre mayúsculas y minúsculas (`ignore_case`); sin embargo, 
     no te permiten elegir tu _locale_: siempre utilizan el que está definido
-    por defecto. Puedes ver cuál es usando el siguiente código. Pronto
+    por defecto. Puedes ver cuál se está usando con el siguiente código. Pronto
     hablaremos más sobre el paquete __stringi__. 
     
     ```{r}
