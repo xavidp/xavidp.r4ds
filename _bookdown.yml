@@ -41,3 +41,4 @@ rmd_files: [
 ]
 
 before_chapter_script: "_common.R"
+edit: https://github.com/cienciadedatos/r4ds/edit/traduccion/%s
