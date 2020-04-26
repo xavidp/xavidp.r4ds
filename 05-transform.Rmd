@@ -2,13 +2,14 @@
 
 ## Introducción
 
-La visualización es una herramienta importante para para la generación de conocimiento; sin embargo, es raro que obtengas los datos exactamente en la forma correcta que los necesitas. A menudo tendrás que crear algunas variables nuevas o resúmenes, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete **dplyr** y el uso de un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
+La visualización es una herramienta importante para la generación de conocimiento; sin embargo, es raro que obtengas los datos exactamente en la forma en que los necesitas. A menudo tendrás que crear algunas variables nuevas o resúmenes, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete **dplyr** y el uso de un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
 
 ### Prerequisitos
 
 En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central del tidyverse. Ilustraremos las ideas clave con el _dataset_ *vuelos* que está contenido en el paquete **datos**.  Utilizaremos **ggplot2** para ayudarnos a comprender los datos. 
 
 ```{r setup, message = FALSE, cache = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 #remotes::install_github("cienciadedatos/datos")
 library(datos)
 library(tidyverse)
@@ -18,7 +19,7 @@ Toma nota acerca del mensaje de conflictos que se imprime cuando cargas el paque
 
 ### vuelos
 
-Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `vuelos`. Este conjunto de datos contiene todos los vuelos `r format(nrow (vuelos), big.mark =", ")` que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?vuelos`.
+Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `vuelos`. Este conjunto de datos contiene todos los `r format(nrow (vuelos), big.mark =", ")` vuelos que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?vuelos`.
 
 ```{r}
 vuelos
@@ -64,7 +65,7 @@ Todos los verbos funcionan de manera similar:
 
 3. El resultado es un nuevo *data frame*.
 
-En conjunto, estas propiedades hacen que sea fácil encadenar varios pasos simples para lograr un resultado complejo. Sumerjámosnos y veamos cómo funcionan estos verbos.
+En conjunto, estas propiedades hacen que sea fácil encadenar varios pasos simples para lograr un resultado complejo. Sumerjámonos y veamos cómo funcionan estos verbos.
 
 ## Filtrar filas con `filter()`
 
@@ -192,19 +193,19 @@ filter(df, is.na(x) | x > 1)
 
 1.  Encuentra todos los vuelos que:
 
-   1. Tuvieron un retraso de llegada de dos o más horas
-  
-   2. Volaron a Houston (`IAH` o` HOU`)
-   
-   3. Fueron operados por United, American o Delta
-   
-   4. Partieron en invierno (julio, agosto y septiembre)
-   
-   5. Llegaron más de dos horas tarde, pero no salieron tarde
-   
-   6. Se retrasaron por lo menos una hora, pero repusieron más de 30 minutos en vuelo
-   
-   7. Partieron entre la medianoche y las 6 a.m. (incluyente)
+    1. Tuvieron un retraso de llegada de dos o más horas
+
+    2. Volaron a Houston (`IAH` o` HOU`)
+
+    3. Fueron operados por United, American o Delta
+
+    4. Partieron en invierno (julio, agosto y septiembre)
+
+    5. Llegaron más de dos horas tarde, pero no salieron tarde
+
+    6. Se retrasaron por lo menos una hora, pero repusieron más de 30 minutos en vuelo
+
+    7. Partieron entre la medianoche y las 6 a.m. (incluyente)
 
 2.  Otra función de **dplyr** que es útil para usar filtros es `between()`. ¿Qué hace? ¿Puedes usarla para simplificar el código necesario para responder a los desafíos anteriores?
 
@@ -365,7 +366,7 @@ transmute(vuelos,
     En igualdad de condiciones, recomendamos usar `log2()` porque es más fácil de interpretar: una diferencia de 1 en la escala de registro corresponde a la duplicación de la escala original y una diferencia de -1 corresponde a dividir a la mitad.
 
 
-* Rezagos: `lead()` y `lag()` te permiten referirte a un valor adelante o un valor atrás (con rezago). Esto te permite calcular as diferencias móviles (por ejemplo, `x - lag(x)`) o encontrar cuándo cambian los valores (`x! = lag (x)`). Estos comandos son más útiles cuando se utilizan junto con `group_by()`, algo que aprenderás en breve.
+* Rezagos: `lead()` y `lag()` te permiten referirte a un valor adelante o un valor atrás (con rezago). Esto te permite calcular las diferencias móviles (por ejemplo, `x - lag(x)`) o encontrar cuándo cambian los valores (`x! = lag (x)`). Estos comandos son más útiles cuando se utilizan junto con `group_by()`, algo que aprenderás en breve.
 
 ```{r}
 (x <- 1:10)
@@ -576,13 +577,13 @@ RStudio tip: un atajo en tu teclado que puede ser muy útil es Cmd/Ctrl + Shift 
 
 Hay otra variación común de este tipo de patrón. Veamos cómo el rendimiento promedio de los bateadores en el béisbol está relacionado con el número de veces que les toca batear Aquí utilizaremos el conjunto de datos de `bateadores` para calcular el promedio de bateo (número de bateos / número de intentos) de cada jugador de béisbol de Grandes Ligas.
 
-Cuando graficamos la habilidad del bateador (medido por el promedio de bateo, `pb`) contra el número de oportunidades para golpear la pelota (medido por al bate,`ab`), verás dos patrones:
+Cuando graficamos la habilidad del bateador (medido por el promedio de bateo, `pb`) contra el número de oportunidades para golpear la pelota (medido por el tiempo al bate,`ab`), verás dos patrones:
 
 1. Como en el ejemplo anterior, la variación en nuestro estadístico de resumen disminuye a medida que obtenemos más observaciones.
 
 2. Existe una correlación positiva entre la habilidad (`pb`) y las oportunidades para golpear la pelota (`ab`). Esto se debe a que los equipos controlan quién puede jugar, y obviamente elegirán a sus mejores jugadores.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Convierte a tibble para puedas imprimirlo de una manera legible
 bateo <- as_tibble(datos::bateadores)
 
@@ -731,7 +732,7 @@ diario %>%
 
 ### Ejercicios
 
-1.   Haz una lluvia de ideas de al menos 5 formas diferentes de evaluar las características de un retraso típico de un grupo de vuelos. Considera los siguientes escenarios:
+1. Haz una lluvia de ideas de al menos 5 formas diferentes de evaluar las características de un retraso típico de un grupo de vuelos. Considera los siguientes escenarios:
  
     * Un vuelo llega 15 minutos antes 50% del tiempo, y 15 minutos tarde 50% del tiempo.
 
@@ -743,10 +744,10 @@ diario %>%
     
     ¿Qué es más importante: retraso de la llegada o demora de salida?
 
-2.  Sugiere un nuevo enfoque que te dé el mismo *output* que `no_cancelados %>% count(destino)` y
+2. Sugiere un nuevo enfoque que te dé el mismo *output* que `no_cancelados %>% count(destino)` y
 `no_cancelado %>% count(codigo_cola, wt = distancia)` (sin usar `count()`).
 
-3.  Nuestra definición de vuelos cancelados (`is.na(atraso_salida) | is.na (atraso_llegada)`) es un poco subóptima. ¿Por qué? ¿Cuál es la columna más importante?
+3. Nuestra definición de vuelos cancelados (`is.na(atraso_salida) | is.na (atraso_llegada)`) es un poco subóptima. ¿Por qué? ¿Cuál es la columna más importante?
 
 4. Mira la cantidad de vuelos cancelados por día. ¿Hay un patrón? ¿La proporción de vuelos cancelados está relacionada con el retraso promedio?
 
