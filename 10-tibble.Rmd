@@ -7,7 +7,7 @@ A lo largo de este libro trabajaremos con "tibbles" (que se pronuncia /tibls/) e
 
 Si luego de leer este capítulo te quedas con ganas de aprender más sobre tibbles, quizás disfrutes `vignette("tibble")`.
 
-### Prerrequisitos
+### Prerequisitos
 
 En este capítulo exploraremos el paquete __tibble__, parte de los paquetes principales del tidyverse. Para ejemplificar utilizaremos _datasets_ incluidos en el paquete __datos__.
 
@@ -90,7 +90,7 @@ datos::vuelos %>%
   print(n = 10, width = Inf)
 ```
 
-También puedes controlar las características de impresión, modificando las opciones que estan determinadas por default.
+También puedes controlar las características de impresión, modificando las opciones que están determinadas por default.
 
 * `options(tibble.print_max = n, tibble.print_min = m)`: si hay más de `n` filas, mostrar solo `m` filas. 
 
@@ -109,7 +109,7 @@ datos::vuelos %>%
 
 ### Selección de subconjuntos
 
-Hasta ahora, todas las herramientas que aprendiste funcionan con el data frame completo. Si quieres recuperar una variable individual, necesitas algunas herramientas nuevas: `$` y `[[`. Mientras que `[[` permite extraer variables usando tanto su nombre como su suposición, con `$` sólo se puede extraer mediante el nombre. La única diferencia es que `$` implica escribir un poco menos.
+Hasta ahora, todas las herramientas que aprendiste funcionan con el data frame completo. Si quieres recuperar una variable individual, necesitas algunas herramientas nuevas: `$` y `[[`. Mientras que `[[` permite extraer variables usando tanto su nombre como su su posición, con `$` sólo se puede extraer mediante el nombre. La única diferencia es que `$` implica escribir un poco menos.
 
 ```{r}
 df <- tibble(
@@ -149,7 +149,7 @@ La principal razón de que algunas funciones previas no funcionen con tibbles es
 
 1. ¿Cómo puedes saber si un objeto es un tibble? (Sugerencia: imprime `mtautos` en consola, que es un data frame clásico).
 
-1. Compara y contrasta las siguientes operaciones aplicadas a un `data.frame` y a un tibble equivalente. ¿Qué es diferente? ¿Por qué podría causarte problemas el comportamiento por defecto del data frame?
+2. Compara y contrasta las siguientes operaciones aplicadas a un `data.frame` y a un tibble equivalente. ¿Qué es diferente? ¿Por qué podría causarte problemas el comportamiento por defecto del data frame?
 
  ```{r, eval = FALSE}
 df <- data.frame(abc = 1, xyz = "a")
@@ -158,25 +158,25 @@ df[, "xyz"]
 df[, c("abc", "xyz")]
  ```
 
-1. Si tienes el nombre de una variable guardada en un objeto, p.e., `var <- "mpg"`, ¿cómo puedes extraer esta variable de un tibble?
+3. Si tienes el nombre de una variable guardada en un objeto, p.e., `var <- "mpg"`, ¿cómo puedes extraer esta variable de un tibble?
 
-1. Practica referenciar nombres no sintácticos en el siguiente data frame:
+4. Practica referenciar nombres no sintácticos en el siguiente data frame:
 
- 1. Extrayendo la variable llamada `1`.
+    1. Extrayendo la variable llamada `1`.
 
- 1. Generando un gráfico de dispersión de `1` vs `2`.
+    1. Generando un gráfico de dispersión de `1` vs `2`.
 
- 1. Creando una nueva columna llamada `3` que sea el resultado de la división de `2` por `1`.
+    1. Creando una nueva columna llamada `3` que sea el resultado de la división de `2` por `1`.
 
- 1. Renombrando las columnas como `uno`, `dos` y `tres`.
+    1. Renombrando las columnas como `uno`, `dos` y `tres`.
 
- ```{r}
+```{r}
 molesto <- tibble(
   `1` = 1:10,
   `2` = `1` * 2 + rnorm(length(`1`))
 )
  ```
 
-1. ¿Qué hace `tibble::enframe()`? ¿Cuándo lo usarías?
+5. ¿Qué hace `tibble::enframe()`? ¿Cuándo lo usarías?
 
-1. ¿Qué opción controla cuántos nombres de columnas adicionales se muestran al pie de un tibble?
+6. ¿Qué opción controla cuántos nombres de columnas adicionales se muestran al pie de un tibble?

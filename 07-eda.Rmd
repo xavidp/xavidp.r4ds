@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Este capítulo te mostrará cómo usar la visualización y la transformación para explorar tus datos de manera sitemática, una tarea que las personas de Estadística suelen llamar análisis exploratorio de datos, o _EDA_ (por sus siglas en inglés _**e**xploratory **d**ata **a**nalysis_). El _EDA_ es un ciclo iterativo en el que:
+Este capítulo te mostrará cómo usar la visualización y la transformación para explorar tus datos de manera sistemática, una tarea que las personas de Estadística suelen llamar análisis exploratorio de datos, o _EDA_ (por sus siglas en inglés _**e**xploratory **d**ata **a**nalysis_). El _EDA_ es un ciclo iterativo en el que:
 
 1. Generas preguntas acerca de tus datos.
 
@@ -12,7 +12,7 @@ Este capítulo te mostrará cómo usar la visualización y la transformación pa
 
 El análisis exploratorio de datos no es un proceso formal regido por un conjunto estricto de reglas. El _EDA_ es, más que nada, un estado mental. Durante las fases iniciales del _EDA_ deberías ser libre de investigar todas las ideas que se te ocurran. Algunas de estas ideas prosperarán, mientras que otras serán como callejones sin salida. A medida que tu exploración continúa, te concentrarás en ciertas áreas particularmente productivas sobre las que eventualmente escribirás y comunicarás a otras personas.
 
-El _EDA_ es una parte importante de cualquier análisis, aun si las preguntas son servidas en bandeja, pues siempre tendrás que examinar la calidad de tus datos. La limpieza de datos es una aplicación del _EDA_: haces preguntas acerca de si tus datos cumplen con tus expectativas o no. Para limpiar tus datos tendrás que desplegar todas las herramientas del _EDA_: visualización, transformación y modelado.
+El _EDA_ es una parte importante de cualquier análisis, aun si las preguntas están servidas en bandeja, pues siempre tendrás que examinar la calidad de tus datos. La limpieza de datos es una aplicación del _EDA_: haces preguntas acerca de si tus datos cumplen con tus expectativas o no. Para limpiar tus datos tendrás que desplegar todas las herramientas del _EDA_: visualización, transformación y modelado.
 
 ### Requisitos indispensables
 
@@ -34,7 +34,7 @@ library(datos)
 
 Tu objetivo durante el _EDA_ es desarrollar un entendimiento de tus datos. La manera más fácil de lograrlo es usar preguntas como herramientas para guiar tu investigación. Cuando formulas una pregunta, esta orienta tu atención en una parte específica de tu conjunto de datos y te ayuda a decidir qué gráficos, modelos o transformaciones son necesarios.
 
-El _EDA_ es un proceso fundamentalmente creativo. Y como la mayoría de los procesos creativos, la clave para formular preguntas _de calidad_ es generar una gran _cantidad_ de preguntas. Es difícil hacer preguntas reveladoras al inicio de tu análisis pues aún no sabes qué percepciones o conocimientos están contenidos en tu conjunto de datos. Por otro lado, cada nueva pregunta que te plantees revelará un nuevo aspecto de tus datos y las probabilidades de hacer un descubrimiento serán mayores. Puedes profundizar en las partes más interesantes de tus datos---y desarrollar un conjunto de preguntas que estimularán tu pensamiento---si a cada pregunta le das seguimiento con una nueva interrogante basada en tus descubrimientos.
+El _EDA_ es un proceso fundamentalmente creativo. Y como la mayoría de los procesos creativos, la clave para formular preguntas _de calidad_ es generar una gran _cantidad_ de preguntas. Es difícil hacer preguntas reveladoras al inicio de tu análisis pues aún no sabes qué percepciones o conocimientos están contenidos en tu conjunto de datos. Por otro lado, cada nueva pregunta que te plantees revelará un nuevo aspecto de tus datos y las probabilidades de hacer un descubrimiento serán mayores. Puedes profundizar en las partes más interesantes de tus datos---y desarrollar un conjunto de preguntas que estimularán tu pensamiento---si a cada pregunta le das seguimiento con un nuevo interrogante basado en tus descubrimientos.
 
 No hay reglas específicas sobre qué preguntas deberías hacerte para guiar tu investigación. Sin embargo, hay dos tipos de preguntas que siempre te serán útiles para hacer descubrimientos dentro tus datos. Puedes formular dichas preguntas de la siguiente manera:
 
@@ -137,7 +137,7 @@ Por ejemplo, el siguiente histograma sugiere varias preguntas interesantes:
 * ¿Por qué hay más diamantes hacia la derecha de cada sección que  
   hacia la izquierda?
   
-* ¿Por qué hay no hay diamantes más grandes que 3 quilates?
+* ¿Por qué no hay diamantes más grandes que 3 quilates?
 
 ```{r}
 ggplot(data = pequenos, mapping = aes(x = quilate)) +
@@ -200,7 +200,7 @@ inusual
 options(viejo)
 ```
 
-La variable `y` mide una de las tres dimensiones de estos diamantes en mm (milímetros). Sabemos que los diamantes no pueden tener una anchura de 0mm, así que estos valores deben ser incorrectos. También podríamos sospechar que las medidas de 32mm y 59mm son improbables: esos diamentes medirían más de una pulgada de largo, ¡pero no cuestan cientos de miles de dólares!
+La variable `y` mide una de las tres dimensiones de estos diamantes en mm (milímetros). Sabemos que los diamantes no pueden tener una anchura de 0mm, así que estos valores deben ser incorrectos. También podríamos sospechar que las medidas de 32mm y 59mm son improbables: esos diamantes medirían más de una pulgada de largo, ¡pero no cuestan cientos de miles de dólares!
 
 Es un buen hábito repetir tu análisis con y sin los valores inusuales. Si tienen un efecto mínimo en los resultados y no puedes descubrir por qué están en los datos, es razonable reemplazarlos con valores ausentes y seguir adelante con tu análisis. Sin embargo, si tienen un efecto sustancial en tus resultados, no deberías ignorarlos sin justificación. Deberás descubrir qué los causó (p.ej., un error en la entrada de datos) y explicitar que los removiste en tu reporte escrito.
 
@@ -248,7 +248,7 @@ Si has encontrado valores inusuales en tu set de datos y simplemente quieres seg
       mutate(y = ifelse(y < 3 | y > 20, NA, y))
     ```
 
-`ifelse()` tiene tres argumentos. El primer argumento `test` debe ser un vector lógico. El resultado contendrá el valor del segundo argumento, `sí`, cuando `test` sea `VERDADERO`, y el valor del tercer argumento, `no`, cuando sea falso. Como alternativa a __ifelse__, usa `dplyr::case_when()` (del ingés _ caso cuando _). `case_when()` es particularmente útil dentro de __mutate__ cuando quieras crear una nueva variable que dependa de una combinación compleja de variables existentes.
+`ifelse()` tiene tres argumentos. El primer argumento `test` debe ser un vector lógico. El resultado contendrá el valor del segundo argumento, `sí`, cuando `test` sea `VERDADERO`, y el valor del tercer argumento, `no`, cuando sea falso. Como alternativa a __ifelse__, usa `dplyr::case_when()` (del inglés _caso cuando_). `case_when()` es particularmente útil dentro de __mutate__ cuando quieras crear una nueva variable que dependa de una combinación compleja de variables existentes.
 
 Como R, ggplot2 suscribe la filosofía de que los valores faltantes nunca deberían desaparecer silenciosamente. La cuestión de dónde graficar los valores faltantes no es trivial, así que ggplot2 no los incluye en los gráficos, pero emite una advertencia acerca de que fueron removidos:
 
@@ -347,7 +347,7 @@ Si bien vemos mucha menos información sobre la distribución, los diagramas de 
 
 `corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables discretas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (del inglés _reordenar_).
 
-Por ejemplo, el caso de la variable `clase` del set de datos `millas`. Podría interesarte saber cómo varía el rendimiento en autopista según la clase del vehículo:
+Por ejemplo, el caso de la variable `clase` del conjunto de datos `millas`. Podría interesarte saber cómo varía el rendimiento en autopista según la clase del vehículo:
 
 ```{r}
 ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
@@ -374,26 +374,26 @@ ggplot(data = millas) +
 1.  Usa lo que has aprendido para mejorar la visualización de los tiempos de salida 
     de los vuelos cancelados versus los no cancelados.
 
-1.  ¿Qué variable del conjunto de datos de diamantes es más importante para predecir
+2.  ¿Qué variable del conjunto de datos de diamantes es más importante para predecir
     el precio de un diamante? ¿Cómo está correlacionada esta variable con el corte?
     ¿Por qué la combinación de estas dos relaciones conlleva que los diamantes de 
     menor calidad sean más costosos?
 
-1.  Instala el paquete **ggstance**, y crea un diagrama de caja horizontal. 
+3.  Instala el paquete **ggstance**, y crea un diagrama de caja horizontal. 
     ¿Cómo se compara esto a usar `coord_flip()`?
 
-1.  Un problema con los diagramas de caja es que fueron desarrollados en un tiempo en que 
-    los sets de datos eran más pequeños y por ende tienden a mostrar un número muy grande de 
+4.  Un problema con los diagramas de caja es que fueron desarrollados en un tiempo en que 
+    los conjuntos de datos eran más pequeños y por ende tienden a mostrar un número muy grande de 
     "valores atípicos". Una estrategia para remediar este problema es 
     el diagrama __letter value__. Instala el paquete **lvplot**, e intenta usar
     `geom_lv()` para mostrar la distribución de precio vs corte. ¿Qué observas?
-    ¿Cómo intepretas los gráficos?
+    ¿Cómo interpretas los gráficos?
 
-1.  Compara y contrasta `geom_violin()` con un `geom_histogram()` dividido en facetas,
+5.  Compara y contrasta `geom_violin()` con un `geom_histogram()` dividido en facetas,
     o un `geom_freqpoly()` codificado por colores. ¿Cuáles son las ventajas y desventajas de
     cada método?
 
-1.  Si tu set de datos es pequeño, a veces resulta útil usar `geom_jitter()`
+6.  Si tu set de datos es pequeño, a veces resulta útil usar `geom_jitter()`
     para ver la relación entre una variable continua y una discreta.
     El paquete **ggbeeswarm** provee de un número de métodos similares a 
     `geom_jitter()`. Enlístalos y describe brevemente qué hace cada uno.
@@ -441,7 +441,7 @@ Si las variables discretas no siguen un orden particular, podrías usar el paque
 
 ### Dos variables continuas
 
-Ya viste una manera muy buena de visualizar la covariación entre dos variables continuas: dibujar un diagrama de dispersión (o _scatterplot_) con `geom_point()`. Puedes identificar la covariación como un patrón en los puntos. Por ejemplo, puedes observar la relación exponencial entre el quilataje y el precio de un diamante.
+Ya viste una manera muy buena de visualizar la covariación entre dos variables continuas: dibujar un diagrama de dispersión (o _scatterplot_) con `geom_point()`. Puedes identificar la covariación como un patrón en los puntos. Por ejemplo, puedes observar la relación exponencial entre los quilates y el precio de un diamante.
 
 ```{r, dev = "png"}
 ggplot(data = diamantes) +
@@ -536,7 +536,7 @@ ggplot(data = faithful) +
 
 Los patrones son una de las herramientas más útiles para quienes hacen ciencia de datos, pues permiten revelar covariación. Si piensas en la variación como un fenómeno que crea incertidumbre, la covariación es un fenómeno que la reduce. Si dos variables varían de manera conjunta, puedes usar los valores de una variable para hacer mejores predicciones sobre valores de la segunda. Si la covariación es producto de una relación causal (un caso especial), entonces puedes usar el valor de una variable para controlar el valor de la segunda. 
 
-Los modelos son una herramienta para extraer patrones de los datos. Por ejemplo, considera los datos sobre diamantes. Resulta difícil entender la relación entre corte y precio, pues corte y quilate, así como quilate y precio, están estrechamente relacionadas. Es posible usar un modelo para remover la fuerte relación entre precio y quilate de manera que podamos explorar las sutilezas que quedan en los datos. El código mostrado a continuación crea un modelo que predice el `precio` a partir de la variable `quilate` y después calcula los residuales (la diferencia entre la variable predecida y el valor real). Los residuales nos informan acerca del precio de un diamante, una vez que el efecto que el quilataje tiene sobre esta variable ha sido removido.
+Los modelos son una herramienta para extraer patrones de los datos. Por ejemplo, considera los datos sobre diamantes. Resulta difícil entender la relación entre corte y precio, pues corte y quilate, así como quilate y precio, están estrechamente relacionadas. Es posible usar un modelo para remover la fuerte relación entre precio y quilate de manera que podamos explorar las sutilezas que quedan en los datos. El código mostrado a continuación crea un modelo que predice el `precio` a partir de la variable `quilate` y después calcula los residuales (la diferencia entre la variable predecida y el valor real). Los residuales nos informan acerca del precio de un diamante, una vez que el efecto que los quilates tienen sobre esta variable ha sido removido.
 
 
 ```{r, dev = "png"}
