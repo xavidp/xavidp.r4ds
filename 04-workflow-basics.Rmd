@@ -135,6 +135,7 @@ Allí puedes ver todos los objetos que creaste.
     mi_variable <- 10
     mi_varıable
     ```
+    **Nota de la traducción**: El código anterior falla (y es lo esperado) en entornos Linux/Mac, no así en Windows
     
     ¡Mira detenidamente! (Esto puede parecer un ejercicio inútil, pero entrenar tu cerebro para detectar incluso las diferencias más pequeñas será muy útil cuando comiences a programar.)
     
