@@ -6,12 +6,19 @@
 
 Este es el repositorio (y branch) para la traducción de [R for Data Science](http://r4ds.had.co.nz).
 
-Instrucciones para colaborar:
+**Para consultar el libro fuera de línea:**
+* Descarga y descomprime esta carpeta: https://github.com/cienciadedatos/r4ds/archive/gh-pages.zip
+* Haz clic sobre cualquiera de los archivos con extensión html
+* ¡Listo! Ya puedes ver el libro localmente y sin necesidad de conexión a internet.
+
+--- 
+
+¿Encontraste algún error en el libro que es necesario corregir? Puedes abrir un _issue_ en https://github.com/cienciadedatos/r4ds/issues o, idealmente, hacer un _pull request_ con los cambios necesarios. 
+
 1. Haz un fork en tu cuenta de Github.
 2. Clona el repositorio a tu cuenta (e.g. `git clone git@github.com:miusuario/r4ds.git`)
-3. Crea un branch propio (e.g. traduccion-andrea, puedes hacer `git checkout -b traduccion-miusuario`)
-4. Cuando quieras subir tus cambios haz push a tu cuenta y luego haz un *Pull Request* indicando el branch `traducción` del repositorio `cienciadedatos/r4ds`.
-5. Los admins se van a encargar de hacer los merge y que todo funcione.
+3. Crea un branch propio (e.g. correcciones-andrea, puedes hacer `git checkout -b correcciones-miusuario`)
+4. Cuando quieras subir tus cambios, haz _push_ a tu cuenta y luego haz un *Pull Request* indicando el branch `traducción` del repositorio `cienciadedatos/r4ds`.
 
 Puedes generar el libro directamente desde el archivo `index.rmd`. Asegurate de tener los siguientes paquetes instalados:
 
