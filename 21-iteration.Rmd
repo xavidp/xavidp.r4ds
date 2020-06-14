@@ -766,7 +766,7 @@ args2 %>%
 Esto genera llamadas más largas, pero más seguras:
 
 ```{r, echo = FALSE}
-knitr::include_graphics("diagrams/es/lists-pmap-named.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-pmap-named.svg")
 ```
 
 Dado que los argumentos son todos del mismo largo, tiene sentido almacenarlos en un data frame:
