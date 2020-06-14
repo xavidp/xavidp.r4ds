@@ -347,7 +347,7 @@ Si bien vemos mucha menos información sobre la distribución, los diagramas de 
 
 `corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables discretas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (del inglés _reordenar_).
 
-Por ejemplo, el caso de la variable `clase` del conjunto de datos `millas`. Podría interesarte saber cómo varía el rendimiento en autopista según la clase del vehículo:
+Por ejemplo, el caso de la variable `clase` del set de datos `millas`. Podría interesarte saber cómo varía el rendimiento en autopista según la clase del vehículo:
 
 ```{r}
 ggplot(data = millas, mapping = aes(x = clase, y = autopista)) +
@@ -383,7 +383,7 @@ ggplot(data = millas) +
     ¿Cómo se compara esto a usar `coord_flip()`?
 
 4.  Un problema con los diagramas de caja es que fueron desarrollados en un tiempo en que 
-    los conjuntos de datos eran más pequeños y por ende tienden a mostrar un número muy grande de 
+    los set de datos eran más pequeños y por ende tienden a mostrar un número muy grande de 
     "valores atípicos". Una estrategia para remediar este problema es 
     el diagrama __letter value__. Instala el paquete **lvplot**, e intenta usar
     `geom_lv()` para mostrar la distribución de precio vs corte. ¿Qué observas?
