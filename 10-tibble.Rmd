@@ -109,7 +109,7 @@ datos::vuelos %>%
 
 ### Selección de subconjuntos
 
-Hasta ahora, todas las herramientas que aprendiste funcionan con el data frame completo. Si quieres recuperar una variable individual, necesitas algunas herramientas nuevas: `$` y `[[`. Mientras que `[[` permite extraer variables usando tanto su nombre como su su posición, con `$` sólo se puede extraer mediante el nombre. La única diferencia es que `$` implica escribir un poco menos.
+Hasta ahora, todas las herramientas que aprendiste funcionan con el data frame completo. Si quieres recuperar una variable individual, necesitas algunas herramientas nuevas: `$` y `[[`. Mientras que `[[` permite extraer variables usando tanto su nombre como su posición, con `$` sólo se puede extraer mediante el nombre. La única diferencia es que `$` implica escribir un poco menos.
 
 ```{r}
 df <- tibble(
