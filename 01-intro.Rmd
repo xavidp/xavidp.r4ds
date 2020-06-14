@@ -7,7 +7,7 @@ La ciencia de datos (_data science_) es una disciplina fascinante que te permite
 La ciencia de datos es un campo muy amplio y no hay manera de que puedas dominarlo leyendo un solo libro. El objetivo de este, en particular, es entregarte una base sólida acerca de las herramientas más importantes. Nuestro modelo sobre cuáles son las herramientas necesarias para un proyecto típico de ciencia de datos se ve así:
 
 ```{r echo = FALSE, out.width = "75%"}
-knitr::include_graphics("diagrams/es/data-science.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/data-science.svg")
 ```
 
 Primero, debes __importar__ tus datos hacia R. Típicamente, esto implica tomar datos que están guardados en un archivo, base de datos o API y cargarlos como _data frame_ en R. Si no puedes llevar tus datos a R, no puedes hacer ciencia de datos con él.
@@ -114,7 +114,7 @@ RStudio es un ambiente de desarrollo integrado (o IDE, por su sigla en inglés: 
 Cuando abras RStudio, verás en la interfaz dos regiones clave:
 
 ```{r echo = FALSE, out.width = "75%"}
-knitr::include_graphics("diagrams/es/rstudio-console.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/rstudio-console.svg")
 ```
 
 Por ahora, todo lo que tienes que saber es que el código de R se escribe en la Consola y que hay que presionar Enter para ejecutarlo. ¡Aprenderás más a medida que avancemos!
