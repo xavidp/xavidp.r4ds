@@ -9,7 +9,6 @@ La visualización es una herramienta importante para la generación de conocimie
 En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central del tidyverse. Ilustraremos las ideas clave con el _dataset_ *vuelos* que está contenido en el paquete **datos**.  Utilizaremos **ggplot2** para ayudarnos a comprender los datos. 
 
 ```{r setup, message = FALSE, cache = FALSE}
-knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 #remotes::install_github("cienciadedatos/datos")
 library(datos)
 library(tidyverse)
