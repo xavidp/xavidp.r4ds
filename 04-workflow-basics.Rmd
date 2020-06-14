@@ -34,7 +34,7 @@ Harás una gran cantidad de asignaciones y `<-` es incómodo de escribir. Que no
 
 ## La importancia de los nombres
 
-Los nombres de los objetos deben comenzar con una letra y solo pueden contener letras, números, `_` y `.`. Es mejor que los nombres sean descriptivos. Por eso necesitarás una convención para usar más de una palabra. Nosotros recomendamos __guion_bajo__ (o *snake_case*) en el que las palabras en minúscula y sin tilde, se separan con `_`.
+Los nombres de los objetos deben comenzar con una letra y solo pueden contener letras, números, `_` y `.`. Es mejor que los nombres sean descriptivos. Por eso necesitarás una convención para usar más de una palabra. Nosotros recomendamos __guion_bajo__ (o *snake_case*) en el que las palabras en minúscula y sin tilde se separan con `_`.
 
 ```{r, eval = FALSE}
 yo_uso_guion_bajo
