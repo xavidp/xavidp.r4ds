@@ -804,7 +804,7 @@ invoke_map(f, param, n = 5) %>% str()
 ```
 
 ```{r, echo = FALSE, out.width = NULL}
-knitr::include_graphics("diagrams/es/lists-invoke.svg")
+knitr::include_graphics("diagrams_w_text_as_path/es/lists-invoke.svg")
 ```
 
 El primer argumento es una lista de funciones o un vector de caracteres con nombres de funciones. El segundo argumento es una lista de listas que indica los argumentos que cambian en cada función. Los argumentos subsecuentes pasan a cada función.
