@@ -56,7 +56,7 @@ La principal desventaja de esta manera es que te obliga a nombrar cada paso inte
 
 2. Hay que incrementar cuidadosamente el sufijo en cada línea.
 
-Cada vez que escribimos código como este, os ocurre que inevitablemente usamos el número incorrecto en una línea y luego perdemos 10 minutos rascándonos la cabeza tratándo de darnos cuenta por qué no funciona. 
+Cada vez que escribimos código como este, nos ocurre que inevitablemente usamos el número incorrecto en una línea y luego perdemos 10 minutos rascándonos la cabeza tratándo de darnos cuenta por qué no funciona. 
 Probablemente te preocupa también que esta forma crea muchas copias de tus datos y ocupa demasiada memoria. Sorprendentemente, este no es el caso. Primero, ten en cuenta que preocuparse proactivamente de la memoria no es una manera útil de invertir tu tiempo: preocúpate acerca de ello cuando se convierta en un problema (es decir, cuando te quedes sin memoria), no antes. En segundo lugar, R no es estúpido y compartirá las columnas a lo largo de los dataframes cuando sea posible. Echemos un vistazo a un pipe de manipulación de datos en el que agregamos una nueva columna a `datos::diamantes`:
 
 ```{r}
@@ -72,7 +72,7 @@ pryr::object_size(diamantes, diamantes2)
 
 * `diamantes` ocupa 3.46 MB,
 * `diamantes2` ocupa 3.89 MB,
-* `diamantes` y `diamantes2` juntos ocupan 3.89 MB!
+* ¡`diamantes` y `diamantes2` juntos ocupan 3.89 MB!
 
 ¿Cómo es que funciona esto? Bien, `diamantes2` tiene 10 columnas en común con `diamantes`: no hay necesidad de duplicar los datos, así que ambos data frames tienen variables en común. Estas variables solo serán copiadas si modificas una de ellas. En el siguiente ejemplo, modificamos un solo valor en `diamantes$quilate`. Esto significa que la variable `quilate` no podrá ser compartida entre los dos data frames, por lo que se debe realizar una copia. El tamaño de cada data frame no cambia, pero el tamaño colectivo se incrementa:
 
@@ -128,7 +128,7 @@ foo_foo %>%
   golpear(en = cabeza)
 ```
 
-Esta es nuestra forma preferida, ya que se enfoca en los verbos, no en los sustantivos. Puedes leer esta secuencia de composición de funciones como si fuera un conjunto de acciones imperativas. Foo salta, luego recoge, luego golpea. La desventaja, por supuesto, es que necesitas estar familiarizado con el uso de los pipes. Si nunca has visto `%>%` antes, no tendras idea acerca de lo que realiza el código. Afortunadamente, la mayoría de la gente entiende la idea fácilmente, así que cuando compartes tu código con otros que no están familiarizados con los pipes, puedes enseñárselos fácilmente.
+Esta es nuestra forma preferida, ya que se enfoca en los verbos, no en los sustantivos. Puedes leer esta secuencia de composición de funciones como si fuera un conjunto de acciones imperativas. Foo salta, luego recoge, luego golpea. La desventaja, por supuesto, es que necesitas estar familiarizado con el uso de los pipes. Si nunca has visto `%>%` antes, no tendrás idea acerca de lo que realiza el código. Afortunadamente, la mayoría de la gente entiende la idea fácilmente, así que cuando compartes tu código con otros que no están familiarizados con los pipes, puedes enseñárselos fácilmente.
 
 El pipe trabaja realizando una "transformación léxica": detrás de escena, magrittr reensambla el código en el pipe a una forma que funciona sobrescribiendo un objeto intermedio. Cuando se ejecuta un pipe como el de arriba, magrittr hace algo como esto:
 
@@ -152,7 +152,7 @@ x
 x
 ```
 
-El uso de la asignación con el pipe no funcionará porque lo asigna a un entorno temporario usado por `%>%`. Si quieres usar la asignación con un pipe, debes explicitar el entorno:
+El uso de la asignación con el pipe no funcionará porque lo asigna a un entorno temporal usado por `%>%`. Si quieres usar la asignación con un pipe, debes explicitar el entorno:
 
 ```{r}
 env <- environment()
@@ -177,10 +177,10 @@ Hay una cantidad relativamente grande de funciones con este comportamiento, que 
 
 ## Cuándo no usar el pipe
 
-El pipe es una herramienta poderosa, pero no es la única herramienta a tu disposición, ¡y no soluciona todos los problemas! Los pipes son mayoritariamente usados para reescribir una secuencia lineal bastante corta de operaciones. Creemos que deberías buscar otra herramienta cuando:
+El pipe es una herramienta poderosa, pero no es la única herramienta a tu disposición ¡y no soluciona todos los problemas! Los pipes son mayoritariamente usados para reescribir una secuencia lineal bastante corta de operaciones. Creemos que deberías buscar otra herramienta cuando:
 
 * Tus pipes son más largos que (digamos) 10 pasos. En ese caso, crea objetos intermedios con nombres significativos. Esto hará la depuración más fácil, porque puedes chequear con mayor facilidad los resultados intermedios. Además, hace más simple entender tu código, ya que los nombres de las variables pueden ayudar a comunicar la intención.
-* Tienes múltiples inputs y _outputs_. Si no hay un objeto principal para ser transformado, sino dos o más objetos siendo combinados juntos, no uses el pipe.
+* Tienes múltiples _inputs_ y _outputs_. Si no hay un objeto principal para ser transformado, sino dos o más objetos siendo combinados juntos, no uses el pipe.
 * Si estás empezando a pensar acerca de un grafo dirigido con una estructura de dependencia compleja. Los pipes son fundamentalmente lineales y usarlos para expresar relaciones complejas, típicamente llevarán a un código confuso.
 
 ## Otras herramientas de magrittr

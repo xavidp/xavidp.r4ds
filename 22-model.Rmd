@@ -1,4 +1,4 @@
-# (PART) Model {-}
+# (PART) Modelar {-}
 
 # Introducción {#model-intro}
 

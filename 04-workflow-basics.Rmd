@@ -127,7 +127,7 @@ knitr::include_graphics("screenshots/rstudio-env.png")
 
 Allí puedes ver todos los objetos que creaste.
 
-## Práctica
+## Ejercicios
 
 1.  ¿Por qué no funciona este código?
 
@@ -144,11 +144,11 @@ Allí puedes ver todos los objetos que creaste.
     ```{r, eval = FALSE}
     library(tidyverse)
 
-    ggplot(data = millas) + 
-      geom_point(mapping = aes(x = motor, y = autopista))
+    ggplot(dota = millas) + 
+      geom_point(mapping = aes(x = cilindrada, y = autopista))
     
     fliter(millas, cilindros = 8)
-    filter(diamantes, quilate > 3)
+    filter(diamante, quilate > 3)
     ```
     
 3.  Presiona Alt + Shift + K. ¿Qué ocurrió? ¿Cómo puedes llegar al mismo lugar utilizando los menús?

@@ -9,17 +9,16 @@ Históricamente, los factores eran más sencillos de trabajar que los caracteres
 
 ### Prerrequisitos
 
-Para trabajar con factores, vamos a usar el paquete __forcats__, que provee herramientas para lidiar con variables **cat**egóricas (¡y es un anagrama de factores!). Este paquete ofrece un amplio rango de ayudas para trabajar con factores. __forcats__ no es parte de los paquetes centrales de tidyverse, así que necesitamos cargarlo de forma explícita.
+Para trabajar con factores, vamos a usar el paquete __forcats__, que es parte del __tidyverse__. Este paquete provee herramientas para lidiar con variables **cat**egóricas (¡y es un anagrama de _factores_ en inglés!) y ofrece un amplio rango de ayudas para trabajar con factores. 
 
 ```{r setup, message = FALSE}
 library(tidyverse)
-library(forcats)
 library(datos)
 ```
 
 ### Aprendiendo más
 
-Si quieres aprender más sobre los factores, te recomendamos leer el artículo de Amelia McNamara y Nicholas Horton, [_Wrangling categorical data in R_](https://peerj.com/preprints/3163/) (el nombre significa _Domando Datos Categóricos en R_). Este artículo cuenta parte de la historia discutida en [_stringsAsFactors: An unauthorized biography_](http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/) (del inglés _cadenasComoFactores: Una Biografía No Autorizada_) y [_stringsAsFactors = \<sigh\>_](http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh) (del inglés _cadenasComoFactores = \<suspiro\>_), y compara las propuestas _tidy_ para los datos categóricos demostrados en este libro, contra los métodos de R base. Una versión temprana de este artículo ayudó a motivar y definir el alcance del paquete __forcats__; ¡Gracias Amelia y Nick!
+Si quieres aprender más sobre factores, te recomendamos leer el artículo de Amelia McNamara y Nicholas Horton, [_Wrangling categorical data in R_](https://peerj.com/preprints/3163/) (el nombre significa _Domando/Manejando Datos Categóricos en R_). Este artículo cuenta parte de la historia discutida en [_stringsAsFactors: An unauthorized biography_](http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/) (del inglés _cadenasComoFactores: Una Biografía No Autorizada_) y [_stringsAsFactors = \<sigh\>_](http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh) (del inglés _cadenasComoFactores = \<suspiro\>_), y compara las propuestas _tidy_ para los datos categóricos demostrados en este libro, en comparación a los métodos de R base. Una versión temprana de este artículo ayudó a motivar y definir el alcance del paquete __forcats__. ¡Gracias Amelia y Nick!
 
 
 ## Creando factores
@@ -34,17 +33,17 @@ Usar una cadena de caracteres (o _string_, en inglés) para guardar esta variabl
 
 1. Solo hay doce meses posibles y no hay nada que te resguarde de errores de tipeo:
 
- ```{r}
+```{r}
 x2 <- c("Dic", "Abr", "Eme", "Mar")
- ```
+```
 
-1. No se ordena de una forma útil:
+2. No se ordena de una forma útil:
 
- ```{r}
+```{r}
 sort(x1)
- ```
+```
 
-Puedes solucionar ambos problemas con un factor. Para crearlo debes empezar definiendo una lista de los __niveles__ válidos:
+Puedes solucionar ambos problemas con un factor. Para crearlo, debes empezar definiendo una lista con los __niveles__ válidos:
 
 ```{r}
 niveles_meses <- c(
@@ -61,14 +60,14 @@ y1
 sort(y1)
 ```
 
-Y cualquier valor no fijado en el conjunto, será convertido a `NA` de forma silenciosa:
+Cualquier valor no fijado en el conjunto será convertido a `NA` de forma silenciosa:
 
 ```{r}
 y2 <- factor(x2, levels = niveles_meses)
 y2
 ```
 
-Si quieres una advertencia, puedes usar `readr::parse_factor()` (del inglés _segmentar un factor_):
+Si quieres una advertencia, puedes usar `readr::parse_factor()` (_segmentar un factor_, en inglés):
 
 ```{r}
 y2 <- parse_factor(x2, levels = niveles_meses)
@@ -80,7 +79,7 @@ Si omites los niveles, se van a definir a partir de los datos en orden alfabéti
 factor(x1)
 ```
 
-A veces es preferible que el orden de los niveles se corresponda con su primera aparición en los datos. Puedes hacer esto cuando creas el factor, al definir los niveles con `unique(x)` (del inglés _único_), o después del hecho, con `fct_inorder()` (del inglés _factores en orden_):
+A veces es preferible que el orden de los niveles se corresponda con su primera aparición en los datos. Puedes hacer esto cuando creas el factor, al definir los niveles con `unique(x)` _único_) o después con `fct_inorder()` (_factores en orden_):
 
 ```{r}
 f1 <- factor(x1, levels = unique(x1))
@@ -90,7 +89,7 @@ f2 <- x1 %>% factor() %>% fct_inorder()
 f2
 ```
 
-Si alguna vez necesitas acceso directo al conjunto de niveles válidos, puedes hacerlo con `levels()` (del inglés _niveles_):
+Si alguna vez necesitas acceso directo al conjunto de niveles válidos, puedes hacerlo con `levels()` (_niveles_):
 
 ```{r}
 levels(f2)
@@ -98,7 +97,7 @@ levels(f2)
 
 ## Encuesta Social General
 
-Por el resto del capítulo, nos vamos a concentrar en `datos::encuesta`. Esta es la versión traducida al español de un conjunto de datos de ejemplo de la [General Social Survey](http://gss.norc.org); esta es una encuesta realizada en Estados Unidos desde hace mucho tiempo, conducida por la organización de investigación independiente llamada NORC, en la Universidad de Chicago. La encuesta tiene miles de preguntas, así que en el conjunto de datos hemos seleccionado aquellas que ilustran algunos de los desafíos comunes que encontrarás al trabajar con factores.
+Por el resto del capítulo, nos vamos a concentrar en `datos::encuesta`. Esta es la versión traducida al español de un conjunto de datos de ejemplo de la [General Social Survey](http://gss.norc.org), una encuesta realizada en Estados Unidos desde hace mucho tiempo, conducida por la organización de investigación independiente llamada NORC, en la Universidad de Chicago. La encuesta tiene miles de preguntas, así que en el conjunto de datos hemos seleccionado aquellas que ilustran algunos de los desafíos comunes que encontrarás al trabajar con factores.
 
 ```{r}
 encuesta
@@ -106,7 +105,7 @@ encuesta
 
 (Recuerda que como este conjunto de datos está provisto por un paquete, puedes obtener más información de las variables con `?encuesta`.)
 
-Cuando los factores están almacenados en un _tibble_ no puedes ver sus niveles tan fácilmente. Una forma de verlos es con `count()` (del inglés _contar_):
+Cuando los factores están almacenados en un _tibble_ no puedes ver sus niveles tan fácilmente. Una forma de verlos es con `count()` (_contar_):
 
 ```{r}
 encuesta %>%
@@ -128,9 +127,9 @@ ggplot(encuesta, aes(raza)) +
   scale_x_discrete(drop = FALSE)
 ```
 
-Estos niveles representan valores válidos que simplemente no ocurren en este conjunto de datos. Desafortunadamente, __dplyr__ no tiene una opción de `drop` (del inglés _descartar_, _eliminar_), pero la tendrá en el futuro.
+Estos niveles representan valores válidos que simplemente no ocurren en este conjunto de datos. Desafortunadamente, __dplyr__ no tiene una opción de `drop` (_descartar_, _eliminar_), pero la tendrá en el futuro.
 
-Cuando se trabaja con factores, las dos operaciones más comunes son cambiar el orden de los niveles y cambiar los valores de los niveles. Estas operaciones se describen en las siguientes secciones.
+Cuando se trabaja con factores, las dos operaciones más comunes son cambiar el orden de los niveles y cambiar sus valores. Estas operaciones se describen en las siguientes secciones.
 
 ### Ejercicios
 
@@ -157,7 +156,7 @@ resumen_religion <- encuesta %>%
 ggplot(resumen_religion, aes(horas_tv, religion)) + geom_point()
 ```
 
-Este gráfico resulta dificil de interpretar porque no hay un patrón general. Podemos mejorarlo al ordenar los niveles de `religion` usando `fct_reorder()` (del inglés, _reordenar factores_). `fct_reorder()` requiere tres argumentos:
+Este gráfico resulta dificil de interpretar porque no hay un patrón general. Podemos mejorarlo al ordenar los niveles de `religion` usando `fct_reorder()` ( _reordenar factores_). `fct_reorder()` requiere tres argumentos:
 
 * `f`, el factor cuyos niveles quieres modificar.
 * `x`, un vector numérico que quieres usar para reordenar los niveles.
@@ -195,7 +194,7 @@ ggplot(resumen_ingreso, aes(edad, fct_reorder(ingreso, edad))) + geom_point()
 
 En ete caso, ¡reordenar los niveles arbitrariamente no es una buena idea! Eso es porque `ingreso` ya tiene un orden basado en un principio determinado, con el cual no deberíamos meternos. Reserva `fct_reorder()` para factores cuyos niveles están ordenados arbitrariamente.
 
-Sin embargo, sí tiene sentido mover "No Aplica" al frente, junto a los otros niveles especiales. Puedes usar `fct_relevel()` (del inglés _cambiar niveles_). Esta función recibe como argumento un factor, `f`, y luego cualquier número de niveles que quieras mover al principio de la línea.
+Sin embargo, sí tiene sentido mover "No Aplica" al frente, junto a los otros niveles especiales. Puedes usar `fct_relevel()` (_cambiar niveles_). Esta función recibe como argumento un factor, `f` y luego cualquier número de niveles que quieras mover al principio de la línea.
 
 ```{r}
 ggplot(resumen_ingreso, aes(edad, fct_relevel(ingreso, "No aplica"))) +
@@ -204,7 +203,7 @@ ggplot(resumen_ingreso, aes(edad, fct_relevel(ingreso, "No aplica"))) +
 
 ¿Por qué crees que la edad promedio para "No aplica" es tan alta?
 
-Otro tipo de reordenamiento es útil cuando estás coloreando las líneas de un gráfico. `fct_reorder2()` reordena el factor mediante los valores `y` asociados con los valores `x` más grandes. Esto hace que el gráfico sea más sencillo de leer, porque los colores de líneas se ajustan con la leyenda.
+Es otro el tipo de reordenamiento que resulta útil cuando estás coloreando las líneas de un gráfico. `fct_reorder2()` reordena el factor mediante los valores `y` asociados con los valores `x` más grandes. Esto hace que el gráfico sea más sencillo de leer, porque los colores de líneas se ajustan con la leyenda.
 
 
 ```{r, fig.align = "default", out.width = "50%", fig.width = 4}
@@ -222,7 +221,7 @@ ggplot(por_edad, aes(edad, prop, colour = fct_reorder2(estado_civil, edad, prop)
   labs(colour = "estado_civil")
 ```
 
-Finalmente, para los gráficos de barra puedes usar `fct_infreq()` (del inglés, _frecuencia incremental de factores_) para ordenar los niveles incrementalmente según su frecuencia: este es el ordenamiento más sencillo porque no requiere de variables adicionales. Puedes querer combinarlo con `fct_rev()` (del inglés, _invertir factores_).
+Finalmente, para los gráficos de barra puedes usar `fct_infreq()` (_frecuencia incremental de factores_) para ordenar los niveles incrementalmente según su frecuencia: este es el ordenamiento más sencillo porque no requiere de variables adicionales. Puedes querer combinarlo con `fct_rev()` (_invertir factores_).
 
 ```{r}
 encuesta %>%
@@ -241,22 +240,22 @@ encuesta %>%
 
 ## Modificar los niveles de los factores
 
-Más poderoso que cambiar el orden de los niveles es cambiar sus valores. Esto te permite clarificar etiquetas para publicación y colapsar niveles para visualizaciones de alto nivel. La herramienta más general y más poderosa es `fct_recode()` (del inglés, _recodificar factores_). Esta función te permite recodificar o cambiar el valor de cada nivel. Por ejemplo, toma la columna `encuesta$partido`:
+Más poderoso que cambiar el orden de los niveles es cambiar sus valores. Esto te permite clarificar etiquetas para publicación y colapsar niveles para visualizaciones de alto nivel. La herramienta más general y más poderosa es `fct_recode()` (_recodificar factores_). Esta función te permite recodificar o cambiar el valor de cada nivel. Por ejemplo, toma la columna `encuesta$partido`:
 
 ```{r}
 encuesta %>% count(partido)
 ```
-Los niveles son concisos e inconsistentes. Hay que correjirlos un poco para que sean más largos, y poder usar una construcción paralela.
+Los niveles son concisos e inconsistentes. Modifiquémoslos un poco para que sean más largos y para poder usar una construcción paralela.
 
 ```{r}
 encuesta %>%
   mutate(partido = fct_recode(partido,
-    "Republicano duro" = "Republicano Acérrimo",
-    "Republicano moderado" = "Republicado No Acérrimo",
-    "Independiente pro republicano" = "Independiente, pro-Rep",
-    "Independiente pro demócrata" = "Independiente, pro-Dem",
-    "Demócrata moderado" = "Demócrata No Acérrimo",
-    "Demócrata duro" = "Demócrata Acérrimo"
+    "Republicano duro" = "Fuertemente republicano",
+    "Republicano moderado" = "No fuertemente republicano",
+    "Independiente pro republicano" = "Ind, pro rep",
+    "Independiente pro demócrata" = "Ind, pro dem",
+    "Demócrata moderado" = "No fuertemente demócrata",
+    "Demócrata duro" = "Fuertemente demócrata"
   )) %>%
   count(partido)
 ```
@@ -268,12 +267,12 @@ Para combinar grupos, puedes asignar múltiples niveles viejos al mismo nivel nu
 ```{r}
 encuesta %>%
   mutate(partido = fct_recode(partido,
-    "Republicano duro" = "Republicano Acérrimo",
-    "Republicano moderado" = "Republicado No Acérrimo",
-    "Independiente pro republicano" = "Independiente, pro-Rep",
-    "Independiente pro demócrata" = "Independiente, pro-Dem",
-    "Demócrata moderado" = "Demócrata No Acérrimo",
-    "Demócrata duro" = "Demócrata Acérrimo",
+    "Republicano duro" = "Fuertemente republicano",
+    "Republicano moderado" = "No fuertemente republicano",
+    "Independiente pro republicano" = "Ind, pro rep",
+    "Independiente pro demócrata" = "Ind, pro dem",
+    "Demócrata moderado" = "No fuertemente demócrata",
+    "Demócrata duro" = "Fuertemente demócrata",
     "Otro" = "Sin respuesta",
     "Otro" = "No sabe",
     "Otro" = "Otro partido"
@@ -283,20 +282,20 @@ encuesta %>%
 
 Debes usar esta técnica con cuidado: si agrupas categorías que son realmente diferentes, obtendrás resultados confusos y/o engañosos.
 
-Si quieres colapsar muchos niveles, `fct_collapse()` (del inglés, _colapsar factores_) es una variante muy útil de `fct_recode()`. Para cada nueva variable, puedes proveer un vector de niveles viejos:
+Si quieres colapsar muchos niveles, `fct_collapse()` (_colapsar factores_) es una variante muy útil de `fct_recode()`. Para cada nueva variable puedes proveer un vector de niveles viejos:
 
 ```{r}
 encuesta %>%
   mutate(partido = fct_collapse(partido,
     otro = c("Sin respuesta", "No sabe", "Otro partido"),
-    republicano = c("Republicano duro", "Republicano moderado"),
-    independiente = c("Independiente pro republicano", "Independiente", "Independiente pro demócrata"),
-    democrata = c("Demócrata moderado", "Demócrata duro")
+    republicano = c("Fuertemente republicano", "No fuertemente republicano"),
+    independiente = c("Ind, pro rep", "Independiente", "Ind, pro dem"),
+    demócrata = c("No fuertemente demócrata", "Fuertemente demócrata")
   )) %>%
   count(partido)
 ```
 
-A veces, simplemente quieres agrupar todos los grupos pequeños para simplificar un gráfico o tabla. Ese es un trabajo para `fct_lump()` (del inglés, _agrupar factores_):
+A veces, simplemente quieres agrupar todos los grupos pequeños para simplificar un gráfico o tabla. Ese es un trabajo para `fct_lump()` (_agrupar factores_):
 
 ```{r}
 encuesta %>%

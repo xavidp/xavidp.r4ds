@@ -49,7 +49,7 @@ RStudio te informará también sobre posibles problemas:
 knitr::include_graphics("screenshots/rstudio-diagnostic-warn.png")
 ```
 
-## Práctica
+## Ejercicios
 
 1. Visita la cuenta de Twitter de RStudio Tips, <https://twitter.com/rstudiotips>, y encuentra algún *tip* que parezca interesante. Practica utilizándolo.
 
