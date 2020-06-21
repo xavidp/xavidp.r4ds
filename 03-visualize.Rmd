@@ -50,8 +50,7 @@ Cuando necesitemos especificar la procedencia de una función (o un conjunto de 
 Además del Tidyverse, es necesario que cargue el paquete `datos`, ya que en él están contenidas las versiones en español de los datos que utilizaremos en este capítulo:
 
 ```{r}
-# install.packages("remotes")
-# remotes::install_github("cienciadedatos/datos")
+# install.packages("datos")
 library(datos)
 ```
 
