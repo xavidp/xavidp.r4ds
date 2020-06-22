@@ -145,12 +145,11 @@ Los paquetes del Tidyverse cambian con bastante frecuencia. Puedes ver si existe
 
 Con el fin de que este libro sea más accesible para el público hispanoparlante, además de la traducción del texto se han traducido los datos que se utilizan en los ejemplos y ejercicios.
 
-El paquete `datos` se encuentra disponible en Github y puedes instalarlo ejecutando el siguiente código:
+El paquete `datos` se encuentra disponible en CRAN y puedes instalarlo ejecutando el siguiente código:
 
 
 ```{r, eval = FALSE}
-#install.packages("remotes")
-remotes::install_github("cienciadedatos/datos")
+install.packages("datos")
 ```
 
 ### Otros paquetes
