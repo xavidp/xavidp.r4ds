@@ -427,7 +427,7 @@ Vemos un patrón fuerte en el número de vuelos de los sábados. Esto es tranqui
 
     ```{r}
     vuelos_por_dia %>% 
-      top_n(3, resid)
+      slice_max(n = 3, resid)
     ```
 
 1.  Crea una nueva variable que divida la variable `dia_semana` en periodos, pero sólo

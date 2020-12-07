@@ -12,10 +12,10 @@ library(dplyr)
 clase <- millas %>% filter(clase == params$mi_clase)
 ```
 
-# Economía de combustible en vehículos `r params$mi_clase`
+# Economía de combustible en vehículos de tipo `r params$mi_clase`
 
 ```{r, message = FALSE}
-ggplot(clase, aes(motor, autopista)) +
+ggplot(clase, aes(cilindrada, autopista)) +
   geom_point() +
   geom_smooth(se = FALSE)
 ```

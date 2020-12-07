@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Hasta ahora has visto usar R Markdown para producir documentos HTML. Este capítulo muestra una breve descripción de algunos de los muchos otros tipos de documentos que puedes generar con R Markdown. Hay dos maneras de definir la salida de un documento:
+Hasta ahora has visto R Markdown usado para producir documentos HTML. Este capítulo muestra una breve descripción de algunos de los muchos otros tipos de documentos que puedes generar con R Markdown. Hay dos maneras de definir el output de un documento:
 
 1.  De forma permanente, modificando el encabezado YAML: 
     
@@ -17,9 +17,9 @@ Hasta ahora has visto usar R Markdown para producir documentos HTML. Este capít
     rmarkdown::render("diamond-sizes.Rmd", output_format = "word_document")
     ```
     
-    Esto es útil si quieres producir múltiples tipos de salida programáticamente.
+    Esto es útil si quieres producir múltiples tipos de outputs programáticamente.
 
-El botón knit de RStudio genera un archivo con el primer tipo de formato listado en su campo de salida `output`. Puedes generar archivos en formatos adicionales haciendo clic en el menú de selección al lado del botón knit.
+El botón knit de RStudio genera un archivo con el primer tipo de formato listado en el campo`output`. Puedes generar archivos en formatos adicionales haciendo clic en el menú de selección al lado del botón knit.
 
 
 ```{r, echo = FALSE, out.width = NULL}
@@ -30,7 +30,7 @@ knitr::include_graphics("screenshots/rmarkdown-knit.png")
 
 Cada formato de salida está asociado con una función de R. Puedes escribir `foo` o `pkg::foo`. Si omites `pkg`, por defecto se asume que es rmarkdown. Es importante conocer el nombre de la función que genera el documento de salida, porque así es como obtienes ayuda. Por ejemplo, para saber qué parámetros puedes definir con `html_document`, busca en `?rmarkdown::html_document`.
 
-Para sobrescribir los parámetros predeterminados necesitas usar un campo de `output` extendido. Por ejemplo, si quisieras generar un `html_document` con una tabla de contenido flotante, usarías:
+Para sobrescribir los parámetros predeterminados necesitas usar un campo de `output` extendido. Por ejemplo, si quisieras generar un `html_document` con una tabla de contenido flotante, deberías usar:
 
 ```yaml
 output:
@@ -49,11 +49,11 @@ output:
   pdf_document: default
 ```
 
-Nota la sintaxis especial si no quieres modificar ninguna de las opciones por defecto, en inglés default.
+Nota la sintaxis especial si no quieres modificar ninguna de las opciones por defecto: debes agregar `default`.
 
 ## Documentos
 
-El capítulo anterior se enfocó en la salida predeterminada del documento html `html_document`. Sin embargo hay un número de variaciones básicas para generar diferentes tipos de documentos:
+El capítulo anterior se enfocó en en la salida por defecto, que es `html_document`. Sin embargo, hay un número de variaciones básicas para generar diferentes tipos de documentos:
 
 *   `pdf_document` crea un PDF con LaTeX (un sistema de código abierto 
     de composición de textos), que necesitarás instalar. RStudio te notificará
@@ -72,13 +72,13 @@ El capítulo anterior se enfocó en la salida predeterminada del documento html 
 *   `github_document`: esta es una versión de `md_document` específicamente
     diseñada para compartir en GitHub.
 
-Recuerda que cuando generes un documento para compartirlo con los responsables de la toma de decisiones, puedes desactivar la visualización predeterminada de código, definiendo las opciones globales en el fragmento de configuración:
+Recuerda que cuando generes un documento para compartirlo con responsables de la toma de decisiones, puedes desactivar la visualización predeterminada de código, definiendo las opciones globales en el fragmento de configuración (setup):
 
 ```{r, eval = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Para los `html_document` otra opción es hacer que los fragmentos de código estén escondidos por defecto, pero visibles con un clic: 
+Otra opción para los `html_document`es hacer que los fragmentos de código estén escondidos por defecto, pero visibles con un clic: 
 
 ```yaml
 output:
@@ -88,15 +88,15 @@ output:
 
 ## Notebooks
 
-Un notebook, `html_notebook` (cuaderno en español), es una variación de un `html_document`. Las salidas de los dos documentos son muy similares, pero tienen propósitos distintos. Un `html_document` está enfocado en la comunicación con los encargados de la toma de decisiones, mientras que un notebook está enfocado en colaborar con otros científicos de datos. Estos propósitos diferentes llevan a usar la salida HTML de diferentes maneras. Ambas salidas HTML contendrán la salida renderizada, pero el notebook también contendrá el código fuente completo. Esto significa que puedes usar el archivo `.nb.html` generado por el notebook de dos maneras:
+Un notebook `html_notebook` es una variación de un `html_document`. Los outputs de los dos documentos son muy similares, pero tienen propósitos distintos. Un `html_document` está enfocado en la comunicación con personas encargadas de la toma de decisiones, mientras que un notebook está enfocado en colaborar con otros/as científicos/as de datos. Estos propósitos diferentes llevan a que la salida HTML sea usada de diferentes maneras. Ambas contendrán todo el output renderizado, pero el notebook también contendrá el código fuente completo. Esto significa que puedes usar el archivo `.nb.html` generado por el notebook de dos maneras:
 
-1. Puedes verlo en un navegador web, y ver la salida generada. A diferencia del
+1. Puedes verlo en un navegador web y ver el output generado. A diferencia del
    `html_document`, esta renderización siempre incluye una copia incrustada del
    código fuente que lo generó.   
 
 2. Puedes editarlo en RStudio. Cuando abras un archivo `.nb.html`, RStudio 
    automáticamente recreará el archivo `.Rmd` que lo creó. En el futuro, también
-   podrás incluir archivos de soporte (ej. archivos de datos `.csv`), que 
+   podrás incluir archivos de soporte (por ej., archivos de datos `.csv`), que 
    serán extraídos automáticamente cuando sea necesario.
 
 Enviar archivos `.nb.html` por correo electrónico es una manera simple de compartir los análisis con tus colegas. Pero las cosas se pondrán difíciles tan pronto como quieras hacer cambios. Si esto empieza a suceder, es un buen momento para aprender Git y GitHub. Aprender Git y Github definitivamente es doloroso al principio, pero la recompensa de la colaboración es enorme. Como se mencionó anteriormente, Git y GitHub están fuera del alcance de este libro, pero este es un consejo útil si ya los estás usando: usa las dos salidas, `html_notebook` y `github_document`: 
@@ -107,11 +107,11 @@ output:
   github_document: default
 ```
 
-`html_notebook` te da una vista previa local, y un archivo que puedes compartir por correo electrónico. `github_document` crea un archivo md mínimo que puedes ingresar en git. Puedes revisar fácilmente como los resultados de tus análisis (no solo el código) cambian con el tiempo, y GitHub lo renderizará muy bien en línea.
+`html_notebook` te da una vista previa local y un archivo que puedes compartir por correo electrónico. `github_document` crea un archivo md mínimo que puedes ingresar en Git. Puedes revisar fácilmente cómo los resultados de tus análisis (no solo el código) cambian con el tiempo y GitHub lo renderizará muy bien en línea.
 
 ## Presentaciones
 
-También puedes usar R Markdown para crear presentaciones. Obtienes menos control visual que con herramientas como Keynote y PowerPoint, pero ahorrarás mucho tiempo insertando automáticamente los resultados de tu código R en una presentación. Las Presentaciones funcionan dividiendo tu contenido en diapositivas, con una nueva diapositiva que comienza en cada encabezado de primer nivel (`#`) o de segundo nivel (`##`). También puedes insertar una regla horizontal (`***`) para crear una nueva diapositiva sin encabezado. 
+También puedes usar R Markdown para crear presentaciones. Obtienes menos control visual que con herramientas como Keynote y PowerPoint, pero ahorrarás mucho tiempo insertando automáticamente los resultados de tu código R en una presentación. Las presentaciones funcionan dividiendo tu contenido en diapositivas, con una nueva diapositiva que comienza en cada encabezado de primer nivel (`#`) o de segundo nivel (`##`). También puedes insertar una regla horizontal (`***`) para crear una nueva diapositiva sin encabezado. 
 
 R Markdown viene con tres formatos de presentación integrados:
 
@@ -131,7 +131,7 @@ Otros dos formatos populares son proporcionados por paquetes:
 
 ## Dashboards
 
-Los dashboards (tableros de control en español) son una forma útil de comunicar grandes cantidades de información de forma visual y rápida. Flexdashboard hace que sea particularmente fácil crear dashboards usando R Markdown y proporciona una convención de como los encabezados afectan el diseño:
+Los dashboards o tableros de control son una forma útil de comunicar grandes cantidades de información de forma visual y rápida. Flexdashboard hace que sea particularmente fácil crear dashboards usando R Markdown y proporciona una convención de cómo los encabezados afectan el diseño:
 
 * Cada encabezado de Nivel 1 (`#`) comienza una nueva página en el dashboard.
 * Cada encabezado de Nivel 2 (`##`) comienza una nueva columna.
@@ -153,11 +153,11 @@ Flexdashboard también proporciona herramientas simples para crear barras latera
 
 ## Interactividad
 
-Cualquier formato HTML (documento, notebook, presentación, o dashboard) puede contener componentes interactivos.
+Cualquier formato HTML (documento, notebook, presentación o dashboard) puede contener componentes interactivos.
 
 ### htmlwidgets
 
-HTML es un formato interactivo, y puedes aprovechar esa interactividad con __htmlwidgets__, funciones de R que producen visualizaciones HTML interactivas. Por ejemplo, fíjate en el mapa de __leaflet__ a continuación. Si estás viendo esta página en la web, puedes arrastrar el mapa, acercar y alejar, etc. Obviamente no puedes hacer esto en un libro, por lo que RMarkdown automáticamente inserta una captura de pantalla estática.
+HTML es un formato interactivo y puedes aprovechar esa interactividad con __htmlwidgets__, que son funciones de R que producen visualizaciones HTML interactivas. Por ejemplo, fíjate en el mapa de __leaflet__ a continuación. Si estás viendo esta página en la web, puedes arrastrar el mapa, acercar y alejar, etc. Obviamente no puedes hacer esto en un libro, por lo que RMarkdown automáticamente inserta una captura de pantalla estática.
 
 ```{r}
 library(leaflet)
@@ -167,7 +167,7 @@ leaflet() %>%
   addMarkers(174.764, -36.877, popup = "Maungawhau") 
 ```
 
-Lo bueno de los htmlwidgets es que no necesitas saber nada sobre HTML o JavaScript para usarlos. Todos los detalles están incluidos en el paquete, por lo que no tienes que preocuparte por eso.
+Lo bueno de htmlwidgets es que no necesitas saber nada sobre HTML o JavaScript para usarlos. Todos los detalles están incluidos en el paquete, por lo que no tienes que preocuparte por eso.
 
 Hay muchos paquetes que proporcionan htmlwidgets, incluyendo:
 
@@ -195,7 +195,7 @@ output: html_document
 runtime: shiny
 ```
 
-Luego puedes usar las funciones de "input" (entrada en español) para agregar componentes interactivos al documento:
+Luego puedes usar las funciones de "input" para agregar componentes interactivos al documento:
 
 ```{r, eval = FALSE}
 library(shiny)
@@ -206,9 +206,9 @@ numericInput("edad", "Cuántos años tienes?", NA, min = 0, max = 150)
 knitr::include_graphics("screenshots/rmarkdown-shiny.png")
 ```
 
-Después puedes referirte a los valores con `input$nombre` e `input$edad`, y el código que los usa se volverá a ejecutar automáticamente cada vez que los valores cambien.
+Después puedes referirte a los valores con `input$nombre` e `input$edad` y el código que los usa se volverá a ejecutar automáticamente cada vez que los valores cambien.
 
-No puedo mostrarte una aplicacion Shiny corriendo ahora porque las interacciones de Shiny ocurren en el lado del servidor. Esto quiere decir que puedes escribir aplicaciones interactivas sin saber JavaScript, pero necesitas un servidor para correrlas. Esto introduce un problema logístico: Las aplicaciones Shiny necesitan un servidor para correr en línea. Cuando corres una aplicación Shiny en tu propia computadora, Shiny automáticamente crea un servidor Shiny para que la puedas correr, pero necesitarás un servidor Shiny público si quieres proporcionar este tipo de interactividad en línea. Ésta es la limitación fundamental de Shiny: puedes crear en Shiny todo lo que puedes crear en R, pero necesitarás que R esté corriendo en algún lugar.
+No podemos mostrarte una aplicación Shiny corriendo ahora porque las interacciones de Shiny ocurren en el lado del servidor. Esto quiere decir que puedes escribir aplicaciones interactivas sin saber JavaScript, pero necesitas un servidor para correrlas. Esto introduce un problema logístico: Las aplicaciones Shiny necesitan un servidor para correr en línea. Cuando corres una aplicación Shiny en tu propia computadora, Shiny automáticamente crea un servidor Shiny para que la puedas correr, pero necesitarás un servidor Shiny público si quieres proporcionar este tipo de interactividad en línea. Ésta es la limitación fundamental de Shiny: puedes crear en Shiny todo lo que puedes crear en R, pero necesitarás que R esté corriendo en algún lugar.
 
 Aprende más sobre Shiny en: <http://shiny.rstudio.com/>.
 
@@ -226,9 +226,9 @@ Con un poco más de infraestructura puedes usar R Markdown para crear un sitio w
     cat(readr::read_file("rmarkdown/example-site.yml"))
     ```
 
-Ejecuta `rmarkdown::render_site()` para crear `_site` (sitio en español), un directorio de archivos listo para ser implementado como un sitio web estático independiente, o si usas un proyecto de RStudio para el directorio de tu sitio web, RStudio agregará una pestaña de compilación que puedes usar para crear y obtener una vista previa de tu sitio.
+Ejecuta `rmarkdown::render_site()` para crear `_site`, un directorio de archivos listo para ser implementado como un sitio web estático independiente, o si usas un proyecto de RStudio para el directorio de tu sitio web, RStudio agregará una pestaña de compilación que puedes usar para crear y obtener una vista previa de tu sitio.
 
-Lee más acerca de los Sitios Web en: <http://rmarkdown.rstudio.com/rmarkdown_websites.html>.
+Lee más acerca de sitios web en: <http://rmarkdown.rstudio.com/rmarkdown_websites.html>.
 
 ## Otros Formatos
 
@@ -236,14 +236,13 @@ Otros paquetes proveen incluso más formatos de salida:
 
 *   El paquete __bookdown__, <https://github.com/rstudio/bookdown>, 
     hace que crear libros, como este mismo, sea fácil. Para aprender más, lee
-    "Creando libros con R Markdown" en inglés 
     [_Authoring Books with R Markdown_](https://bookdown.org/yihui/bookdown/),
-    por Yihui Xie, el cual está, por supuesto, escrito en bookdown. Visita
+    de Yihui Xie, el que, por supuesto, escrito en bookdown. Visita
     <http://www.bookdown.org> para ver otros libros bookdown escritos 
-    por la comunidad R.
+    por la comunidad de R.
 
 *   El paquete __prettydoc__, <https://github.com/yixuan/prettydoc/>, 
-    proporciona formatos livianos de documentos con una gama de estéticas atractivas.
+    proporciona formatos livianos de documentos con una gama de temas atractivos.
 
 *   El paquete __rticles__, <https://github.com/rstudio/rticles>, compila una
     selección de formatos específicos para revistas científicas.
@@ -254,25 +253,22 @@ Consulta <http://rmarkdown.rstudio.com/formats.html> para ver una lista de más 
 
 Para obtener más información sobre comunicación efectiva con estos diferentes formatos, recomiendo los siguientes recursos (en inglés):
 
-* Para mejorar tus habilidades de presentación, recomiendo: Patrones de Presentación,
-  [_Presentation Patterns_](https://amzn.com/0321820800), por Neal Ford,
+* Para mejorar tus habilidades de presentación, recomiendo: [_Presentation Patterns_](https://amzn.com/0321820800), de Neal Ford,
   Matthew McCollough y Nathaniel Schutta. Proporciona un conjunto de patrones 
-  efectivo (de alto y bajo nivel) que puedes usar para mejorar tus presentaciones.
+  efectivos (de alto y bajo nivel) que puedes usar para mejorar tus presentaciones.
 
-* Si das charlas académicas, recomiendo que leas La guía para dar charlas del grupo Leek:
+* Si das charlas académicas, recomiendo que leas la guía para dar charlas del grupo Leek:
   [_Leek group guide to giving talks_](https://github.com/jtleek/talkguide).
   
-* Yo no lo he tomado, pero he escuchado buenos comentarios sobre 
-  el curso en línea Hablar en Público; Public Speaking de Matt McGarrity: 
+* Nosotros no lo hemos tomado, pero hemos escuchado buenos comentarios sobre 
+  el curso en línea Public Speaking de Matt McGarrity: 
   <https://www.coursera.org/learn/public-speaking>.
 
 * Si estás creando muchos dashboards, asegúrate de leer: 
-  Diseño de Dashboards de información: La comunicación de datos efectiva, de Stephen Few.
-  [Information Dashboard Design: The Effective Visual Communication 
-  of Data](https://amzn.com/0596100167). Te ayudará a crear dashboards realmente útiles
+    [Information Dashboard Design: The Effective Visual Communication of Data](https://amzn.com/0596100167). Te ayudará a crear dashboards realmente útiles
   y no solo bonitos a la vista.
 
 * Comunicar tus ideas efectivamente a menudo se beneficia de un poco 
   de conocimiento en diseño gráfico. El libro de diseño para no diseñadores,
-  [_The Non-Designer's Design Book_](http://amzn.com/0133966151) 
+  [_The Non-Designer's Design Book_](http://amzn.com/0133966151), 
   es un buen lugar para empezar.

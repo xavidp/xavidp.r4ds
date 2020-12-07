@@ -36,7 +36,7 @@ library(tidyverse)
 
 Esa única línea de código carga el núcleo del Tidyverse, que está compuesto por los paquetes que usarás en casi todos tus análisis de datos. Al correr esta línea también verás cuáles funciones de tidyverse pueden tener conflicto con funciones de R base (o de otros paquetes que puedas haber cargado previamente).
 
-Si ejecutas este código y recibes el mensaje de error "Error in library(tidyverse): there is no package called 'tidyverse'" (no hay ningún paquete llamado 'tidyverse'), primero deberás instalarlo y luego ejecutar `library()`:.
+Si ejecutas este código y recibes el mensaje "Error in library(tidyverse): there is no package called 'tidyverse'" (no hay ningún paquete llamado 'tidyverse'), primero deberás instalarlo y luego ejecutar `library()`:
 
 ```{r eval = FALSE}
 install.packages("tidyverse")
@@ -47,7 +47,7 @@ Solo es necesario que instales los paquetes una única vez; sin embargo, tendrá
 
 Cuando necesitemos especificar la procedencia de una función (o un conjunto de datos), usaremos el formato especial `paquete::funcion()`. Por ejemplo, `ggplot2::ggplot()` dice explícitamente que estamos usando la función `ggplot()` del paquete ggplot2.
 
-Además del Tidyverse, es necesario que cargue el paquete `datos`, ya que en él están contenidas las versiones en español de los datos que utilizaremos en este capítulo:
+Además del Tidyverse, es necesario que cargues el paquete `datos`, ya que en él están contenidas las versiones en español de los datos que utilizaremos en este capítulo:
 
 ```{r}
 # install.packages("datos")
@@ -88,7 +88,7 @@ El gráfico muestra una relación negativa entre el tamaño del motor (`cilindra
 
 Para comenzar un gráfico con **ggplot2** se utiliza la función `ggplot()`. `ggplot()` crea un sistema de coordenadas al que puedes agregar capas. El primer argumento de `ggplot()` es el conjunto de datos que se utilizará en el gráfico. Si corres `ggplot(data = millas)`, obtendrás un gráfico vacío. Como no es muy interesante, no vamos a mostrarlo aquí.
 
-Para completar tu gráfico debes agregar una o más capas a `ggplot()`. La función `geom_point()` agrega una capa de puntos al gráfico, que crea un diagrama de dispersión (o *scatterplot*). **ggplot2** incluye muchas funciones _geom_, cada una de las cuales agrega un tipo de capa diferente a un gráfico. Aprenderás muchas de ellas a lo largo de este capítulo.
+Para completar tu gráfico debes agregar una o más capas a `ggplot()`. La función `geom_point()` agrega una capa de puntos al gráfico, lo que crea un diagrama de dispersión (o *scatterplot*). **ggplot2** incluye muchas funciones _geom_, cada una de las cuales agrega un tipo de capa diferente a un gráfico. Aprenderás muchas de ellas a lo largo de este capítulo.
 
 Cada función geom en **ggplot2** tiene un argumento de `mapping`. Este define cómo se "mapean" o se asignan las variables del conjunto de datos a propiedades visuales. El argumento de `mapping` siempre aparece emparejado con `aes()` y los argumentos `x` e `y` dentro de `aes()` especifican qué variables asignar a estos ejes. **ggplot2** busca la variable asignada en el argumento `data`, en este caso, `millas`.
 
@@ -246,7 +246,7 @@ ggplot(data = millas)
 + geom_point(mapping = aes(x = cilindrada, y = autopista))
 ```
 
-Si esto no resuelve el problema, prueba con la ayuda. Puedes obtener ayuda sobre cualquier función R ejecutando `?nombre_de_la_funcion` en la consola o seleccionando el nombre de la función y presionando F1 en RStudio. No te preocupes si la ayuda no te parece tan útil, trata entonces de saltar a los ejemplos y buscar un pedazo de código que coincida con lo que intentas hacer.
+Si esto no resuelve el problema, prueba con la ayuda. Puedes obtener ayuda sobre cualquier función de R ejecutando `?nombre_de_la_funcion` en la consola o seleccionando el nombre de la función y presionando F1 en RStudio. No te preocupes si la ayuda no te parece tan útil, trata entonces de saltar a los ejemplos y buscar un pedazo de código que coincida con lo que intentas hacer.
 
 Si eso no ayuda, lee cuidadosamente el mensaje de error. ¡A veces la respuesta estará oculta allí! Sin embargo, cuando recién comienzas en R, puede que la respuesta esté en el mensaje de error, pero aún no sabes cómo entenderlo. Otra gran herramienta es Google: intenta buscar allí el mensaje de error, ya que es probable que otra persona haya tenido el mismo problema y haya obtenido ayuda en línea.
 
@@ -254,7 +254,7 @@ Si eso no ayuda, lee cuidadosamente el mensaje de error. ¡A veces la respuesta 
 
 Una forma de agregar variables adicionales es con las estéticas. Otra forma particularmente útil para las variables categóricas consiste en dividir el gráfico en __facetas__, es decir, sub-gráficos que muestran cada uno un subconjunto de los datos.
 
-Para separar en facetas un gráfico según una sola variable, utiliza `facet_wrap()` (del inglés *envolver una faceta*). El primer argumento de `facet_wrap()` debería ser una fórmula creada con `~` seguido del nombre de una de las variable (aquí "fórmula" es el nombre de un tipo de estructura en R, no un sinónimo de "ecuación"). La variable que uses en `facet_wrap()` debe ser categórica.
+Para separar en facetas un gráfico según una sola variable, utiliza `facet_wrap()` (del inglés *envolver una faceta*). El primer argumento de `facet_wrap()` debería ser una fórmula creada con `~` seguida del nombre de una de las variable (aquí "fórmula" es el nombre de un tipo de estructura en R, no un sinónimo de "ecuación"). La variable que uses en `facet_wrap()` debe ser categórica.
 
 ```{r}
 ggplot(data = millas) +
@@ -361,7 +361,7 @@ ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista, color = tracc
 
 ¡Observa que generamos un gráfico que contiene dos geoms! Si esto te emociona, abróchate el cinturón. En la siguiente sección aprenderemos cómo colocar múltiples geoms en el mismo gráfico.
 
-**ggplot2** proporciona más de 40 geoms y los paquetes de extensión proporcionan aún más (consulta <https://exts.ggplot2.tidyverse.org/gallery/> para obtener una muestra). La mejor forma de obtener un panorama completo sobre las posibilidades que brinda **ggplot2** es consultando la hoja de referencia (o *cheatsheet*), que puedes encontrar en <https://rstudio.com/resources/cheatsheets/>. Para obtener más información sobre un tipo dado de geoms, usa la ayuda: `?geom_smooth`.
+**ggplot2** proporciona más de 40 geoms y los paquetes de extensión proporcionan aún más (consulta <https://exts.ggplot2.tidyverse.org/gallery/> para obtener una muestra). La mejor forma de obtener un panorama completo sobre las posibilidades que brinda **ggplot2** es consultando la hoja de referencia (o *cheatsheet*), que puedes encontrar en <https://rstudio.com/resources/cheatsheets/> (en la parte baja de la página encontrarás la versión en español). Para obtener más información sobre un tipo dado de geoms, usa la ayuda: `?geom_smooth`.
 
 Muchos geoms, como `geom_smooth()`, usan un único objeto geométrico para mostrar múltiples filas de datos. Con estos geoms, puedes asignar la estética de `group` (__grupo__) a una variable categórica para graficar múltiples objetos. **ggplot2** representará un objeto distinto por cada valor único de la variable de agrupamiento. En la práctica, **ggplot2** agrupará automáticamente los datos para estos geoms siempre que se asigne una estética a una variable discreta (como en el ejemplo del tipo de línea o `linetype`). Es conveniente confiar en esta característica porque la estética del grupo en sí misma no agrega una leyenda o características distintivas a los geoms.
 
@@ -403,7 +403,7 @@ ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
   geom_smooth()
 ```
 
-La misma idea se puede emplear para especificar distintos conjuntos de datos (`data`) para cada capa. Aquí, nuestra línea suave muestra solo un subconjunto del conjunto de datos de `millas`: los autos subcompactos. El argumento local de datos en `geom_smooth()` anula el argumento de datos globales en `ggplot()` solo para esa capa.
+La misma idea se puede emplear para especificar distintos conjuntos de datos (`data`) para cada capa. En el siguiente caso, nuestra línea suave muestra solo un subconjunto del conjunto de datos de `millas`: los autos subcompactos. El argumento local de datos en `geom_smooth()` anula el argumento de datos globales en `ggplot()` solo para esa capa.
 
 ```{r, message = FALSE}
 ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista)) +
@@ -480,21 +480,21 @@ ggplot(data = diamantes) +
   geom_bar(mapping = aes(x = corte))
 ```
 
-En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje y muestra 'recuento' (_count_), ¡pero el recuento no es una variable en `diamantes`! ¿De dónde viene? Muchos gráficos, como los diagramas de dispersión (_scatterplots_), grafican los valores brutos de un conjunto de datos. Otros gráficos, como los de barras, calculan nuevos valores para presentar:
+En el eje x, el gráfico muestra `corte`, una variable de `diamantes`. En el eje y muestra el recuento (_count_), ¡pero el recuento no es una variable en `diamantes`! ¿De dónde viene? Muchos gráficos, como los diagramas de dispersión (_scatterplots_), grafican los valores brutos de un conjunto de datos. Otros gráficos, como los de barras, calculan nuevos valores para presentar:
 
-* los gráficos de barras, los histogramas y los polígonos de frecuencia almacenan los datos y luego grafican los conteos por contenedores, es decir, el número de puntos que caen en cada contenedor.
+* Los gráficos de barras, los histogramas y los polígonos de frecuencia almacenan los datos y luego grafican los conteos por contenedores (_bins_), es decir, el número de puntos que caen en cada contenedor.
 
-* los gráficos de líneas suavizadas (_smoothers_) ajustan un modelo a los datos y luego grafican las predicciones del modelo.
+* Los gráficos de líneas suavizadas (_smoothers_) ajustan un modelo a los datos y luego grafican las predicciones del modelo.
 
-* los diagramas de caja (_boxplots_) calculan un resumen robusto de la distribución y luego muestran una caja con formato especial.
+* Los diagramas de caja (_boxplots_) calculan un resumen robusto de la distribución y luego muestran una caja con formato especial.
 
-El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés de transformación estadística (_**stat**tistical transformation_). La siguiente figura describe cómo funciona este proceso con `geom_bar()`.
+El algoritmo utilizado para calcular nuevos valores para un gráfico se llama *stat*, abreviatura en inglés de transformación estadística (_**stat**istical transformation_). La siguiente figura describe cómo funciona este proceso con `geom_bar()`.
 
 ```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("diagrams_w_text_as_path/es/visualization-stat-bar.svg")
 ```
 
-Puedes aprender acerca de qué _stat_ usa cada geom inspeccionando el valor predeterminado para el argumento `stat`. Por ejemplo, `?geom_bar` muestra que el valor predeterminado para `stat` es "count", lo que significa que `geom_bar()` usa `stat_count()`. `stat_count()` está documentado en la misma página que `geom_bar()`, y si te desplazas hacia abajo puedes encontrar una sección llamada "Computed variables" (*Variables calculadas*). Ahí se describe cómo calcula dos nuevas variables: `count` y `prop`.
+Puedes aprender acerca de qué _stat_ usa cada geom inspeccionando el valor predeterminado para el argumento `stat`. Por ejemplo, `?geom_bar` muestra que el valor predeterminado para `stat` es "count", lo que significa que `geom_bar()` usa `stat_count()`. `stat_count()` está documentado en la misma página que `geom_bar()` y si te desplazas hacia abajo puedes encontrar una sección llamada "Computed variables" (*Variables calculadas*). Ahí se describe cómo calcula dos nuevas variables: `count` y `prop`.
 
 Por lo general, puedes usar geoms y estadísticas de forma intercambiable. Por ejemplo, puedes volver a crear la gráfica anterior usando `stat_count()` en lugar de `geom_bar()`:
 
@@ -503,7 +503,7 @@ ggplot(data = diamantes) +
   stat_count(mapping = aes(x = corte))
 ```
 
-Esto funciona porque cada geom tiene una estadística predeterminada, y cada estadística tiene un geom predeterminado. Esto significa que generalmente puedes usar geoms sin preocuparte por la transformación estadística subyacente. 
+Esto funciona porque cada geom tiene una estadística predeterminada y cada estadística tiene un geom predeterminado. Esto significa que generalmente puedes usar geoms sin preocuparte por la transformación estadística subyacente. 
 
 Hay tres razones por las que podrías necesitar usar una estadística explícitamente:
 

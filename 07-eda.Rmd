@@ -26,7 +26,7 @@ library(datos)
 ## Preguntas
 
 > "No hay tal cosa como preguntas estadísticas rutinarias, 
-> sólo rutinas estadísticas cuestionables." --- Sir David Cox
+> solo rutinas estadísticas cuestionables." --- Sir David Cox
 
 > "Es preferible una respuesta aproximada a la pregunta correcta, que 
 > frecuentemente es formulada de manera imprecisa, que una respuesta exacta a la pregunta incorrecta,
@@ -99,7 +99,7 @@ diamantes %>%
 
 Un histograma segmenta el eje horizontal en rangos equidistantes y después hace uso de la altura de la barra para mostrar el número de observaciones que corresponden a cada unidad o barra. En el gráfico anterior, la barra más alta muestra que al menos 30,000 observaciones tienen un valor de `quilate` entre 0.25 y 0.75, que son los bordes izquierdo y derecho de la barra. 
 
-Puedes definir el ancho de los intervalos de un histograma con el argumento `binwidth` (del inglés _ancho del contenedor_), que es medido en las unidades de la variable `x`. Siempre deberías explorar una variedad de distintas medidas para el ancho del intervalo cuando estés trabajando con histogramas, pues distintas medidas pueden revelar diferentes patrones. Por ejemplo, así es como luce la gráfica anterior cuando acercamos la imagen a solo los diamantes con un tamaño menor a tres quilates y escogemos un intervalo más pequeño.
+Puedes definir el ancho de los intervalos de un histograma con el argumento `binwidth` (_ancho del contenedor_ en inglés), que es medido en las unidades de la variable `x`. Siempre deberías explorar una variedad de distintas medidas para el ancho del intervalo cuando estés trabajando con histogramas, pues distintas medidas pueden revelar diferentes patrones. Por ejemplo, así es como luce la gráfica anterior cuando acercamos la imagen a solo los diamantes con un tamaño menor a tres quilates y escogemos un intervalo más pequeño.
 
 ```{r}
 pequenos <- diamantes %>% 
@@ -109,7 +109,7 @@ ggplot(data = pequenos, mapping = aes(x = quilate)) +
   geom_histogram(binwidth = 0.1)
 ```
 
-Si deseas sobreponer múltiples histogramas en la misma gráfica, te recomendamos usar `geom_freqpoly()` (del inglés _polígonos de frecuencia_) en lugar de `geom_histogram()`. `geom_freqpoly()` realiza el mismo cálculo que `geom_histogram()`, pero usa líneas en lugar de barras para mostrar los totales. Es mucho más fácil entender líneas que barras que se sobreponen.
+Si deseas sobreponer múltiples histogramas en la misma gráfica, te recomendamos usar `geom_freqpoly()` (_polígonos de frecuencia_) en lugar de `geom_histogram()`. `geom_freqpoly()` realiza el mismo cálculo que `geom_histogram()`, pero usa líneas en lugar de barras para mostrar los totales. Es mucho más fácil entender líneas que barras que se sobreponen.
 
 ```{r}
 ggplot(data = pequenos, mapping = aes(x = quilate, colour = corte)) +
@@ -239,7 +239,7 @@ Si has encontrado valores inusuales en tu set de datos y simplemente quieres seg
     ¡quizás te des cuenta que ya no tienes datos con los que trabajar! 
 
 1.  En lugar de eso, recomiendo reemplazar los valores inusuales con valores faltantes.
-    La manera más fácil de hacerlo es usar `mutate()` (del inglés _mutar_ o _transformar_) para reemplazar la variable
+    La manera más fácil de hacerlo es usar `mutate()` para reemplazar la variable
     con una copia editada de la misma. Puedes usar la función `ifelse()` para
     reemplazar valores inusuales con `NA`:
 
@@ -248,7 +248,7 @@ Si has encontrado valores inusuales en tu set de datos y simplemente quieres seg
       mutate(y = ifelse(y < 3 | y > 20, NA, y))
     ```
 
-`ifelse()` tiene tres argumentos. El primer argumento `test` debe ser un vector lógico. El resultado contendrá el valor del segundo argumento, `sí`, cuando `test` sea `VERDADERO`, y el valor del tercer argumento, `no`, cuando sea falso. Como alternativa a __ifelse__, usa `dplyr::case_when()` (del inglés _caso cuando_). `case_when()` es particularmente útil dentro de __mutate__ cuando quieras crear una nueva variable que dependa de una combinación compleja de variables existentes.
+`ifelse()` tiene tres argumentos. El primer argumento `test` debe ser un vector lógico. El resultado contendrá el valor del segundo argumento, `sí`, cuando `test` sea `VERDADERO`, y el valor del tercer argumento, `no`, cuando sea falso. Como alternativa a __ifelse__, usa `dplyr::case_when()` (_caso cuando_). `case_when()` es particularmente útil dentro de __mutate__ cuando quieras crear una nueva variable que dependa de una combinación compleja de variables existentes.
 
 Como R, ggplot2 suscribe la filosofía de que los valores faltantes nunca deberían desaparecer silenciosamente. La cuestión de dónde graficar los valores faltantes no es trivial, así que ggplot2 no los incluye en los gráficos, pero emite una advertencia acerca de que fueron removidos:
 
@@ -325,7 +325,7 @@ Otra alternativa para mostrar la distribución de una variable continua agrupada
   distribución, así como también te mostrarán si la distribución es simétrica en torno a la mediana 
   o si está sesgada hacia uno de los lados.
 
-* Los puntos que representan observaciones que se encuentran a más de 1.5 veces el_IQR_
+* Los puntos que representan observaciones que se encuentran a más de 1.5 veces el _IQR_
   a partir de cualquier borde de la caja. Estos puntos son inusuales en los datos, 
   de manera que son graficados individualmente.
 
@@ -345,7 +345,7 @@ ggplot(data = diamantes, mapping = aes(x = corte, y = precio)) +
 
 Si bien vemos mucha menos información sobre la distribución, los diagramas de caja son más compactos, lo que hace que sea más fácil compararlos (y presentar más en un mismo gráfico). Esto respalda el contradictorio resultado al que llegamos antes sobre que los diamantes de mayor calidad son en promedio más baratos. En los ejercicios tendrás que descubrir por qué.
 
-`corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables categóricas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (del inglés _reordenar_).
+`corte` es un factor ordenado: regular es peor que bueno, que a su vez es peor que muy bueno y así sucesivamente. Muchas variables categóricas no tienen un orden intrínseco como tal, de manera que puedes reordenarlas para mostrarlas de manera más informativa. Una manera de hacerlo es usar la función `reorder()` (_reordenar_).
 
 Por ejemplo, el caso de la variable `clase` del set de datos `millas`. Podría interesarte saber cómo varía el rendimiento en autopista según la clase del vehículo:
 
@@ -361,7 +361,7 @@ ggplot(data = millas) +
   geom_boxplot(mapping = aes(x = reorder(clase, autopista, FUN = median), y = autopista))
 ```
 
-Si los nombres de tus variables son muy largos, `geom_boxplot()` funcionará mejor si giras el gráfico en 90°. Puedes hacer esto agregando `coord_flip()` (del inglés _voltear coordenadas_).
+Si los nombres de tus variables son muy largos, `geom_boxplot()` funcionará mejor si giras el gráfico en 90°. Puedes hacer esto agregando `coord_flip()` (_voltear coordenadas_).
 
 ```{r}
 ggplot(data = millas) +
@@ -570,7 +570,7 @@ ggplot(data = faithful, mapping = aes(x = eruptions)) +
   geom_freqpoly(binwidth = 0.25)
 ```
 
-Usualmente los primeros argumentos de una función son tan importantes que deberías saberlos de memoria. Los primeros dos argumentos de `ggplot()` son `data` y `mapping`, y los primeros dos argumentos de `aes()` son `x` e `y`. En lo que resta del libro no escribiremos esos nombres. Esto nos ahorra teclear y ,al reducir la cantidad de palabras repetidas, será más fácil identificar lo que es distinto entre diferentes gráficos. Esta es una cuestión importante en cuanto a programación se refiere, y hablaremos más sobre esto en el capítulo sobre [funciones](#funciones).
+Usualmente los primeros argumentos de una función son tan importantes que deberías saberlos de memoria. Los primeros dos argumentos de `ggplot()` son `data` y `mapping`, y los primeros dos argumentos de `aes()` son `x` e `y`. En lo que resta del libro no escribiremos esos nombres. Esto nos ahorra teclear y, al reducir la cantidad de palabras repetidas, será más fácil identificar lo que es distinto entre diferentes gráficos. Esta es una cuestión importante en cuanto a programación se refiere, y hablaremos más sobre esto en el capítulo sobre [funciones](#funciones).
 
 Escribir el código para el gráfico anterior de manera más precisa resulta en:
 
@@ -579,7 +579,7 @@ ggplot(faithful, aes(eruptions)) +
   geom_freqpoly(binwidth = 0.25)
 ```
 
-Algunas veces convertiremos el producto obtenido en el último paso del proceso de transformación de datos a un gráfico. Observa también la transición de `%>%` a `+`. Nos gustaría que esta transición no fuera necesaria, pero desafortunadamente `ggplot2` fue creado antes de que el _pipe_ fuera descubierto.
+Algunas veces el producto obtenido en el último paso del proceso de transformación de datos lo convertiremos en un gráfico. Observa también la transición de `%>%` a `+`. Nos gustaría que esta transición no fuera necesaria, pero desafortunadamente `ggplot2` fue creado antes de que el _pipe_ fuera descubierto.
 
 ```{r, eval = FALSE}
 diamantes %>% 
@@ -590,7 +590,7 @@ diamantes %>%
 
 ## Aprendiendo más
 
-Si quieres aprender más acerca de la mecánica de `ggplot2`, te recomendaría consultar una copia del [_libro de ggplot2_](https://amzn.com/331924275X) (disponible en inglés). Fue actualizado recientemente, de manera que incluye código para dplyr y tidyr, y tiene mucho más espacio para explorar todas las facetas de visualización. Desafortunadamente, el libro no está disponible sin costo, pero si tienes alguna relación con una universidad es probable que puedas obtener una versión electrónica del libro mediante SpringerLink.
+Si quieres aprender más acerca de la mecánica de `ggplot2`, te recomendamos consultar una copia del [_libro de ggplot2_](https://amzn.com/331924275X) (disponible en inglés). Fue actualizado recientemente, de manera que incluye código para dplyr y tidyr, y tiene mucho más espacio para explorar todas las facetas de visualización. Desafortunadamente, el libro no está disponible sin costo, pero si tienes alguna relación con una universidad es probable que puedas obtener una versión electrónica del libro mediante SpringerLink.
 
 Otro recurso útil es el [_R Graphics Cookbook_](https://amzn.com/1449316956) por Winston Chang. Gran parte del contenido de este libro está disponible en línea en <http://www.cookbook-r.com/Graphs/>.
 
