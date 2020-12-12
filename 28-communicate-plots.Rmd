@@ -561,4 +561,4 @@ Es una buena idea darles nombres a los bloques de código que producen figuras, 
 
 El mejor lugar para aprender más es el libro de ggplot2: [_ggplot2: Elegant graphics for data analysis_](https://amzn.com/331924275X). Este explica con mucha más profundidad la teoría subyacente y tiene muchos más ejemplos de cómo combinar las piezas individuales para resolver problemas prácticos. Desafortunadamente, el libro no está disponible en línea de forma gratuita, aunque puede encontrar el código fuente en <https://github.com/hadley/ggplot2-book>.
 
-Otro gran recurso es la guía de extensiones ggplot2 <http://www.ggplot2-exts.org/>. Este sitio enumera muchos de los paquetes que amplían **ggplot2** con nuevos geoms y escalas. Es un buen lugar para comenzar si tratas de hacer algo que parece difícil con **ggplot2**.
+Otro gran recurso es la guía de extensiones ggplot2 <https://exts.ggplot2.tidyverse.org/gallery/>. Este sitio enumera muchos de los paquetes que amplían **ggplot2** con nuevos geoms y escalas. Es un buen lugar para comenzar si tratas de hacer algo que parece difícil con **ggplot2**.
