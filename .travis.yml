@@ -1,5 +1,4 @@
 language: R
-pandoc_version: 2.9.2.1
 
 sudo: required
 
