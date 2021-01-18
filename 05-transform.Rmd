@@ -4,9 +4,9 @@
 
 La visualización es una herramienta importante para la generación de conocimiento; sin embargo, es raro que obtengas los datos exactamente en la forma en que los necesitas. A menudo tendrás que crear algunas variables nuevas o resúmenes, o tal vez solo quieras cambiar el nombre de las variables o reordenar las observaciones para facilitar el trabajo con los datos. En este capítulo aprenderás cómo hacer todo eso (¡y más!), incluyendo cómo transformar tus datos utilizando el paquete **dplyr** y el uso de un nuevo conjunto de datos sobre salida de vuelos de la ciudad de Nueva York en el año 2013.
 
-### Prerequisitos
+### Prerrequisitos
 
-En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central del tidyverse. Ilustraremos las ideas clave con el _dataset_ *vuelos* que está contenido en el paquete **datos**.  Utilizaremos **ggplot2** para ayudarnos a comprender los datos. 
+En este capítulo nos enfocaremos en cómo usar el paquete **dplyr**, otro miembro central del tidyverse. Ilustraremos las ideas clave con el _dataset_ `vuelos` que está contenido en el paquete **datos**.  Utilizaremos **ggplot2** como ayuda para comprender los datos. 
 
 ```{r setup, message = FALSE, cache = FALSE}
 # install.packages("datos")
@@ -18,7 +18,7 @@ Toma nota acerca del mensaje de conflictos que se imprime cuando cargas el paque
 
 ### vuelos
 
-Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `vuelos`. Este conjunto de datos contiene los `r format(nrow (vuelos), big.mark =", ")` vuelos que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0), y están documentados en `?vuelos`.
+Para explorar los verbos básicos de manipulación de datos de **dplyr**, usaremos `vuelos`. Este conjunto de datos contiene los `r format(nrow (vuelos), big.mark = ", ")` vuelos que partieron de la ciudad de Nueva York durante el 2013. Los datos provienen del [Departamento de Estadísticas de Transporte de los Estados Unidos](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0) y están documentados en `?vuelos`.
 
 ```{r}
 vuelos
@@ -114,7 +114,7 @@ near(1 / 49 * 49, 1)
 
 Si tienes múltiples argumentos para `filter()` estos se combinan con "y": cada expresión debe ser verdadera para que una fila se incluya en el *output*. Para otros tipos de combinaciones necesitarás usar operadores Booleanos: `&` es "y", `|` es "o", y `!` es "no". La figura @ref(fig:bool-ops) muestra el conjunto completo de operaciones Booleanas.
 
-```{r bool-ops, echo = FALSE, fig.cap = "Complete set of boolean operations. `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."}
+```{r bool-ops, echo = FALSE, fig.cap = "Set completo de operadores booleanos. `x` es el círculo de la derecha, `y` es el círculo de la izquierda y la región sombreada qué partes selecciona cada operador."}
 knitr::include_graphics("diagrams_w_text_as_path/es/transform-logical.svg")
 ```
 
@@ -198,7 +198,7 @@ filter(df, is.na(x) | x > 1)
 
     3. Fueron operados por United, American o Delta
 
-    4. Partieron en invierno (julio, agosto y septiembre)
+    4. Partieron en invierno del hemisferio sur (julio, agosto y septiembre)
 
     5. Llegaron más de dos horas tarde, pero no salieron tarde
 
@@ -574,13 +574,13 @@ RStudio tip: un atajo en tu teclado que puede ser muy útil es Cmd/Ctrl + Shift 
 
 --------------------------------------------------------------------------------
 
-Hay otra variación común de este tipo de patrón. Veamos cómo el rendimiento promedio de los bateadores en el béisbol está relacionado con el número de veces que les toca batear Aquí utilizaremos el conjunto de datos de `bateadores` para calcular el promedio de bateo (número de bateos / número de intentos) de cada jugador de béisbol de Grandes Ligas.
+Hay otra variación común de este tipo de patrón. Veamos cómo el rendimiento promedio de los bateadores en el béisbol está relacionado con el número de veces que les toca batear. Aquí utilizaremos el conjunto de datos de `bateadores` para calcular el promedio de bateo (número de bateos / número de intentos) de cada jugador de béisbol de las Grandes Ligas.
 
 Cuando graficamos la habilidad del bateador (medido por el promedio de bateo, `pb`) contra el número de oportunidades para golpear la pelota (medido por el tiempo al bate,`ab`), verás dos patrones:
 
 1. Como en el ejemplo anterior, la variación en nuestro estadístico de resumen disminuye a medida que obtenemos más observaciones.
 
-2. Existe una correlación positiva entre la habilidad (`pb`) y las oportunidades para golpear la pelota (`ab`). Esto se debe a que los equipos controlan quién puede jugar, y obviamente elegirán a sus mejores jugadores.
+2. Existe una correlación positiva entre la habilidad (`pb`) y las oportunidades para golpear la pelota (`ab`). Esto se debe a que los equipos controlan quién puede jugar y, obviamente, elegirán a sus mejores jugadores.
 
 ```{r message=FALSE, warning=FALSE}
 # Convierte a tibble para puedas imprimirlo de una manera legible
@@ -614,7 +614,7 @@ Puedes encontrar una buena explicación de este problema en <http://varianceexpl
 Solo el uso de medias, conteos y sumas puede llevarte muy lejos, pero R proporciona muchas otras funciones de resumen útiles:
 
 *  Medidas de centralidad: hemos usado `mean(x)`, pero `median(x)` también resulta muy útil. La media es la suma dividida por el número de observaciones; la mediana es un valor donde el 50% de `x` está por encima de él y el 50% está por debajo. 
-A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [subsetting].
+A veces es útil combinar agregación con un subconjunto lógico. Todavía no hemos hablado sobre este tipo de subconjuntos, pero aprenderás más al respecto en [selección de subconjuntos].
     
 ```{r}
 no_cancelados %>% 
@@ -769,16 +769,16 @@ vuelos_sml %>%
 *   Encuentra todos los grupos más grandes que un determinado umbral:
 
 ```{r}
-popular_destinos <- vuelos %>% 
+destinos_populares <- vuelos %>% 
   group_by(destino) %>% 
   filter(n() > 365)
-popular_destinos
+destinos_populares
 ```
 
 *   Estandariza para calcular las métricas por grupo:
 
 ```{r}
-popular_destinos %>% 
+destinos_populares %>% 
   filter(atraso_llegada > 0) %>% 
   mutate(prop_atraso = atraso_llegada / sum(atraso_llegada)) %>% 
   select(anio:dia, destino, atraso_llegada, prop_atraso)

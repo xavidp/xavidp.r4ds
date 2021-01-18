@@ -3,7 +3,7 @@
 
 # Introducción {#domardatos-intro}
 
-En esta parte del libro, aprenderás cómo "domar" datos (_data wrangling_, en inglés): el arte de tener tus datos en R de una forma conveniente para su visualización y modelado. Si bien en español también se suele hacer referencia a esta etapa como _manejo_ o _manipulación_ de datos, hemos mantenido la traducción literal ya que, como se señala en la introducción, la noción de domar (_wrangling_) apunta a lo difícil que puede ser a veces este proceso. 
+En esta parte del libro, aprenderás cómo manejar o "domar" datos (_data wrangling_, en inglés): el arte de tener tus datos en R de una forma conveniente para su visualización y modelado. Si bien en español también se suele hacer referencia a esta etapa como  _manipulación_ de datos, hemos mantenido también la traducción literal ya que, como se señala en la introducción, la noción de domar (_wrangling_) apunta a lo difícil que puede ser a veces este proceso. 
 La doma de datos es muy importante: ¡sin ella no puedes trabajar con tus propios datos! Este proceso tiene tres partes principales:
 
 ```{r echo = FALSE, out.width = "75%"}

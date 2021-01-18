@@ -28,7 +28,7 @@ Agradecemos a todas las personas que han ayudado revisando las traducciones y ha
 
 Este proyecto no solo implica la traducción del texto, sino también de los sets de datos que se utilizan a lo largo de él. Para ello, se creó el paquete `datos`, que contiene las versiones traducidas de estos. Puedes revisar su documentación [acá](https://cienciadedatos.github.io/datos). El paquete fue desarrollado por Edgar Ruiz, Riva Quiroga, Mauricio "Pachá" Vargas y Mauro Lepore. Para su creación se utilizaron funciones del paquete `datalang` de Edgar Ruiz y las sabias sugerencias de Hadley Wickham.  
 
-Si quieres conocer más sobre los principios que han orientado nuestro trabajo puedes leer [la documentación del proyecto] (https://github.com/cienciadedatos/documentacion-traduccion-r4ds). Para estar al tanto de novedades sobre el paquete {datos} y nuevas iniciativas del equipo, [sigue nuestra cuenta en Twitter](https://twitter.com/R4DS_es).
+Si quieres conocer más sobre los principios que han orientado nuestro trabajo puedes leer [la documentación del proyecto](https://github.com/cienciadedatos/documentacion-traduccion-r4ds). Para estar al tanto de novedades sobre el paquete {datos} y nuevas iniciativas del equipo, [sigue nuestra cuenta en Twitter](https://twitter.com/R4DS_es).
 
 ## Sobre la versión original en inglés {-}
 

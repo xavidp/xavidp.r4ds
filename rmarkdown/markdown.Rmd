@@ -1,10 +1,10 @@
 Formato de texto
 ------------------------------------------------------------
 
-*cursiva*   ó _cursiva_
+*cursiva*   o _cursiva_
 **negrita**   __negrita__
 `code`
-superscript^2^ y subscript~2~
+superíndice^2^ y subíndice~2~
 
 Encabezados
 ------------------------------------------------------------
