@@ -4,8 +4,6 @@
 
 # R for Data Science
 
-[![Build Status](https://travis-ci.org/cienciadedatos/r4ds.svg?branch=traduccion)](https://travis-ci.org/cienciadedatos/r4ds)
-
 Última versión disponible en http://es.r4ds.hadley.nz.
 
 Este es el repositorio (y branch) para la traducción de [R for Data Science](http://r4ds.had.co.nz).
