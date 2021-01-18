@@ -1,3 +1,7 @@
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/cienciadedatos/r4ds/workflows/R-CMD-check/badge.svg)](https://github.com/cienciadedatos/r4ds/actions)
+<!-- badges: end -->
+
 # R for Data Science
 
 [![Build Status](https://travis-ci.org/cienciadedatos/r4ds.svg?branch=traduccion)](https://travis-ci.org/cienciadedatos/r4ds)
