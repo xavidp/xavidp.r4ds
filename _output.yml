@@ -1,3 +1,8 @@
+bookdown::bs4_book:
+  theme:
+    primary: "#637238"
+  repo: https://github.com/hadley/r4ds
+
 bookdown::gitbook:
   config:
     toc:
