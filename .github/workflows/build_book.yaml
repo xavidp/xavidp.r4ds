@@ -15,42 +15,70 @@ env:
   isExtPR: ${{ github.event.pull_request.head.repo.fork == true }}
 
 jobs:
-  bookdown:
-    name: Render-Book
+  build:
     runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install rmarkdown
-        run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
-      - name: Render Book
-        run: Rscript -e 'bookdown::render_book("index.Rmd")'
-      - uses: actions/upload-artifact@v1
-        with:
-          name: _book
-          path: _book/
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
-# Need to first create an empty gh-pages branch
-# see https://pkgdown.r-lib.org/reference/deploy_site_github.html
-# and also add secrets for a GH_PAT and EMAIL to the repository
-# gh-action from Cecilapp/GitHub-Pages-deploy
-  checkout-and-deploy:
-   runs-on: ubuntu-latest
-   needs: bookdown
-   steps:
-     - name: Checkout
-       uses: actions/checkout@master
-     - name: Download artifact
-       uses: actions/download-artifact@v1.0.0
-       with:
-         # Artifact name
-         name: _book # optional
-         # Destination path
-         path: _book # optional
-     - name: Deploy to GitHub Pages
-       uses: Cecilapp/GitHub-Pages-deploy@master
-       env:
-          EMAIL: ${{ secrets.EMAIL }}               # must be a verified email
-          GH_TOKEN: ${{ secrets.GH_PAT }} # https://github.com/settings/tokens
-          BUILD_DIR: _book/                     # "_site/" by default
+      - name: Setup R
+        uses: r-lib/actions/setup-r@master
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@master
+
+      - name: Get R version
+        id: get-r-version
+        run: |
+          echo "::set-output name=version::$(Rscript -e 'cat(as.character(getRversion()))')"
+        shell: bash
+
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ steps.get-r-version.outputs.version }}-3-
+
+      - name: Install pak
+        run: |
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+        shell: Rscript {0}
+
+      - name: Install dependencies
+        run: |
+          pak::local_install_dev_deps()
+        shell: Rscript {0}
+
+      - name: Cache bookdown results
+        uses: actions/cache@v2
+        with:
+          path: _bookdown_files
+          key: bookdown-3-${{ hashFiles('**/*Rmd') }}
+          restore-keys: bookdown-3-
+
+      - name: Build site
+        run: |
+          # Allows [implcit heading links] to work; will need to convert
+          # to explicit before switching to visual editor
+          options(bookdown.render.file_scope = FALSE)
+          bookdown::render_book("index.Rmd")
+        shell: Rscript {0}
+
+      - name: Deploy to Netlify
+        if: contains(env.isExtPR, 'false')
+        id: netlify-deploy
+        uses: nwtgck/actions-netlify@v1.1
+        with:
+          publish-dir: './_book'
+          production-branch: master
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message:
+            'Deploy from GHA: ${{ github.event.pull_request.title || github.event.head_commit.message }} (${{ github.sha }})'
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
