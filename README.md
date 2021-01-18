@@ -1,6 +1,8 @@
-# R for Data Science
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/cienciadedatos/r4ds/workflows/R-CMD-check/badge.svg)](https://github.com/cienciadedatos/r4ds/actions)
+<!-- badges: end -->
 
-[![Build Status](https://travis-ci.org/cienciadedatos/r4ds.svg?branch=traduccion)](https://travis-ci.org/cienciadedatos/r4ds)
+# R for Data Science
 
 Última versión disponible en http://es.r4ds.hadley.nz.
 
