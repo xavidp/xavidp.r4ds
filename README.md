@@ -1,5 +1,5 @@
 <!-- badges: start -->
-![Build book](https://github.com/cienciadedatos/r4ds/workflows/Build%20book/badge.svg)
+[![Build book](https://github.com/cienciadedatos/r4ds/workflows/Build%20book/badge.svg)](https://github.com/cienciadedatos/r4ds/actions)
 <!-- badges: end -->
 
 # R for Data Science
