@@ -31,7 +31,8 @@ Suggests:
   knitr,
   png,
   sessioninfo,
-  xml2
+  xml2,
+  devtools
 Remotes:
   rstudio/bookdown,
   rstudio/bslib,

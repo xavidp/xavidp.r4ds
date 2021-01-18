@@ -1,5 +1,5 @@
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/cienciadedatos/r4ds/workflows/R-CMD-check/badge.svg)](https://github.com/cienciadedatos/r4ds/actions)
+[![build](https://github.com/cienciadedatos/r4ds/workflows/build_book/badge.svg)](https://github.com/cienciadedatos/r4ds/actions)
 <!-- badges: end -->
 
 # R for Data Science
