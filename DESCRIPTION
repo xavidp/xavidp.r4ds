@@ -35,5 +35,4 @@ Suggests:
   devtools
 Remotes:
   rstudio/bookdown,
-  rstudio/bslib,
-  cienciadedatos/datos
+  rstudio/bslib

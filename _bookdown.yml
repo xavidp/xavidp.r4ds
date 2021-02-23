@@ -2,7 +2,7 @@ delete_merged_file: true
 new_session: yes
 
 rmd_files: [
-  "index.rmd",
+  "index.Rmd",
   "01-intro.Rmd",
 
   "02-explore.Rmd",
@@ -42,3 +42,4 @@ rmd_files: [
 
 before_chapter_script: "_common.R"
 edit: https://github.com/cienciadedatos/r4ds/edit/traduccion/%s
+output_dir: "docs"
