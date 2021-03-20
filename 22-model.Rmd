@@ -40,7 +40,6 @@ En este libro vamos a usar los modelos como una herramienta para la exploración
 
 Esto es necesario porque, para confirmar una hipótesis, debes usar datos independientes de los datos utilizados para generarla. De lo contrario, serás demasiado optimista. No hay absolutamente nada de malo en la exploración, pero nunca debes vender un análisis exploratorio como análisis confirmatorio porque es fundamentalmente erróneo.
 
-If you are serious about doing an confirmatory analysis, one approach is to split your data into three pieces before you begin the analysis:
 Si realmente quieres realizar un análisis confirmatorio, un enfoque es dividir los datos en tres partes antes de comenzar el análisis:
 
 1. El 60% de los datos van a un conjunto de __entrenamiento__ (del inglés, _training_) o exploración. Puedes
