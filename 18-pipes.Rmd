@@ -99,23 +99,23 @@ Esto es menos tipeo (y menos que pensar), así que es menos probable que cometas
 
 1. Depurar es doloroso: si cometes un error vas a necesitar correr de nuevo todo el código desde el principio.
 
-1. La repetición del objeto a medida que es transformado (¡hemos escrito foo_foo 6 veces!) hace poco transparente lo que está siendo cambiado en cada línea.
+2. La repetición del objeto a medida que es transformado (¡hemos escrito foo_foo 6 veces!) hace poco transparente lo que está siendo cambiado en cada línea.
 
 ### Composición de funciones
 
 Otro enfoque es abandonar la asignación y encadenar todas las llamadas a las funciones:
 
 ```{r, eval = FALSE}
-saltar(
+golpear(
   recoger(
-    golpear(foo_foo, por_el = bosque),
-    arriba = raton_de_campo
+    saltar(foo_foo, a_traves = bosque),
+    que = raton_de_campo
   ),
   en = la_cabeza
 )
 ```
 
-Aquí la desventaja es que se debe leer de adentro hacia afuera, de derecha a izquierda y que los argumentos terminan separados (problema que se conoce como [Dagwood sandwich](https://es.wikipedia.org/wiki/Dagwood_sandwich)). En resumen, este código es difícil leer para un ser humano.
+Aquí la desventaja es que se debe leer de adentro hacia afuera, de derecha a izquierda y que los argumentos terminan separados (problema que se conoce como [Dagwood sandwich](https://es.wikipedia.org/wiki/Dagwood_sandwich)). En resumen, este código es difícil de leer para un ser humano.
 
 ### Uso de pipe
 
@@ -123,7 +123,7 @@ Finalmente, podemos usar el pipe:
 
 ```{r, eval = FALSE}
 foo_foo %>%
-  saltar(a_través = bosque) %>%
+  saltar(a_traves = bosque) %>%
   recoger(que = ratones_campo) %>%
   golpear(en = cabeza)
 ```

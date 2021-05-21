@@ -36,7 +36,7 @@ Cada vector tiene dos propiedades clave:
  typeof(1:10)
 ```
 
-1. Su __longitud__ (_length_), que puede determinar con `length()`.
+2. Su __longitud__ (_length_), que puede determinar con `length()`.
 
 ```{r}
  x <- list("a", "b", 1:10)
@@ -86,7 +86,7 @@ La distinción entre enteros y dobles usualmente no resulta importante, aunque e
 
 Este comportamiento es común cuando trabajas con números de punto flotante: la mayoría de los cálculos incluyen algunos errores de aproximación. En lugar de comparar números de punto flotante usando `==`, debes usar ´dplyr::near()`, que provee tolerancia numérica.
 
-2. Los números enteros tienen un valor especial, `NA`, mientras que los dobles tienen cuatro tipos: `NA`, `NaN`, `Inf` and `–Inf`. Los tres valores especiales `NaN`, `Inf` and `-Inf` pueden surgir durante una división:
+2. Los números enteros tienen un valor especial, `NA`, mientras que los dobles tienen cuatro tipos: `NA`, `NaN`, `Inf` y `–Inf`. Los tres valores especiales `NaN`, `Inf` y `-Inf` pueden surgir durante una división:
 
 ```{r}
 c(-1, 0, 1) / 0
