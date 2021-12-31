@@ -170,7 +170,7 @@ df[, c("abc", "xyz")]
 
     1. Renombrando las columnas como `uno`, `dos` y `tres`.
 
-```{r}
+```{r, eval=FALSE}
 molesto <- tibble(
   `1` = 1:10,
   `2` = `1` * 2 + rnorm(length(`1`))

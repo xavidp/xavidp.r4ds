@@ -1,5 +1,5 @@
 Package: r4ds
-Title: R para Ciencia de Datos.
+Title: R para Ciencia de Datos
 Version: 0.1
 Authors@R: c(
   person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
@@ -33,6 +33,3 @@ Suggests:
   sessioninfo,
   xml2,
   devtools
-Remotes:
-  rstudio/bookdown,
-  rstudio/bslib
