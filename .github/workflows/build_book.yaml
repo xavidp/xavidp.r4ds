@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - main
+      - traduccion
   pull_request:
     branches:
-      - main
+      - traduccion
   # schedule:
   #   # run every day at 11 PM
   #   - cron: '0 23 * * *'
