@@ -22,7 +22,7 @@ Este es el sitio web de la versión en español de __"R for Data Science"__, de 
 
 <img src="hex_r4ds-es.png" width="300" height="300" align="right" alt="Hex logo" />
 
-La traducción de "R para Ciencia de Datos" es un proyecto colaborativo de la comunidad de R de Latinoamérica, que tiene por objetivo hacer R más accesible en la región. .
+La traducción de "R para Ciencia de Datos" es un proyecto colaborativo de la comunidad de R de Latinoamérica, que tiene por objetivo hacer R más accesible en la región.
 
 En la traducción del libro participaron las siguientes personas (en orden alfabético): Marcela Alfaro, Mónica Alonso, Fernando Álvarez, Zulemma Bazurto, Yanina Bellini, Juliana Benítez, María Paula Caldas, Elio Campitelli, Florencia D'Andrea, Rocío Espada, Joshua Kunst, Patricia Loto, Pamela Matías, Lina Moreno, Paola Prieto, Riva Quiroga, Lucía Rodríguez, Mauricio "Pachá" Vargas, Daniela Vázquez, Melina Vidoni, Roxana N. Villafañe. ¡Muchas gracias por su trabajo! La administración del repositorio con la traducción ha estado cargo de Mauricio "Pachá" Vargas. La coordinación general y la edición, a cargo de Riva Quiroga.
 
