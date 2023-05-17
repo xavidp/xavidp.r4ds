@@ -53,7 +53,7 @@ jobs:
 
       - name: Cache bookdown results
         uses: actions/cache@v2
-        with: nwtgck/actions-netlify@v1.1
+        with:
           path: _bookdown_files
           key: bookdown-3-${{ hashFiles('**/*Rmd') }}
           restore-keys: bookdown-3-
