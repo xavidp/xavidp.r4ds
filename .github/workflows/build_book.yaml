@@ -52,8 +52,8 @@ jobs:
         shell: Rscript {0}
 
       - name: Cache bookdown results
-        uses: actions/cache@v2, nwtgck/actions-netlify@v1.1
-        with:
+        uses: actions/cache@v2
+        with: nwtgck/actions-netlify@v1.1
           path: _bookdown_files
           key: bookdown-3-${{ hashFiles('**/*Rmd') }}
           restore-keys: bookdown-3-
@@ -61,7 +61,7 @@ jobs:
       - name: Build site
         run: |
           # Allows [implcit heading links] to work; will need to convert
-          # to explicit before switching to visual enwtgck/actions-netlify@v1.1ditor
+          # to explicit before switching to visual editor
           options(bookdown.render.file_scope = FALSE)
           bookdown::render_book("index.Rmd")
         shell: Rscript {0}
