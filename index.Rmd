@@ -12,7 +12,7 @@ site: bookdown::bookdown_site
 documentclass: book
 ---
 
-Ultima actualización: `r Sys.date()`
+Ultima actualización: `r Sys.Date()`
 
 # Bienvenida {-}
 
