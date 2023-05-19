@@ -65,9 +65,7 @@ jobs:
           bookdown::render_book("index.Rmd")
         shell: Rscript {0}
 
-      # Copy all the contents of the docs folder to the root of the gh-pages branch
       - name: Copy docs to gh-pages
-        if: ${{ env.isExtPR == false }}
         run: |
           git branch -D gh-pages
           git checkout -b gh-pages
