@@ -65,27 +65,12 @@ jobs:
           bookdown::render_book("index.Rmd")
         shell: Rscript {0}
 
-      - name: Copy docs to gh-pages
+      - name: Commit and push docs/
         run: |
+          cp -r CNAME docs/
           git config --global user.name "GitHub Actions"
           git config --global user.email "noemail@cienciade.datos"
-
-          # delete gh-pages remote branch if it exists
-          git push origin --delete gh-pages
-
-          # clone gh-pages branch
-          git checkout -b gh-pages
-          
-          # remove all files except .git and docs
-          find . -maxdepth 1 ! -name .git ! -name docs ! -name . ! -name .. -exec rm -rf {} \;
-
-          mv docs/* .
-
-          # create an empty .nojekyll file (otherwise github pages will ignore files starting with underscore)
-          touch .nojekyll
-
-          git add .
-          git commit -m "Update gh-pages"
-          
-          git push origin gh-pages
+          git add docs/ -f
+          git commit -m "Update rendered book"
+          git push
         shell: bash
