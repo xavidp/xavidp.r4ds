@@ -67,7 +67,6 @@ jobs:
 
       - name: Copy docs to gh-pages
         run: |
-          git branch -D gh-pages
           git checkout -b gh-pages
 
           # remove all files except .git and docs
