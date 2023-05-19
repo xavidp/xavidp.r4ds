@@ -75,9 +75,6 @@ jobs:
           # pull to avoid crashes when pushing later
           git config pull.rebase true
 
-          # rebase repo onto gh-pages branch
-          git pull origin gh-pages --rebase
-                    
           # remove all files except .git and docs
           find . -maxdepth 1 ! -name .git ! -name docs ! -name . ! -name .. -exec rm -rf {} \;
 
@@ -88,5 +85,9 @@ jobs:
 
           git add .
           git commit -m "Update gh-pages"
+
+          # rebase repo onto gh-pages branch
+          git pull origin gh-pages --rebase
+          
           git push origin gh-pages
         shell: bash
