@@ -33,7 +33,8 @@ jobs:
         id: get-r-version
         run: |
           echo "::set-output name=version::$(Rscript -e 'cat(as.character(getRversion()))')"
-        shell: bash
+        run: echo "version=$(Rscript -e 'cat(as.character(getRversion()))')" >> $GITHUB_OUTPUT
+        shell: bash  
 
       - name: Cache R packages
         uses: actions/cache@v2
@@ -72,8 +73,15 @@ jobs:
         run: |
           git branch -D gh-pages
           git checkout -b gh-pages
+
           # remove all files except .git and docs
+          find . -maxdepth 1 ! -name .git ! -name docs ! -name . ! -name .. -exec rm -rf {} \;
+
           mv docs/* .
+
+          # create an empty .nojekyll file (otherwise github pages will ignore files starting with underscore)
+          touch .nojekyll
+
           git add .
           git commit -m "Update gh-pages"
           git push origin gh-pages
