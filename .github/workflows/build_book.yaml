@@ -31,8 +31,6 @@ jobs:
 
       - name: Get R version
         id: get-r-version
-        run: |
-          echo "::set-output name=version::$(Rscript -e 'cat(as.character(getRversion()))')"
         run: echo "version=$(Rscript -e 'cat(as.character(getRversion()))')" >> $GITHUB_OUTPUT
         shell: bash  
 
