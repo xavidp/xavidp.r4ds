@@ -67,10 +67,22 @@ jobs:
 
       - name: Commit and push docs/
         run: |
-          cp -r CNAME docs/
+          # configure git
           git config --global user.name "GitHub Actions"
           git config --global user.email "noemail@cienciade.datos"
-          git add docs/ -f
-          git commit -m "Update rendered book"
-          git push
+
+          # clone gh-pages branch to gh-pages/
+          git clone --single-branch --branch gh-pages git@github.com:cienciadedatos/r4ds.git gh-pages
+
+          # remove everything inside gh-pages except .git/
+          find gh-pages -maxdepth 1 ! -name .git ! -name gh-pages -exec rm -rf {} \;
+
+          # copy docs/ to gh-pages/
+          cp -r docs/* gh-pages/
+
+          # commit and push
+          cd gh-pages
+          git add .
+          git commit -m "Update gh-pages"
+          git push origin gh-pages
         shell: bash
