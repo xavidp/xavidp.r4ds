@@ -72,6 +72,8 @@ jobs:
 
           git checkout -b gh-pages
 
+          # pull to avoid crashes when pushing later
+          git config pull.rebase true
           git pull origin gh-pages
           
           # remove all files except .git and docs
