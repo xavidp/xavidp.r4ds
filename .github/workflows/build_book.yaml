@@ -72,6 +72,8 @@ jobs:
 
           git checkout -b gh-pages
 
+          git pull origin gh-pages
+          
           # remove all files except .git and docs
           find . -maxdepth 1 ! -name .git ! -name docs ! -name . ! -name .. -exec rm -rf {} \;
 
