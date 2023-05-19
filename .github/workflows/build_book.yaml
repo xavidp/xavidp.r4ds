@@ -65,10 +65,12 @@ jobs:
           bookdown::render_book("index.Rmd")
         shell: Rscript {0}
 
-      - name: Commit and push docs/
+      - name: Set SSH key
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
+      
+      - name: Push to gh-pages
         run: |
           # configure git
           git config --global user.name "GitHub Actions"
