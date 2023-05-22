@@ -66,11 +66,13 @@ jobs:
         shell: Rscript {0}
 
       - name: Set SSH key
+        if: github.event_name != 'pull_request'
         uses: webfactory/ssh-agent@v0.7.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
       
       - name: Push to gh-pages
+        if: github.event_name != 'pull_request'
         run: |
           # configure git
           git config --global user.name "GitHub Actions"
