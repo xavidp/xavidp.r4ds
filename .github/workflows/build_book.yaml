@@ -91,8 +91,16 @@ jobs:
           cp -r CNAME gh-pages/
 
           # commit and push
+
           cd gh-pages
-          git add .
-          git commit -m "Update gh-pages"
-          git push origin gh-pages
+
+          # count the modified files
+          modified=$(git status --porcelain | wc -l)
+
+          # if there are changes, push them
+          if [ $modified -gt 0 ]; then
+            git add .
+            git commit -m "Update gh-pages"
+            git push origin gh-pages
+          fi
         shell: bash
