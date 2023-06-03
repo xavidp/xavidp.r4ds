@@ -25,7 +25,7 @@ Este es el repositorio (y branch) para la traducción de [R for Data Science](ht
 Puedes generar el libro directamente desde el archivo `index.rmd`. Asegurate de tener los siguientes paquetes instalados:
 
 ```{r}
-install.packages("bookdown")
+install.packages(c("bookdown", "microbenchmark", "pryr", "ggrepel", "leaflet", "devtools"))
 devtools::install_github("hadley/r4ds")
 devtools::install_github("cienciadedatos/datos")
 ```
