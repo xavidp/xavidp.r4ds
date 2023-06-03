@@ -265,11 +265,11 @@ Debes elegir entre tres segmentadores dependiendo de si quieres una fecha (el n�
   Esta es la estandarización de fecha/hora más  importante. Si trabajas con fechas y horas   frecuentemente, te recomendamos que leas <https://en.wikipedia.org/wiki/ISO_8601>
     
 *   `parse_date()` asume un año de cuatro dígitos, un guión `-` o `/`, el mes, un guión `-` o `/` y luego el día.
-     ```{r}
+    ```{r}
     parse_date("2010-10-01")
     ```
 *   `parse_time()` espera la hora, `:`, minutos, opcionalmente `:` y segundos, y un especificador opcional am/pm:
-     ```{r}
+    ```{r}
     library(hms)
     parse_time("01:10 am")
     parse_time("20:10:01")

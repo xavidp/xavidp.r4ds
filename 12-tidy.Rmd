@@ -319,7 +319,7 @@ tabla5 %>%
 
   tibble(x = c("a,b,c", "d,e",   "f,g,i")) %>%
     separate(x, c("one", "two",     "three"))
-   ```
+  ```
 
 1. Tanto `unite()` como `separate()` tienen un argumento `remove`. ¿Qué es lo que hace?
 ¿Por qué lo dejarías en `FALSE`?

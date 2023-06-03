@@ -425,7 +425,7 @@ Luego, ejecuta el código en R y verifica tus predicciones.
    ggplot(data = millas, mapping = aes(x = cilindrada, y = autopista, color = traccion)) +
      geom_point() +
      geom_smooth(se = FALSE)
- ```
+   ```
 3. ¿Qué muestra `show.legend = FALSE`? ¿Qué pasa si lo quitas?
  ¿Por qué crees que lo utilizamos antes en el capítulo?
 
